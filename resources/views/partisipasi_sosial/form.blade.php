@@ -12,51 +12,57 @@
                     @endforeach
                 </ul>
                 <div class="panel-body">
-                    {!! Form::open(array('url' => 'partisipasi-sosial')) !!}
+                    {{ Form::open(array('url' => 'partisipasi-sosial')) }}
+                        <table class="table">
                         @foreach ($pertanyaan as $idx_pertanyaan => $item)
-                        {{
-                            Form::hidden(
-                                'pertanyaan[' . $idx_pertanyaan . ']', 
-                                $item->id_partisipasi, 
-                                [
-                                    'class'       => 'form-control',
-                                    'placeholder' => '',
-                                    'maxlength'   => 2
-                                ]
-                            )
-                        }}
-                        <div class="form-group">
-                            {{
-                                Form::label(
-                                    'pertanyaan', 
-                                    $item->pertanyaan_partisipasi
-                                )
-                            }}
-                            @foreach ($opsi[$item->id_master_opsional] as $idx_opsional => $value)
-                            <div class="radio">
-                                <label>
-                                    {{
-                                        Form::radio(
-                                            'jawaban[' . $idx_pertanyaan . ']', 
-                                            $idx_opsional,
-                                            false,
-                                            [
-                                                'class' => 'control-label'
-                                            ]
-                                        )
-                                    }} 
-                                    {{$value}}
-                                </label>
-                            </div>
-                            @endforeach
-                        </div>
+                        <tr>
+                            <td>{{$item->id_partisipasi}}.</td>
+                            <td>
+                                {{$item->pertanyaan_partisipasi}}
+                                @if ($item->is_reason)
+                                <br>
+                                Alasan:                             
+                                {{
+                                    Form::textarea(
+                                        'alasan[' . $item->id_partisipasi . ']', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control col-sm-6',
+                                            'placeholder' => 'Alasan',
+                                            'rows'  => 4
+                                        ]
+                                    )
+                                }} 
+                                @endif
+                            </td>
+                            <td>
+                                @foreach ($opsi[$item->id_master_opsional] as $idx_opsional => $value)
+                                <div class="radio">
+                                    <label>
+                                        {{
+                                            Form::radio(
+                                                'jawaban[' . $item->id_partisipasi . ']', 
+                                                $idx_opsional,
+                                                false,
+                                                [
+                                                    'class' => 'control-label'
+                                                ]
+                                            )
+                                        }} 
+                                        {{$value}}
+                                    </label>
+                                </div>
+                                @endforeach
+                            </td>
+                        </tr>
                         @endforeach
+                        </table>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-default">Simpan</button>
                             </div>
                         </div>
-                    {!! Form::close() !!}
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

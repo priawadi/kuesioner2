@@ -107,4 +107,20 @@ class SampleController extends Controller
     {
         //
     }
+
+
+    public function set_session(Request $request)
+    {
+        $request->session()->put('mySession', 'Hello World!');
+    }
+
+    public function get_session(Request $request)
+    {
+        echo $request->session()->get('mySession');
+    }
+
+    public function delete_session(Request $request)
+    {
+        $request->session()->forget('mySession');
+    }
 }

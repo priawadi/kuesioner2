@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablePartisipasi extends Migration
+class CreateTableJwbPartisipasi extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,13 @@ class CreateTablePartisipasi extends Migration
      */
     public function up()
     {
-        Schema::create('partisipasi', function (Blueprint $table) {
-            $table->increments('id_partisipasi');
-            
-            $table->integer('parent_partisipasi');
-            $table->string('pertanyaan_partisipasi', 500);
-            $table->integer('kateg_partisipasi');
+        Schema::create('jwb_partisipasi', function (Blueprint $table) {
+            $table->increments('id_jwb_partisipasi');
             $table->integer('id_master_opsional');
-            $table->boolean('is_reason')->default(FALSE);
-            
+            $table->integer('id_responden');
+            $table->integer('id_partisipasi');
+            $table->text('jwb_teks_partisipasi');
+
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,6 +31,6 @@ class CreateTablePartisipasi extends Migration
      */
     public function down()
     {
-        Schema::drop('partisipasi');
+        Schema::drop('jwb_partisipasi');
     }
 }

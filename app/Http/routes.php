@@ -26,6 +26,10 @@ Route::get('/partisipasi-sosial/tambah', 'PartisipasiSosialController@create');
 
 Route::get('/sample', 'SampleController@create');
 Route::post('/sample', 'SampleController@store');
+Route::get('/sample/session/set', 'SampleController@set_session');
+Route::get('/sample/session/get', 'SampleController@get_session');
+Route::get('/sample/session/delete', 'SampleController@delete_session');
+
 
 //konsumsi
 Route::get('/konsumsi', 'KonsumsiController@create');

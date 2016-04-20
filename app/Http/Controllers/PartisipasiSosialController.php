@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Partisipasi;
 use App\MasterOpsional;
+use App\JwbPartisipasi;
 use App\Http\Requests;
+use Validator;
+use Illuminate\Support\Facades\Input;
 
 class PartisipasiSosialController extends Controller
 {
@@ -23,6 +26,7 @@ class PartisipasiSosialController extends Controller
             $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
         }
 
+        // return view('partisipasi_sosial.form', [
         return view('partisipasi_sosial.form', [
             'subtitle'   => 'Partisipasi Sosial',
             'pertanyaan' => Partisipasi::where('kateg_partisipasi', 1)->get(),
@@ -48,26 +52,46 @@ class PartisipasiSosialController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request->all(), [
-        //     'jawaban.*' => 'required|string'
-        // ]);
-        $rules = array();
-        foreach($request->get('jawaban') as $key => $value)
-        {
-            echo "Index jawaban: " . $key . '<br>';
-            echo "ID opsi dipilih: " . $value . '<br>';
-            // $rules['items.'.$key] = 'required|max:10';
-        }
+        $pertanyaan = Partisipasi::where('kateg_partisipasi', 1)->select('id_partisipasi', 'is_reason')->get();
 
-        foreach($request->get('pertanyaan') as $key => $value)
+        // Get ids of pertanyaan
+        foreach($pertanyaan as $key => $item)
         {
-            // echo "Index pertanyaan: " . $key . '<br>';
-            echo "ID pertanyaan: " . $value . '<br>';
-            echo var_dump($value);
+            $rules['jawaban.' . $item->id_partisipasi] = 'required';
+
+            // validate reason
+            if ($item->is_reason)
+            {
+                $rules['alasan.' . $item->id_partisipasi] = 'required|max:500';
+            }
         }
         
-        // $this->validate($request->all(), $rules);
+        // Validate input
+        $validator = Validator::make($request->all(), $rules);
 
+        if ($validator->fails()) {
+            return redirect('partisipasi-sosial')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        // Save jawaban into database
+        $jawaban = $request->get('jawaban');
+        $alasan  = $request->get('alasan');
+        foreach($pertanyaan as $key => $item)
+        {
+            $jwb_partisipasi = new JwbPartisipasi;
+            $jwb_partisipasi->id_master_opsional   = $jawaban[$item->id_partisipasi];
+            $jwb_partisipasi->id_responden         = 1;
+            $jwb_partisipasi->id_partisipasi       = $item->id_partisipasi;
+            if ($item->is_reason)
+            {
+                $jwb_partisipasi->jwb_teks_partisipasi = $alasan[$item->id_partisipasi];
+            }
+            $jwb_partisipasi->save();
+        }
+
+        return view('home');
     }
 
     /**
