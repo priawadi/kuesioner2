@@ -11,8 +11,66 @@
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
+                <div class="row">
+                    <div class="col-sm-2"><center><b>RINCIAN</b></center></div>    
+                    <div class="col-sm-6"><center><b>ISIAN</b></center></div>    
+                    <div class="col-sm-2"><center><b>KODE KONDISI AWAL</b></center></div>    
+                    <div class="col-sm-2"><center><b>KODE (Saat Pencacahan) </b></center></div>    
+                </div>
                 <div class="panel-body">
-                    {!! Form::open(array('url' => 'responden', 'class' => 'form-horizontal')) !!}
+                    {!! Form::open(array('url' => 'responden/tambah', 'class' => 'form-horizontal')) !!}
+                        <div class="form-group">
+                            {{
+                                Form::label(
+                                    'id_id', 
+                                    'ID', 
+                                    [
+                                        'class' => 'col-sm-2 control-label'
+                                    ]
+                                )
+                            }}
+                        
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'id_id', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'ID',
+                                            'maxlength'   => 8
+
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-offset-4 col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodeawal_id', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodecacah_id', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
+                                        ]
+                                    )
+                                }}
+                            </div>
+                        </div>
                         <div class="form-group">
                             {{
                                 Form::label(
@@ -24,7 +82,7 @@
                                 )
                             }}
                         
-                            <div class="col-sm-10">
+                            <div class="col-sm-6">
                                 {{
                                     Form::text(
                                         'nama_responden', 
@@ -36,79 +94,28 @@
                                     )
                                 }}
                             </div>
-                        </div>
-                        <div class="form-group">
-                            {{
-                                Form::label(
-                                    'alamat', 
-                                    'Alamat', 
-                                    [
-                                        'class' => 'col-sm-2 control-label'
-                                    ]
-                                )
-                            }}
-                            <div class="col-sm-5">
+                            <div class="col-sm-2">
                                 {{
-                                    Form::textarea(
-                                        'alamat', 
+                                    Form::text(
+                                        'kodeawal_nama', 
                                         '', 
                                         [
                                             'class'       => 'form-control',
-                                            'placeholder' => 'Alamat'
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
                                         ]
                                     )
                                 }}
                             </div>
-                        </div>
-                        <div class="form-group">
-                            {{
-                                Form::label(
-                                    'aktif', 
-                                    'Aktif?', 
-                                    [
-                                        'class' => 'col-sm-2 control-label'
-                                    ]
-                                )
-                            }}
-                            <div class="col-sm-10">
-                                <div class="checkbox">
-                                    <label>
-                                        {{
-                                            Form::checkbox(
-                                                'aktif', 
-                                                true,
-                                                false,
-                                                [
-                                                    'class' => 'control-label'
-                                                ]
-                                            )
-                                        }} 
-                                        Ya
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {{
-                                Form::label(
-                                    'kategori', 
-                                    'Kategori', 
-                                    [
-                                        'class' => 'col-sm-2 control-label'
-                                    ]
-                                )
-                            }}
-                            <div class="col-sm-5">
+                            <div class="col-sm-2">
                                 {{
-                                    Form::select(
-                                        'kategori', 
+                                    Form::text(
+                                        'kodecacah_nama', 
+                                        '', 
                                         [
-                                            'L' => 'Large', 'S' => 'Small'
-                                        ], 
-                                        null, 
-                                        [
-                                            'class' => 'form-control',
-                                            'placeholder' => 'Pilih'
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
                                         ]
                                     )
                                 }}
@@ -117,50 +124,413 @@
                         <div class="form-group">
                             {{
                                 Form::label(
-                                    'jenis_kelamin', 
-                                    'Jenis Kelamin', 
+                                    'suku', 
+                                    'Etnis / Suku', 
+                                    [
+                                        'class' => 'col-sm-2 control-label'
+                                    ]
+                                )
+                            }}
+                        
+                            <div class="col-sm-6">
+                                {{
+                                    Form::text(
+                                        'suku', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Etnis / Suku'
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodeawal_suku', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodecacah_suku', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
+                                        ]
+                                    )
+                                }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{
+                                Form::label(
+                                    'kampung', 
+                                    'RT / Kampung', 
+                                    [
+                                        'class' => 'col-sm-2 control-label'
+                                    ]
+                                )
+                            }}
+                        
+                            <div class="col-sm-6">
+                                {{
+                                    Form::text(
+                                        'kampung', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'RT / Kampung'
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodeawal_kampung', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodecacah_kampung', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
+                                        ]
+                                    )
+                                }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{
+                                Form::label(
+                                    'dusun', 
+                                    'RW / Dusun', 
+                                    [
+                                        'class' => 'col-sm-2 control-label'
+                                    ]
+                                )
+                            }}
+                        
+                            <div class="col-sm-6">
+                                {{
+                                    Form::text(
+                                        'dusun', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'RW / Dusun'
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodeawal_dusun', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodecacah_dusun', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
+                                        ]
+                                    )
+                                }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{
+                                Form::label(
+                                    'kelurahan', 
+                                    'Desa / Kelurahan', 
+                                    [
+                                        'class' => 'col-sm-2 control-label'
+                                    ]
+                                )
+                            }}
+                        
+                            <div class="col-sm-6">
+                                {{
+                                    Form::text(
+                                        'kelurahan', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Desa / Kelurahan'
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodeawal_kelurahan', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 3
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodecacah_kelurahan', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 3
+                                        ]
+                                    )
+                                }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{
+                                Form::label(
+                                    'kecamatan', 
+                                    'Kecamatan', 
+                                    [
+                                        'class' => 'col-sm-2 control-label'
+                                    ]
+                                )
+                            }}
+                        
+                            <div class="col-sm-6">
+                                {{
+                                    Form::text(
+                                        'kecamatan', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Kecamatan'
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodeawal_kecamatan', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 3
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodecacah_kecamatan', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 3
+                                        ]
+                                    )
+                                }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{
+                                Form::label(
+                                    'kabupaten', 
+                                    'Kabupaten', 
+                                    [
+                                        'class' => 'col-sm-2 control-label'
+                                    ]
+                                )
+                            }}
+                        
+                            <div class="col-sm-6">
+                                {{
+                                    Form::text(
+                                        'kabupaten', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Kabupaten'
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodeawal_kabupaten', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodecacah_kabupaten', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
+                                        ]
+                                    )
+                                }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{
+                                Form::label(
+                                    'provinsi', 
+                                    'Provinsi', 
+                                    [
+                                        'class' => 'col-sm-2 control-label'
+                                    ]
+                                )
+                            }}
+                        
+                            <div class="col-sm-6">
+                                {{
+                                    Form::text(
+                                        'provinsi', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Provinsi'
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodeawal_provinsi', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
+                                        ]
+                                    )
+                                }}
+                            </div>
+                            <div class="col-sm-2">
+                                {{
+                                    Form::text(
+                                        'kodecacah_provinsi', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => '',
+                                            'maxlength'   => 2
+                                        ]
+                                    )
+                                }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{
+                                Form::label(
+                                    'tipologi', 
+                                    'Tipologi', 
+                                    [
+                                        'class' => 'col-sm-2 control-label'
+                                    ]
+                                )
+                            }}
+                        
+                            <div class="col-sm-6">
+                                {{
+                                    Form::text(
+                                        'tipologi', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Tipologi'
+                                        ]
+                                    )
+                                }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{
+                                Form::label(
+                                    'stat_responden', 
+                                    'Status Responden', 
                                     [
                                         'class' => 'col-sm-2 control-label'
                                     ]
                                 )
                             }}
                             <div class="col-sm-10">
-                                <div class="radio">
-                                    <label>
-                                        {{
-                                            Form::radio(
-                                                'jenis_kelamin', 
-                                                'P',
-                                                false,
-                                                [
-                                                    'class' => 'control-label'
-                                                ]
-                                            )
-                                        }} 
-                                        Pria
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        {{
-                                            Form::radio(
-                                                'jenis_kelamin', 
-                                                'W',
-                                                false,
-                                                [
-                                                    'class' => 'control-label'
-                                                ]
-                                            )
-                                        }} 
-                                        Wanita
-                                    </label>
-                                </div>
+                                @foreach ($status as $k => $v)
+                                    <div class="radio">
+                                        <label>
+                                            {{
+                                                Form::radio(
+                                                    'stat_responden', 
+                                                    $k,
+                                                    false,
+                                                    [
+                                                        'class' => 'control-label'
+                                                    ]
+                                                )
+                                            }} 
+                                            {{ $v }}
+                                        </label>
+                                    </div>
+                                @endforeach
+
                             </div>
                         </div>
 
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-default">Simpan</button>
+                            <a href="{{ url('responden') }}" class="btn btn-link btn-sm">Batal</a>
+                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                         </div>
                       </div>
                     {!! Form::close() !!}

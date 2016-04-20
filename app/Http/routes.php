@@ -15,8 +15,17 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/responden', 'RespondenController@create');
-Route::post('/responden', 'RespondenController@store');
+Route::get('/responden', 'RespondenController@index');
+Route::get('/responden/tambah', 'RespondenController@create');
+Route::post('/responden/tambah', 'RespondenController@store');
+
+Route::get('/partisipasi-sosial', 'PartisipasiSosialController@index');
+Route::post('/partisipasi-sosial', 'PartisipasiSosialController@store');
+Route::get('/partisipasi-sosial/tambah', 'PartisipasiSosialController@create');
+
+
+Route::get('/sample', 'SampleController@create');
+Route::post('/sample', 'SampleController@store');
 
 //konsumsi
 Route::get('/konsumsi', 'KonsumsiController@create');

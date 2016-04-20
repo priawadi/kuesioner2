@@ -260,7 +260,11 @@ class ComposerStaticInitf96fe4030dfeb8c481f689cf838f308a
 
     public static $classMap = array (
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreateTableMasterOpsional' => __DIR__ . '/../..' . '/database/migrations/2016_04_19_144049_create_table_master_opsional.php',
+        'CreateTableMasterPartisipasi' => __DIR__ . '/../..' . '/database/migrations/2016_04_19_170428_create_table_master_partisipasi.php',
+        'CreateTablePartisipasi' => __DIR__ . '/../..' . '/database/migrations/2016_04_19_132740_create_table_partisipasi.php',
         'CreateTableResponden' => __DIR__ . '/../..' . '/database/migrations/2016_04_16_173436_create_table_responden.php',
+        'CreateTableSample' => __DIR__ . '/../..' . '/database/migrations/2016_04_18_154937_create_table_sample.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
@@ -335,6 +339,7 @@ class ComposerStaticInitf96fe4030dfeb8c481f689cf838f308a
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
         'IlluminateQueueClosure' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
+        'MasterOpsionalSeeder' => __DIR__ . '/../..' . '/database/seeds/MasterOpsionalSeeder.php',
         'PHPUnit_Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit_Extensions_GroupTestSuite' => __DIR__ . '/..' . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
         'PHPUnit_Extensions_PhptTestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/Extensions/PhptTestCase.php',
@@ -730,6 +735,7 @@ class ComposerStaticInitf96fe4030dfeb8c481f689cf838f308a
         'PHP_Token_XOR_EQUAL' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD_FROM' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
+        'PartisipasiTableSeeder' => __DIR__ . '/../..' . '/database/seeds/PartisipasiTableSeeder.php',
         'SebastianBergmann\\Comparator\\ArrayComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ArrayComparator.php',
         'SebastianBergmann\\Comparator\\Comparator' => __DIR__ . '/..' . '/sebastian/comparator/src/Comparator.php',
         'SebastianBergmann\\Comparator\\ComparisonFailure' => __DIR__ . '/..' . '/sebastian/comparator/src/ComparisonFailure.php',

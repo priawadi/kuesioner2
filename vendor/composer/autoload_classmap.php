@@ -7,7 +7,11 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateTableMasterOpsional' => $baseDir . '/database/migrations/2016_04_19_144049_create_table_master_opsional.php',
+    'CreateTableMasterPartisipasi' => $baseDir . '/database/migrations/2016_04_19_170428_create_table_master_partisipasi.php',
+    'CreateTablePartisipasi' => $baseDir . '/database/migrations/2016_04_19_132740_create_table_partisipasi.php',
     'CreateTableResponden' => $baseDir . '/database/migrations/2016_04_16_173436_create_table_responden.php',
+    'CreateTableSample' => $baseDir . '/database/migrations/2016_04_18_154937_create_table_sample.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
@@ -82,6 +86,7 @@ return array(
     'Hamcrest\\Util' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
     'Hamcrest\\Xml\\HasXPath' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
+    'MasterOpsionalSeeder' => $baseDir . '/database/seeds/MasterOpsionalSeeder.php',
     'PHPUnit_Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit_Extensions_GroupTestSuite' => $vendorDir . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
     'PHPUnit_Extensions_PhptTestCase' => $vendorDir . '/phpunit/phpunit/src/Extensions/PhptTestCase.php',
@@ -477,6 +482,7 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'PartisipasiTableSeeder' => $baseDir . '/database/seeds/PartisipasiTableSeeder.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',
     'SebastianBergmann\\Comparator\\ComparisonFailure' => $vendorDir . '/sebastian/comparator/src/ComparisonFailure.php',

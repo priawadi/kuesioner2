@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Responden;
+use App\Sample;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
 
-class RespondenController extends Controller
+
+class SampleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +17,7 @@ class RespondenController extends Controller
      */
     public function index()
     {
-
-        return view('responden.index', [
-            'responden'  => Responden::all(),
-        ]);
+        //
     }
 
     /**
@@ -29,58 +27,37 @@ class RespondenController extends Controller
      */
     public function create()
     {
-        $status_responden = [
-            1 => 'Pemilik',
-            2 => 'Nahkoda',
-            3 => 'ABK',
-        ];
-
-        return view('responden.form', [
-            'tasks'  => 'test',
-            'status' => $status_responden
-        ]);
+        return view('sample.form');
     }
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $validator = Validator::make($request->all(), [
-            'id_id' => 'required',
-            'nama_responden' => 'required',
-            'suku' => 'required',
-            'kampung' => 'required',
-            'dusun' => 'required',
-            'kelurahan' => 'required',
-            'kecamatan' => 'required',
-            'kabupaten' => 'required',
-            'provinsi' => 'required',
-            'tipologi' => 'required',
-            'stat_responden' => 'required'
-
+            'nama'           => 'required',
+            'alamat'         => 'required',
+            'aktif'          => 'required',
+            'kategori'       => 'required',
+            'jenis_kelamin'  => 'required'
         ]);
 
         if ($validator->fails()) {
-            return redirect('responden/tambah')
+            return redirect('sample')
                         ->withErrors($validator)
                         ->withInput();
         }
 
-        $responden = new Responden;
-        $responden->id_id         = $request->id_id;
-        $responden->nama_responden = $request->nama_responden;
-        $responden->suku         = $request->suku;
-        $responden->kampung         = $request->kampung;
-        $responden->dusun         = $request->dusun;
-        $responden->kelurahan         = $request->kelurahant;
-        $responden->kecamatan         = $request->kecamatanat;
-        $responden->kabupaten         = $request->kabupaten;
-        $responden->provinsi         = $request->provinsi;
-        $responden->tipologi         = $request->tipologit;
+        $responden = new Sample;
+        $responden->nama          = $request->nama;
+        $responden->alamat        = $request->alamat;
+        $responden->aktif         = $request->aktif;
+        $responden->kategori      = $request->kategori;
+        $responden->jenis_kelamin = $request->jenis_kelamin;
         $responden->save();
 
         return view('home');
