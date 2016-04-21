@@ -39,6 +39,11 @@ Route::get('/rasa-percaya-masyarakat', 'RasaPercayaMasyController@index');
 Route::post('/rasa-percaya-masyarakat', 'RasaPercayaMasyController@store');
 Route::get('/rasa-percaya-masyarakat/tambah', 'RasaPercayaMasyController@create');
 
+// Rasa Percaya Organisasi Sosial
+Route::get('/rasa-percaya-organisasi', 'RasaPercayaOrgController@index');
+Route::post('/rasa-percaya-organisasi', 'RasaPercayaOrgController@store');
+Route::get('/rasa-percaya-organisasi/tambah', 'RasaPercayaOrgController@create');
+
 Route::get('/sample', 'SampleController@create');
 Route::post('/sample', 'SampleController@store');
 Route::get('/sample/session/set', 'SampleController@set_session');
