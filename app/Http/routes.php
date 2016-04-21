@@ -44,6 +44,11 @@ Route::get('/rasa-percaya-organisasi', 'RasaPercayaOrgController@index');
 Route::post('/rasa-percaya-organisasi', 'RasaPercayaOrgController@store');
 Route::get('/rasa-percaya-organisasi/tambah', 'RasaPercayaOrgController@create');
 
+// Rasa Percaya Politik
+Route::get('/rasa-percaya-politik', 'RasaPercayaPolController@index');
+Route::post('/rasa-percaya-politik', 'RasaPercayaPolController@store');
+Route::get('/rasa-percaya-politik/tambah', 'RasaPercayaPolController@create');
+
 Route::get('/sample', 'SampleController@create');
 Route::post('/sample', 'SampleController@store');
 Route::get('/sample/session/set', 'SampleController@set_session');
