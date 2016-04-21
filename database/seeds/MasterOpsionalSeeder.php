@@ -122,6 +122,99 @@ class MasterOpsionalSeeder extends Seeder
 				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
 				'opsional_master_ops'   => 'Sangat sering / setiap trip penangkapan',
             ],
+            [
+				'id_master_opsional'    => 19, 
+				'kateg_master_ops' 		=> 6, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Tidak pernah',
+            ],
+            [
+				'id_master_opsional'    => 20, 
+				'kateg_master_ops' 		=> 6, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Jarang',
+            ],
+            [
+				'id_master_opsional'    => 21, 
+				'kateg_master_ops' 		=> 6, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Sering',
+            ],
+            [
+				'id_master_opsional'    => 22, 
+				'kateg_master_ops' 		=> 6, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Sangat Sering',
+            ],
+            [
+				'id_master_opsional'    => 23, 
+				'kateg_master_ops' 		=> 7, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Tidak ada',
+            ],
+            [
+				'id_master_opsional'    => 24, 
+				'kateg_master_ops' 		=> 7, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Sedikit mendapat kemudahan',
+            ],
+            [
+				'id_master_opsional'    => 25, 
+				'kateg_master_ops' 		=> 7, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Cukup mendapat kemudahan',
+            ],
+            [
+				'id_master_opsional'    => 26, 
+				'kateg_master_ops' 		=> 7, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Sangat memberikan kemudahan',
+            ],
+            [
+				'id_master_opsional'    => 27, 
+				'kateg_master_ops' 		=> 8, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Tidak pernah',
+            ],
+            [
+				'id_master_opsional'    => 28, 
+				'kateg_master_ops' 		=> 8, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Kadang-kadang',
+            ],            
+            [
+				'id_master_opsional'    => 29, 
+				'kateg_master_ops' 		=> 8, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Sering',
+            ],
+            [
+				'id_master_opsional'    => 30, 
+				'kateg_master_ops' 		=> 8, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Selalu',
+            ],
+            [
+				'id_master_opsional'    => 31, 
+				'kateg_master_ops' 		=> 9, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Tidak sama sekali',
+            ],[
+				'id_master_opsional'    => 32, 
+				'kateg_master_ops' 		=> 9, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Kurang percaya',
+            ],[
+				'id_master_opsional'    => 33, 
+				'kateg_master_ops' 		=> 9, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Percaya',
+            ],[
+				'id_master_opsional'    => 34, 
+				'kateg_master_ops' 		=> 9, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Sangat Percaya',
+            ],
         ];
         DB::table('master_opsional')->insert($opsional);
     }

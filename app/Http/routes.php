@@ -19,9 +19,15 @@ Route::get('/responden', 'RespondenController@index');
 Route::get('/responden/tambah', 'RespondenController@create');
 Route::post('/responden/tambah', 'RespondenController@store');
 
+// Partisipasi Sosial
 Route::get('/partisipasi-sosial', 'PartisipasiSosialController@index');
 Route::post('/partisipasi-sosial', 'PartisipasiSosialController@store');
 Route::get('/partisipasi-sosial/tambah', 'PartisipasiSosialController@create');
+
+// Partisipasi Organisasi
+Route::get('/partisipasi-organisasi', 'PartisipasiOrgController@index');
+Route::post('/partisipasi-organisasi', 'PartisipasiOrgController@store');
+Route::get('/partisipasi-organisasi/tambah', 'PartisipasiOrgController@create');
 
 
 Route::get('/sample', 'SampleController@create');
