@@ -49,6 +49,11 @@ Route::get('/rasa-percaya-politik', 'RasaPercayaPolController@index');
 Route::post('/rasa-percaya-politik', 'RasaPercayaPolController@store');
 Route::get('/rasa-percaya-politik/tambah', 'RasaPercayaPolController@create');
 
+// Nilai dan norma
+Route::get('/nilai-norma', 'NilaiNormaController@index');
+Route::post('/nilai-norma', 'NilaiNormaController@store');
+Route::get('/nilai-norma/tambah', 'NilaiNormaController@create');
+
 Route::get('/sample', 'SampleController@create');
 Route::post('/sample', 'SampleController@store');
 Route::get('/sample/session/set', 'SampleController@set_session');
