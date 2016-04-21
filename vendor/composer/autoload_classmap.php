@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateSessionsTable' => $baseDir . '/database/migrations/2016_04_20_162406_create_sessions_table.php',
+    'CreateTableJwbPartisipasi' => $baseDir . '/database/migrations/2016_04_20_173510_create_table_jwb_partisipasi.php',
     'CreateTableMasterOpsional' => $baseDir . '/database/migrations/2016_04_19_144049_create_table_master_opsional.php',
     'CreateTableMasterPartisipasi' => $baseDir . '/database/migrations/2016_04_19_170428_create_table_master_partisipasi.php',
     'CreateTablePartisipasi' => $baseDir . '/database/migrations/2016_04_19_132740_create_table_partisipasi.php',
@@ -482,6 +484,7 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'PartisipasiOrgSeeder' => $baseDir . '/database/seeds/PartisipasiOrgSeeder.php',
     'PartisipasiTableSeeder' => $baseDir . '/database/seeds/PartisipasiTableSeeder.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',

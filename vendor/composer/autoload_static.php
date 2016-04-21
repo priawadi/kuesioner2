@@ -260,6 +260,8 @@ class ComposerStaticInitf96fe4030dfeb8c481f689cf838f308a
 
     public static $classMap = array (
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreateSessionsTable' => __DIR__ . '/../..' . '/database/migrations/2016_04_20_162406_create_sessions_table.php',
+        'CreateTableJwbPartisipasi' => __DIR__ . '/../..' . '/database/migrations/2016_04_20_173510_create_table_jwb_partisipasi.php',
         'CreateTableMasterOpsional' => __DIR__ . '/../..' . '/database/migrations/2016_04_19_144049_create_table_master_opsional.php',
         'CreateTableMasterPartisipasi' => __DIR__ . '/../..' . '/database/migrations/2016_04_19_170428_create_table_master_partisipasi.php',
         'CreateTablePartisipasi' => __DIR__ . '/../..' . '/database/migrations/2016_04_19_132740_create_table_partisipasi.php',
@@ -735,6 +737,7 @@ class ComposerStaticInitf96fe4030dfeb8c481f689cf838f308a
         'PHP_Token_XOR_EQUAL' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD_FROM' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
+        'PartisipasiOrgSeeder' => __DIR__ . '/../..' . '/database/seeds/PartisipasiOrgSeeder.php',
         'PartisipasiTableSeeder' => __DIR__ . '/../..' . '/database/seeds/PartisipasiTableSeeder.php',
         'SebastianBergmann\\Comparator\\ArrayComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ArrayComparator.php',
         'SebastianBergmann\\Comparator\\Comparator' => __DIR__ . '/..' . '/sebastian/comparator/src/Comparator.php',
