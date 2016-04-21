@@ -34,6 +34,11 @@ Route::get('/partisipasi-politik', 'PartisipasiPolitikController@index');
 Route::post('/partisipasi-politik', 'PartisipasiPolitikController@store');
 Route::get('/partisipasi-politik/tambah', 'PartisipasiPolitikController@create');
 
+// Rasa Percaya Masyarakat
+Route::get('/rasa-percaya-masyarakat', 'RasaPercayaMasyController@index');
+Route::post('/rasa-percaya-masyarakat', 'RasaPercayaMasyController@store');
+Route::get('/rasa-percaya-masyarakat/tambah', 'RasaPercayaMasyController@create');
+
 Route::get('/sample', 'SampleController@create');
 Route::post('/sample', 'SampleController@store');
 Route::get('/sample/session/set', 'SampleController@set_session');

@@ -102,9 +102,7 @@
                                 {{
                                     Form::select(
                                         'kategori', 
-                                        [
-                                            'L' => 'Large', 'S' => 'Small'
-                                        ], 
+                                        $kategori, 
                                         null, 
                                         [
                                             'class' => 'form-control',

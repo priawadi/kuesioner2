@@ -27,7 +27,9 @@ class SampleController extends Controller
      */
     public function create()
     {
-        return view('sample.form');
+        return view('sample.form', [
+            'kategori' => [1 => 'Besar', 2 => 'Kecil']
+        ]);
     }
 
     /**
