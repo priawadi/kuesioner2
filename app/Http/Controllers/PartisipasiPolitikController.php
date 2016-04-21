@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class PartisipasiPolitik extends Controller
+class PartisipasiPolitikController extends Controller
 {
     //
 }
