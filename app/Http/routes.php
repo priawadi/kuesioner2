@@ -29,6 +29,10 @@ Route::get('/partisipasi-organisasi', 'PartisipasiOrgController@index');
 Route::post('/partisipasi-organisasi', 'PartisipasiOrgController@store');
 Route::get('/partisipasi-organisasi/tambah', 'PartisipasiOrgController@create');
 
+// Partisipasi Politik
+Route::get('/partisipasi-politik', 'PartisipasiPolitikController@index');
+Route::post('/partisipasi-politik', 'PartisipasiPolitikController@store');
+Route::get('/partisipasi-politik/tambah', 'PartisipasiPolitikController@create');
 
 Route::get('/sample', 'SampleController@create');
 Route::post('/sample', 'SampleController@store');

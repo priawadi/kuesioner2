@@ -28,7 +28,7 @@ class PartisipasiSosialController extends Controller
 
         // return view('partisipasi_sosial.form', [
         return view('partisipasi_sosial.form', [
-            'subtitle'   => 'Partisipasi Sosial',
+            'subtitle'   => 'Partisipasi Politik',
             'pertanyaan' => Partisipasi::where('kateg_partisipasi', 1)->get(),
             'opsi'       => $opsi
         ]);
