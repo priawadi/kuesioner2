@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Konsumsi;
+use App\JawabanKonsumsi;
 use App\Http\Requests;
+use Validator;
 
 class KonsumsiController extends Controller
 {
@@ -15,7 +17,8 @@ class KonsumsiController extends Controller
      */
     public function index()
     {
-        
+        $konsumsi = Konsumsi::all();
+
     }
 
     /**
@@ -25,6 +28,12 @@ class KonsumsiController extends Controller
      */
     public function create()
     {
+
+        return view('konsumsi.form', [
+            'subtitle'   => 'I PENGELUARAN PANGAN MINGGUAN RUMAH TANGGA PERIKANAN',
+            'konsumsi' => Konsumsi::all(),
+        ]);
+
         return view('konsumsi.form', [
             'tasks' => 'test',
         ]);
@@ -39,26 +48,23 @@ class KonsumsiController extends Controller
     public function store(Request $request)
     {   
         $validator = Validator::make($request->all(), [
-            'nama_responden' => 'required|min:5',
-            'alamat'         => 'required',
-            'aktif'          => 'required',
-            'kategori'       => 'required',
-            'jenis_kelamin'  => 'required'
+            'konsumsi.*' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return redirect('responden')
+            return redirect('konsumsi/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
 
-        $responden = new Responden;
-        $responden->nama_responden = $request->nama_responden;
-        $responden->alamat         = $request->alamat;
-        $responden->aktif          = $request->aktif;
-        $responden->kategori       = $request->kategori;
-        $responden->jenis_kelamin  = $request->jenis_kelamin;
-        $responden->save();
+        $input = $request->all();
+        foreach ($input['konsumsi'] as $key => $value) {
+            $konsumsi = new JawabanKonsumsi;
+            $konsumsi -> id_konsumsi = $key;
+            $konsumsi -> id_responden = 1;
+            $konsumsi -> jawaban = $value;
+            $konsumsi->save();
+        }
 
         return view('home');
     }

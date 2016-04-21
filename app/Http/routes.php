@@ -32,9 +32,11 @@ Route::get('/sample/session/delete', 'SampleController@delete_session');
 
 
 //konsumsi
-Route::get('/konsumsi', 'KonsumsiController@create');
-Route::post('/konsumsi', 'KonsumsiController@store');
+Route::get('/konsumsi', 'KonsumsiController@index');
+Route::get('/konsumsi/tambah', 'KonsumsiController@create');
+Route::post('/konsumsi/tambah', 'KonsumsiController@store');
 
 //tenaker
-Route::get('/tenaker', 'TenakerController@create');
+Route::get('/tenaker', 'TenakerController@index');
+Route::get('/tenaker/tambah', 'TenakerController@create');
 Route::post('/tenaker', 'TenakerController@store');
