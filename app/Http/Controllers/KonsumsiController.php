@@ -34,9 +34,6 @@ class KonsumsiController extends Controller
             'konsumsi' => Konsumsi::all(),
         ]);
 
-        return view('konsumsi.form', [
-            'tasks' => 'test',
-        ]);
     }
 
     /**

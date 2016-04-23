@@ -381,8 +381,7 @@ class KonsumsiSeeder extends Seeder
 				'created_at'		=> \Carbon\Carbon::now()->toDateTimeString(),
             ],                                                                                                                                                                                                                                                                         
 
-
            ];
-        DB::table('konsumsi')->insert($opsional);        
+        DB::table('konsumsi')->insert($opsional);
     }
 }

@@ -13,6 +13,8 @@
                     @endforeach
                 </ul>
                 <div class="panel-body">
+                {!! Form::open(array('url' => 'tenaker/tambah', 'class' => 'form-horizontal')) !!}    
+
                     <table class="table table-hover"> 
                         <thead>
                             <tr class="info"> 
@@ -31,176 +33,79 @@
                             </tr> 
                         </thead> 
                         <tbody> 
+                            @foreach($armada_dimiliki as $id_perahu => $perahu)               
                             <tr>
-                                <td>Perahu 1</td> 
+                                <td>{{$perahu}}</td> 
                                 <td class="col-xs-2">      
-                                    <select class="form-control" id="jArmada">
-                                        <option value="0">-</option>
-                                        <option value="1">Tanpa Motor</option>
-                                        <option value="2">Motor Tempel</option>
-                                        <option value="3">Perahu Motor</option>
-                                    </select>
+                                {{
+                                    Form::select(
+                                        'jenis_armada', 
+                                        
+                                            $jenis_armada
+                                        , 
+                                        null, 
+                                        [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Pilih'
+                                        ]
+                                    )
+                                }}
                                 </td> 
                                 <td><input class="form-control" type="text" placeholder=""></td> 
                                 <td class="col-xs-1">
-                                    <select class="form-control" id="sKepemilikan">
-                                        <option value="0">-</option>
-                                        <option value="1">Sendiri</option>
-                                        <option value="2">Juragan</option>
-                                        <option value="3">Kelompok</option>
-                                        <option value="4">Sewa</option>
-                                    </select>
+                                {{
+                                    Form::select(
+                                        'status_kepemilikan', 
+                                        
+                                            $status_kepemilikan
+                                        , 
+                                        null, 
+                                        [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Pilih'
+                                        ]
+                                    )
+                                }}
                                 </td> 
                                 <td><input class="form-control" type="text" placeholder=""></td> 
                                 <td class="col-xs-2">
-                                    <select class="form-control" id="kondisi">
-                                        <option value="0">-</option>
-                                        <option value="1">Baru</option>
-                                        <option value="2">Bekas</option>
-                                    </select>
+                                {{
+                                    Form::select(
+                                        'kondisi', 
+                                        
+                                            $kondisi
+                                        , 
+                                        null, 
+                                        [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Pilih'
+                                        ]
+                                    )
+                                }}
                                 </td> 
                                 <td class="col-xs-3"><input class="form-control" type="text" placeholder=""></td> 
                                 <td><input class="form-control" type="text" placeholder=""></td> 
                                 <td class="col-xs-3">
-                                    <select class="form-control" id="sModal">
-                                        <option value="0">-</option>
-                                        <option value="1">Modal sendiri</option>
-                                        <option value="2">Kredit formal</option>
-                                        <option value="3">Kredit informal</option>
-                                        <option value="4">Bantuan pemerintah</option>
-                                        <option value="5">Keluarga</option>
-                                        <option value="6">Campuran</option>
-                                    </select>
+                                {{
+                                    Form::select(
+                                        'sumber_modal', 
+                                        
+                                            $sumber_modal
+                                        , 
+                                        null, 
+                                        [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Pilih'
+                                        ]
+                                    )
+                                }}
                                 </td> 
                             </tr>   
+                            @endforeach
                             <tr> 
-                                <td>Perahu 2</td> 
-                                <td class="col-xs-2">      
-                                    <select class="form-control" id="jArmada">
-                                        <option value="0">-</option>
-                                        <option value="1">Tanpa Motor</option>
-                                        <option value="2">Motor Tempel</option>
-                                        <option value="3">Perahu Motor</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-1">
-                                    <select class="form-control" id="sKepemilikan">
-                                        <option value="0">-</option>
-                                        <option value="1">Sendiri</option>
-                                        <option value="2">Juragan</option>
-                                        <option value="3">Kelompok</option>
-                                        <option value="4">Sewa</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-2">
-                                    <select class="form-control" id="kondisi">
-                                        <option value="0">-</option>
-                                        <option value="1">Baru</option>
-                                        <option value="2">Bekas</option>
-                                    </select>
-                                </td> 
-                                <td class="col-xs-3"><input class="form-control" type="text" placeholder=""></td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-3">
-                                    <select class="form-control" id="sModal">
-                                        <option value="0">-</option>
-                                        <option value="1">Modal sendiri</option>
-                                        <option value="2">Kredit formal</option>
-                                        <option value="3">Kredit informal</option>
-                                        <option value="4">Bantuan pemerintah</option>
-                                        <option value="5">Keluarga</option>
-                                        <option value="6">Campuran</option>
-                                    </select>
-                                </td> 
-                            </tr>  
-                            <tr> 
-                                <td>Perahu 3</td> 
-                                <td class="col-xs-2">      
-                                    <select class="form-control" id="jArmada">
-                                        <option value="0">-</option>
-                                        <option value="1">Tanpa Motor</option>
-                                        <option value="2">Motor Tempel</option>
-                                        <option value="3">Perahu Motor</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-1">
-                                    <select class="form-control" id="sKepemilikan">
-                                        <option value="0">-</option>
-                                        <option value="1">Sendiri</option>
-                                        <option value="2">Juragan</option>
-                                        <option value="3">Kelompok</option>
-                                        <option value="4">Sewa</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-2">
-                                    <select class="form-control" id="kondisi">
-                                        <option value="0">-</option>
-                                        <option value="1">Baru</option>
-                                        <option value="2">Bekas</option>
-                                    </select>
-                                </td> 
-                                <td class="col-xs-3"><input class="form-control" type="text" placeholder=""></td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-3">
-                                    <select class="form-control" id="sModal">
-                                        <option value="0">-</option>
-                                        <option value="1">Modal sendiri</option>
-                                        <option value="2">Kredit formal</option>
-                                        <option value="3">Kredit informal</option>
-                                        <option value="4">Bantuan pemerintah</option>
-                                        <option value="5">Keluarga</option>
-                                        <option value="6">Campuran</option>
-                                    </select>
-                                </td> 
-                            </tr>  
-                            <tr> 
-                                <td>Perahu 4</td> 
-                                <td class="col-xs-2">      
-                                    <select class="form-control" id="jArmada">
-                                        <option value="0">-</option>
-                                        <option value="1">Tanpa Motor</option>
-                                        <option value="2">Motor Tempel</option>
-                                        <option value="3">Perahu Motor</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-1">
-                                    <select class="form-control" id="sKepemilikan">
-                                        <option value="0">-</option>
-                                        <option value="1">Sendiri</option>
-                                        <option value="2">Juragan</option>
-                                        <option value="3">Kelompok</option>
-                                        <option value="4">Sewa</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-2">
-                                    <select class="form-control" id="kondisi">
-                                        <option value="0">-</option>
-                                        <option value="1">Baru</option>
-                                        <option value="2">Bekas</option>
-                                    </select>
-                                </td> 
-                                <td class="col-xs-3"><input class="form-control" type="text" placeholder=""></td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-3">
-                                    <select class="form-control" id="sModal">
-                                        <option value="0">-</option>
-                                        <option value="1">Modal sendiri</option>
-                                        <option value="2">Kredit formal</option>
-                                        <option value="3">Kredit informal</option>
-                                        <option value="4">Bantuan pemerintah</option>
-                                        <option value="5">Keluarga</option>
-                                        <option value="6">Campuran</option>
-                                    </select>
-                                </td> 
-                            </tr>                                                                                                                                                                                                                                                                                                                                                                                                  
                         </tbody> 
                     </table>
+                    {!! Form::close() !!}
                 </div>
 
                 <div class="panel-body">
@@ -223,242 +128,92 @@
                             </tr> 
                         </thead> 
                         <tbody> 
+                            @foreach($mesin as $id_mesin => $mesin)               
                             <tr>
-                                <td>Mesin 1</td> 
+                                <td>{{$mesin}}</td> 
                                 <td class="col-xs-2">      
-                                    <select class="form-control" id="tPenggerak">
-                                        <option value="0">-</option>
-                                        <option value="1">Donfeng</option>
-                                        <option value="2">Yanmar</option>
-                                        <option value="3">Honda</option>
-                                        <option value="4">Kubota</option>
-                                        <option value="5">Yamaha</option>
-                                        <option value="6">Hino</option>
-                                        <option value="7">Mitsubishi</option>
-                                        <option value="8">Sanghyang</option>
-                                        <option value="9">Lainnya</option>
-                                    </select>
+                                {{
+                                    Form::select(
+                                        'merek_mesin', 
+                                        
+                                            $merek_mesin
+                                        , 
+                                        null, 
+                                        [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Pilih'
+                                        ]
+                                    )
+                                }}
                                 </td> 
                                 <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-3">
-                                    <select class="form-control" id="sKepemilikan">
-                                        <option value="0">-</option>
-                                        <option value="1">Sendiri</option>
-                                        <option value="2">Juragan</option>
-                                        <option value="3">Kelompok</option>
-                                        <option value="4">Sewa</option>
-                                    </select>
+                                <td class="col-xs-2">
+                                {{
+                                    Form::select(
+                                        'status_kepemilikan_mesin', 
+                                        
+                                            $status_kepemilikan
+                                        , 
+                                        null, 
+                                        [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Pilih'
+                                        ]
+                                    )
+                                }}
                                 </td> 
                                 <td class="col-xs-2">
-                                    <select class="form-control" id="jenisBbm">
-                                        <option value="0">-</option>
-                                        <option value="1">Bensin</option>
-                                        <option value="2">Solar</option>
-                                        <option value="3">Minyak Tanah</option>
-                                        <option value="4">Campuran</option>
-                                        <option value="5">Bio Diesel</option>
-                                        <option value="6">Lainnya</option>
-                                    </select>
+                                {{
+                                    Form::select(
+                                        'jenis_bbm_mesin', 
+                                        
+                                            $jenis_bbm_mesin
+                                        , 
+                                        null, 
+                                        [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Pilih'
+                                        ]
+                                    )
+                                }}
                                 </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-1">
-                                    <select class="form-control" id="kondisi">
-                                        <option value="0">-</option>
-                                        <option value="1">Baru</option>
-                                        <option value="2">Bekas</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-3">
-                                    <select class="form-control" id="sModal">
-                                        <option value="0">-</option>
-                                        <option value="1">Modal sendiri</option>
-                                        <option value="2">Kredit formal</option>
-                                        <option value="3">Kredit informal</option>
-                                        <option value="4">Bantuan pemerintah</option>
-                                        <option value="5">Keluarga</option>
-                                        <option value="6">Campuran</option>
-                                    </select>
-                                </td>                                 
-                            </tr>
-                            <tr>
-                                <td>Mesin 2</td> 
-                                <td class="col-xs-2">      
-                                    <select class="form-control" id="tPenggerak">
-                                        <option value="0">-</option>
-                                        <option value="1">Donfeng</option>
-                                        <option value="2">Yanmar</option>
-                                        <option value="3">Honda</option>
-                                        <option value="4">Kubota</option>
-                                        <option value="5">Yamaha</option>
-                                        <option value="6">Hino</option>
-                                        <option value="7">Mitsubishi</option>
-                                        <option value="8">Sanghyang</option>
-                                        <option value="9">Lainnya</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-3">
-                                    <select class="form-control" id="sKepemilikan">
-                                        <option value="0">-</option>
-                                        <option value="1">Sendiri</option>
-                                        <option value="2">Juragan</option>
-                                        <option value="3">Kelompok</option>
-                                        <option value="4">Sewa</option>
-                                    </select>
-                                </td> 
+                                <td class="col-xs-3"><input class="form-control" type="text" placeholder=""></td> 
                                 <td class="col-xs-2">
-                                    <select class="form-control" id="jenisBbm">
-                                        <option value="0">-</option>
-                                        <option value="1">Bensin</option>
-                                        <option value="2">Solar</option>
-                                        <option value="3">Minyak Tanah</option>
-                                        <option value="4">Campuran</option>
-                                        <option value="5">Bio Diesel</option>
-                                        <option value="6">Lainnya</option>
-                                    </select>
+                                {{
+                                    Form::select(
+                                        'kondisi_mesin', 
+                                        
+                                            $kondisi
+                                        , 
+                                        null, 
+                                        [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Pilih'
+                                        ]
+                                    )
+                                }}
                                 </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-1">
-                                    <select class="form-control" id="kondisi">
-                                        <option value="0">-</option>
-                                        <option value="1">Baru</option>
-                                        <option value="2">Bekas</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
+                                <td class="col-xs-3"><input class="form-control" type="text" placeholder=""></td>
+                                <td class="col-xs-3"><input class="form-control" type="text" placeholder=""></td>
                                 <td class="col-xs-3">
-                                    <select class="form-control" id="sModal">
-                                        <option value="0">-</option>
-                                        <option value="1">Modal sendiri</option>
-                                        <option value="2">Kredit formal</option>
-                                        <option value="3">Kredit informal</option>
-                                        <option value="4">Bantuan pemerintah</option>
-                                        <option value="5">Keluarga</option>
-                                        <option value="6">Campuran</option>
-                                    </select>
-                                </td>                                 
-                            </tr> 
-                            <tr>
-                                <td>Mesin 3</td> 
-                                <td class="col-xs-2">      
-                                    <select class="form-control" id="tPenggerak">
-                                        <option value="0">-</option>
-                                        <option value="1">Donfeng</option>
-                                        <option value="2">Yanmar</option>
-                                        <option value="3">Honda</option>
-                                        <option value="4">Kubota</option>
-                                        <option value="5">Yamaha</option>
-                                        <option value="6">Hino</option>
-                                        <option value="7">Mitsubishi</option>
-                                        <option value="8">Sanghyang</option>
-                                        <option value="9">Lainnya</option>
-                                    </select>
+                                {{
+                                    Form::select(
+                                        'sumber_modal_mesin', 
+                                        
+                                            $sumber_modal
+                                                                                    , 
+                                        null, 
+                                        [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Pilih'
+                                        ]
+                                    )
+                                }}
                                 </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-3">
-                                    <select class="form-control" id="sKepemilikan">
-                                        <option value="0">-</option>
-                                        <option value="1">Sendiri</option>
-                                        <option value="2">Juragan</option>
-                                        <option value="3">Kelompok</option>
-                                        <option value="4">Sewa</option>
-                                    </select>
-                                </td> 
-                                <td class="col-xs-2">
-                                    <select class="form-control" id="jenisBbm">
-                                        <option value="0">-</option>
-                                        <option value="1">Bensin</option>
-                                        <option value="2">Solar</option>
-                                        <option value="3">Minyak Tanah</option>
-                                        <option value="4">Campuran</option>
-                                        <option value="5">Bio Diesel</option>
-                                        <option value="6">Lainnya</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-1">
-                                    <select class="form-control" id="kondisi">
-                                        <option value="0">-</option>
-                                        <option value="1">Baru</option>
-                                        <option value="2">Bekas</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-3">
-                                    <select class="form-control" id="sModal">
-                                        <option value="0">-</option>
-                                        <option value="1">Modal sendiri</option>
-                                        <option value="2">Kredit formal</option>
-                                        <option value="3">Kredit informal</option>
-                                        <option value="4">Bantuan pemerintah</option>
-                                        <option value="5">Keluarga</option>
-                                        <option value="6">Campuran</option>
-                                    </select>
-                                </td>                                 
-                            </tr> 
-                            <tr>
-                                <td>Mesin 4</td> 
-                                <td class="col-xs-2">      
-                                    <select class="form-control" id="tPenggerak">
-                                        <option value="0">-</option>
-                                        <option value="1">Donfeng</option>
-                                        <option value="2">Yanmar</option>
-                                        <option value="3">Honda</option>
-                                        <option value="4">Kubota</option>
-                                        <option value="5">Yamaha</option>
-                                        <option value="6">Hino</option>
-                                        <option value="7">Mitsubishi</option>
-                                        <option value="8">Sanghyang</option>
-                                        <option value="9">Lainnya</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-3">
-                                    <select class="form-control" id="sKepemilikan">
-                                        <option value="0">-</option>
-                                        <option value="1">Sendiri</option>
-                                        <option value="2">Juragan</option>
-                                        <option value="3">Kelompok</option>
-                                        <option value="4">Sewa</option>
-                                    </select>
-                                </td> 
-                                <td class="col-xs-2">
-                                    <select class="form-control" id="jenisBbm">
-                                        <option value="0">-</option>
-                                        <option value="1">Bensin</option>
-                                        <option value="2">Solar</option>
-                                        <option value="3">Minyak Tanah</option>
-                                        <option value="4">Campuran</option>
-                                        <option value="5">Bio Diesel</option>
-                                        <option value="6">Lainnya</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-1">
-                                    <select class="form-control" id="kondisi">
-                                        <option value="0">-</option>
-                                        <option value="1">Baru</option>
-                                        <option value="2">Bekas</option>
-                                    </select>
-                                </td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td><input class="form-control" type="text" placeholder=""></td> 
-                                <td class="col-xs-3">
-                                    <select class="form-control" id="sModal">
-                                        <option value="0">-</option>
-                                        <option value="1">Modal sendiri</option>
-                                        <option value="2">Kredit formal</option>
-                                        <option value="3">Kredit informal</option>
-                                        <option value="4">Bantuan pemerintah</option>
-                                        <option value="5">Keluarga</option>
-                                        <option value="6">Campuran</option>
-                                    </select>
-                                </td>                                 
-                            </tr>                                                                                                                                                                                                                                                                                                                                               
+                            </tr>   
+                            @endforeach
+                            <tr>                             
+
                         </tbody> 
                     </table>
                 </div>
