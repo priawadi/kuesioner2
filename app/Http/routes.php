@@ -54,6 +54,11 @@ Route::get('/nilai-norma', 'NilaiNormaController@index');
 Route::post('/nilai-norma', 'NilaiNormaController@store');
 Route::get('/nilai-norma/tambah', 'NilaiNormaController@create');
 
+// Nilai dan norma
+Route::get('/karakteristik-rumah-tangga', 'KarRumahTanggaController@index');
+Route::post('/karakteristik-rumah-tangga', 'KarRumahTanggaController@store');
+Route::get('/karakteristik-rumah-tangga/tambah', 'KarRumahTanggaController@create');
+
 Route::get('/sample', 'SampleController@create');
 Route::post('/sample', 'SampleController@store');
 Route::get('/sample/session/set', 'SampleController@set_session');
@@ -70,3 +75,8 @@ Route::post('/konsumsi/tambah', 'KonsumsiController@store');
 Route::get('/tenaker', 'TenakerController@index');
 Route::get('/tenaker/tambah', 'TenakerController@create');
 Route::post('/tenaker', 'TenakerController@store');
+
+// Hasil tangkapan ikan
+Route::get('/hasil-tangkapan-ikan', 'HasilTangkapanController@index');
+Route::get('/hasil-tangkapan-ikan/tambah', 'HasilTangkapanController@create');
+Route::post('/hasil-tangkapan-ikan/tambah', 'HasilTangkapanController@store');
