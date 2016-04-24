@@ -29,7 +29,8 @@ class PartisipasiPolitikController extends Controller
             'subtitle'   => 'Partisipasi Politik',
             'pertanyaan' => Partisipasi::where('kateg_partisipasi', 3)->get(),
             'opsi'       => $opsi,
-            'nomor'      => 1
+            'nomor'      => 1,
+            'prev_action'=> 'partisipasi-organisasi'
         ]);
     }
 

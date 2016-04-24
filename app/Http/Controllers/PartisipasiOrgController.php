@@ -30,10 +30,11 @@ class PartisipasiOrgController extends Controller
 
         // return view('partisipasi_org.form', [
         return view('partisipasi_org.form', [
-            'subtitle'   => 'Partisipasi Sosial',
-            'pertanyaan' => Partisipasi::where('kateg_partisipasi', 2)->get(),
-            'opsi'       => $opsi,
-            'nomor'      => 1
+            'subtitle'    => 'Partisipasi Sosial',
+            'pertanyaan'  => Partisipasi::where('kateg_partisipasi', 2)->get(),
+            'opsi'        => $opsi,
+            'nomor'       => 1,
+            'prev_action' => 'partisipasi-sosial'
         ]);
     }
 

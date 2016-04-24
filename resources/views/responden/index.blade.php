@@ -34,9 +34,9 @@
                                 <td>{{$item->kampung}}</td> 
                                 <td>{{$item->dusun}}</td> 
                                 <td>
-                                    <a href="" title="Hapus"><i class="glyphicon glyphicon-trash"></i></a>
+                                    <!-- <a href="" title="Hapus"><i class="glyphicon glyphicon-trash"></i></a> -->
                                     <a href="" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
-                                    <a href="" title="Lihat"><i class="glyphicon glyphicon-file"></i></a>
+                                    <a href="{{url('responden/lihat/' . $item->id_responden)}}" title="Lihat"><i class="glyphicon glyphicon-file"></i></a>
                                 </td> 
                             </tr>
                             @endforeach

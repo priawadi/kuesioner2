@@ -15,9 +15,12 @@ Route::get('/', function () {
     return view('home');
 });
 
+// Responden
 Route::get('/responden', 'RespondenController@index');
 Route::get('/responden/tambah', 'RespondenController@create');
 Route::post('/responden/tambah', 'RespondenController@store');
+
+Route::get('/responden/lihat/{id_responden}', 'RespondenController@detail');
 
 // Partisipasi Sosial
 Route::get('/partisipasi-sosial', 'PartisipasiSosialController@index');

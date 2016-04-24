@@ -57,11 +57,7 @@
                         </tr>
                         @endforeach
                         </table>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">Simpan</button>
-                            </div>
-                        </div>
+                        @include('components.form.prev_next_btn')
                     {{ Form::close() }}
                 </div>
             </div>

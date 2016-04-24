@@ -64,11 +64,8 @@
                         </tr>
                         @endforeach
                         </table>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">Simpan</button>
-                            </div>
-                        </div>
+                        <a href="#" class="btn btn-primary pull-left">Kembali</a>
+                        <button type="submit" class="btn btn-primary pull-right">Selanjutnya</button>
                     {{ Form::close() }}
                 </div>
             </div>

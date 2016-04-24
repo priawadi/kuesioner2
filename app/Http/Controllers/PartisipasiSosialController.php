@@ -17,8 +17,12 @@ class PartisipasiSosialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+
         $master_opsional = MasterOpsional::all();
 
         $opsi = [];
@@ -28,9 +32,10 @@ class PartisipasiSosialController extends Controller
 
         // return view('partisipasi_sosial.form', [
         return view('partisipasi_sosial.form', [
-            'subtitle'   => 'Partisipasi Politik',
-            'pertanyaan' => Partisipasi::where('kateg_partisipasi', 1)->get(),
-            'opsi'       => $opsi
+            'subtitle'    => 'Partisipasi Politik',
+            'pertanyaan'  => Partisipasi::where('kateg_partisipasi', 1)->get(),
+            'opsi'        => $opsi,
+            'prev_action' => 'responden'
         ]);
     }
 
@@ -82,7 +87,7 @@ class PartisipasiSosialController extends Controller
         {
             $jwb_partisipasi = new JwbPartisipasi;
             $jwb_partisipasi->id_master_opsional   = $jawaban[$item->id_partisipasi];
-            $jwb_partisipasi->id_responden         = 1;
+            $jwb_partisipasi->id_responden         = $request->session()->get('id_responden');
             $jwb_partisipasi->id_partisipasi       = $item->id_partisipasi;
             if ($item->is_reason)
             {
