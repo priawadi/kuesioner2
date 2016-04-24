@@ -82,7 +82,7 @@ class RasaPercayaPolController extends Controller
         {
             $jwb_rasa_percaya = new JwbRasaPercaya;
             $jwb_rasa_percaya->id_master_opsional = $jawaban[$item->id_rasa_percaya];
-            $jwb_rasa_percaya->id_responden       = 1;
+            $jwb_rasa_percaya->id_responden       = $request->session()->get('id_responden');
             $jwb_rasa_percaya->id_rasa_percaya    = $item->id_rasa_percaya;
             if ($item->is_reason)
             {

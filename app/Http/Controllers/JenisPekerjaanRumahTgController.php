@@ -119,7 +119,7 @@ class JenisPekerjaanRumahTgController extends Controller
             // Save karakteristik rumah tangga
             $jenis_pekerjaan_rumahtg                  = new JenisPekerjaanRumahTg;
             $jenis_pekerjaan_rumahtg->nama            = $request->get('nama')[$i];
-            $jenis_pekerjaan_rumahtg->id_responden    = 1;
+            $jenis_pekerjaan_rumahtg->id_responden    = $request->session()->get('id_responden');
             $jenis_pekerjaan_rumahtg->status_keluarga = $request->get('status_keluarga')[$i];
             
             if ($request->get('status_keluarga')[$i] == 4)

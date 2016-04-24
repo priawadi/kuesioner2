@@ -118,7 +118,7 @@ class KarRumahTanggaController extends Controller
             
             $kar_rumahtangga->jenis_kelamin        = $request->get('jenis_kelamin')[$i];
             $kar_rumahtangga->umur                 = $request->get('umur')[$i];
-            $kar_rumahtangga->id_responden         = 1;
+            $kar_rumahtangga->id_responden         = $request->session()->get('id_responden');
             $kar_rumahtangga->id_pendidikan_formal = $request->get('pend_formal')[$i];;
             $kar_rumahtangga->save();
             

@@ -82,7 +82,7 @@ class NilaiNormaController extends Controller
         {
             $jwb_nilai_norma                     = new JwbNilaiNorma;
             $jwb_nilai_norma->id_master_opsional = $jawaban[$item->id_nilai_norma];
-            $jwb_nilai_norma->id_responden       = 1;
+            $jwb_nilai_norma->id_responden       = $request->session()->get('id_responden');
             $jwb_nilai_norma->id_nilai_norma     = $item->id_nilai_norma;
             if ($item->is_reason)
             {

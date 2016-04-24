@@ -14,8 +14,11 @@ class RespondenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        
+        // Remove current session
+        $request->session()->forget('id_responden');
 
         return view('responden.index', [
             'responden'  => Responden::orderBy('id_responden', 'DESC')->get(),

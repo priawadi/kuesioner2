@@ -58,7 +58,7 @@ class KonsumsiController extends Controller
         foreach ($input['konsumsi'] as $key => $value) {
             $konsumsi = new JawabanKonsumsi;
             $konsumsi -> id_konsumsi = $key;
-            $konsumsi -> id_responden = 1;
+            $konsumsi -> id_responden = $request->session()->get('id_responden');
             $konsumsi -> jawaban = $value;
             $konsumsi->save();
         }

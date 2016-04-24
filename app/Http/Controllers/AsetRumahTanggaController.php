@@ -91,8 +91,8 @@ class AsetRumahTanggaController extends Controller
         {
             if (!$item->parent)
             {
-                $aset_rumah_tangga                     = new AsetRumahTangga;
-                $aset_rumah_tangga->id_responden       = 1;
+                $aset_rumah_tangga                       = new AsetRumahTangga;
+                $aset_rumah_tangga->id_responden         = $request->session()->get('id_responden');
                 $aset_rumah_tangga->id_master_jenis_aset = $item->id_master_jenis_aset;
                 $aset_rumah_tangga->volume               = $request->get('volume')[$item->id_master_jenis_aset];
                 $aset_rumah_tangga->nilai_satuan         = $request->get('nilai_satuan')[$item->id_master_jenis_aset];

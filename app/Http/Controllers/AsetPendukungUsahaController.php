@@ -115,14 +115,15 @@ class AsetPendukungUsahaController extends Controller
         // Save aset pendukung usaha
         foreach($master_peralatan_tambahan as $key => $item)
         {
-            $aset_pendukung_usaha                          = new AsetPendukungUsaha;
-            $aset_pendukung_usaha->id_peralatan_tambahan   = $item->id_master_peralatan_tambahan;
-            $aset_pendukung_usaha->status_kepemilikan      = $request->get('status_kepemilikan')[$item->id_master_peralatan_tambahan];
-            $aset_pendukung_usaha->jumlah                  = $request->get('jumlah')[$item->id_master_peralatan_tambahan];
-            $aset_pendukung_usaha->kondisi                 = $request->get('kondisi')[$item->id_master_peralatan_tambahan];
-            $aset_pendukung_usaha->umur_ekonomis           = $request->get('umur_ekonomis')[$item->id_master_peralatan_tambahan];
-            $aset_pendukung_usaha->harga_beli              = $request->get('harga_beli')[$item->id_master_peralatan_tambahan];
-            $aset_pendukung_usaha->sumber_modal            = $request->get('sumber_modal')[$item->id_master_peralatan_tambahan];
+            $aset_pendukung_usaha                        = new AsetPendukungUsaha;
+            $aset_pendukung_usaha->id_responden          = $request->session()->get('id_responden');
+            $aset_pendukung_usaha->id_peralatan_tambahan = $item->id_master_peralatan_tambahan;
+            $aset_pendukung_usaha->status_kepemilikan    = $request->get('status_kepemilikan')[$item->id_master_peralatan_tambahan];
+            $aset_pendukung_usaha->jumlah                = $request->get('jumlah')[$item->id_master_peralatan_tambahan];
+            $aset_pendukung_usaha->kondisi               = $request->get('kondisi')[$item->id_master_peralatan_tambahan];
+            $aset_pendukung_usaha->umur_ekonomis         = $request->get('umur_ekonomis')[$item->id_master_peralatan_tambahan];
+            $aset_pendukung_usaha->harga_beli            = $request->get('harga_beli')[$item->id_master_peralatan_tambahan];
+            $aset_pendukung_usaha->sumber_modal          = $request->get('sumber_modal')[$item->id_master_peralatan_tambahan];
             
             if ($item->id_master_peralatan_tambahan > 8)
             {

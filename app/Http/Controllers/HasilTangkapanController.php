@@ -142,7 +142,7 @@ class HasilTangkapanController extends Controller
 
         // Save data penerimaan_usaha
         $penerimaan_usaha = new PenerimaanUsaha;
-        $penerimaan_usaha->id_responden            = 1;
+        $penerimaan_usaha->id_responden            = $request->session()->get('id_responden');
         $penerimaan_usaha->bulan_tidak_tangkap     = $bulan_tidak_tangkap;
         $penerimaan_usaha->total_bulan             = $request->get('total_bulan');
         $penerimaan_usaha->alasan_tidak_melaut     = $request->get('alasan_tidak_melaut');
@@ -155,17 +155,18 @@ class HasilTangkapanController extends Controller
         // Save data hasil tangkapan
         $jenis_ikan_dominan = $request->get('jenis_ikan_dominan');
         for ($id_bulan = 1; $id_bulan <= 12; $id_bulan++) { 
-            $hasil_tangkapan             = new HasilTangkapan;
-            $hasil_tangkapan->id_bulan   = $id_bulan;
-            $hasil_tangkapan->id_musim   = $musim_produksi[$id_bulan];
-            $hasil_tangkapan->total_trip = $request->get('total_trip')[$id_bulan];
+            $hasil_tangkapan               = new HasilTangkapan;
+            $hasil_tangkapan->id_bulan     = $id_bulan;
+            $hasil_tangkapan->id_responden = $request->session()->get('id_responden');
+            $hasil_tangkapan->id_musim     = $musim_produksi[$id_bulan];
+            $hasil_tangkapan->total_trip   = $request->get('total_trip')[$id_bulan];
 
             $hasil_tangkapan->save();
 
             // Save data detil hasil tangkapan
             for ($id_input = 1; $id_input <= 4 ; $id_input++) { 
                 $detil_hasil_tangkapan = new DetilHasilTangkapan;
-                $detil_hasil_tangkapan->id_responden            = 1;
+                $detil_hasil_tangkapan->id_responden            = $request->session()->get('id_responden');
                 $detil_hasil_tangkapan->id_master_jenis_ikan    = $jenis_ikan_dominan[$id_bulan][$id_input];
 
                 // If jenis_ikan_dominan Lainnya is chosen
@@ -181,6 +182,8 @@ class HasilTangkapanController extends Controller
                 $detil_hasil_tangkapan->save();
             }
         }
+
+        return view('home');
 
     }
 

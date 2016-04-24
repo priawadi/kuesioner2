@@ -84,7 +84,7 @@ class PartisipasiOrgController extends Controller
             {
                 $jwb_partisipasi = new JwbPartisipasi;
                 $jwb_partisipasi->id_master_opsional   = $jawaban[$item->id_partisipasi];
-                $jwb_partisipasi->id_responden         = 1;
+                $jwb_partisipasi->id_responden         = $request->session()->get('id_responden');
                 $jwb_partisipasi->id_partisipasi       = $item->id_partisipasi;
                 $jwb_partisipasi->save();
             }
