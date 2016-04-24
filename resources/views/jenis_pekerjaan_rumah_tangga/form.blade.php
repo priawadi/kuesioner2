@@ -17,15 +17,14 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Status dlm Rumah Tangga</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Umur</th>
-                            <th>Pendidikan Formal</th>
-                            <th>Pelatihan yg pernah Diikuti</th>
-                            <th>Wkt Pelaksanaan</th>
-                            <th>Sumber Dana Pelatihan</th>
-                            <th>Tujuan Pelatihan</th>
+                            <th>Jenis Pekerjaan</th>
+                            <th>Jumlah Pendapatan (Rp/Tahun)</th>
+                            <th>Jenis Pekerjaan</th>
+                            <th>Jumlah Pendapatan (Rp/Tahun)</th>
+                            <th>Jenis Pekerjaan</th>
+                            <th>Jumlah Pendapatan (Rp/Tahun)</th>
                         </tr>
-                    @for ($id = 1; $id <= $jml_isian; $id++)
+                        @for ($id = 1; $id <= $jml_isian; $id++)
                         <tr>
                             <td>{{$id}}</td>
                             <td>
@@ -56,25 +55,36 @@
                                 }}
                                 <br>
                                 {{  
-                                        Form::text(
-                                            'status_keluarga_lain[' . $id . ']', 
-                                            '', 
-                                            [
-                                                'class'       => 'form-control',
-                                                'placeholder' => 'Status keluarga lain'
-                                            ]
-                                        )
-                                    }}
+                                    Form::text(
+                                        'status_keluarga_lain[' . $id . ']', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Status keluarga lain'
+                                        ]
+                                    )
+                                }}
                             </td>
                             <td>
                                 {{
                                     Form::select(
-                                        'jenis_kelamin[' . $id . ']', 
-                                        $jenis_kelamin, 
+                                        'jenis_pekerjaan1[' . $id . ']', 
+                                        $jenis_pekerjaan, 
                                         null, 
                                         [
                                             'class' => 'form-control',
                                             'placeholder' => 'Pilih'
+                                        ]
+                                    )
+                                }}
+                                <br>
+                                {{  
+                                    Form::text(
+                                        'jenis_pekerjaan_lain1[' . $id . ']', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Sebutkan'
                                         ]
                                     )
                                 }}
@@ -83,104 +93,94 @@
                                 <div class="form-group">
                                     {{  
                                         Form::text(
-                                            'umur[' . $id . ']', 
+                                            'pendapatan1[' . $id . ']', 
                                             '', 
                                             [
                                                 'class'       => 'form-control',
-                                                'placeholder' => 'Umur (tahun)'
+                                                'placeholder' => 'Jumlah Pendapatan (Rp/Tahun)'
                                             ]
                                         )
                                     }}
                                 </div>
                             </td>
                             <td>
-                                <div class="form-group">
-                                    {{
-                                        Form::select(
-                                            'pend_formal[' . $id . ']', 
-                                            $pend_formal, 
-                                            null, 
-                                            [
-                                                'class' => 'form-control',
-                                                'placeholder' => 'Pilih'
-                                            ]
-                                        )
-                                    }}
-                                </div>
+                                {{
+                                    Form::select(
+                                        'jenis_pekerjaan2[' . $id . ']', 
+                                        $jenis_pekerjaan, 
+                                        null, 
+                                        [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Pilih'
+                                        ]
+                                    )
+                                }}
+                                <br>
+                                {{  
+                                    Form::text(
+                                        'jenis_pekerjaan_lain2[' . $id . ']', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Sebutkan'
+                                        ]
+                                    )
+                                }}
                             </td>
                             <td>
                                 <div class="form-group">
                                     {{  
                                         Form::text(
-                                            'jenis_pelatihan[' . $id . ']', 
+                                            'pendapatan2[' . $id . ']', 
                                             '', 
                                             [
                                                 'class'       => 'form-control',
-                                                'placeholder' => 'Pelatihan'
+                                                'placeholder' => 'Jumlah Pendapatan (Rp/Tahun)'
                                             ]
                                         )
                                     }}
                                 </div>
+                            </td>
+                            <td>
+                                {{
+                                    Form::select(
+                                        'jenis_pekerjaan3[' . $id . ']', 
+                                        $jenis_pekerjaan, 
+                                        null, 
+                                        [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Pilih'
+                                        ]
+                                    )
+                                }}
+                                <br>
+                                {{  
+                                    Form::text(
+                                        'jenis_pekerjaan_lain3[' . $id . ']', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Sebutkan'
+                                        ]
+                                    )
+                                }}
                             </td>
                             <td>
                                 <div class="form-group">
                                     {{  
                                         Form::text(
-                                            'waktu_pelaksanaan[' . $id . ']', 
+                                            'pendapatan3[' . $id . ']', 
                                             '', 
                                             [
                                                 'class'       => 'form-control',
-                                                'placeholder' => 'Wkt Pelaksanaan'
+                                                'placeholder' => 'Jumlah Pendapatan (Rp/Tahun)'
                                             ]
                                         )
                                     }}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    {{
-                                        Form::select(
-                                            'sumber_dana[' . $id . ']', 
-                                            $sumber_pelatihan, 
-                                            null, 
-                                            [
-                                                'class' => 'form-control',
-                                                'placeholder' => 'Pilih'
-                                            ]
-                                        )
-                                    }}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    {{
-                                        Form::select(
-                                            'tujuan_pelatihan[' . $id . ']', 
-                                            $tujuan_pelatihan, 
-                                            null, 
-                                            [
-                                                'class' => 'form-control',
-                                                'placeholder' => 'Pilih'
-                                            ]
-                                        )
-                                    }}
-                                    <br>
-                                    <div class="form-group">
-                                    {{  
-                                        Form::text(
-                                            'tujuan_pelatihan_lain[' . $id . ']', 
-                                            '', 
-                                            [
-                                                'class'       => 'form-control',
-                                                'placeholder' => 'Sebutkan'
-                                            ]
-                                        )
-                                    }}
-                                </div>
                                 </div>
                             </td>
                         </tr>
-                    @endfor
+                        @endfor
                     </table>
                     <a href="#" class="btn btn-primary pull-left">Kembali</a>
                     <button type="submit" class="btn btn-primary pull-right">Selanjutnya</button>

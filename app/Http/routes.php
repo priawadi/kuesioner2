@@ -54,10 +54,20 @@ Route::get('/nilai-norma', 'NilaiNormaController@index');
 Route::post('/nilai-norma', 'NilaiNormaController@store');
 Route::get('/nilai-norma/tambah', 'NilaiNormaController@create');
 
-// Nilai dan norma
+// Karakteristik Rumah Tangga
 Route::get('/karakteristik-rumah-tangga', 'KarRumahTanggaController@index');
 Route::post('/karakteristik-rumah-tangga', 'KarRumahTanggaController@store');
 Route::get('/karakteristik-rumah-tangga/tambah', 'KarRumahTanggaController@create');
+
+// Jenis Pekerjaan Rumah Tangga
+Route::get('/jenis-pekerjaan-rumah-tangga', 'JenisPekerjaanRumahTgController@index');
+Route::get('/jenis-pekerjaan-rumah-tangga/tambah', 'JenisPekerjaanRumahTgController@create');
+Route::post('/jenis-pekerjaan-rumah-tangga/tambah', 'JenisPekerjaanRumahTgController@store');
+
+// Aset Rumah Tangga
+Route::get('/aset-rumah-tangga', 'AsetRumahTanggaController@index');
+Route::get('/aset-rumah-tangga/tambah', 'AsetRumahTanggaController@create');
+Route::post('/aset-rumah-tangga/tambah', 'AsetRumahTanggaController@store');
 
 Route::get('/sample', 'SampleController@create');
 Route::post('/sample', 'SampleController@store');
