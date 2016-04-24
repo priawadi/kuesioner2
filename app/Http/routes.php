@@ -72,6 +72,11 @@ Route::get('/aset-rumah-tangga', 'AsetRumahTanggaController@index');
 Route::get('/aset-rumah-tangga/tambah', 'AsetRumahTanggaController@create');
 Route::post('/aset-rumah-tangga/tambah', 'AsetRumahTanggaController@store');
 
+// Kesehatan
+Route::get('/kesehatan', 'KesehatanController@index');
+Route::get('/kesehatan/tambah', 'KesehatanController@create');
+Route::post('/kesehatan/tambah', 'KesehatanController@store');
+
 Route::get('/sample', 'SampleController@create');
 Route::post('/sample', 'SampleController@store');
 Route::get('/sample/session/set', 'SampleController@set_session');

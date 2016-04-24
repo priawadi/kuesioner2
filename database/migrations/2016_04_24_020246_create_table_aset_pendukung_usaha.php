@@ -14,6 +14,7 @@ class CreateTableAsetPendukungUsaha extends Migration
     {
         Schema::create('aset_pendukung_usaha', function (Blueprint $table) {
             $table->increments('id_aset_pendukung_usaha');
+            $table->integer('id_responden');
             $table->integer('id_peralatan_tambahan');
 
             $table->string('peralatan_tambahan_lain', 150);

@@ -167,7 +167,6 @@ class RespondenController extends Controller
         // Save id responden in session
         $request->session()->put('id_responden', $id_responden);
 
-        echo $request->session()->get('id_responden');
         return redirect('partisipasi-sosial');
     }
 }

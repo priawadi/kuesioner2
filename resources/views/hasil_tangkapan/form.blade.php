@@ -172,7 +172,7 @@
                                             <br>
                                             {{
                                                 Form::text(
-                                                    'ikan_lain[' . $id_bulan . '][' . $i . ']', 
+                                                    'jenis_ikan_lain[' . $id_bulan . '][' . $i . ']', 
                                                     '', 
                                                     [
                                                         'class'       => 'form-control',

@@ -114,7 +114,7 @@ class HasilTangkapanController extends Controller
 
                 if($jenis_ikan_dominan[$id_bulan][$id_input] == 32)
                 {
-                    $rules['ikan_lain.' . $id_bulan . '.' . $id_input] = 'required';
+                    $rules['jenis_ikan_lain.' . $id_bulan . '.' . $id_input] = 'required';
                 }
             }
         }
@@ -172,7 +172,7 @@ class HasilTangkapanController extends Controller
                 // If jenis_ikan_dominan Lainnya is chosen
                 if($jenis_ikan_dominan[$id_bulan][$id_input] == 32)
                 {
-                    $detil_hasil_tangkapan->jenis_ikan_lain    = $jenis_ikan_lain[$id_bulan][$id_input];
+                    $detil_hasil_tangkapan->jenis_ikan_lain    = $request->get('jenis_ikan_lain')[$id_bulan][$id_input];
                 }
 
                 $detil_hasil_tangkapan->urutan_isian     = $id_input;

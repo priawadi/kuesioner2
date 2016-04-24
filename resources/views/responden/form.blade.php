@@ -19,7 +19,7 @@
                 </div>
                 <div class="panel-body">
                     {!! Form::open(array('url' => 'responden/tambah', 'class' => 'form-horizontal')) !!}
-                        <div class="form-group">
+                        <div class="form-group @if ($errors->has('nama_responden')) has-error @endif">
                             {{
                                 Form::label(
                                     'id_id', 

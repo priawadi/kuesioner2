@@ -15,9 +15,12 @@ class CreateTableKarRumahtangga extends Migration
         Schema::create('kar_rumahtangga', function (Blueprint $table) {
             $table->increments('id_kar_rumah_tangga');
             $table->integer('id_responden');
-            $table->integer('status_rumah_tangga');
             $table->smallInteger('jenis_kelamin');
             $table->smallInteger('umur');
+            $table->string('nama', 150);
+            $table->smallInteger('status_keluarga');
+            $table->string('status_keluarga_lain', 100);
+            $table->integer('id_pendidikan_formal');
 
             $table->softDeletes();
             $table->timestamps();
