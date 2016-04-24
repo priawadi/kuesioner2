@@ -256,12 +256,8 @@
                             @endforeach
                         </tbody> 
                     </table>
-                    <!-- <div class="form-group"> -->
-                        <!-- <div class="col-sm-10 pull-right"> -->
-                            <button type="submit" class="btn btn-primary pull-left">Kembali</button>
-                            <button type="submit" class="btn btn-primary pull-right">Selanjutnya</button>
-                        <!-- </div> -->
-                    <!-- </div> -->
+                    <a href="#" class="btn btn-primary pull-left">Kembali</a>
+                    <button type="submit" class="btn btn-primary pull-right">Selanjutnya</button>
                     {!! Form::close() !!}
                 </div>
             </div>

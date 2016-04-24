@@ -80,3 +80,8 @@ Route::post('/tenaker', 'TenakerController@store');
 Route::get('/hasil-tangkapan-ikan', 'HasilTangkapanController@index');
 Route::get('/hasil-tangkapan-ikan/tambah', 'HasilTangkapanController@create');
 Route::post('/hasil-tangkapan-ikan/tambah', 'HasilTangkapanController@store');
+
+// Aset pendukung usaha
+Route::get('/aset-pendukung-usaha', 'AsetPendukungUsahaController@index');
+Route::get('/aset-pendukung-usaha/tambah', 'AsetPendukungUsahaController@create');
+Route::post('/aset-pendukung-usaha/tambah', 'AsetPendukungUsahaController@store');
