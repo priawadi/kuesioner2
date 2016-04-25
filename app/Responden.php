@@ -13,4 +13,5 @@ class Responden extends Model
      */
     // protected $fillable = ['name'];
     protected $table = 'responden';
+    protected $primaryKey = 'id_responden';
 }

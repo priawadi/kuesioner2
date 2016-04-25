@@ -20,6 +20,12 @@ Route::get('/responden', 'RespondenController@index');
 Route::get('/responden/tambah', 'RespondenController@create');
 Route::post('/responden/tambah', 'RespondenController@store');
 
+Route::get('/enumerator', 'EnumeratorController@index');
+Route::get('/enumerator/tambah', 'EnumeratorController@create');
+Route::post('/enumerator/tambah', 'EnumeratorController@store');
+Route::get('/enumerator/edit', 'EnumeratorController@edit');
+Route::post('/enumerator/edit', 'EnumeratorController@update');
+
 Route::get('/responden/lihat/{id_responden}', 'RespondenController@detail');
 
 // Partisipasi Sosial

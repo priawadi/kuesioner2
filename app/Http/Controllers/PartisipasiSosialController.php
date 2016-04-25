@@ -141,6 +141,6 @@ class PartisipasiSosialController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Partisipasi::where('active', 0)->delete();
     }
 }

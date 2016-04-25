@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Responden;
+use App\JwbPartisipasi;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
@@ -166,7 +167,71 @@ class RespondenController extends Controller
     {
         // Save id responden in session
         $request->session()->put('id_responden', $id_responden);
+        $kuesioner = [];
 
-        return redirect('partisipasi-sosial');
+        $kuesioner['aspek_modal_sosial'] = [
+            [
+                'kuesioner' => 'Partisipasi Sosial',
+                'is_done'   => (JwbPartisipasi::where('id_responden', $request->session()->get('id_responden'))->get()? 'Sudah': 'Belum'),
+                'link'      => 'partisipasi-sosial',
+            ],
+            [
+                'kuesioner' => 'Partisipasi Organisasi',
+                'is_done'   => 0,
+                'link'      => 'partisipasi-organisasi',
+            ],
+            [
+                'kuesioner' => 'Partisipasi Politik',
+                'is_done'   => 'belum',
+                'link'      => 'partisipasi-politik',
+            ],
+            [
+                'kuesioner' => 'Rasa Percaya Antar Masyarakat',
+                'is_done'   => 'belum',
+                'link'      => 'rasa-percaya-masyarakat',
+            ],
+            [
+                'kuesioner' => 'Rasa Percaya terhadap Organisasi Sosial',
+                'is_done'   => 'belum',
+                'link'      => 'rasa-percaya-organisasi',
+            ],
+            [
+                'kuesioner' => 'Rasa Percaya Politik',
+                'is_done'   => 'belum',
+                'link'      => 'rasa-percaya-politik',
+            ],
+            [
+                'kuesioner' => 'Nilai dan Norma',
+                'is_done'   => 'belum',
+                'link'      => 'nilai-norma',
+            ]
+        ];
+        $kuesioner['karakteristik_rt'] = [
+            [
+                'kuesioner' => 'Karakteristik Anggota Rumah Tangga dan Pendapatan',
+                'is_done'   => 'sudah',
+                'link'      => 'karakteristik-rumah-tangga',
+            ],
+            [
+                'kuesioner' => 'Jenis Pekerjaan Rumah Tangga',
+                'is_done'   => 'sudah',
+                'link'      => 'jenis-pekerjaan-rumah-tangga',
+            ],
+            [
+                'kuesioner' => 'Aset Rumah Tangga',
+                'is_done'   => 'belum',
+                'link'      => 'aset-rumah-tangga',
+            ],
+            [
+                'kuesioner' => 'Kesehatan',
+                'is_done'   => 'belum',
+                'link'      => 'kesehatan',
+            ],
+        ];
+
+        return view('responden.detail', [
+            'responden' => Responden::find($id_responden),
+            'kuesioner' => $kuesioner
+        ]);
     }
 }
