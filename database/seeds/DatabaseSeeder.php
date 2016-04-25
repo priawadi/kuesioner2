@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RasaPercayaMasySeeder::class);
         $this->call(RasaPercayaOrgSeeder::class);
         $this->call(RasaPercayaPolSeeder::class);
+        $this->call(MasterPlagisKecilSeeder::class);
     }
 }

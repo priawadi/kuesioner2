@@ -241,7 +241,10 @@
                                 <tr class="info">
                                     <td colspan="9"><b>PLAGIS KECIL</b></td>
                                 </tr>
-                                <td class="col-xs-3">Jaring Purse Seine</td> 
+                                @foreach ($plagis_kecil as $id_master_plagis_kecil => $item)
+                                    <td>{{$item -> plagis_kecil}}</td>
+                                @endforeach
+   <!--                              <td class="col-xs-3">Jaring Purse Seine</td> 
                                 <td><input class="form-control" type="text" placeholder=""></td>
                                 <td><input class="form-control" type="text" placeholder=""></td> 
                                 <td class="col-xs-2">
@@ -518,7 +521,7 @@
                                         <option value="5">Keluarga</option>
                                         <option value="6">Campuran</option>
                                     </select>
-                                </td>                                 
+                                </td>  -->                                
                             </tr>
                             <tr class="info">
                                 <td colspan="9"><b>PLAGIS BESAR</b></td>
@@ -545,7 +548,7 @@
                                     </select>
                                 </td> 
                                 <td><input class="form-control" type="text" placeholder=""></td>
-                                <td></td> 
+                                <td><input class="form-control" type="text" placeholder=""></td> 
                                 <td class="col-xs-3">
                                     <select class="form-control" id="sModal">
                                         <option value="0">-</option>

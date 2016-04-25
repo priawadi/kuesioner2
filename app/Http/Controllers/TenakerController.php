@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\MasterPlagisKecil;
 use App\Http\Requests;
 
 class TenakerController extends Controller
@@ -16,6 +16,7 @@ class TenakerController extends Controller
     public function index()
     {
         $perahu = Perahu::all();
+        $plagis_kecil = MasterPlagisKecil::all();
     }
 
     /**
@@ -66,15 +67,11 @@ class TenakerController extends Controller
         //                 ->withInput();
         // }
 
-        // $responden = new Responden;
-        // $responden->nama_responden = $request->nama_responden;
-        // $responden->alamat         = $request->alamat;
-        // $responden->aktif          = $request->aktif;
-        // $responden->kategori       = $request->kategori;
-        // $responden->jenis_kelamin  = $request->jenis_kelamin;
+        $plagis_kecil = new MasterPlagisKecil;
+        $plagis_kecil->plagis_kecil = $request->plagis_kecil;
         // $responden->save();
 
-        // return view('home');
+        return view('home');
     }
 
     /**
