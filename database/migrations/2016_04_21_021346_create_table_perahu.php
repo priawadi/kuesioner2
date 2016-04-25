@@ -14,6 +14,7 @@ class CreateTablePerahu extends Migration
     {
         Schema::create('perahu', function (Blueprint $table) {
             $table->increments('id_perahu');
+            $table->integer('id_responden');
             $table->string('armada_dimiliki', 150);
             $table->integer('jenis_armada');
             $table->integer('ukuran_tonase');

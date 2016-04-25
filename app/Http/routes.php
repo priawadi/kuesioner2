@@ -98,7 +98,7 @@ Route::post('/konsumsi/tambah', 'KonsumsiController@store');
 //tenaker
 Route::get('/tenaker', 'TenakerController@index');
 Route::get('/tenaker/tambah', 'TenakerController@create');
-Route::post('/tenaker', 'TenakerController@store');
+Route::post('/tenaker/tambah', 'TenakerController@store');
 
 // Hasil tangkapan ikan
 Route::get('/hasil-tangkapan-ikan', 'HasilTangkapanController@index');
