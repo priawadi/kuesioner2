@@ -45,7 +45,7 @@ class KonsumsiController extends Controller
     public function store(Request $request)
     {   
         $validator = Validator::make($request->all(), [
-            'konsumsi.*' => 'required',
+            'konsumsi.*' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -63,7 +63,7 @@ class KonsumsiController extends Controller
             $konsumsi->save();
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**

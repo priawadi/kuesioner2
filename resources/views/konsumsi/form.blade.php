@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
 {!! Form::open(array('url' => 'konsumsi/tambah', 'class' => 'form-horizontal')) !!}
-        <div class="col-md-12>
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">{{ $subtitle }}</div>
                 <ul>
@@ -55,15 +55,11 @@
                             @endforeach                                                                                                                                                                                                                   
                         </tbody> 
                     </table>
-<!--                     <div class="col-md-10 col-md-offset-1">
-                      <button type="submit" class="btn btn-primary col-md-offset-11">Simpan</button>
-                    </div>  -->  
-                    <!-- {!! Form::close() !!} -->                 
                 </div>
             </div>
         </div>
 
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">II PENGELUARAN NON PANGAN BULANAN RUMAH TANGGA PERIKANAN</div>
                 <ul>
@@ -116,7 +112,7 @@
             </div>
         </div>
 
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">III PENGELUARAN NON PANGAN TAHUNAN RUMAH TANGGA PERIKANAN</div>
                 <ul>
@@ -169,15 +165,12 @@
             </div>
         </div>
 
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
             <p><b>Justifikasi</b>: Pertanyaan tentang konsumsi ikan tidak dibreak down menurut jenis ikan karena respondents adalah para nelayan pesisir yang mana konsumsi ikannya mayoritas berdasarkan ketersediaan ikan / musim, dan bukan didasarkan oleh individual preference akan jenis ikan tertentu seperti layaknya di masyarakat kota. </p>
         </div>
 
-        <div class="col-md-10 col-md-offset-1">
-          <button type="submit" class="btn btn-primary col-md-offset-11">Simpan</button>
-          <br><br><br>
-        </div>
 
+    @include('components.form.prev_next_btn')
 {!! Form::close() !!}
     </div>
 </div>

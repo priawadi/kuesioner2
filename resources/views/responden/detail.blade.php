@@ -19,10 +19,10 @@
                     <table class="table table-bordered">
                         <thead> 
                             <tr> 
-                                <th>#</th> 
+                                <th width="40px">#</th> 
                                 <th>Kuesioner</th> 
-                                <th>Status</th> 
-                                <th>Aksi</th>
+                                <th width="100px">Status</th> 
+                                <th width="150px">Aksi</th>
                             </tr> 
                         </thead> 
                         <tbody>
@@ -52,10 +52,10 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr> 
-                                <th>#</th> 
+                                <th width="40px">#</th> 
                                 <th>Kuesioner</th> 
-                                <th>Status</th> 
-                                <th>Aksi</th>
+                                <th width="100px">Status</th> 
+                                <th width="150px">Aksi</th>
                             </tr> 
                         </thead> 
                         <tbody> 
@@ -85,10 +85,10 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr> 
-                                <th>#</th> 
+                                <th width="40px">#</th> 
                                 <th>Kuesioner</th> 
-                                <th>Status</th> 
-                                <th>Aksi</th>
+                                <th width="100px">Status</th> 
+                                <th width="150px">Aksi</th>
                             </tr> 
                         </thead> 
                         <tbody> 
@@ -118,10 +118,10 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr> 
-                                <th>#</th> 
+                                <th width="40px">#</th> 
                                 <th>Kuesioner</th> 
-                                <th>Status</th> 
-                                <th>Aksi</th>
+                                <th width="100px">Status</th> 
+                                <th width="150px">Aksi</th>
                             </tr> 
                         </thead> 
                         <tbody> 

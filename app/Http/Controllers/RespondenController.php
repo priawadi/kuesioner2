@@ -10,6 +10,7 @@ use App\JenisPekerjaanRumahTg;
 use App\KarakteristikRumahTangga;
 use App\AsetRumahTangga;
 use App\Kesehatan;
+use App\JawabanKonsumsi;
 use App\AsetPendukungUsaha;
 use App\HasilTangkapan;
 use App\BiayaPerijinan;
@@ -243,18 +244,18 @@ class RespondenController extends Controller
         $kuesioner['konsumsi'] = [
             [
                 'kuesioner' => 'Pengeluaran Pangan Mingguan Rumah Tangga Perikanan',
-                'is_done'   => 0,
-                'link'      => '',
+                'is_done'   => (JawabanKonsumsi::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'konsumsi',
             ],
             [
                 'kuesioner' => 'Pengeluaran Non Pangan Bulanan Rumah Tangga',
-                'is_done'   => 0,
-                'link'      => '',
+                'is_done'   => (JawabanKonsumsi::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'konsumsi',
             ],
             [
                 'kuesioner' => 'Pengeluaran Non Pangan Tahunan Rumah Tangga Perikanan',
-                'is_done'   => 0,
-                'link'      => '',
+                'is_done'   => (JawabanKonsumsi::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'konsumsi',
             ],
         ];
 
