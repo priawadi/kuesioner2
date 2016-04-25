@@ -18,24 +18,7 @@ class PartisipasiOrgController extends Controller
      */
     public function index()
     {
-        $master_opsional = MasterOpsional::all();
-
-        $opsi = [];
-        foreach ($master_opsional as $item) {
-            $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
-        }
-
-        // print_r($opsi);
-        // print_r(Partisipasi::where('kateg_partisipasi', 2)->get());
-
-        // return view('partisipasi_org.form', [
-        return view('partisipasi_org.form', [
-            'subtitle'    => 'Partisipasi Sosial',
-            'pertanyaan'  => Partisipasi::where('kateg_partisipasi', 2)->get(),
-            'opsi'        => $opsi,
-            'nomor'       => 1,
-            'prev_action' => 'partisipasi-sosial'
-        ]);
+        
     }
 
     /**
@@ -43,9 +26,27 @@ class PartisipasiOrgController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+        
+        $master_opsional = MasterOpsional::all();
+
+        $opsi = [];
+        foreach ($master_opsional as $item) {
+            $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
+        }
+
+        // return view('partisipasi_org.form', [
+        return view('partisipasi_org.form', [
+            'subtitle'    => 'Partisipasi Organisasi',
+            'action'      => 'partisipasi-organisasi/tambah',
+            'pertanyaan'  => Partisipasi::where('kateg_partisipasi', 2)->get(),
+            'opsi'        => $opsi,
+            'nomor'       => 1,
+            'prev_action' => 'partisipasi-organisasi'
+        ]);
     }
 
     /**
@@ -71,7 +72,7 @@ class PartisipasiOrgController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('partisipasi-organisasi')
+            return redirect('partisipasi-organisasi/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -82,15 +83,16 @@ class PartisipasiOrgController extends Controller
         {
             if ($item->parent_partisipasi)
             {
-                $jwb_partisipasi = new JwbPartisipasi;
-                $jwb_partisipasi->id_master_opsional   = $jawaban[$item->id_partisipasi];
-                $jwb_partisipasi->id_responden         = $request->session()->get('id_responden');
-                $jwb_partisipasi->id_partisipasi       = $item->id_partisipasi;
+                $jwb_partisipasi                     = new JwbPartisipasi;
+                $jwb_partisipasi->id_master_opsional = $jawaban[$item->id_partisipasi];
+                $jwb_partisipasi->id_responden       = $request->session()->get('id_responden');
+                $jwb_partisipasi->id_partisipasi     = $item->id_partisipasi;
+                $jwb_partisipasi->kateg_partisipasi  = 2;
                 $jwb_partisipasi->save();
             }
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**
@@ -135,6 +137,7 @@ class PartisipasiOrgController extends Controller
      */
     public function destroy($id)
     {
-        //
+        echo $id;
+        // return view('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }

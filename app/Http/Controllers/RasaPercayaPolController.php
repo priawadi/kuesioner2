@@ -18,20 +18,7 @@ class RasaPercayaPolController extends Controller
      */
     public function index()
     {
-        $master_opsional = MasterOpsional::all();
-
-        $opsi = [];
-        foreach ($master_opsional as $item) {
-            $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
-        }
-
-        return view('rasa_percaya_org.form', [
-            'subtitle'   => 'Rasa Percaya Politik',
-            'action'     => 'rasa-percaya-politik',
-            'pertanyaan' => RasaPercaya::where('kateg_rasa_percaya', 3)->get(),
-            'opsi'       => $opsi,
-            'nomor'      => 1
-        ]);
+        
     }
 
     /**
@@ -41,7 +28,23 @@ class RasaPercayaPolController extends Controller
      */
     public function create()
     {
-        //
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+
+        $master_opsional = MasterOpsional::all();
+
+        $opsi = [];
+        foreach ($master_opsional as $item) {
+            $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
+        }
+
+        return view('rasa_percaya_org.form', [
+            'subtitle'   => 'Rasa Percaya Politik',
+            'action'     => 'rasa-percaya-politik/tambah',
+            'pertanyaan' => RasaPercaya::where('kateg_rasa_percaya', 3)->get(),
+            'opsi'       => $opsi,
+            'nomor'      => 1
+        ]);
     }
 
     /**
@@ -70,7 +73,7 @@ class RasaPercayaPolController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('rasa-percaya-politik')
+            return redirect('rasa-percaya-politik/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -80,10 +83,11 @@ class RasaPercayaPolController extends Controller
         $alasan  = $request->get('alasan');
         foreach($pertanyaan as $key => $item)
         {
-            $jwb_rasa_percaya = new JwbRasaPercaya;
+            $jwb_rasa_percaya                     = new JwbRasaPercaya;
             $jwb_rasa_percaya->id_master_opsional = $jawaban[$item->id_rasa_percaya];
             $jwb_rasa_percaya->id_responden       = $request->session()->get('id_responden');
             $jwb_rasa_percaya->id_rasa_percaya    = $item->id_rasa_percaya;
+            $jwb_rasa_percaya->kateg_rasa_percaya = 3;
             if ($item->is_reason)
             {
                 $jwb_rasa_percaya->jwb_teks_rasa_percaya = $alasan[$item->id_rasa_percaya];
@@ -91,7 +95,7 @@ class RasaPercayaPolController extends Controller
             $jwb_rasa_percaya->save();
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**

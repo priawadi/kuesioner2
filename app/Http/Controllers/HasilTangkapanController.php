@@ -183,7 +183,7 @@ class HasilTangkapanController extends Controller
             }
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
 
     }
 

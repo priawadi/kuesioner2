@@ -30,13 +30,19 @@
                                 <tr>
                                     <td>{{($key + 1)}}</td>
                                     <td>{{$item['kuesioner']}}</td>
-                                    <td><span class="label label-{{$item['is_done']? 'success': 'warning'}}">{{$item['is_done']? 'Sudah': 'Belum'}}</span></td>
                                     <td>
-                                        @if ($item['is_done'])
-                                            <a href="{{url($item['link'])}}/destroy/{{$responden['id_responden']}}">Hapus</a>
-                                        @else
-                                            <a href="{{url($item['link'])}}/create">Tambah</a>
-                                        @endif
+                                    <center>
+                                        <span class="label label-{{$item['is_done']? 'success': 'warning'}}">{{$item['is_done']? 'Sudah': 'Belum'}}</span>
+                                    </center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            @if ($item['is_done'])
+                                                <a class="btn btn-danger btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Hapus</a>
+                                            @else
+                                                <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
+                                            @endif
+                                        </center>
                                     </td>
                                 </tr>
                             @endforeach
@@ -54,12 +60,24 @@
                         </thead> 
                         <tbody> 
                             @foreach($kuesioner['karakteristik_rt'] as $key => $item)
-                                <tr>
-                                    <td>{{($key + 1)}}</td>
-                                    <td>{{$item['kuesioner']}}</td>
-                                    <td><span class="label label-{{$item['is_done']? 'success': 'warning'}}">{{$item['is_done']? 'Sudah': 'Belum'}}</span></td>
-                                    <td><a href="{{url($item['link'])}}/{{($item['is_done']? 'destroy': 'create')}}">{{($item['is_done']? 'Hapus': 'Tambah')}}</a></td>
-                                </tr>
+                            <tr>
+                                <td>{{($key + 1)}}</td>
+                                <td>{{$item['kuesioner']}}</td>
+                                <td>
+                                    <center>
+                                        <span class="label label-{{$item['is_done']? 'success': 'warning'}}">{{$item['is_done']? 'Sudah': 'Belum'}}</span>
+                                    </center>
+                                </td>
+                                <td>
+                                    <center>
+                                        @if ($item['is_done'])
+                                            <a class="btn btn-danger btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Hapus</a>
+                                        @else
+                                            <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
+                                        @endif
+                                    </center>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody> 
                     </table>

@@ -18,20 +18,7 @@ class NilaiNormaController extends Controller
      */
     public function index()
     {
-        $master_opsional = MasterOpsional::all();
-
-        $opsi = [];
-        foreach ($master_opsional as $item) {
-            $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
-        }
-
-        return view('nilai_norma.form', [
-            'subtitle'   => 'Nilai dan Norma',
-            'action'     => 'nilai-norma',
-            'pertanyaan' => NilaiNorma::get(),
-            'opsi'       => $opsi,
-            'nomor'      => 1
-        ]);
+        
     }
 
     /**
@@ -41,7 +28,23 @@ class NilaiNormaController extends Controller
      */
     public function create()
     {
-        //
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+        
+        $master_opsional = MasterOpsional::all();
+
+        $opsi = [];
+        foreach ($master_opsional as $item) {
+            $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
+        }
+
+        return view('nilai_norma.form', [
+            'subtitle'   => 'Nilai dan Norma',
+            'action'     => 'nilai-norma/tambah',
+            'pertanyaan' => NilaiNorma::get(),
+            'opsi'       => $opsi,
+            'nomor'      => 1
+        ]);
     }
 
     /**
@@ -70,7 +73,7 @@ class NilaiNormaController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('nilai-norma')
+            return redirect('nilai-norma/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -91,7 +94,7 @@ class NilaiNormaController extends Controller
             $jwb_nilai_norma->save();
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**

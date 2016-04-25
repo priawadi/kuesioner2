@@ -155,7 +155,7 @@ class PartisipasiOrgSeeder extends Seeder
 				'pertanyaan_partisipasi' => 'Seberapa sering  organisasi tersebut melakukan pertemuan rutin?', 
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
-				'id_master_opsional'     => '',
+				'id_master_opsional'     => 5,
 				'is_reason'              => FALSE
             ],
 

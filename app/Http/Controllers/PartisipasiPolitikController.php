@@ -18,20 +18,7 @@ class PartisipasiPolitikController extends Controller
      */
     public function index()
     {
-        $master_opsional = MasterOpsional::all();
-
-        $opsi = [];
-        foreach ($master_opsional as $item) {
-            $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
-        }
-
-        return view('partisipasi_politik.form', [
-            'subtitle'   => 'Partisipasi Politik',
-            'pertanyaan' => Partisipasi::where('kateg_partisipasi', 3)->get(),
-            'opsi'       => $opsi,
-            'nomor'      => 1,
-            'prev_action'=> 'partisipasi-organisasi'
-        ]);
+        
     }
 
     /**
@@ -41,7 +28,24 @@ class PartisipasiPolitikController extends Controller
      */
     public function create()
     {
-        //
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+            
+        $master_opsional = MasterOpsional::all();
+
+        $opsi = [];
+        foreach ($master_opsional as $item) {
+            $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
+        }
+
+        return view('partisipasi_politik.form', [
+            'subtitle'    => 'Partisipasi Politik',
+            'action'      => 'partisipasi-politik/tambah',
+            'pertanyaan'  => Partisipasi::where('kateg_partisipasi', 3)->get(),
+            'opsi'        => $opsi,
+            'nomor'       => 1,
+            'prev_action' => 'partisipasi-organisasi'
+        ]);
     }
 
     /**
@@ -70,7 +74,7 @@ class PartisipasiPolitikController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('partisipasi-politik')
+            return redirect('partisipasi-politik/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -80,10 +84,11 @@ class PartisipasiPolitikController extends Controller
         $alasan = $request->get('alasan');
         foreach($pertanyaan as $key => $item)
         {
-            $jwb_partisipasi = new JwbPartisipasi;
-            $jwb_partisipasi->id_master_opsional   = $jawaban[$item->id_partisipasi];
-            $jwb_partisipasi->id_responden         = $request->session()->get('id_responden');
-            $jwb_partisipasi->id_partisipasi       = $item->id_partisipasi;
+            $jwb_partisipasi                     = new JwbPartisipasi;
+            $jwb_partisipasi->id_master_opsional = $jawaban[$item->id_partisipasi];
+            $jwb_partisipasi->id_responden       = $request->session()->get('id_responden');
+            $jwb_partisipasi->id_partisipasi     = $item->id_partisipasi;
+            $jwb_partisipasi->kateg_partisipasi  = 3;
             if ($item->is_reason)
             {
                 $jwb_partisipasi->jwb_teks_partisipasi = $alasan[$item->id_partisipasi];
@@ -91,7 +96,7 @@ class PartisipasiPolitikController extends Controller
             $jwb_partisipasi->save();
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**

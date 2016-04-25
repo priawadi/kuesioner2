@@ -12,7 +12,7 @@
                     @endforeach
                 </ul>
                 <div class="panel-body">
-                    {{ Form::open(array('url' => 'partisipasi-politik')) }}
+                    {{ Form::open(array('url' => $action)) }}
                         <table class="table">
                         @foreach ($pertanyaan as $idx_pertanyaan => $item)
                         <tr>

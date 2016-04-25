@@ -30,43 +30,43 @@ Route::get('/responden/lihat/{id_responden}', 'RespondenController@detail');
 
 // Partisipasi Sosial
 Route::get('/partisipasi-sosial', 'PartisipasiSosialController@index');
-Route::post('/partisipasi-sosial', 'PartisipasiSosialController@store');
 Route::get('/partisipasi-sosial/tambah', 'PartisipasiSosialController@create');
+Route::post('/partisipasi-sosial/tambah', 'PartisipasiSosialController@store');
 
 // Partisipasi Organisasi
 Route::get('/partisipasi-organisasi', 'PartisipasiOrgController@index');
-Route::post('/partisipasi-organisasi', 'PartisipasiOrgController@store');
 Route::get('/partisipasi-organisasi/tambah', 'PartisipasiOrgController@create');
+Route::post('/partisipasi-organisasi/tambah', 'PartisipasiOrgController@store');
 
 // Partisipasi Politik
 Route::get('/partisipasi-politik', 'PartisipasiPolitikController@index');
-Route::post('/partisipasi-politik', 'PartisipasiPolitikController@store');
 Route::get('/partisipasi-politik/tambah', 'PartisipasiPolitikController@create');
+Route::post('/partisipasi-politik/tambah', 'PartisipasiPolitikController@store');
 
 // Rasa Percaya Masyarakat
 Route::get('/rasa-percaya-masyarakat', 'RasaPercayaMasyController@index');
-Route::post('/rasa-percaya-masyarakat', 'RasaPercayaMasyController@store');
 Route::get('/rasa-percaya-masyarakat/tambah', 'RasaPercayaMasyController@create');
+Route::post('/rasa-percaya-masyarakat/tambah', 'RasaPercayaMasyController@store');
 
 // Rasa Percaya Organisasi Sosial
 Route::get('/rasa-percaya-organisasi', 'RasaPercayaOrgController@index');
-Route::post('/rasa-percaya-organisasi', 'RasaPercayaOrgController@store');
 Route::get('/rasa-percaya-organisasi/tambah', 'RasaPercayaOrgController@create');
+Route::post('/rasa-percaya-organisasi/tambah', 'RasaPercayaOrgController@store');
 
 // Rasa Percaya Politik
 Route::get('/rasa-percaya-politik', 'RasaPercayaPolController@index');
-Route::post('/rasa-percaya-politik', 'RasaPercayaPolController@store');
 Route::get('/rasa-percaya-politik/tambah', 'RasaPercayaPolController@create');
+Route::post('/rasa-percaya-politik/tambah', 'RasaPercayaPolController@store');
 
 // Nilai dan norma
 Route::get('/nilai-norma', 'NilaiNormaController@index');
-Route::post('/nilai-norma', 'NilaiNormaController@store');
 Route::get('/nilai-norma/tambah', 'NilaiNormaController@create');
+Route::post('/nilai-norma/tambah', 'NilaiNormaController@store');
 
 // Karakteristik Rumah Tangga
 Route::get('/karakteristik-rumah-tangga', 'KarRumahTanggaController@index');
-Route::post('/karakteristik-rumah-tangga', 'KarRumahTanggaController@store');
 Route::get('/karakteristik-rumah-tangga/tambah', 'KarRumahTanggaController@create');
+Route::post('/karakteristik-rumah-tangga/tambah', 'KarRumahTanggaController@store');
 
 // Jenis Pekerjaan Rumah Tangga
 Route::get('/jenis-pekerjaan-rumah-tangga', 'JenisPekerjaanRumahTgController@index');

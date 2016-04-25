@@ -18,6 +18,16 @@ class JenisPekerjaanRumahTgController extends Controller
      */
     public function index()
     {
+        
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
         // Init
         $jenis_pekerjaan = [];
         foreach (MasterJenisPekerjaan::all() as $key => $item) {
@@ -31,16 +41,6 @@ class JenisPekerjaanRumahTgController extends Controller
             'jml_isian'        => 8,
             'jenis_pekerjaan'  => $jenis_pekerjaan
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -107,7 +107,7 @@ class JenisPekerjaanRumahTgController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('jenis-pekerjaan-rumah-tangga')
+            return redirect('jenis-pekerjaan-rumah-tangga/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -137,7 +137,7 @@ class JenisPekerjaanRumahTgController extends Controller
             $jenis_pekerjaan_rumahtg->save();
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**

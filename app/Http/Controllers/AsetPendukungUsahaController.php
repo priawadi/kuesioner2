@@ -18,6 +18,16 @@ class AsetPendukungUsahaController extends Controller
      */
     public function index()
     {
+    
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
         $master_peralatan_tambahan = [];
         foreach (MasterPeralatanTambahan::all() as $item) {
             $master_peralatan_tambahan[$item->id_master_peralatan_tambahan] = $item->peralatan_tambahan;
@@ -47,16 +57,6 @@ class AsetPendukungUsahaController extends Controller
             ],
             'nomor' => 1
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -107,7 +107,7 @@ class AsetPendukungUsahaController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('aset-pendukung-usaha')
+            return redirect('aset-pendukung-usaha/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -133,7 +133,7 @@ class AsetPendukungUsahaController extends Controller
             $aset_pendukung_usaha->save();
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**

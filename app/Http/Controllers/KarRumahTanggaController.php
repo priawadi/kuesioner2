@@ -19,6 +19,19 @@ class KarRumahTanggaController extends Controller
     public function index()
     {
 
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
+        
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+
         // Init
         $pendidikan_formal = [];
         foreach (PendidikanFormal::all() as $key => $item) {
@@ -27,7 +40,7 @@ class KarRumahTanggaController extends Controller
 
         return view('karakteristik_rumah_tangga.form', [
             'subtitle'         => 'Karakteristik Anggota Rumah Tangga dan Pendatapan',
-            'action'           => 'karakteristik-rumah-tangga',
+            'action'           => 'karakteristik-rumah-tangga/tambah',
             'jenis_kelamin'    => [ 1 => 'Pria', 2 => 'Wanita'],
             'status_keluarga'  => [ 1 => 'Kepala Keluarga', 2 => 'Istri', 3 => 'Anak', 4 => 'Anggota Rumah Tangga Lainnya (Sebutkan)'],
             'pend_formal'      => $pendidikan_formal,
@@ -35,16 +48,6 @@ class KarRumahTanggaController extends Controller
             'tujuan_pelatihan' => [ 1 => 'Kebutuhan Pekerjaan', 2 => 'Karena Hobi', 3 => 'Lainnya (Sebutkan)'],
             'jml_isian'        => 10
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -97,7 +100,7 @@ class KarRumahTanggaController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('jenis-pekerjaan-rumah-tangga')
+            return redirect('karakteristik_rumah_tangga/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -143,7 +146,7 @@ class KarRumahTanggaController extends Controller
 
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**

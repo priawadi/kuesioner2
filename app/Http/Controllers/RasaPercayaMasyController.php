@@ -18,6 +18,19 @@ class RasaPercayaMasyController extends Controller
      */
     public function index()
     {
+        
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+        
         $master_opsional = MasterOpsional::all();
 
         $opsi = [];
@@ -28,20 +41,11 @@ class RasaPercayaMasyController extends Controller
         // return view('rasa_percaya_masy.form', [
         return view('rasa_percaya_masy.form', [
             'subtitle'   => 'Rasa Percaya Antar Masyarakat',
+            'action'     => 'rasa-percaya-masyarakat/tambah',
             'pertanyaan' => RasaPercaya::where('kateg_rasa_percaya', 1)->get(),
             'opsi'       => $opsi,
             'nomor'      => 1
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -73,7 +77,7 @@ class RasaPercayaMasyController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('rasa-percaya-masyarakat')
+            return redirect('rasa-percaya-masyarakat/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -89,6 +93,7 @@ class RasaPercayaMasyController extends Controller
                 $jwb_rasa_percaya->id_master_opsional = $jawaban[$item->id_rasa_percaya];
                 $jwb_rasa_percaya->id_responden       = $request->session()->get('id_responden');
                 $jwb_rasa_percaya->id_rasa_percaya    = $item->id_rasa_percaya;
+                $jwb_rasa_percaya->kateg_rasa_percaya = 1;
                 if ($item->is_reason)
                 {
                     $jwb_rasa_percaya->jwb_teks_rasa_percaya = $alasan[$item->id_rasa_percaya];
@@ -100,6 +105,7 @@ class RasaPercayaMasyController extends Controller
                 $jwb_rasa_percaya                     = new JwbRasaPercaya;
                 $jwb_rasa_percaya->id_responden       = $request->session()->get('id_responden');
                 $jwb_rasa_percaya->id_rasa_percaya    = $item->id_rasa_percaya;
+                $jwb_rasa_percaya->kateg_rasa_percaya = 1;
                 if ($item->is_reason)
                 {
                     $jwb_rasa_percaya->jwb_teks_rasa_percaya = $alasan[$item->id_rasa_percaya];
@@ -108,7 +114,7 @@ class RasaPercayaMasyController extends Controller
             }
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**

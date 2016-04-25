@@ -19,14 +19,6 @@ class AsetRumahTanggaController extends Controller
     public function index()
     {
         
-        return view('aset_rumah_tangga.form', [
-            'subtitle'          => 'Aset Rumah Tangga',
-            'action'            => 'aset-rumah-tangga/tambah',
-            'master_jenis_aset' => MasterJenisAset::all(),
-            'cara_perolehan'    => [1 => 'Beli', 2 => 'Warisan', 3 => 'Pemberian'],
-            'jenis_aset'        => [1 => 'Produktif', 2 => 'Tidak Produktif'],
-            'nomor'             => 1
-        ]);
     }
 
     /**
@@ -36,7 +28,14 @@ class AsetRumahTanggaController extends Controller
      */
     public function create()
     {
-        //
+        return view('aset_rumah_tangga.form', [
+            'subtitle'          => 'Aset Rumah Tangga',
+            'action'            => 'aset-rumah-tangga/tambah',
+            'master_jenis_aset' => MasterJenisAset::all(),
+            'cara_perolehan'    => [1 => 'Beli', 2 => 'Warisan', 3 => 'Pemberian'],
+            'jenis_aset'        => [1 => 'Produktif', 2 => 'Tidak Produktif'],
+            'nomor'             => 1
+        ]);
     }
 
     /**
@@ -81,7 +80,7 @@ class AsetRumahTanggaController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('aset-rumah-tangga')
+            return redirect('aset-rumah-tangga/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -104,7 +103,7 @@ class AsetRumahTanggaController extends Controller
             }
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**

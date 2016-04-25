@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Responden;
 use App\JwbPartisipasi;
+use App\JwbRasaPercaya;
+use App\JwbNilaiNorma;
+use App\JenisPekerjaanRumahTg;
+use App\KarakteristikRumahTangga;
+use App\AsetRumahTangga;
+use App\Kesehatan;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
@@ -172,59 +178,59 @@ class RespondenController extends Controller
         $kuesioner['aspek_modal_sosial'] = [
             [
                 'kuesioner' => 'Partisipasi Sosial',
-                'is_done'   => (JwbPartisipasi::where('id_responden', $request->session()->get('id_responden'))->get()? 'Sudah': 'Belum'),
+                'is_done'   => (JwbPartisipasi::where('id_responden', $request->session()->get('id_responden'))->where('kateg_partisipasi', 1)->count()),
                 'link'      => 'partisipasi-sosial',
             ],
             [
                 'kuesioner' => 'Partisipasi Organisasi',
-                'is_done'   => 0,
+                'is_done'   => (JwbPartisipasi::where('id_responden', $request->session()->get('id_responden'))->where('kateg_partisipasi', 2)->count()),
                 'link'      => 'partisipasi-organisasi',
             ],
             [
                 'kuesioner' => 'Partisipasi Politik',
-                'is_done'   => 'belum',
+                'is_done'   => (JwbPartisipasi::where('id_responden', $request->session()->get('id_responden'))->where('kateg_partisipasi', 3)->count()),
                 'link'      => 'partisipasi-politik',
             ],
             [
                 'kuesioner' => 'Rasa Percaya Antar Masyarakat',
-                'is_done'   => 'belum',
+                'is_done'   => (JwbRasaPercaya::where('id_responden', $request->session()->get('id_responden'))->where('kateg_rasa_percaya', 1)->count()),
                 'link'      => 'rasa-percaya-masyarakat',
             ],
             [
                 'kuesioner' => 'Rasa Percaya terhadap Organisasi Sosial',
-                'is_done'   => 'belum',
+                'is_done'   => (JwbRasaPercaya::where('id_responden', $request->session()->get('id_responden'))->where('kateg_rasa_percaya', 2)->count()),
                 'link'      => 'rasa-percaya-organisasi',
             ],
             [
                 'kuesioner' => 'Rasa Percaya Politik',
-                'is_done'   => 'belum',
+                'is_done'   => (JwbRasaPercaya::where('id_responden', $request->session()->get('id_responden'))->where('kateg_rasa_percaya', 3)->count()),
                 'link'      => 'rasa-percaya-politik',
             ],
             [
                 'kuesioner' => 'Nilai dan Norma',
-                'is_done'   => 'belum',
+                'is_done'   => (JwbNilaiNorma::where('id_responden', $request->session()->get('id_responden'))->count()),
                 'link'      => 'nilai-norma',
             ]
         ];
         $kuesioner['karakteristik_rt'] = [
             [
                 'kuesioner' => 'Karakteristik Anggota Rumah Tangga dan Pendapatan',
-                'is_done'   => 'sudah',
+                'is_done'   => (KarakteristikRumahTangga::where('id_responden', $request->session()->get('id_responden'))->count()),
                 'link'      => 'karakteristik-rumah-tangga',
             ],
             [
                 'kuesioner' => 'Jenis Pekerjaan Rumah Tangga',
-                'is_done'   => 'sudah',
+                'is_done'   => (JenisPekerjaanRumahTg::where('id_responden', $request->session()->get('id_responden'))->count()),
                 'link'      => 'jenis-pekerjaan-rumah-tangga',
             ],
             [
                 'kuesioner' => 'Aset Rumah Tangga',
-                'is_done'   => 'belum',
+                'is_done'   => (AsetRumahTangga::where('id_responden', $request->session()->get('id_responden'))->count()),
                 'link'      => 'aset-rumah-tangga',
             ],
             [
                 'kuesioner' => 'Kesehatan',
-                'is_done'   => 'belum',
+                'is_done'   => (Kesehatan::where('id_responden', $request->session()->get('id_responden'))->count()),
                 'link'      => 'kesehatan',
             ],
         ];

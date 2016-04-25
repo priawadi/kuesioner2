@@ -73,6 +73,8 @@ class EnumeratorController extends Controller
         $enumerator->nama_pemvalidasi  = $request->get('nama_pemvalidasi');
 
         $enumerator->save();
+        
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
 
     }
 

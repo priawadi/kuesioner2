@@ -123,7 +123,7 @@ class KesehatanController extends Controller
 
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**

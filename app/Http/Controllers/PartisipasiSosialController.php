@@ -20,6 +20,16 @@ class PartisipasiSosialController extends Controller
     public function index(Request $request)
     {
         
+        
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
         // Redirect to list of responden if id_responden
         if (!$request->session()->get('id_responden')) return redirect('responden');
 
@@ -33,20 +43,11 @@ class PartisipasiSosialController extends Controller
         // return view('partisipasi_sosial.form', [
         return view('partisipasi_sosial.form', [
             'subtitle'    => 'Partisipasi Politik',
+            'action'      => 'partisipasi-sosial/tambah',
             'pertanyaan'  => Partisipasi::where('kateg_partisipasi', 1)->get(),
             'opsi'        => $opsi,
             'prev_action' => 'responden'
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -75,7 +76,7 @@ class PartisipasiSosialController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('partisipasi-sosial')
+            return redirect('partisipasi-sosial/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -85,10 +86,11 @@ class PartisipasiSosialController extends Controller
         $alasan  = $request->get('alasan');
         foreach($pertanyaan as $key => $item)
         {
-            $jwb_partisipasi = new JwbPartisipasi;
-            $jwb_partisipasi->id_master_opsional   = $jawaban[$item->id_partisipasi];
-            $jwb_partisipasi->id_responden         = $request->session()->get('id_responden');
-            $jwb_partisipasi->id_partisipasi       = $item->id_partisipasi;
+            $jwb_partisipasi                     = new JwbPartisipasi;
+            $jwb_partisipasi->id_master_opsional = $jawaban[$item->id_partisipasi];
+            $jwb_partisipasi->id_responden       = $request->session()->get('id_responden');
+            $jwb_partisipasi->id_partisipasi     = $item->id_partisipasi;
+            $jwb_partisipasi->kateg_partisipasi  = 1;
             if ($item->is_reason)
             {
                 $jwb_partisipasi->jwb_teks_partisipasi = $alasan[$item->id_partisipasi];
@@ -96,7 +98,7 @@ class PartisipasiSosialController extends Controller
             $jwb_partisipasi->save();
         }
 
-        return view('home');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**
@@ -141,6 +143,7 @@ class PartisipasiSosialController extends Controller
      */
     public function destroy($id)
     {
-        Partisipasi::where('active', 0)->delete();
+        echo "ID: " . $id;
+        // Partisipasi::where('active', 0)->delete();
     }
 }
