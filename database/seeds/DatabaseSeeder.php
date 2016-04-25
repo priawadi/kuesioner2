@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RasaPercayaPolSeeder::class);
         $this->call(MasterPlagisKecilSeeder::class);
         $this->call(PendidikanFormalSeeder::class);
+        $this->call(MasterBiayaVariabelSeeder::class);
     }
 }

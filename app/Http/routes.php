@@ -109,3 +109,18 @@ Route::post('/hasil-tangkapan-ikan/tambah', 'HasilTangkapanController@store');
 Route::get('/aset-pendukung-usaha', 'AsetPendukungUsahaController@index');
 Route::get('/aset-pendukung-usaha/tambah', 'AsetPendukungUsahaController@create');
 Route::post('/aset-pendukung-usaha/tambah', 'AsetPendukungUsahaController@store');
+
+// Biaya Perijinan
+Route::get('/biaya-perijinan', 'BiayaPerijinanController@index');
+Route::get('/biaya-perijinan/tambah', 'BiayaPerijinanController@create');
+Route::post('/biaya-perijinan/tambah', 'BiayaPerijinanController@store');
+
+// Biaya Operasional
+Route::get('/biaya-operasional', 'BiayaOperasionalController@index');
+Route::get('/biaya-operasional/tambah', 'BiayaOperasionalController@create');
+Route::post('/biaya-operasional/tambah', 'BiayaOperasionalController@store');
+
+// Biaya Ransum
+Route::get('/biaya-ransum', 'BiayaRansumController@index');
+Route::get('/biaya-ransum/tambah', 'BiayaRansumController@create');
+Route::post('/biaya-ransum/tambah', 'BiayaRansumController@store');

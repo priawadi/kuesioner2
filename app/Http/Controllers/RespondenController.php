@@ -12,6 +12,9 @@ use App\AsetRumahTangga;
 use App\Kesehatan;
 use App\AsetPendukungUsaha;
 use App\HasilTangkapan;
+use App\BiayaPerijinan;
+use App\BiayaOperasional;
+use App\BiayaRansum;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
@@ -278,18 +281,18 @@ class RespondenController extends Controller
             ],
             [
                 'kuesioner' => 'Biaya Perizinan dan Pemeliharaan Selama 1 Tahun',
-                'is_done'   => 0,
-                'link'      => '',
+                'is_done'   => (BiayaPerijinan::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'biaya-perijinan',
             ],
             [
                 'kuesioner' => 'Biaya Variabel Berdasarkan Musim (Biaya Operasional per Trip)',
-                'is_done'   => 0,
-                'link'      => '',
+                'is_done'   => (BiayaOperasional::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'biaya-operasional',
             ],
             [
                 'kuesioner' => 'Biaya Variabel Berdasarkan Musim (Biaya Ransum / Perbekalan per Trip)',
-                'is_done'   => 0,
-                'link'      => '',
+                'is_done'   => (BiayaRansum::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'biaya-ransum',
             ],
             [
                 'kuesioner' => 'Biaya Jasa',

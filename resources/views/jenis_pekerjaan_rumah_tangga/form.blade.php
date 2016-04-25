@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" width="1200px">
+<div class="container">
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">{{ $subtitle }}</div>
@@ -182,8 +182,7 @@
                         </tr>
                         @endfor
                     </table>
-                    <a href="#" class="btn btn-primary pull-left">Kembali</a>
-                    <button type="submit" class="btn btn-primary pull-right">Selanjutnya</button>
+                    @include('components.form.prev_next_btn')
                 {{ Form::close() }}
             </div>
         </div>
