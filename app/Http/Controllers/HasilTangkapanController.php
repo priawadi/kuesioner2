@@ -20,6 +20,16 @@ class HasilTangkapanController extends Controller
      */
     public function index()
     {
+        
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
         $master_jenis_ikans = [];
         foreach (MasterJenisIkan::all() as $item) {
             $master_jenis_ikan[$item->id_master_jenis_ikan] = $item->jenis_ikan;
@@ -60,16 +70,6 @@ class HasilTangkapanController extends Controller
             ],
             'nomor'        => 1
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -123,7 +123,7 @@ class HasilTangkapanController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('hasil-tangkapan-ikan')
+            return redirect('hasil-tangkapan-ikan/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }

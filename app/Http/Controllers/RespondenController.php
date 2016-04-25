@@ -10,6 +10,8 @@ use App\JenisPekerjaanRumahTg;
 use App\KarakteristikRumahTangga;
 use App\AsetRumahTangga;
 use App\Kesehatan;
+use App\AsetPendukungUsaha;
+use App\HasilTangkapan;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
@@ -235,6 +237,76 @@ class RespondenController extends Controller
             ],
         ];
 
+        $kuesioner['konsumsi'] = [
+            [
+                'kuesioner' => 'Pengeluaran Pangan Mingguan Rumah Tangga Perikanan',
+                'is_done'   => 0,
+                'link'      => '',
+            ],
+            [
+                'kuesioner' => 'Pengeluaran Non Pangan Bulanan Rumah Tangga',
+                'is_done'   => 0,
+                'link'      => '',
+            ],
+            [
+                'kuesioner' => 'Pengeluaran Non Pangan Tahunan Rumah Tangga Perikanan',
+                'is_done'   => 0,
+                'link'      => '',
+            ],
+        ];
+
+        $kuesioner['usaha_tenaga_kerja'] = [
+            [
+                'kuesioner' => 'Perahu',
+                'is_done'   => 0,
+                'link'      => '',
+            ],
+            [
+                'kuesioner' => 'Tenaga Penggerak / Mesin',
+                'is_done'   => 0,
+                'link'      => '',
+            ],
+            [
+                'kuesioner' => 'Alat Tangkap',
+                'is_done'   => 0,
+                'link'      => '',
+            ],
+            [
+                'kuesioner' => 'Aset Pendukung Usaha',
+                'is_done'   => (AsetPendukungUsaha::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'aset-pendukung-usaha',
+            ],
+            [
+                'kuesioner' => 'Biaya Perizinan dan Pemeliharaan Selama 1 Tahun',
+                'is_done'   => 0,
+                'link'      => '',
+            ],
+            [
+                'kuesioner' => 'Biaya Variabel Berdasarkan Musim (Biaya Operasional per Trip)',
+                'is_done'   => 0,
+                'link'      => '',
+            ],
+            [
+                'kuesioner' => 'Biaya Variabel Berdasarkan Musim (Biaya Ransum / Perbekalan per Trip)',
+                'is_done'   => 0,
+                'link'      => '',
+            ],
+            [
+                'kuesioner' => 'Biaya Jasa',
+                'is_done'   => 0,
+                'link'      => '',
+            ],
+            [
+                'kuesioner' => 'Penerimaan Usaha Berdasarkan Musim',
+                'is_done'   => (HasilTangkapan::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'hasil-tangkapan-ikan',
+            ],
+            [
+                'kuesioner' => 'Ketenagakerjaan',
+                'is_done'   => 0,
+                'link'      => '',
+            ],
+        ];
         return view('responden.detail', [
             'responden' => Responden::find($id_responden),
             'kuesioner' => $kuesioner

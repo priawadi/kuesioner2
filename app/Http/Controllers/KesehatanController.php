@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Kesehatan;
+use Validator;
 
 class KesehatanController extends Controller
 {
@@ -15,10 +17,7 @@ class KesehatanController extends Controller
      */
     public function index()
     {
-        return view('kesehatan.form', [
-            'subtitle'         => 'Kesehatan',
-            'action'           => 'kesehatan/tambah',
-        ]);
+        
     }
 
     /**
@@ -28,7 +27,11 @@ class KesehatanController extends Controller
      */
     public function create()
     {
-        //
+        return view('kesehatan.form', [
+            'subtitle'    => 'Kesehatan',
+            'action'      => 'kesehatan/tambah',
+            'prev_action' => 'responden',
+        ]);    
     }
 
     /**
@@ -39,89 +42,64 @@ class KesehatanController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate input if choose other option
-        for ($i = 1; $i <= $jml_isian; $i++)
-        {
-            // if name not null, validate other input
-            if ($request->get('nama')[$i])
-            {   
-                $rules['nama.' . $i]            = 'max:300';
-                $rules['status_keluarga.' . $i] = 'required';
+        $rules['sakit_setahun_ringan'] = 'required|numeric';
+        $rules['sakit_setahun_berat']  = 'required|numeric';
+        $rules['ringan_dibiarkan']     = 'required|numeric';
+        $rules['ringan_beli_obat']     = 'required|numeric';
+        $rules['ringan_puskesmas']     = 'required|numeric';
+        $rules['ringan_dokter']        = 'required|numeric';
+        $rules['ringan_alternatif']    = 'required|numeric';
+        $rules['ringan_rumah_sakit']   = 'required|numeric';
 
-                // Validate if input status keluarga is Other
-                if ($request->get('status_keluarga')[$i] == 4)
-                {
-                    $rules['status_keluarga_lain.' . $i] = 'required|max:100';
-                }
+        $rules['berat_dibiarkan']   = 'required|numeric';
+        $rules['berat_beli_obat']   = 'required|numeric';
+        $rules['berat_puskesmas']   = 'required|numeric';
+        $rules['berat_dokter']      = 'required|numeric';
+        $rules['berat_alternatif']  = 'required|numeric';
+        $rules['berat_rumah_sakit'] = 'required|numeric';
 
-                $rules['jenis_kelamin.' . $i]        = 'required';
-                $rules['umur.' . $i]                 = 'required|numeric';
-                $rules['pend_formal.' . $i]          = 'required';
+        $rules['jamkesmas'] = 'required';
+        $rules['bpjs']      = 'required';
+        $rules['asuransi']  = 'required';
 
-                // Validate if input pelatihan is filled
-                if ($request->get('jenis_pelatihan')[$i])
-                {
-                    $rules['waktu_pelaksanaan.' . $i] = 'required|numeric';
-                    $rules['sumber_dana.' . $i]       = 'required';
-                    $rules['tujuan_pelatihan.' . $i]  = 'required';
-
-                    if ($request->get('tujuan_pelatihan')[$i] == 3)
-                    {
-                        $rules['tujuan_pelatihan_lain.' . $i] = 'required|max:500';
-                    }
-                }
-            }
-        }
+        $rules['frek_jamkesmas'] = 'required';
+        $rules['frek_bpjs']      = 'required';
+        $rules['frek_asuransi']  = 'required';
         
         // Validate input
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('jenis-pekerjaan-rumah-tangga')
+            return redirect('kesehatan/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
 
-        // Save data
-        for ($i = 1; $i <= $jml_isian; $i++)
-        {
-            
-            // Save karakteristik rumah tangga
-            $kar_rumahtangga                  = new KarakteristikRumahTangga;
-            $kar_rumahtangga->nama            = $request->get('nama')[$i];
-            $kar_rumahtangga->status_keluarga = $request->get('status_keluarga')[$i];
-            
-            if ($request->get('status_keluarga')[$i] == 4)
-            {
-                $kar_rumahtangga->status_keluarga_lain = $request->get('status_keluarga_lain')[$i];
-            }
-            
-            $kar_rumahtangga->jenis_kelamin        = $request->get('jenis_kelamin')[$i];
-            $kar_rumahtangga->umur                 = $request->get('umur')[$i];
-            $kar_rumahtangga->id_responden         = $request->session()->get('id_responden');
-            $kar_rumahtangga->id_pendidikan_formal = $request->get('pend_formal')[$i];;
-            $kar_rumahtangga->save();
-            
-            // Save pendidikan informal
-            $pend_informal   = new PendidikanInformal;
-            if ($request->get('jenis_pelatihan')[$i])
-            {
-                $pend_informal                      = new PendidikanInformal;
-                $pend_informal->id_kar_rumah_tangga = $kar_rumahtangga->id_kar_rumah_tangga;
-                $pend_informal->jenis_pelatihan     = $request->get('jenis_pelatihan')[$i];
-                $pend_informal->waktu_pelaksanaan   = $request->get('waktu_pelaksanaan')[$i];
-                $pend_informal->sumber_dana         = $request->get('sumber_dana')[$i];
-                $pend_informal->tujuan_pelatihan    = $request->get('tujuan_pelatihan')[$i];
-                
-                if ($request->get('tujuan_pelatihan')[$i] == 3)
-                {
-                    $pend_informal->tujuan_pelatihan_lain = $request->get('tujuan_pelatihan_lain')[$i];
-                }
+        // Save data 
+        $kesehatan                       = new Kesehatan;
+        $kesehatan->sakit_setahun_ringan = $request->get('sakit_setahun_ringan');
+        $kesehatan->sakit_setahun_berat  = $request->get('sakit_setahun_berat');
+        $kesehatan->ringan_dibiarkan     = $request->get('ringan_dibiarkan');
+        $kesehatan->ringan_beli_obat     = $request->get('ringan_beli_obat');
+        $kesehatan->ringan_puskesmas     = $request->get('ringan_puskesmas');
+        $kesehatan->ringan_dokter        = $request->get('ringan_dokter');
+        $kesehatan->ringan_alternatif    = $request->get('ringan_alternatif');
+        $kesehatan->ringan_rumah_sakit   = $request->get('ringan_rumah_sakit');
+        $kesehatan->berat_dibiarkan      = $request->get('berat_dibiarkan');
+        $kesehatan->berat_beli_obat      = $request->get('berat_beli_obat');
+        $kesehatan->berat_puskesmas      = $request->get('berat_puskesmas');
+        $kesehatan->berat_dokter         = $request->get('berat_dokter');
+        $kesehatan->berat_alternatif     = $request->get('berat_alternatif');
+        $kesehatan->berat_rumah_sakit    = $request->get('berat_rumah_sakit');
+        $kesehatan->jamkesmas            = $request->get('jamkesmas');
+        $kesehatan->bpjs                 = $request->get('bpjs');
+        $kesehatan->asuransi             = $request->get('asuransi');
+        $kesehatan->frek_jamkesmas       = $request->get('frek_jamkesmas');
+        $kesehatan->frek_bpjs            = $request->get('frek_bpjs');
+        $kesehatan->frek_asuransi        = $request->get('frek_asuransi');
+        $kesehatan->id_responden         = $request->session()->get('id_responden');
 
-                $pend_informal->save();
-            }
-
-        }
+        $kesehatan->save();
 
         return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
