@@ -31,7 +31,13 @@
                                     <td>{{($key + 1)}}</td>
                                     <td>{{$item['kuesioner']}}</td>
                                     <td><span class="label label-{{$item['is_done']? 'success': 'warning'}}">{{$item['is_done']? 'Sudah': 'Belum'}}</span></td>
-                                    <td><a href="{{url($item['link'])}}/{{($item['is_done']? 'destroy': 'create')}}">{{($item['is_done']? 'Hapus': 'Tambah')}}</a></td>
+                                    <td>
+                                        @if ($item['is_done'])
+                                            <a href="{{url($item['link'])}}/destroy/{{$responden['id_responden']}}">Hapus</a>
+                                        @else
+                                            <a href="{{url($item['link'])}}/create">Tambah</a>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody> 
