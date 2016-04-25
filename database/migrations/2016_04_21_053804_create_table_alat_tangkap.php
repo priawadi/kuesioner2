@@ -14,8 +14,8 @@ class CreateTableAlatTangkap extends Migration
     {
         Schema::create('alat_tangkap', function (Blueprint $table) {
             $table->increments('id_alat_tangkap');
-            $table->integer('id_parent_alat');
-            $table->string('jenis_alat_tangkap');
+/*            $table->integer('id_parent_alat');
+            $table->string('jenis_alat_tangkap');*/
             $table->integer('jumlah_alat_tangkap');
             $table->integer('waktu_penggunaan_alat');
             $table->integer('status_kepemilikan_alat');
