@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\MasterPlagisKecil;
+use App\MasterPlagisBesar;
+use App\MasterDemersal;
 use App\Http\Requests;
 
 class TenakerController extends Controller
@@ -15,8 +17,10 @@ class TenakerController extends Controller
      */
     public function index()
     {
-        $perahu = Perahu::all();
-        $plagis_kecil = MasterPlagisKecil::all();
+        $perahu         = Perahu::all();
+        $plagis_kecil   = MasterPlagisKecil::all();
+        $plagis_besar   = MasterPlagisBesar::all();
+        $demersal       = MasterDemersal::all();
     }
 
     /**
@@ -41,6 +45,9 @@ class TenakerController extends Controller
             'jenis_bbm_mesin'               => [1 => 'Bensin', 2 => 'Solar', 3 => 'Minyak Tanah', 4 => 'Campuran', 5 => 'Bio Diesel', 6 => 'Lainnya'],
             // 'kondisi_mesin'                 => [1 => 'Baru', 2 => 'Bekas'],
             // 'sumber_modal_mesin'            => [1 => 'Modal Sendiri', 2 => 'Kredit Formal', 3 => 'Kredit Informal', 4 => 'Bantuan Pemerintah', 5 => 'Keluarga', 6 => 'Campuran'],
+            'plagis_kecil'                  => MasterPlagisKecil::all(),
+            'plagis_besar'                  => MasterPlagisBesar::all(),
+            'demersal'                      => MasterDemersal::all(),
 
         ]);
     }
@@ -67,8 +74,8 @@ class TenakerController extends Controller
         //                 ->withInput();
         // }
 
-        $plagis_kecil = new MasterPlagisKecil;
-        $plagis_kecil->plagis_kecil = $request->plagis_kecil;
+        // $plagis_kecil = new MasterPlagisKecil;
+        // $plagis_kecil->plagis_kecil = $request->plagis_kecil;
         // $responden->save();
 
         return view('home');
