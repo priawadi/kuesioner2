@@ -24,6 +24,7 @@ class CreateTableMesin extends Migration
             $table->float('harga_beli_mesin');
             $table->integer('umur_ekonomis_mesin');
             $table->integer('sumber_modal_mesin');
+            $table->integer('id_responden');
 
             $table->softDeletes();
             $table->timestamps();

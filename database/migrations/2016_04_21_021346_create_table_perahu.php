@@ -24,6 +24,7 @@ class CreateTablePerahu extends Migration
             $table->float('harga_beli');
             $table->integer('umur_ekonomis');
             $table->integer('sumber_modal');
+            $table->integer('id_responden');
 
             $table->softDeletes();
             $table->timestamps();

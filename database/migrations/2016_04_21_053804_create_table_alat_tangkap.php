@@ -24,6 +24,8 @@ class CreateTableAlatTangkap extends Migration
             $table->float('harga_beli_alat');
             $table->integer('umur_ekonomis_alat');
             $table->integer('sumber_modal_alat');
+            $table->integer('id_responden');
+            $table->string('jenis_alat_tangkap_lain', 150);
 
             $table->softDeletes();
             $table->timestamps();
