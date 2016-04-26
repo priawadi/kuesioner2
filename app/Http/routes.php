@@ -32,6 +32,7 @@ Route::get('/responden/lihat/{id_responden}', 'RespondenController@detail');
 Route::get('/partisipasi-sosial', 'PartisipasiSosialController@index');
 Route::get('/partisipasi-sosial/tambah', 'PartisipasiSosialController@create');
 Route::post('/partisipasi-sosial/tambah', 'PartisipasiSosialController@store');
+Route::get('/partisipasi-sosial/hapus/{id_responden}', 'PartisipasiSosialController@destroy');
 
 // Partisipasi Organisasi
 Route::get('/partisipasi-organisasi', 'PartisipasiOrgController@index');
@@ -124,3 +125,13 @@ Route::post('/biaya-operasional/tambah', 'BiayaOperasionalController@store');
 Route::get('/biaya-ransum', 'BiayaRansumController@index');
 Route::get('/biaya-ransum/tambah', 'BiayaRansumController@create');
 Route::post('/biaya-ransum/tambah', 'BiayaRansumController@store');
+
+// Biaya Jasa
+Route::get('/biaya-jasa', 'BiayaJasaController@index');
+Route::get('/biaya-jasa/tambah', 'BiayaJasaController@create');
+Route::post('/biaya-jasa/tambah', 'BiayaJasaController@store');
+
+// Ketenagakerjaan
+Route::get('/ketenagakerjaan', 'KetenagakerjaanController@index');
+Route::get('/ketenagakerjaan/tambah', 'KetenagakerjaanController@create');
+Route::post('/ketenagakerjaan/tambah', 'KetenagakerjaanController@store');

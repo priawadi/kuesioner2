@@ -16,6 +16,8 @@ use App\HasilTangkapan;
 use App\BiayaPerijinan;
 use App\BiayaOperasional;
 use App\BiayaRansum;
+use App\Ketenagakerjaan;
+use App\BiayaJasa;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
@@ -297,8 +299,8 @@ class RespondenController extends Controller
             ],
             [
                 'kuesioner' => 'Biaya Jasa',
-                'is_done'   => 0,
-                'link'      => '',
+                'is_done'   => (BiayaJasa::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'biaya-jasa',
             ],
             [
                 'kuesioner' => 'Penerimaan Usaha Berdasarkan Musim',
@@ -307,8 +309,8 @@ class RespondenController extends Controller
             ],
             [
                 'kuesioner' => 'Ketenagakerjaan',
-                'is_done'   => 0,
-                'link'      => '',
+                'is_done'   => (Ketenagakerjaan::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'ketenagakerjaan',
             ],
         ];
         return view('responden.detail', [

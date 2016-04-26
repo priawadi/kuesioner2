@@ -141,9 +141,11 @@ class PartisipasiSosialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         echo "ID: " . $id;
-        // Partisipasi::where('active', 0)->delete();
+        JwbPartisipasi::where('id_responden', $id)->where('kateg_partisipasi', 1)->delete();
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }
