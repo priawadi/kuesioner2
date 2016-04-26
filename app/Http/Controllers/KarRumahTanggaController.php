@@ -100,7 +100,7 @@ class KarRumahTanggaController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect('karakteristik_rumah_tangga/tambah')
+            return redirect('karakteristik-rumah-tangga/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
