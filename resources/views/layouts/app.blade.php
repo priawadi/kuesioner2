@@ -16,7 +16,7 @@
     <link href="{{ url('/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link href="{!! asset('css/bootstrap-multiselect.css') !!}" media="all" rel="stylesheet" type="text/css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="{!! asset('js/jquery.min.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('bootstrap-datetimepicker/moment.min.js') !!}"></script>
 
     <style>
