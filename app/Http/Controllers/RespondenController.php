@@ -20,6 +20,8 @@ use App\BiayaRansum;
 use App\Ketenagakerjaan;
 use App\BiayaJasa;
 use App\AlatTangkap;
+use App\Mesin;
+use App\Perahu;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
@@ -266,13 +268,13 @@ class RespondenController extends Controller
         $kuesioner['usaha_tenaga_kerja'] = [
             [
                 'kuesioner' => 'Perahu',
-                'is_done'   => 0,
-                'link'      => '',
+                'is_done'   => (Perahu::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'perahu',
             ],
             [
                 'kuesioner' => 'Tenaga Penggerak / Mesin',
-                'is_done'   => 0,
-                'link'      => '',
+                'is_done'   => (Mesin::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'tenaga-penggerak',
             ],
             [
                 'kuesioner' => 'Alat Tangkap',

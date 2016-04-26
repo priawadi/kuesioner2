@@ -140,3 +140,13 @@ Route::post('/ketenagakerjaan/tambah', 'KetenagakerjaanController@store');
 Route::get('/alat-tangkap', 'AlatTangkapController@index');
 Route::get('/alat-tangkap/tambah', 'AlatTangkapController@create');
 Route::post('/alat-tangkap/tambah', 'AlatTangkapController@store');
+
+// Tenaga Kerja
+Route::get('/tenaga-penggerak', 'TenagaPenggerakController@index');
+Route::get('/tenaga-penggerak/tambah', 'TenagaPenggerakController@create');
+Route::post('/tenaga-penggerak/tambah', 'TenagaPenggerakController@store');
+
+// Perahu
+Route::get('/perahu', 'PerahuController@index');
+Route::get('/perahu/tambah', 'PerahuController@create');
+Route::post('/perahu/tambah', 'PerahuController@store');
