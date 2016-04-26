@@ -15,8 +15,9 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(URL::asset('bootstrap/css/bootstrap.css')); ?>">
     <link href="<?php echo e(url('/bootstrap/css/bootstrap.css')); ?>" rel="stylesheet">
     <?php /* <link href="<?php echo e(elixir('css/app.css')); ?>" rel="stylesheet"> */ ?>
-	<link href="<?php echo asset('css/bootstrap-multiselect.css'); ?>" media="all" rel="stylesheet" type="text/css" />
+    <link href="<?php echo asset('css/bootstrap-multiselect.css'); ?>" media="all" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo asset('bootstrap-datetimepicker/moment.min.js'); ?>"></script>
 
     <style>
         body {
@@ -76,10 +77,10 @@
     </nav>
 
     <?php echo $__env->yieldContent('content'); ?>
-
     <!-- JavaScripts -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<?php echo asset('js/bootstrap-multiselect.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo asset('js/bootstrap-multiselect.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo asset('bootstrap-datetimepicker/bootstrap-datetimepicker.min.js'); ?>"></script>
     <?php /* <script src="<?php echo e(elixir('js/app.js')); ?>"></script> */ ?>
 </body>
 </html>

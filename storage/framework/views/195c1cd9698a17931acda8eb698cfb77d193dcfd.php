@@ -1,7 +1,7 @@
 <?php $__env->startSection('content'); ?>
-<div class="container" width="1200px">
+<div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Data Responden</div>
                 <ul>
@@ -18,7 +18,7 @@
                 <div class="panel-body">
                     <?php echo Form::open(array('url' => 'responden/tambah', 'class' => 'form-horizontal')); ?>
 
-                        <div class="form-group">
+                        <div class="form-group <?php if($errors->has('nama_responden')): ?> has-error <?php endif; ?>">
                             <?php echo e(Form::label(
                                     'id_id', 
                                     'ID', 
