@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enumerator;
 use App\Responden;
 use App\JwbPartisipasi;
 use App\JwbRasaPercaya;
@@ -18,6 +19,7 @@ use App\BiayaOperasional;
 use App\BiayaRansum;
 use App\Ketenagakerjaan;
 use App\BiayaJasa;
+use App\AlatTangkap;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
@@ -274,8 +276,8 @@ class RespondenController extends Controller
             ],
             [
                 'kuesioner' => 'Alat Tangkap',
-                'is_done'   => 0,
-                'link'      => '',
+                'is_done'   => (AlatTangkap::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'alat-tangkap',
             ],
             [
                 'kuesioner' => 'Aset Pendukung Usaha',
@@ -314,8 +316,9 @@ class RespondenController extends Controller
             ],
         ];
         return view('responden.detail', [
-            'responden' => Responden::find($id_responden),
-            'kuesioner' => $kuesioner
+            'responden'  => Responden::find($id_responden),
+            'kuesioner'  => $kuesioner,
+            'enumerator' => Enumerator::where('id_responden', $request->session()->get('id_responden'))->get(),
         ]);
     }
 }

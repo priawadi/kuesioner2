@@ -75,8 +75,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <a href="#" class="btn btn-primary pull-left">Kembali</a>
-                        <button type="submit" class="btn btn-primary pull-right">Selanjutnya</button>
+                        @include('components.form.prev_next_btn')
                     {{ Form::close() }}
                 </div>
             </div>

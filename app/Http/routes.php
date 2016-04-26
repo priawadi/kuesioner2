@@ -135,3 +135,8 @@ Route::post('/biaya-jasa/tambah', 'BiayaJasaController@store');
 Route::get('/ketenagakerjaan', 'KetenagakerjaanController@index');
 Route::get('/ketenagakerjaan/tambah', 'KetenagakerjaanController@create');
 Route::post('/ketenagakerjaan/tambah', 'KetenagakerjaanController@store');
+
+// Alat Tangkap
+Route::get('/alat-tangkap', 'AlatTangkapController@index');
+Route::get('/alat-tangkap/tambah', 'AlatTangkapController@create');
+Route::post('/alat-tangkap/tambah', 'AlatTangkapController@store');

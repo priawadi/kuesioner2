@@ -15,6 +15,40 @@
                     <b>Nama Responden : {{$responden->nama_responden}}</b>
                     <br>
                     <br>
+                    <b>ENUMERATOR</b>
+                    <table class="table table-bordered">
+                        <thead> 
+                            <tr> 
+                                <th>Nama Enumerator</th> 
+                                <th>Tanggal Wawancara</th> 
+                                <th>Tanggal Editing</th> 
+                                <th>Nama Pemvalidasi</th>
+                                <th>Aksi</th>
+                            </tr> 
+                        </thead> 
+                        <tbody>
+                            <tr>
+                                @if (!count($enumerator))
+                                    <td colspan="4">Tidak ada data</td>
+                                @else
+                                    <td>{{$enumerator[0]->nama_enumerator}}</td>
+                                    <td>{{$enumerator[0]->tanggal_wawancara->format('d-m-y')}}</td>
+                                    <td>{{$enumerator[0]->tanggal_editing->format('d-m-y')}}</td>
+                                    <td>{{$enumerator[0]->nama_pemvalidasi}}</td>
+                                   
+                                @endif
+                                <td>
+                                    <center>
+                                        @if (count($enumerator))
+                                            <a class="btn btn-danger btn-sm" href="{{url('enumerator/hapus')}}">Hapus</a>
+                                        @else
+                                            <a class="btn btn-primary btn-sm" href="{{url('enumerator/tambah')}}">Tambah</a>
+                                        @endif
+                                    </center>
+                                </td>
+                            </tr>
+                        </tbody> 
+                    </table>
                     <b>ASPEK MODAL SOSIAL</b>
                     <table class="table table-bordered">
                         <thead> 

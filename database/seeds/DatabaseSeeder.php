@@ -30,5 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PendidikanFormalSeeder::class);
         $this->call(MasterBiayaVariabelSeeder::class);
         $this->call(MasterDemersalSeeder::class);
+        $this->call(MasterJenisAlatTangkapSeeder::class);
     }
 }
