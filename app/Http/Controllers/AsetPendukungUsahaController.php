@@ -26,8 +26,11 @@ class AsetPendukungUsahaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+        
         $master_peralatan_tambahan = [];
         foreach (MasterPeralatanTambahan::all() as $item) {
             $master_peralatan_tambahan[$item->id_master_peralatan_tambahan] = $item->peralatan_tambahan;

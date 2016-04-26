@@ -26,8 +26,11 @@ class BiayaRansumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+        
         return view('biaya_ransum.form', [
             'subtitle'          => 'Biaya Ransum',
             'action'            => 'biaya-ransum/tambah',
