@@ -47,14 +47,14 @@ class BiayaOperasionalController extends Controller
      */
     public function store(Request $request)
     {
-        $rules['satuan.*'] = 'required';
-        $rules['rataan_puncak.*']      = 'required|numeric';
-        $rules['rataan_sedang.*']      = 'required|numeric';
-        $rules['rataan_paceklik.*']    = 'required|numeric';
-        $rules['harga.*']              = 'required|numeric';
-        $rules['total_puncak.*']       = 'required|numeric';
-        $rules['total_sedang.*']       = 'required|numeric';
-        $rules['total_paceklik.*']     = 'required|numeric';
+        $rules['satuan.*'] = '';
+        $rules['rataan_puncak.*']      = 'numeric';
+        $rules['rataan_sedang.*']      = 'numeric';
+        $rules['rataan_paceklik.*']    = 'numeric';
+        $rules['harga.*']              = 'numeric';
+        $rules['total_puncak.*']       = 'numeric';
+        $rules['total_sedang.*']       = 'numeric';
+        $rules['total_paceklik.*']     = 'numeric';
         
         // Validate input
         $validator = Validator::make($request->all(), $rules);

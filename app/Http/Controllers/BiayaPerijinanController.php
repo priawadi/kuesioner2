@@ -56,9 +56,9 @@ class BiayaPerijinanController extends Controller
     public function store(Request $request)
     {
         
-        $rules['frek_satuan.*']  = 'required|numeric';
-        $rules['harga_satuan.*'] = 'required|numeric';
-        $rules['total_biaya.*']  = 'required|numeric';
+        $rules['frek_satuan.*']  = 'numeric';
+        $rules['harga_satuan.*'] = 'numeric';
+        $rules['total_biaya.*']  = 'numeric';
 
         
         // Validate input
