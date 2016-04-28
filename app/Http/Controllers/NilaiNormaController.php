@@ -57,26 +57,26 @@ class NilaiNormaController extends Controller
     {
         $pertanyaan = NilaiNorma::select('id_nilai_norma', 'is_reason')->get();
 
-        // Get ids of pertanyaan
-        foreach($pertanyaan as $key => $item)
-        {
-            $rules['jawaban.' . $item->id_nilai_norma] = 'required';
+        // // Get ids of pertanyaan
+        // foreach($pertanyaan as $key => $item)
+        // {
+        //     $rules['jawaban.' . $item->id_nilai_norma] = 'required';
 
-            // validate reason
-            if ($item->is_reason)
-            {
-                $rules['alasan.' . $item->id_nilai_norma] = 'required|max:500';
-            }
-        }
+        //     // validate reason
+        //     if ($item->is_reason)
+        //     {
+        //         $rules['alasan.' . $item->id_nilai_norma] = 'required|max:500';
+        //     }
+        // }
         
-        // Validate input
-        $validator = Validator::make($request->all(), $rules);
+        // // Validate input
+        // $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()) {
-            return redirect('nilai-norma/tambah')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect('nilai-norma/tambah')
+        //                 ->withErrors($validator)
+        //                 ->withInput();
+        // }
 
         // Save jawaban into database
         $jawaban = $request->get('jawaban');
@@ -84,13 +84,10 @@ class NilaiNormaController extends Controller
         foreach($pertanyaan as $key => $item)
         {
             $jwb_nilai_norma                     = new JwbNilaiNorma;
-            $jwb_nilai_norma->id_master_opsional = $jawaban[$item->id_nilai_norma];
+            $jwb_nilai_norma->id_master_opsional = isset($jawaban[$item->id_nilai_norma])? $jawaban[$item->id_nilai_norma]: null;
             $jwb_nilai_norma->id_responden       = $request->session()->get('id_responden');
             $jwb_nilai_norma->id_nilai_norma     = $item->id_nilai_norma;
-            if ($item->is_reason)
-            {
-                $jwb_nilai_norma->jwb_teks_nilai_norma = $alasan[$item->id_nilai_norma];
-            }
+
             $jwb_nilai_norma->save();
         }
 

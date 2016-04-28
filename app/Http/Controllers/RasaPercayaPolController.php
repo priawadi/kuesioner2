@@ -57,26 +57,26 @@ class RasaPercayaPolController extends Controller
     {
         $pertanyaan = RasaPercaya::where('kateg_rasa_percaya', 3)->select('id_rasa_percaya', 'is_reason')->get();
 
-        // Get ids of pertanyaan
-        foreach($pertanyaan as $key => $item)
-        {
-            $rules['jawaban.' . $item->id_rasa_percaya] = 'required';
+        // // Get ids of pertanyaan
+        // foreach($pertanyaan as $key => $item)
+        // {
+        //     $rules['jawaban.' . $item->id_rasa_percaya] = 'required';
 
-            // validate reason
-            if ($item->is_reason)
-            {
-                $rules['alasan.' . $item->id_rasa_percaya] = 'required|max:500';
-            }
-        }
+        //     // validate reason
+        //     if ($item->is_reason)
+        //     {
+        //         $rules['alasan.' . $item->id_rasa_percaya] = 'required|max:500';
+        //     }
+        // }
         
-        // Validate input
-        $validator = Validator::make($request->all(), $rules);
+        // // Validate input
+        // $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()) {
-            return redirect('rasa-percaya-politik/tambah')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect('rasa-percaya-politik/tambah')
+        //                 ->withErrors($validator)
+        //                 ->withInput();
+        // }
 
         // Save jawaban into database
         $jawaban = $request->get('jawaban');
@@ -84,7 +84,7 @@ class RasaPercayaPolController extends Controller
         foreach($pertanyaan as $key => $item)
         {
             $jwb_rasa_percaya                     = new JwbRasaPercaya;
-            $jwb_rasa_percaya->id_master_opsional = $jawaban[$item->id_rasa_percaya];
+            $jwb_rasa_percaya->id_master_opsional = isset($jawaban[$item->id_rasa_percaya])? $jawaban[$item->id_rasa_percaya]: null;
             $jwb_rasa_percaya->id_responden       = $request->session()->get('id_responden');
             $jwb_rasa_percaya->id_rasa_percaya    = $item->id_rasa_percaya;
             $jwb_rasa_percaya->kateg_rasa_percaya = 3;

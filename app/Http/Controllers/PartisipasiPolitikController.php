@@ -58,26 +58,26 @@ class PartisipasiPolitikController extends Controller
     {
         $pertanyaan = Partisipasi::where('kateg_partisipasi', 3)->select('id_partisipasi', 'parent_partisipasi', 'is_reason')->get();
 
-        // Get ids of pertanyaan
-        foreach($pertanyaan as $key => $item)
-        {
-            $rules['jawaban.' . $item->id_partisipasi] = '';
+        // // Get ids of pertanyaan
+        // foreach($pertanyaan as $key => $item)
+        // {
+        //     $rules['jawaban.' . $item->id_partisipasi] = '';
 
-            // validate reason
-            if ($item->is_reason)
-            {
-                $rules['alasan.' . $item->id_partisipasi] = 'max:500';
-            }   
-        }
+        //     // validate reason
+        //     if ($item->is_reason)
+        //     {
+        //         $rules['alasan.' . $item->id_partisipasi] = 'max:500';
+        //     }   
+        // }
 
-        // Validate input
-        $validator = Validator::make($request->all(), $rules);
+        // // Validate input
+        // $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()) {
-            return redirect('partisipasi-politik/tambah')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect('partisipasi-politik/tambah')
+        //                 ->withErrors($validator)
+        //                 ->withInput();
+        // }
 
         // Save jawaban into database
         $jawaban = $request->get('jawaban');
@@ -85,7 +85,7 @@ class PartisipasiPolitikController extends Controller
         foreach($pertanyaan as $key => $item)
         {
             $jwb_partisipasi                     = new JwbPartisipasi;
-            $jwb_partisipasi->id_master_opsional = $jawaban[$item->id_partisipasi];
+            $jwb_partisipasi->id_master_opsional = isset($jawaban[$item->id_partisipasi])? $jawaban[$item->id_partisipasi]: null;
             $jwb_partisipasi->id_responden       = $request->session()->get('id_responden');
             $jwb_partisipasi->id_partisipasi     = $item->id_partisipasi;
             $jwb_partisipasi->kateg_partisipasi  = 3;
