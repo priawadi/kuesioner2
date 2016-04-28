@@ -111,13 +111,13 @@ class TenagaPenggerakController extends Controller
         }
         
         // Validate input
-        $validator = Validator::make($request->all(), $rules);
+        // $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()) {
-            return redirect('tenaga-penggerak/tambah')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect('tenaga-penggerak/tambah')
+        //                 ->withErrors($validator)
+        //                 ->withInput();
+        // }
 
         // Save data
         foreach ($mesin as $key => $value) 

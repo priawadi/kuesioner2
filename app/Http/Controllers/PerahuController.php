@@ -66,13 +66,13 @@ class PerahuController extends Controller
         }
         
         // Validate input
-        $validator = Validator::make($request->all(), $rules);
+        // $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()) {
-            return redirect('perahu/tambah')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect('perahu/tambah')
+        //                 ->withErrors($validator)
+        //                 ->withInput();
+        // }
 
         // Save data
         foreach ($jenis_armada as $id_perahu => $value) 

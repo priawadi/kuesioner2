@@ -45,29 +45,29 @@ class KesehatanController extends Controller
      */
     public function store(Request $request)
     {
-        $rules['sakit_setahun_ringan'] = 'required|numeric';
-        $rules['sakit_setahun_berat']  = 'required|numeric';
-        $rules['ringan_dibiarkan']     = 'required|numeric';
-        $rules['ringan_beli_obat']     = 'required|numeric';
-        $rules['ringan_puskesmas']     = 'required|numeric';
-        $rules['ringan_dokter']        = 'required|numeric';
-        $rules['ringan_alternatif']    = 'required|numeric';
-        $rules['ringan_rumah_sakit']   = 'required|numeric';
+        $rules['sakit_setahun_ringan'] = 'numeric';
+        $rules['sakit_setahun_berat']  = 'numeric';
+        $rules['ringan_dibiarkan']     = 'numeric';
+        $rules['ringan_beli_obat']     = 'numeric';
+        $rules['ringan_puskesmas']     = 'numeric';
+        $rules['ringan_dokter']        = 'numeric';
+        $rules['ringan_alternatif']    = 'numeric';
+        $rules['ringan_rumah_sakit']   = 'numeric';
 
-        $rules['berat_dibiarkan']   = 'required|numeric';
-        $rules['berat_beli_obat']   = 'required|numeric';
-        $rules['berat_puskesmas']   = 'required|numeric';
-        $rules['berat_dokter']      = 'required|numeric';
-        $rules['berat_alternatif']  = 'required|numeric';
-        $rules['berat_rumah_sakit'] = 'required|numeric';
+        $rules['berat_dibiarkan']   = 'numeric';
+        $rules['berat_beli_obat']   = 'numeric';
+        $rules['berat_puskesmas']   = 'numeric';
+        $rules['berat_dokter']      = 'numeric';
+        $rules['berat_alternatif']  = 'numeric';
+        $rules['berat_rumah_sakit'] = 'numeric';
 
-        $rules['jamkesmas'] = 'required';
-        $rules['bpjs']      = 'required';
-        $rules['asuransi']  = 'required';
+        $rules['jamkesmas'] = '';
+        $rules['bpjs']      = '';
+        $rules['asuransi']  = '';
 
-        $rules['frek_jamkesmas'] = 'required';
-        $rules['frek_bpjs']      = 'required';
-        $rules['frek_asuransi']  = 'required';
+        $rules['frek_jamkesmas'] = '';
+        $rules['frek_bpjs']      = '';
+        $rules['frek_asuransi']  = '';
         
         // Validate input
         $validator = Validator::make($request->all(), $rules);
