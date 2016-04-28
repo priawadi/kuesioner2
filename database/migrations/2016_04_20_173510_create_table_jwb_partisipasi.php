@@ -14,10 +14,10 @@ class CreateTableJwbPartisipasi extends Migration
     {
         Schema::create('jwb_partisipasi', function (Blueprint $table) {
             $table->increments('id_jwb_partisipasi');
-            $table->integer('id_master_opsional');
+            $table->integer('id_master_opsional')->nullable();
             $table->integer('id_responden');
             $table->integer('id_partisipasi');
-            $table->text('jwb_teks_partisipasi');
+            $table->text('jwb_teks_partisipasi')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

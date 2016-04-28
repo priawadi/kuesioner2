@@ -15,7 +15,7 @@ class CreateTablePendidikanFormal extends Migration
         Schema::create('pendidikan_formal', function (Blueprint $table) {
             $table->increments('id_pendidikan_formal');
 
-            $table->string('pendidikan_formal', 100);
+            $table->string('pendidikan_formal', 100)->nullable();
 
             $table->softDeletes();
             $table->timestamps();

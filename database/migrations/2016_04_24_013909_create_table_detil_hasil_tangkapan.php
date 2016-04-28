@@ -17,12 +17,12 @@ class CreateTableDetilHasilTangkapan extends Migration
             $table->integer('id_master_jenis_ikan');
             $table->integer('id_responden');
 
-            $table->integer('id_bulan');
-            $table->smallInteger('urutan_isian');
-            $table->integer('produksi_sebulan');
-            $table->float('harga_ikan');
-            $table->string('jenis_ikan_lain', 100);
-            $table->float('nilai_produksi');
+            $table->integer('id_bulan')->nullable();
+            $table->smallInteger('urutan_isian')->nullable();
+            $table->integer('produksi_sebulan')->nullable();
+            $table->float('harga_ikan')->nullable();
+            $table->string('jenis_ikan_lain', 100)->nullable();
+            $table->float('nilai_produksi')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

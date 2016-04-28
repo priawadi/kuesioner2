@@ -16,19 +16,19 @@ class CreateTableJenisPekerjaanRumahtg extends Migration
             $table->increments('id_jenis_pekerjaan_rumahtg');
             $table->integer('id_responden');
 
-            $table->string('nama', 150);
-            $table->smallInteger('status_keluarga');
-            $table->string('status_keluarga_lain', 100);
+            $table->string('nama', 150)->nullable();
+            $table->smallInteger('status_keluarga')->nullable();
+            $table->string('status_keluarga_lain', 100)->nullable();
             
-            $table->integer('jenis_pekerjaan1');
-            $table->string('jenis_pekerjaan_lain1', 100);
-            $table->float('pendapatan1');
-            $table->integer('jenis_pekerjaan2');
-            $table->string('jenis_pekerjaan_lain2', 100);
-            $table->float('pendapatan2');
-            $table->integer('jenis_pekerjaan3');
-            $table->string('jenis_pekerjaan_lain3', 100);
-            $table->float('pendapatan3');
+            $table->integer('jenis_pekerjaan1')->nullable();
+            $table->string('jenis_pekerjaan_lain1', 100)->nullable();
+            $table->float('pendapatan1')->nullable();
+            $table->integer('jenis_pekerjaan2')->nullable();
+            $table->string('jenis_pekerjaan_lain2', 100)->nullable();
+            $table->float('pendapatan2')->nullable();
+            $table->integer('jenis_pekerjaan3')->nullable();
+            $table->string('jenis_pekerjaan_lain3', 100)->nullable();
+            $table->float('pendapatan3')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

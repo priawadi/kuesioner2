@@ -17,11 +17,11 @@ class CreateTableBiayaJasa extends Migration
             $table->integer('id_responden');
 
             $table->integer('jenis_biaya_jasa');
-            $table->string('jenis_biaya_jasa_lain', 150);
-            $table->string('satuan', 50);
-            $table->integer('jumlah_jasa');
-            $table->float('harga_jasa');
-            $table->float('total_nilai');
+            $table->string('jenis_biaya_jasa_lain', 150)->nullable();
+            $table->string('satuan', 50)->nullable();
+            $table->integer('jumlah_jasa')->nullable();
+            $table->float('harga_jasa')->nullable();
+            $table->float('total_nilai')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

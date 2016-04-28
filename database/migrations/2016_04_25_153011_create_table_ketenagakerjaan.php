@@ -16,7 +16,7 @@ class CreateTableKetenagakerjaan extends Migration
             $table->increments('id_ketenagakerjaan');
             $table->integer('id_responden');
 
-            $table->boolean('jml_tenaga_kerja_sama');
+            $table->boolean('jml_tenaga_kerja_sama')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

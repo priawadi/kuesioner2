@@ -17,12 +17,12 @@ class CreateAsetRumahTangga extends Migration
             $table->integer('id_responden');
             
             $table->integer('id_master_jenis_aset');
-            $table->integer('volume');
-            $table->float('nilai_satuan');
-            $table->float('nilai_total');
-            $table->integer('cara_perolehan');
-            $table->smallInteger('jenis_aset');
-            $table->float('pendapatan_produktif');
+            $table->integer('volume')->nullable();
+            $table->float('nilai_satuan')->nullable();
+            $table->float('nilai_total')->nullable();
+            $table->integer('cara_perolehan')->nullable();
+            $table->smallInteger('jenis_aset')->nullable();
+            $table->float('pendapatan_produktif')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

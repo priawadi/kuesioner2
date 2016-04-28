@@ -16,7 +16,7 @@ class CreateTableJawabanKonsumsi extends Migration
             $table->increments('id_jawaban_konsumsi');
             $table->integer('id_responden');
             $table->integer('id_konsumsi');
-            $table->float('jawaban');
+            $table->float('jawaban')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

@@ -16,10 +16,10 @@ class CreateTableEnumerator extends Migration
             $table->increments('id_enumerator');
             $table->integer('id_responden');
 
-            $table->string('nama_enumerator', 150);
-            $table->timestamp('tanggal_wawancara');
-            $table->timestamp('tanggal_editing');
-            $table->string('nama_pemvalidasi', 150);
+            $table->string('nama_enumerator', 150)->nullable();
+            $table->timestamp('tanggal_wawancara')->nullable();
+            $table->timestamp('tanggal_editing')->nullable();
+            $table->string('nama_pemvalidasi', 150)->nullable();
 
             $table->timestamps();
             $table->softDeletes();

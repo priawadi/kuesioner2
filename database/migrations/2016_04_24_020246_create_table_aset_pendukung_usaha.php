@@ -17,13 +17,13 @@ class CreateTableAsetPendukungUsaha extends Migration
             $table->integer('id_responden');
             $table->integer('id_peralatan_tambahan');
 
-            $table->string('peralatan_tambahan_lain', 150);
-            $table->smallInteger('status_kepemilikan');
-            $table->integer('jumlah');
-            $table->smallInteger('kondisi');
-            $table->integer('umur_ekonomis');
-            $table->float('harga_beli');
-            $table->smallInteger('sumber_modal');
+            $table->string('peralatan_tambahan_lain', 150)->nullable();
+            $table->smallInteger('status_kepemilikan')->nullable();
+            $table->integer('jumlah')->nullable();
+            $table->smallInteger('kondisi')->nullable();
+            $table->integer('umur_ekonomis')->nullable();
+            $table->float('harga_beli')->nullable();
+            $table->smallInteger('sumber_modal')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

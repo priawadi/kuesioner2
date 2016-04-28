@@ -17,13 +17,13 @@ class CreateTableCurahanTenagaKerja extends Migration
             $table->integer('id_ketenagakerjaan');
 
             $table->integer('status_pekerjaan');
-            $table->string('status_pekerjaan_lain', 150);
-            $table->integer('status_tenaga_kerja');
-            $table->integer('jumlah_tenaga_kerja');
-            $table->integer('lama_trip');
-            $table->integer('jumlah_trip');
-            $table->integer('bagi_hasil');
-            $table->integer('upah_trip');
+            $table->string('status_pekerjaan_lain', 150)->nullable();
+            $table->integer('status_tenaga_kerja')->nullable();
+            $table->integer('jumlah_tenaga_kerja')->nullable();
+            $table->integer('lama_trip')->nullable();
+            $table->integer('jumlah_trip')->nullable();
+            $table->integer('bagi_hasil')->nullable();
+            $table->integer('upah_trip')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

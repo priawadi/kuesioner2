@@ -14,16 +14,16 @@ class CreateTableMesin extends Migration
     {
         Schema::create('mesin', function (Blueprint $table) {
             $table->increments('id_mesin');
-            $table->string('mesin', 150);
-            $table->integer('merek_mesin');
-            $table->integer('ukuran_mesin');
-            $table->integer('status_kepemilikan_mesin');
-            $table->integer('jenis_bbm_mesin');
-            $table->integer('tahun_pembelian_mesin');
-            $table->integer('kondisi_mesin');
-            $table->float('harga_beli_mesin');
-            $table->integer('umur_ekonomis_mesin');
-            $table->integer('sumber_modal_mesin');
+            $table->string('mesin', 150)->nullable();
+            $table->integer('merek_mesin')->nullable();
+            $table->integer('ukuran_mesin')->nullable();
+            $table->integer('status_kepemilikan_mesin')->nullable();
+            $table->integer('jenis_bbm_mesin')->nullable();
+            $table->integer('tahun_pembelian_mesin')->nullable();
+            $table->integer('kondisi_mesin')->nullable();
+            $table->float('harga_beli_mesin')->nullable();
+            $table->integer('umur_ekonomis_mesin')->nullable();
+            $table->integer('sumber_modal_mesin')->nullable();
             $table->integer('id_responden');
 
             $table->softDeletes();

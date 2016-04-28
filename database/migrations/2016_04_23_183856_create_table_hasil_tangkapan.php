@@ -16,9 +16,9 @@ class CreateTableHasilTangkapan extends Migration
             $table->increments('id_hasil_tangkapan');
             $table->integer('id_responden');
 
-            $table->integer('id_bulan');
-            $table->integer('id_musim');
-            $table->integer('total_trip');
+            $table->integer('id_bulan')->nullable();
+            $table->integer('id_musim')->nullable();
+            $table->integer('total_trip')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

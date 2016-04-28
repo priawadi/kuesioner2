@@ -16,11 +16,11 @@ class CreateTableBiayaPerijinan extends Migration
             $table->increments('id_biaya_perijinan');
             $table->integer('id_responden');
 
-            $table->integer('jenis_biaya_perijinan');
+            $table->integer('jenis_biaya_perijinan')->nullable();
             $table->string('jenis_biaya_perijinan_lain', 100)->nullable();
-            $table->integer('frek_satuan');
-            $table->float('harga_satuan');
-            $table->float('total_biaya');
+            $table->integer('frek_satuan')->nullable();
+            $table->float('harga_satuan')->nullable();
+            $table->float('total_biaya')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

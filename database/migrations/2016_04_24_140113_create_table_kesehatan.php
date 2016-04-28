@@ -16,32 +16,32 @@ class CreateTableKesehatan extends Migration
             $table->increments('id_kesehatan');
             $table->integer('id_responden');
             
-            $table->integer('sakit_setahun');
-            $table->integer('sakit_setahun_ringan');
-            $table->integer('sakit_setahun_berat');
+            $table->integer('sakit_setahun')->nullable();
+            $table->integer('sakit_setahun_ringan')->nullable();
+            $table->integer('sakit_setahun_berat')->nullable();
 
-            $table->integer('ringan_dibiarkan');
-            $table->integer('ringan_beli_obat');
-            $table->integer('ringan_puskesmas');
-            $table->integer('ringan_dokter');
-            $table->integer('ringan_alternatif');
-            $table->integer('ringan_rumah_sakit');
+            $table->integer('ringan_dibiarkan')->nullable();
+            $table->integer('ringan_beli_obat')->nullable();
+            $table->integer('ringan_puskesmas')->nullable();
+            $table->integer('ringan_dokter')->nullable();
+            $table->integer('ringan_alternatif')->nullable();
+            $table->integer('ringan_rumah_sakit')->nullable();
 
-            $table->integer('berat_dibiarkan');
-            $table->integer('berat_beli_obat');
-            $table->integer('berat_puskesmas');
-            $table->integer('berat_dokter');
-            $table->integer('berat_alternatif');
-            $table->integer('berat_rumah_sakit');
+            $table->integer('berat_dibiarkan')->nullable();
+            $table->integer('berat_beli_obat')->nullable();
+            $table->integer('berat_puskesmas')->nullable();
+            $table->integer('berat_dokter')->nullable();
+            $table->integer('berat_alternatif')->nullable();
+            $table->integer('berat_rumah_sakit')->nullable();
             
 
             $table->boolean('jamkesmas')->default(FALSE);
             $table->boolean('bpjs')->default(FALSE);
             $table->boolean('asuransi')->default(FALSE);
 
-            $table->smallInteger('frek_jamkesmas');
-            $table->smallInteger('frek_bpjs');
-            $table->smallInteger('frek_asuransi');
+            $table->smallInteger('frek_jamkesmas')->nullable();
+            $table->smallInteger('frek_bpjs')->nullable();
+            $table->smallInteger('frek_asuransi')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

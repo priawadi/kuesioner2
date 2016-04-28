@@ -14,10 +14,10 @@ class CreateTableJwbNilaiNorma extends Migration
     {
         Schema::create('jwb_nilai_norma', function (Blueprint $table) {
             $table->increments('id_jwb_nilai_norma');
-            $table->integer('id_master_opsional');
+            $table->integer('id_master_opsional')->nullable();
             $table->integer('id_responden');
             $table->integer('id_nilai_norma');
-            $table->text('jwb_teks_nilai_norma');
+            $table->text('jwb_teks_nilai_norma')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
