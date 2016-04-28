@@ -47,7 +47,7 @@ class KonsumsiController extends Controller
     public function store(Request $request)
     {   
         $validator = Validator::make($request->all(), [
-            'konsumsi.*' => 'required|numeric',
+            'konsumsi.*' => 'numeric',
         ]);
 
         if ($validator->fails()) {
@@ -59,7 +59,7 @@ class KonsumsiController extends Controller
         $input = $request->all();
         foreach ($input['konsumsi'] as $key => $value) {
             $konsumsi = new JawabanKonsumsi;
-            $konsumsi -> id_konsumsi = $key;
+            $konsumsi -> id_konsumsi = isset($key)? $key: null;;
             $konsumsi -> id_responden = $request->session()->get('id_responden');
             $konsumsi -> jawaban = $value;
             $konsumsi->save();
