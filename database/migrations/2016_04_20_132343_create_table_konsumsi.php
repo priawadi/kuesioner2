@@ -16,6 +16,7 @@ class CreateTableKonsumsi extends Migration
             $table->increments('id_konsumsi');
             $table->integer('id_parentkonsum');
             $table->integer('id_kateg_konsum');
+            $table->float('nomor_sub');
             $table->string('rincian', 255);
 
             $table->softDeletes();

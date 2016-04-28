@@ -32,8 +32,8 @@
                             @if ($item -> id_kateg_konsum == 1)
                             @if ($item -> id_parentkonsum)
                             <tr class="info"> 
-                            @endif    
-                                <th>{{$id_konsumsi + 1}}</th> 
+                            @endif 
+                                <th> {{$item -> nomor_sub}} </th> 
                                 <td> {{$item -> rincian}}
                                 </td> 
                                 <td>
@@ -87,7 +87,7 @@
                             @if ($item -> id_parentkonsum)
                             <tr class="info"> 
                             @endif    
-                                <th>{{$id_konsumsi + 1}}</th> 
+                                <th>{{$item -> nomor_sub}}</th> 
                                 <td>{{$item -> rincian}}</td> 
                                 <td>
                                     @if ($item -> id_parentkonsum)
@@ -140,7 +140,7 @@
                             @if ($item -> id_parentkonsum)
                             <tr class="info"> 
                             @endif    
-                                <th>{{$id_konsumsi + 1}}</th> 
+                                <th>{{$item -> nomor_sub}}</th> 
                                 <td>{{$item -> rincian}}</td> 
                                 <td>
                                     @if ($item -> id_parentkonsum)
