@@ -63,7 +63,7 @@ class PartisipasiSosialController extends Controller
         // Get ids of pertanyaan
         foreach($pertanyaan as $key => $item)
         {
-            $rules['jawaban.' . $item->id_partisipasi] = '';
+            // $rules['jawaban.' . $item->id_partisipasi] = '';
 
             // validate reason
             if ($item->is_reason)
@@ -87,7 +87,7 @@ class PartisipasiSosialController extends Controller
         foreach($pertanyaan as $key => $item)
         {
             $jwb_partisipasi                     = new JwbPartisipasi;
-            $jwb_partisipasi->id_master_opsional = $jawaban[$item->id_partisipasi];
+            $jwb_partisipasi->id_master_opsional = $jawaban[$item->id_partisipasi] || null;
             $jwb_partisipasi->id_responden       = $request->session()->get('id_responden');
             $jwb_partisipasi->id_partisipasi     = $item->id_partisipasi;
             $jwb_partisipasi->kateg_partisipasi  = 1;
