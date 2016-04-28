@@ -49,39 +49,6 @@
                             </tr>
                         </tbody> 
                     </table>
-                    <b>ASPEK MODAL SOSIAL</b>
-                    <table class="table table-bordered">
-                        <thead> 
-                            <tr> 
-                                <th width="40px">#</th> 
-                                <th>Kuesioner</th> 
-                                <th width="100px">Status</th> 
-                                <th width="150px">Aksi</th>
-                            </tr> 
-                        </thead> 
-                        <tbody>
-                            @foreach($kuesioner['aspek_modal_sosial'] as $key => $item)
-                                <tr>
-                                    <td>{{($key + 1)}}</td>
-                                    <td>{{$item['kuesioner']}}</td>
-                                    <td>
-                                    <center>
-                                        <span class="label label-{{$item['is_done']? 'success': 'warning'}}">{{$item['is_done']? 'Sudah': 'Belum'}}</span>
-                                    </center>
-                                    </td>
-                                    <td>
-                                        <center>
-                                            @if ($item['is_done'])
-                                                <a class="btn btn-danger btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Hapus</a>
-                                            @else
-                                                <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
-                                            @endif
-                                        </center>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody> 
-                    </table>
                     <b>KARAKTERISTIK RUMAH TANGGA, PENDAPATAN, KESEHATAN, DAN ASET RUMAH TANGGA</b>
                     <table class="table table-bordered">
                         <thead>
@@ -94,6 +61,39 @@
                         </thead> 
                         <tbody> 
                             @foreach($kuesioner['karakteristik_rt'] as $key => $item)
+                            <tr>
+                                <td>{{($key + 1)}}</td>
+                                <td>{{$item['kuesioner']}}</td>
+                                <td>
+                                    <center>
+                                        <span class="label label-{{$item['is_done']? 'success': 'warning'}}">{{$item['is_done']? 'Sudah': 'Belum'}}</span>
+                                    </center>
+                                </td>
+                                <td>
+                                    <center>
+                                        @if ($item['is_done'])
+                                            <a class="btn btn-danger btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Hapus</a>
+                                        @else
+                                            <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
+                                        @endif
+                                    </center>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody> 
+                    </table>
+                    <b>USAHA DAN TENAGA KERJA PERIKANAN TANGKAP LAUT</b>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr> 
+                                <th width="40px">#</th> 
+                                <th>Kuesioner</th> 
+                                <th width="100px">Status</th> 
+                                <th width="150px">Aksi</th>
+                            </tr> 
+                        </thead> 
+                        <tbody> 
+                            @foreach($kuesioner['usaha_tenaga_kerja'] as $key => $item)
                             <tr>
                                 <td>{{($key + 1)}}</td>
                                 <td>{{$item['kuesioner']}}</td>
@@ -147,10 +147,10 @@
                             </tr>
                             @endforeach
                         </tbody> 
-                    </table>
-                    <b>USAHA DAN TENAGA KERJA PERIKANAN TANGKAP LAUT</b>
+                    </table>                                                            
+                    <b>ASPEK MODAL SOSIAL</b>
                     <table class="table table-bordered">
-                        <thead>
+                        <thead> 
                             <tr> 
                                 <th width="40px">#</th> 
                                 <th>Kuesioner</th> 
@@ -158,26 +158,26 @@
                                 <th width="150px">Aksi</th>
                             </tr> 
                         </thead> 
-                        <tbody> 
-                            @foreach($kuesioner['usaha_tenaga_kerja'] as $key => $item)
-                            <tr>
-                                <td>{{($key + 1)}}</td>
-                                <td>{{$item['kuesioner']}}</td>
-                                <td>
+                        <tbody>
+                            @foreach($kuesioner['aspek_modal_sosial'] as $key => $item)
+                                <tr>
+                                    <td>{{($key + 1)}}</td>
+                                    <td>{{$item['kuesioner']}}</td>
+                                    <td>
                                     <center>
                                         <span class="label label-{{$item['is_done']? 'success': 'warning'}}">{{$item['is_done']? 'Sudah': 'Belum'}}</span>
                                     </center>
-                                </td>
-                                <td>
-                                    <center>
-                                        @if ($item['is_done'])
-                                            <a class="btn btn-danger btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Hapus</a>
-                                        @else
-                                            <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
-                                        @endif
-                                    </center>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            @if ($item['is_done'])
+                                                <a class="btn btn-danger btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Hapus</a>
+                                            @else
+                                                <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
+                                            @endif
+                                        </center>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody> 
                     </table>

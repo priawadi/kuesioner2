@@ -13,9 +13,9 @@
                 </ul>
                 <div class="row">
                     <div class="col-sm-2"><center><b>RINCIAN</b></center></div>    
-                    <div class="col-sm-6"><center><b>ISIAN</b></center></div>    
-                    <div class="col-sm-2"><center><b>KODE KONDISI AWAL</b></center></div>    
-                    <div class="col-sm-2"><center><b>KODE (Saat Pencacahan) </b></center></div>    
+                    <div class="col-sm-2"><center><b>ISIAN</b></center></div>    
+<!--                     <div class="col-sm-2"><center><b>KODE KONDISI AWAL</b></center></div>    
+                    <div class="col-sm-2"><center><b>KODE (Saat Pencacahan) </b></center></div>   -->  
                 </div>
                 <div class="panel-body">
                     {!! Form::open(array('url' => 'responden/tambah', 'class' => 'form-horizontal')) !!}
@@ -44,7 +44,7 @@
                                     )
                                 }}
                             </div>
-                            <div class="col-sm-offset-4 col-sm-2">
+<!--                             <div class="col-sm-offset-4 col-sm-2">
                                 {{
                                     Form::text(
                                         'kodeawal_id', 
@@ -69,7 +69,7 @@
                                         ]
                                     )
                                 }}
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-group">
                             {{
@@ -94,7 +94,7 @@
                                     )
                                 }}
                             </div>
-                            <div class="col-sm-2">
+<!--                             <div class="col-sm-2">
                                 {{
                                     Form::text(
                                         'kodeawal_nama', 
@@ -119,7 +119,7 @@
                                         ]
                                     )
                                 }}
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-group">
                             {{
@@ -144,7 +144,7 @@
                                     )
                                 }}
                             </div>
-                            <div class="col-sm-2">
+<!--                             <div class="col-sm-2">
                                 {{
                                     Form::text(
                                         'kodeawal_suku', 
@@ -169,7 +169,7 @@
                                         ]
                                     )
                                 }}
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-group">
                             {{
@@ -194,7 +194,7 @@
                                     )
                                 }}
                             </div>
-                            <div class="col-sm-2">
+<!--                             <div class="col-sm-2">
                                 {{
                                     Form::text(
                                         'kodeawal_kampung', 
@@ -219,7 +219,7 @@
                                         ]
                                     )
                                 }}
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-group">
                             {{
@@ -244,7 +244,7 @@
                                     )
                                 }}
                             </div>
-                            <div class="col-sm-2">
+<!--                             <div class="col-sm-2">
                                 {{
                                     Form::text(
                                         'kodeawal_dusun', 
@@ -269,7 +269,7 @@
                                         ]
                                     )
                                 }}
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-group">
                             {{
@@ -294,7 +294,7 @@
                                     )
                                 }}
                             </div>
-                            <div class="col-sm-2">
+<!--                             <div class="col-sm-2">
                                 {{
                                     Form::text(
                                         'kodeawal_kelurahan', 
@@ -319,7 +319,7 @@
                                         ]
                                     )
                                 }}
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-group">
                             {{
@@ -344,7 +344,7 @@
                                     )
                                 }}
                             </div>
-                            <div class="col-sm-2">
+<!--                             <div class="col-sm-2">
                                 {{
                                     Form::text(
                                         'kodeawal_kecamatan', 
@@ -369,7 +369,7 @@
                                         ]
                                     )
                                 }}
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-group">
                             {{
@@ -394,7 +394,7 @@
                                     )
                                 }}
                             </div>
-                            <div class="col-sm-2">
+<!--                             <div class="col-sm-2">
                                 {{
                                     Form::text(
                                         'kodeawal_kabupaten', 
@@ -419,7 +419,7 @@
                                         ]
                                     )
                                 }}
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-group">
                             {{
@@ -444,7 +444,7 @@
                                     )
                                 }}
                             </div>
-                            <div class="col-sm-2">
+<!--                             <div class="col-sm-2">
                                 {{
                                     Form::text(
                                         'kodeawal_provinsi', 
@@ -469,7 +469,7 @@
                                         ]
                                     )
                                 }}
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-group">
                             {{
