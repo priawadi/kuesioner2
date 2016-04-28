@@ -64,7 +64,7 @@ class PartisipasiOrgController extends Controller
         {
             if ($item->parent_partisipasi) 
             {
-                $rules['jawaban.' . $item->id_partisipasi] = 'required';
+                $rules['jawaban.' . $item->id_partisipasi] = '';
             }
         }
         

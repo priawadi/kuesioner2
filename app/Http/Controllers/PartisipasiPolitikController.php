@@ -61,12 +61,12 @@ class PartisipasiPolitikController extends Controller
         // Get ids of pertanyaan
         foreach($pertanyaan as $key => $item)
         {
-            $rules['jawaban.' . $item->id_partisipasi] = 'required';
+            $rules['jawaban.' . $item->id_partisipasi] = '';
 
             // validate reason
             if ($item->is_reason)
             {
-                $rules['alasan.' . $item->id_partisipasi] = 'required|max:500';
+                $rules['alasan.' . $item->id_partisipasi] = 'max:500';
             }   
         }
 
