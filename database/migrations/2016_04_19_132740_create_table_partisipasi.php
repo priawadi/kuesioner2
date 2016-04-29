@@ -20,6 +20,7 @@ class CreateTablePartisipasi extends Migration
             $table->integer('kateg_partisipasi');
             $table->integer('id_master_opsional');
             $table->boolean('is_reason')->default(FALSE);
+            $table->boolean('is_input')->default(FALSE);
             
             $table->softDeletes();
             $table->timestamps();

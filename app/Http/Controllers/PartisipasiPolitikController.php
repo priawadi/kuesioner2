@@ -56,7 +56,6 @@ class PartisipasiPolitikController extends Controller
      */
     public function store(Request $request)
     {
-        $pertanyaan = Partisipasi::where('kateg_partisipasi', 3)->select('id_partisipasi', 'parent_partisipasi', 'is_reason')->get();
 
         // // Get ids of pertanyaan
         // foreach($pertanyaan as $key => $item)
@@ -80,18 +79,17 @@ class PartisipasiPolitikController extends Controller
         // }
 
         // Save jawaban into database
-        $jawaban = $request->get('jawaban');
-        $alasan = $request->get('alasan');
+        $pertanyaan = Partisipasi::where('kateg_partisipasi', 3)->select('id_partisipasi', 'parent_partisipasi', 'is_reason')->get();
         foreach($pertanyaan as $key => $item)
         {
             $jwb_partisipasi                     = new JwbPartisipasi;
-            $jwb_partisipasi->id_master_opsional = isset($jawaban[$item->id_partisipasi])? $jawaban[$item->id_partisipasi]: null;
+            $jwb_partisipasi->id_master_opsional = $request->input('jawaban.' . $item->id_partisipasi, null);
             $jwb_partisipasi->id_responden       = $request->session()->get('id_responden');
             $jwb_partisipasi->id_partisipasi     = $item->id_partisipasi;
             $jwb_partisipasi->kateg_partisipasi  = 3;
             if ($item->is_reason)
             {
-                $jwb_partisipasi->jwb_teks_partisipasi = $alasan[$item->id_partisipasi];
+                $jwb_partisipasi->jwb_teks_partisipasi = $request->input('alasan.' . $item->id_partisipasi);
             }
             $jwb_partisipasi->save();
         }

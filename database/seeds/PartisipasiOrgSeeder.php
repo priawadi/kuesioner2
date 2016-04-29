@@ -21,7 +21,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 12, 
@@ -30,7 +31,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => '',
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => FALSE
             ],
             [
 				'id_partisipasi'         => 13, 
@@ -39,7 +41,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 14, 
@@ -48,7 +51,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 15, 
@@ -57,7 +61,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 16, 
@@ -66,7 +71,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 17, 
@@ -75,7 +81,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 18, 
@@ -84,7 +91,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 19, 
@@ -93,7 +101,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 20, 
@@ -102,7 +111,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 21, 
@@ -111,7 +121,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 22, 
@@ -120,7 +131,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 23, 
@@ -129,7 +141,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 24, 
@@ -138,7 +151,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 25, 
@@ -147,7 +161,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 3,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
             [
 				'id_partisipasi'         => 26, 
@@ -156,7 +171,8 @@ class PartisipasiOrgSeeder extends Seeder
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 2,
 				'id_master_opsional'     => 5,
-				'is_reason'              => FALSE
+				'is_reason'              => FALSE,
+				'is_input'				 => TRUE
             ],
 
         ];

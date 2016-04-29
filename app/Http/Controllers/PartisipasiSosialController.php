@@ -8,7 +8,6 @@ use App\MasterOpsional;
 use App\JwbPartisipasi;
 use App\Http\Requests;
 use Validator;
-use Illuminate\Support\Facades\Input;
 
 class PartisipasiSosialController extends Controller
 {
@@ -82,16 +81,14 @@ class PartisipasiSosialController extends Controller
         }
 
         // Save jawaban into database
-        $jawaban = $request->get('jawaban');
-        $alasan  = $request->get('alasan');
         foreach($pertanyaan as $key => $item)
         {
             $jwb_partisipasi                       = new JwbPartisipasi;
-            $jwb_partisipasi->id_master_opsional   = isset($jawaban[$item->id_partisipasi])? $jawaban[$item->id_partisipasi]: null;
+            $jwb_partisipasi->id_master_opsional   = $request->input('jawaban.' . $item->id_partisipasi, null);
             $jwb_partisipasi->id_responden         = $request->session()->get('id_responden');
             $jwb_partisipasi->id_partisipasi       = $item->id_partisipasi;
             $jwb_partisipasi->kateg_partisipasi    = 1;
-            $jwb_partisipasi->jwb_teks_partisipasi = isset($alasan[$item->id_partisipasi])? $alasan[$item->id_partisipasi]: null;
+            $jwb_partisipasi->jwb_teks_partisipasi = $request->input('alasan.' . $item->id_partisipasi, null);
             
             $jwb_partisipasi->save();
         }
