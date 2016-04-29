@@ -56,7 +56,6 @@ class RasaPercayaMasyController extends Controller
      */
     public function store(Request $request)
     {
-        $pertanyaan = RasaPercaya::where('kateg_rasa_percaya', 1)->select('id_rasa_percaya', 'parent_rasa_percaya', 'is_reason')->get();
 
         // // Get ids of pertanyaan
         // foreach($pertanyaan as $key => $item)
@@ -83,35 +82,20 @@ class RasaPercayaMasyController extends Controller
         // }
 
         // Save jawaban into database
-        $jawaban = $request->get('jawaban');
-        $alasan = $request->get('alasan');
+        $pertanyaan = RasaPercaya::where('kateg_rasa_percaya', 1)->select('id_rasa_percaya', 'parent_rasa_percaya', 'is_reason')->get();
         foreach($pertanyaan as $key => $item)
         {
-            if ($item->parent_rasa_percaya)
-            {
+           
                 $jwb_rasa_percaya                     = new JwbRasaPercaya;
-                $jwb_rasa_percaya->id_master_opsional = isset($jawaban[$item->id_rasa_percaya])? $jawaban[$item->id_rasa_percaya]: null;
+                $jwb_rasa_percaya->id_master_opsional = $request->input('jawaban.' . $item->id_rasa_percaya, null);
                 $jwb_rasa_percaya->id_responden       = $request->session()->get('id_responden');
                 $jwb_rasa_percaya->id_rasa_percaya    = $item->id_rasa_percaya;
                 $jwb_rasa_percaya->kateg_rasa_percaya = 1;
                 if ($item->is_reason)
                 {
-                    $jwb_rasa_percaya->jwb_teks_rasa_percaya = $alasan[$item->id_rasa_percaya];
+                    $jwb_rasa_percaya->jwb_teks_rasa_percaya = $request->input('alasan.' . $item->id_rasa_percaya, null);
                 }
                 $jwb_rasa_percaya->save();
-            } 
-            else
-            {
-                $jwb_rasa_percaya                     = new JwbRasaPercaya;
-                $jwb_rasa_percaya->id_responden       = $request->session()->get('id_responden');
-                $jwb_rasa_percaya->id_rasa_percaya    = $item->id_rasa_percaya;
-                $jwb_rasa_percaya->kateg_rasa_percaya = 1;
-                if ($item->is_reason)
-                {
-                    $jwb_rasa_percaya->jwb_teks_rasa_percaya = $alasan[$item->id_rasa_percaya];
-                }
-                $jwb_rasa_percaya->save();
-            }
         }
 
         return redirect('responden/lihat/' . $request->session()->get('id_responden'));
