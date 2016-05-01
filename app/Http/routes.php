@@ -56,6 +56,10 @@ Route::get('/partisipasi-politik/hapus/{id_responden}', 'PartisipasiPolitikContr
 Route::get('/rasa-percaya-masyarakat', 'RasaPercayaMasyController@index');
 Route::get('/rasa-percaya-masyarakat/tambah', 'RasaPercayaMasyController@create');
 Route::post('/rasa-percaya-masyarakat/tambah', 'RasaPercayaMasyController@store');
+Route::get('/rasa-percaya-masyarakat/edit/{id_responden}', 'RasaPercayaMasyController@edit');
+Route::patch('/rasa-percaya-masyarakat/edit/{id_responden}', 'RasaPercayaMasyController@update');
+Route::get('/rasa-percaya-masyarakat/hapus/{id_responden}', 'RasaPercayaMasyController@destroy');
+
 
 // Rasa Percaya Organisasi Sosial
 Route::get('/rasa-percaya-organisasi', 'RasaPercayaOrgController@index');

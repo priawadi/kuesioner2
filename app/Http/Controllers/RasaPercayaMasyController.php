@@ -118,9 +118,35 @@ class RasaPercayaMasyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+        
+        $master_opsional = MasterOpsional::all();
+
+        $opsi = [];
+        foreach ($master_opsional as $item) {
+            $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
+        }
+
+        $result = JwbRasaPercaya::where('kateg_rasa_percaya', 1)->where('id_responden', $request->session()->get('id_responden'))->get();
+        $jwb_rasa_percaya = [];
+        foreach ($result as $idx => $item) {
+            $jwb_rasa_percaya[$item->id_rasa_percaya] = [
+                'id_jwb_rasa_percaya'   => $item->id_jwb_rasa_percaya,
+                'id_master_opsional'    => $item->id_master_opsional,
+                'jwb_teks_rasa_percaya' => $item->jwb_teks_rasa_percaya,
+            ];
+        }        
+
+        return view('rasa_percaya_masy.edit', [
+            'subtitle'          => 'Rasa Percaya Antar Masyarakat',
+            'action'            => 'rasa-percaya-masyarakat/edit/' . $request->session()->get('id_responden'),
+            'pertanyaan'        => RasaPercaya::where('kateg_rasa_percaya', 1)->get(),
+            'jwb_rasa_percaya'  => $jwb_rasa_percaya,
+            'opsi'              => $opsi,
+            'prev_action'       => 'responden'
+        ]);
     }
 
     /**
@@ -130,9 +156,21 @@ class RasaPercayaMasyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_responden)
     {
-        //
+        foreach ($request->input('jawaban') as $id_jwb_rasa_percaya => $id_master_opsional) {
+            $jwb_rasa_percaya                     = JwbRasaPercaya::find($id_jwb_rasa_percaya);
+            $jwb_rasa_percaya->id_master_opsional = $id_master_opsional;
+            $jwb_rasa_percaya->save();
+        }
+        
+        foreach ($request->input('alasan') as $id_jwb_rasa_percaya => $jwb_teks_rasa_percaya) {
+            $jwb_rasa_percaya                       = JwbRasaPercaya::find($id_jwb_rasa_percaya);
+            $jwb_rasa_percaya->jwb_teks_rasa_percaya = $jwb_teks_rasa_percaya;
+            $jwb_rasa_percaya->save();
+        }
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**
@@ -141,8 +179,11 @@ class RasaPercayaMasyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        echo "ID: " . $id;
+        JwbRasaPercaya::where('id_responden', $id)->where('kateg_rasa_percaya', 1)->delete();
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }
