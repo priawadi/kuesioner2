@@ -112,9 +112,46 @@ class PartisipasiOrgController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+
+        $master_opsional = MasterOpsional::all();
+
+        $opsi = [];
+        foreach ($master_opsional as $item) {
+            $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
+        }
+
+        /**
+         * $jwb_partisipasi = [ 
+         *     id_pertanyaan => [
+         *         'id_jwb_partisipasi' =>, 
+         *         'id_master_opsional' =>,
+         *         'jwb_teks_pertanyaan' =>
+         *     ]
+         * ]
+         */
+        $result = JwbPartisipasi::where('kateg_partisipasi', 2)->where('id_responden', $request->session()->get('id_responden'))->get();
+        $jwb_partisipasi = [];
+        foreach ($result as $idx => $item) {
+            $jwb_partisipasi[$item->id_partisipasi] = [
+                'id_jwb_partisipasi'   => $item->id_jwb_partisipasi,
+                'id_master_opsional'   => $item->id_master_opsional,
+                'jwb_teks_partisipasi' => $item->jwb_teks_partisipasi,
+            ];
+        }
+
+
+        return view('partisipasi_org.edit', [
+            'subtitle'        => 'Partisipasi Organisasi',
+            'action'          => 'partisipasi-organisasi/edit/' . $request->session()->get('id_responden'),
+            'pertanyaan'      => Partisipasi::where('kateg_partisipasi', 2)->get(),
+            'jwb_partisipasi' => $jwb_partisipasi,
+            'opsi'            => $opsi,
+            'prev_action'     => 'responden'
+        ]);
     }
 
     /**
@@ -126,7 +163,13 @@ class PartisipasiOrgController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        foreach ($request->input('jawaban') as $id_jwb_partisipasi => $id_master_opsional) {
+            $jwb_partisipasi                     = JwbPartisipasi::find($id_jwb_partisipasi);
+            $jwb_partisipasi->id_master_opsional = $id_master_opsional;
+            $jwb_partisipasi->save();
+        }
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**

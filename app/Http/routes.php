@@ -40,6 +40,9 @@ Route::get('/partisipasi-sosial/hapus/{id_responden}', 'PartisipasiSosialControl
 Route::get('/partisipasi-organisasi', 'PartisipasiOrgController@index');
 Route::get('/partisipasi-organisasi/tambah', 'PartisipasiOrgController@create');
 Route::post('/partisipasi-organisasi/tambah', 'PartisipasiOrgController@store');
+Route::get('/partisipasi-organisasi/edit/{id_responden}', 'PartisipasiOrgController@edit');
+Route::patch('/partisipasi-organisasi/edit/{id_responden}', 'PartisipasiOrgController@update');
+Route::get('/partisipasi-organisasi/hapus/{id_responden}', 'PartisipasiOrgController@destroy');
 
 // Partisipasi Politik
 Route::get('/partisipasi-politik', 'PartisipasiPolitikController@index');
