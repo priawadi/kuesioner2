@@ -48,6 +48,9 @@ Route::get('/partisipasi-organisasi/hapus/{id_responden}', 'PartisipasiOrgContro
 Route::get('/partisipasi-politik', 'PartisipasiPolitikController@index');
 Route::get('/partisipasi-politik/tambah', 'PartisipasiPolitikController@create');
 Route::post('/partisipasi-politik/tambah', 'PartisipasiPolitikController@store');
+Route::get('/partisipasi-politik/edit/{id_responden}', 'PartisipasiPolitikController@edit');
+Route::patch('/partisipasi-politik/edit/{id_responden}', 'PartisipasiPolitikController@update');
+Route::get('/partisipasi-politik/hapus/{id_responden}', 'PartisipasiPolitikController@destroy');
 
 // Rasa Percaya Masyarakat
 Route::get('/rasa-percaya-masyarakat', 'RasaPercayaMasyController@index');
