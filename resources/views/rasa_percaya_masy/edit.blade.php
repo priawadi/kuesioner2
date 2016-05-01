@@ -36,23 +36,25 @@
                                 @endif
                             </td>
                             <td>
-                                @foreach ($opsi[$item->id_master_opsional] as $id_opsional => $opsional)
-                                <div class="radio">
-                                    <label>
-                                        {{
-                                            Form::radio(
-                                                'jawaban[' . $jwb_rasa_percaya[$item->id_rasa_percaya]['id_jwb_rasa_percaya'] . ']',
-                                                $id_opsional,
-                                                $id_opsional == $jwb_rasa_percaya[$item->id_rasa_percaya]['id_master_opsional'],
-                                                [
-                                                    'class' => 'control-label'
-                                                ]
-                                            )
-                                        }} 
-                                        {{$opsional}}
-                                    </label>
-                                </div>
-                                @endforeach
+                                @if ($item->id_master_opsional)
+                                    @foreach ($opsi[$item->id_master_opsional] as $id_opsional => $opsional)
+                                    <div class="radio">
+                                        <label>
+                                            {{
+                                                Form::radio(
+                                                    'jawaban[' . $jwb_rasa_percaya[$item->id_rasa_percaya]['id_jwb_rasa_percaya'] . ']',
+                                                    $id_opsional,
+                                                    $id_opsional == $jwb_rasa_percaya[$item->id_rasa_percaya]['id_master_opsional'],
+                                                    [
+                                                        'class' => 'control-label'
+                                                    ]
+                                                )
+                                            }} 
+                                            {{$opsional}}
+                                        </label>
+                                    </div>
+                                    @endforeach
+                                @endif
                             </td>
                         </tr>
                         @endforeach
