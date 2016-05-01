@@ -32,6 +32,8 @@ Route::get('/responden/lihat/{id_responden}', 'RespondenController@detail');
 Route::get('/partisipasi-sosial', 'PartisipasiSosialController@index');
 Route::get('/partisipasi-sosial/tambah', 'PartisipasiSosialController@create');
 Route::post('/partisipasi-sosial/tambah', 'PartisipasiSosialController@store');
+Route::get('/partisipasi-sosial/edit/{id_responden}', 'PartisipasiSosialController@edit');
+Route::patch('/partisipasi-sosial/edit/{id_responden}', 'PartisipasiSosialController@update');
 Route::get('/partisipasi-sosial/hapus/{id_responden}', 'PartisipasiSosialController@destroy');
 
 // Partisipasi Organisasi

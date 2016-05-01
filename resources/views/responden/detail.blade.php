@@ -73,6 +73,7 @@
                                     <center>
                                         @if ($item['is_done'])
                                             <a class="btn btn-danger btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Hapus</a>
+                                            <a class="btn btn-success btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Edit</a>
                                         @else
                                             <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
                                         @endif
@@ -106,6 +107,7 @@
                                     <center>
                                         @if ($item['is_done'])
                                             <a class="btn btn-danger btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Hapus</a>
+                                            <a class="btn btn-success btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Edit</a>
                                         @else
                                             <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
                                         @endif
@@ -139,6 +141,7 @@
                                     <center>
                                         @if ($item['is_done'])
                                             <a class="btn btn-danger btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Hapus</a>
+                                            <a class="btn btn-success btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Edit</a>
                                         @else
                                             <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
                                         @endif
@@ -172,6 +175,7 @@
                                         <center>
                                             @if ($item['is_done'])
                                                 <a class="btn btn-danger btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Hapus</a>
+                                                <a class="btn btn-success btn-sm" href="{{url($item['link'])}}/edit/{{$responden['id_responden']}}">Edit</a>
                                             @else
                                                 <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
                                             @endif
