@@ -24,7 +24,7 @@
                                 Alasan:                             
                                 {{
                                     Form::textarea(
-                                        'alasan[' . $item->id_partisipasi . ']', 
+                                        'alasan[' . $jwb_partisipasi[$item->id_partisipasi]['id_jwb_partisipasi'] . ']', 
                                         $jwb_partisipasi[$item->id_partisipasi]['jwb_teks_partisipasi'], 
                                         [
                                             'class'       => 'form-control col-sm-6',
@@ -41,7 +41,7 @@
                                     <label>
                                         {{
                                             Form::radio(
-                                                'jawaban[' . $item->id_partisipasi . ']',
+                                                'jawaban[' . $jwb_partisipasi[$item->id_partisipasi]['id_jwb_partisipasi'] . ']',
                                                 $id_opsional,
                                                 $id_opsional == $jwb_partisipasi[$item->id_partisipasi]['id_master_opsional'],
                                                 [

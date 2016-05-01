@@ -165,14 +165,14 @@ class PartisipasiSosialController extends Controller
      */
     public function update(Request $request, $id_responden)
     {
-        foreach ($request->input('jawaban') as $id_partisipasi => $id_master_opsional) {
-            $jwb_partisipasi                     = JwbPartisipasi::where('id_partisipasi', $id_partisipasi)->first();
+        foreach ($request->input('jawaban') as $id_jwb_partisipasi => $id_master_opsional) {
+            $jwb_partisipasi                     = JwbPartisipasi::find($id_jwb_partisipasi);
             $jwb_partisipasi->id_master_opsional = $id_master_opsional;
             $jwb_partisipasi->save();
         }
         
-        foreach ($request->input('alasan') as $id_partisipasi => $jwb_teks_partisipasi) {
-            $jwb_partisipasi                       = JwbPartisipasi::where('id_partisipasi', $id_partisipasi)->first();
+        foreach ($request->input('alasan') as $id_jwb_partisipasi => $jwb_teks_partisipasi) {
+            $jwb_partisipasi                       = JwbPartisipasi::find($id_jwb_partisipasi);
             $jwb_partisipasi->jwb_teks_partisipasi = $jwb_teks_partisipasi;
             $jwb_partisipasi->save();
         }
