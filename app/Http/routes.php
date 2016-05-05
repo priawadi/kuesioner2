@@ -73,6 +73,9 @@ Route::get('/rasa-percaya-organisasi/hapus/{id_responden}', 'RasaPercayaOrgContr
 Route::get('/rasa-percaya-politik', 'RasaPercayaPolController@index');
 Route::get('/rasa-percaya-politik/tambah', 'RasaPercayaPolController@create');
 Route::post('/rasa-percaya-politik/tambah', 'RasaPercayaPolController@store');
+Route::get('/rasa-percaya-politik/edit/{id_responden}', 'RasaPercayaPolController@edit');
+Route::patch('/rasa-percaya-politik/edit/{id_responden}', 'RasaPercayaPolController@update');
+Route::get('/rasa-percaya-politik/hapus/{id_responden}', 'RasaPercayaPolController@destroy');
 
 // Nilai dan norma
 Route::get('/nilai-norma', 'NilaiNormaController@index');

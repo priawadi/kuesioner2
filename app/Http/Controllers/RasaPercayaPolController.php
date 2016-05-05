@@ -101,7 +101,7 @@ class RasaPercayaPolController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -110,9 +110,38 @@ class RasaPercayaPolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+        
+        $master_opsional = MasterOpsional::all();
+
+        $opsi = [];
+        foreach ($master_opsional as $item) {
+            $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
+        }
+
+        $result = JwbRasaPercaya::where('kateg_rasa_percaya', 3)->where('id_responden', $request->session()->get('id_responden'))->get();
+
+        $jwb_rasa_percaya = [];
+        foreach ($result as $idx => $item) {
+            $jwb_rasa_percaya[$item->id_rasa_percaya] = [
+                'id_jwb_rasa_percaya'   => $item->id_jwb_rasa_percaya,
+                'id_master_opsional'    => $item->id_master_opsional,
+                'jwb_teks_rasa_percaya' => $item->jwb_teks_rasa_percaya,
+            ];
+        }        
+
+        return view('rasa_percaya_pol.edit', [
+            'subtitle'         => 'Rasa Percaya Organisasi',
+            'action'           => 'rasa-percaya-organisasi/edit/' . $request->session()->get('id_responden'),
+            'pertanyaan'       => RasaPercaya::where('kateg_rasa_percaya', 3)->get(),
+            'jwb_rasa_percaya' => $jwb_rasa_percaya,
+            'opsi'             => $opsi,
+            'prev_action'      => 'responden',
+            'nomor'            => 1
+        ]);
     }
 
     /**
@@ -124,7 +153,19 @@ class RasaPercayaPolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        foreach ($request->input('jawaban') as $id_jwb_rasa_percaya => $id_master_opsional) {
+            $jwb_rasa_percaya                     = JwbRasaPercaya::find($id_jwb_rasa_percaya);
+            $jwb_rasa_percaya->id_master_opsional = $id_master_opsional;
+            $jwb_rasa_percaya->save();
+        }
+        
+        foreach ($request->input('alasan') as $id_jwb_rasa_percaya => $jwb_teks_rasa_percaya) {
+            $jwb_rasa_percaya                        = JwbRasaPercaya::find($id_jwb_rasa_percaya);
+            $jwb_rasa_percaya->jwb_teks_rasa_percaya = $jwb_teks_rasa_percaya;
+            $jwb_rasa_percaya->save();
+        }
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**
