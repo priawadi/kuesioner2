@@ -65,6 +65,9 @@ Route::get('/rasa-percaya-masyarakat/hapus/{id_responden}', 'RasaPercayaMasyCont
 Route::get('/rasa-percaya-organisasi', 'RasaPercayaOrgController@index');
 Route::get('/rasa-percaya-organisasi/tambah', 'RasaPercayaOrgController@create');
 Route::post('/rasa-percaya-organisasi/tambah', 'RasaPercayaOrgController@store');
+Route::get('/rasa-percaya-organisasi/edit/{id_responden}', 'RasaPercayaOrgController@edit');
+Route::patch('/rasa-percaya-organisasi/edit/{id_responden}', 'RasaPercayaOrgController@update');
+Route::get('/rasa-percaya-organisasi/hapus/{id_responden}', 'RasaPercayaOrgController@destroy');
 
 // Rasa Percaya Politik
 Route::get('/rasa-percaya-politik', 'RasaPercayaPolController@index');
