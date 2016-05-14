@@ -80,11 +80,11 @@ class NilaiNormaController extends Controller
 
         // Save jawaban into database
         $jawaban = $request->get('jawaban');
-        $alasan  = $request->get('alasan');
         foreach($pertanyaan as $key => $item)
         {
             $jwb_nilai_norma                     = new JwbNilaiNorma;
-            $jwb_nilai_norma->id_master_opsional = isset($jawaban[$item->id_nilai_norma])? $jawaban[$item->id_nilai_norma]: null;
+            $jwb_nilai_norma->id_master_opsional = $request->input('jawaban.' . $item->id_nilai_norma, null);
+            // $jwb_nilai_norma->id_master_opsional = isset($jawaban[$item->id_nilai_norma])? $jawaban[$item->id_nilai_norma]: null;
             $jwb_nilai_norma->id_responden       = $request->session()->get('id_responden');
             $jwb_nilai_norma->id_nilai_norma     = $item->id_nilai_norma;
 
@@ -111,9 +111,46 @@ class NilaiNormaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+
+        $master_opsional = MasterOpsional::all();
+
+        $opsi = [];
+        foreach ($master_opsional as $item) {
+            $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
+        }
+
+        /**
+         * $jwb_partisipasi = [ 
+         *     id_pertanyaan => [
+         *         'id_jwb_partisipasi' =>, 
+         *         'id_master_opsional' =>,
+         *         'jwb_teks_pertanyaan' =>
+         *     ]
+         * ]
+         */
+        $result = JwbNilaiNorma::where('id_responden', $request->session()->get('id_responden'))->get();
+        $jwb_nilai_norma = [];
+        foreach ($result as $idx => $item) {
+            $jwb_nilai_norma[$item->id_partisipasi] = [
+                'id_jwb_nilai_norma'   => $item->id_jwb_nilai_norma,
+                'id_master_opsional'   => $item->id_master_opsional,
+                'jwb_teks_partisipasi' => $item->jwb_teks_partisipasi,
+            ];
+        }
+
+
+        return view('nilai_norma.edit', [
+            'subtitle'        => 'Nilai dan Norma',
+            'action'          => 'nilai-norma/edit/' . $request->session()->get('id_responden'),
+            'pertanyaan'      => NilaiNorma::get(),
+            'jwb_nilai_norma' => $jwb_nilai_norma,
+            'opsi'            => $opsi,
+            'prev_action'     => 'responden'
+        ]);
     }
 
     /**

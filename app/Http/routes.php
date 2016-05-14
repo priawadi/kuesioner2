@@ -81,6 +81,9 @@ Route::get('/rasa-percaya-politik/hapus/{id_responden}', 'RasaPercayaPolControll
 Route::get('/nilai-norma', 'NilaiNormaController@index');
 Route::get('/nilai-norma/tambah', 'NilaiNormaController@create');
 Route::post('/nilai-norma/tambah', 'NilaiNormaController@store');
+Route::get('/nilai-norma/edit/{id_responden}', 'NilaiNormaController@edit');
+Route::patch('/nilai-norma/edit/{id_responden}', 'NilaiNormaController@update');
+Route::get('/nilai-norma/hapus/{id_responden}', 'NilaiNormaController@destroy');
 
 // Karakteristik Rumah Tangga
 Route::get('/karakteristik-rumah-tangga', 'KarRumahTanggaController@index');
