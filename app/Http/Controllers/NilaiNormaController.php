@@ -8,6 +8,7 @@ use App\JwbNilaiNorma;
 use App\MasterOpsional;
 use App\Http\Requests;
 use Validator;
+use Session;
 
 class NilaiNormaController extends Controller
 {
@@ -57,34 +58,12 @@ class NilaiNormaController extends Controller
     {
         $pertanyaan = NilaiNorma::select('id_nilai_norma', 'is_reason')->get();
 
-        // // Get ids of pertanyaan
-        // foreach($pertanyaan as $key => $item)
-        // {
-        //     $rules['jawaban.' . $item->id_nilai_norma] = 'required';
-
-        //     // validate reason
-        //     if ($item->is_reason)
-        //     {
-        //         $rules['alasan.' . $item->id_nilai_norma] = 'required|max:500';
-        //     }
-        // }
-        
-        // // Validate input
-        // $validator = Validator::make($request->all(), $rules);
-
-        // if ($validator->fails()) {
-        //     return redirect('nilai-norma/tambah')
-        //                 ->withErrors($validator)
-        //                 ->withInput();
-        // }
-
         // Save jawaban into database
         $jawaban = $request->get('jawaban');
         foreach($pertanyaan as $key => $item)
         {
             $jwb_nilai_norma                     = new JwbNilaiNorma;
             $jwb_nilai_norma->id_master_opsional = $request->input('jawaban.' . $item->id_nilai_norma, null);
-            // $jwb_nilai_norma->id_master_opsional = isset($jawaban[$item->id_nilai_norma])? $jawaban[$item->id_nilai_norma]: null;
             $jwb_nilai_norma->id_responden       = $request->session()->get('id_responden');
             $jwb_nilai_norma->id_nilai_norma     = $item->id_nilai_norma;
 
@@ -135,7 +114,7 @@ class NilaiNormaController extends Controller
         $result = JwbNilaiNorma::where('id_responden', $request->session()->get('id_responden'))->get();
         $jwb_nilai_norma = [];
         foreach ($result as $idx => $item) {
-            $jwb_nilai_norma[$item->id_partisipasi] = [
+            $jwb_nilai_norma[$item->id_nilai_norma] = [
                 'id_jwb_nilai_norma'   => $item->id_jwb_nilai_norma,
                 'id_master_opsional'   => $item->id_master_opsional,
                 'jwb_teks_partisipasi' => $item->jwb_teks_partisipasi,
@@ -146,7 +125,7 @@ class NilaiNormaController extends Controller
         return view('nilai_norma.edit', [
             'subtitle'        => 'Nilai dan Norma',
             'action'          => 'nilai-norma/edit/' . $request->session()->get('id_responden'),
-            'pertanyaan'      => NilaiNorma::get(),
+            'pertanyaan'      => NilaiNorma::all(),
             'jwb_nilai_norma' => $jwb_nilai_norma,
             'opsi'            => $opsi,
             'prev_action'     => 'responden'
@@ -162,7 +141,14 @@ class NilaiNormaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        foreach ($request->input('jawaban') as $id_jwb_nilai_norma => $value) {
+            $jwb_nilai_norma                     = JwbNilaiNorma::find($id_jwb_nilai_norma);
+            $jwb_nilai_norma->id_master_opsional = $request->input('jawaban.' . $id_jwb_nilai_norma, null);
+
+            $jwb_nilai_norma->save();
+        }
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**
@@ -171,8 +157,11 @@ class NilaiNormaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        
+        JwbNilaiNorma::where('id_responden', $id)->delete();
+        Session::flash('message', 'Berhasil menghapus data.');
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }

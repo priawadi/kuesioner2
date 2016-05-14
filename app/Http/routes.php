@@ -34,7 +34,7 @@ Route::get('/partisipasi-sosial/tambah', 'PartisipasiSosialController@create');
 Route::post('/partisipasi-sosial/tambah', 'PartisipasiSosialController@store');
 Route::get('/partisipasi-sosial/edit/{id_responden}', 'PartisipasiSosialController@edit');
 Route::patch('/partisipasi-sosial/edit/{id_responden}', 'PartisipasiSosialController@update');
-Route::get('/partisipasi-sosial/hapus/{id_responden}', 'PartisipasiSosialController@destroy');
+Route::delete('/partisipasi-sosial/hapus/{id_responden}', 'PartisipasiSosialController@destroy');
 
 // Partisipasi Organisasi
 Route::get('/partisipasi-organisasi', 'PartisipasiOrgController@index');
@@ -42,7 +42,7 @@ Route::get('/partisipasi-organisasi/tambah', 'PartisipasiOrgController@create');
 Route::post('/partisipasi-organisasi/tambah', 'PartisipasiOrgController@store');
 Route::get('/partisipasi-organisasi/edit/{id_responden}', 'PartisipasiOrgController@edit');
 Route::patch('/partisipasi-organisasi/edit/{id_responden}', 'PartisipasiOrgController@update');
-Route::get('/partisipasi-organisasi/hapus/{id_responden}', 'PartisipasiOrgController@destroy');
+Route::delete('/partisipasi-organisasi/hapus/{id_responden}', 'PartisipasiOrgController@destroy');
 
 // Partisipasi Politik
 Route::get('/partisipasi-politik', 'PartisipasiPolitikController@index');
@@ -50,7 +50,7 @@ Route::get('/partisipasi-politik/tambah', 'PartisipasiPolitikController@create')
 Route::post('/partisipasi-politik/tambah', 'PartisipasiPolitikController@store');
 Route::get('/partisipasi-politik/edit/{id_responden}', 'PartisipasiPolitikController@edit');
 Route::patch('/partisipasi-politik/edit/{id_responden}', 'PartisipasiPolitikController@update');
-Route::get('/partisipasi-politik/hapus/{id_responden}', 'PartisipasiPolitikController@destroy');
+Route::delete('/partisipasi-politik/hapus/{id_responden}', 'PartisipasiPolitikController@destroy');
 
 // Rasa Percaya Masyarakat
 Route::get('/rasa-percaya-masyarakat', 'RasaPercayaMasyController@index');
@@ -58,7 +58,7 @@ Route::get('/rasa-percaya-masyarakat/tambah', 'RasaPercayaMasyController@create'
 Route::post('/rasa-percaya-masyarakat/tambah', 'RasaPercayaMasyController@store');
 Route::get('/rasa-percaya-masyarakat/edit/{id_responden}', 'RasaPercayaMasyController@edit');
 Route::patch('/rasa-percaya-masyarakat/edit/{id_responden}', 'RasaPercayaMasyController@update');
-Route::get('/rasa-percaya-masyarakat/hapus/{id_responden}', 'RasaPercayaMasyController@destroy');
+Route::delete('/rasa-percaya-masyarakat/hapus/{id_responden}', 'RasaPercayaMasyController@destroy');
 
 
 // Rasa Percaya Organisasi Sosial
@@ -67,7 +67,7 @@ Route::get('/rasa-percaya-organisasi/tambah', 'RasaPercayaOrgController@create')
 Route::post('/rasa-percaya-organisasi/tambah', 'RasaPercayaOrgController@store');
 Route::get('/rasa-percaya-organisasi/edit/{id_responden}', 'RasaPercayaOrgController@edit');
 Route::patch('/rasa-percaya-organisasi/edit/{id_responden}', 'RasaPercayaOrgController@update');
-Route::get('/rasa-percaya-organisasi/hapus/{id_responden}', 'RasaPercayaOrgController@destroy');
+Route::delete('/rasa-percaya-organisasi/hapus/{id_responden}', 'RasaPercayaOrgController@destroy');
 
 // Rasa Percaya Politik
 Route::get('/rasa-percaya-politik', 'RasaPercayaPolController@index');
@@ -75,7 +75,7 @@ Route::get('/rasa-percaya-politik/tambah', 'RasaPercayaPolController@create');
 Route::post('/rasa-percaya-politik/tambah', 'RasaPercayaPolController@store');
 Route::get('/rasa-percaya-politik/edit/{id_responden}', 'RasaPercayaPolController@edit');
 Route::patch('/rasa-percaya-politik/edit/{id_responden}', 'RasaPercayaPolController@update');
-Route::get('/rasa-percaya-politik/hapus/{id_responden}', 'RasaPercayaPolController@destroy');
+Route::delete('/rasa-percaya-politik/hapus/{id_responden}', 'RasaPercayaPolController@destroy');
 
 // Nilai dan norma
 Route::get('/nilai-norma', 'NilaiNormaController@index');
@@ -83,7 +83,7 @@ Route::get('/nilai-norma/tambah', 'NilaiNormaController@create');
 Route::post('/nilai-norma/tambah', 'NilaiNormaController@store');
 Route::get('/nilai-norma/edit/{id_responden}', 'NilaiNormaController@edit');
 Route::patch('/nilai-norma/edit/{id_responden}', 'NilaiNormaController@update');
-Route::get('/nilai-norma/hapus/{id_responden}', 'NilaiNormaController@destroy');
+Route::delete('/nilai-norma/hapus/{id_responden}', 'NilaiNormaController@destroy');
 
 // Karakteristik Rumah Tangga
 Route::get('/karakteristik-rumah-tangga', 'KarRumahTanggaController@index');

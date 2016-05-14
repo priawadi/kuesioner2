@@ -18,7 +18,7 @@
                         <tr>
                             <td>{{$item->id_nilai_norma}}.</td>
                             <td>
-                                {{$item->pertanyaan_partisipasi}}
+                                {{$item->pertanyaan_nilai_norma}}
                                 @if ($item->is_reason)
                                 <br>
                                 Alasan:                             
