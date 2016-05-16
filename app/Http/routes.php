@@ -100,6 +100,10 @@ Route::delete('/karakteristik-rumah-tangga/hapus/{id_responden}', 'KarRumahTangg
 Route::get('/jenis-pekerjaan-rumah-tangga', 'JenisPekerjaanRumahTgController@index');
 Route::get('/jenis-pekerjaan-rumah-tangga/tambah', 'JenisPekerjaanRumahTgController@create');
 Route::post('/jenis-pekerjaan-rumah-tangga/tambah', 'JenisPekerjaanRumahTgController@store');
+Route::get('/jenis-pekerjaan-rumah-tangga/edit/{id_responden}', 'JenisPekerjaanRumahTgController@edit');
+Route::patch('/jenis-pekerjaan-rumah-tangga/edit/{id_responden}', 'JenisPekerjaanRumahTgController@update');
+Route::delete('/jenis-pekerjaan-rumah-tangga/hapus/{id_responden}', 'JenisPekerjaanRumahTgController@destroy');
+
 
 // Aset Rumah Tangga
 Route::get('/aset-rumah-tangga', 'AsetRumahTanggaController@index');

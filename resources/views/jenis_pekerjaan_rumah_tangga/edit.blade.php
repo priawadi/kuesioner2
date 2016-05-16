@@ -40,15 +40,15 @@
                             <th>Jenis Pekerjaan</th>
                             <th>Jumlah Pendapatan (Rp/Tahun)</th>
                         </tr>
-                        @for ($id = 1; $id <= $jml_isian; $id++)
+                        @foreach ($pekerjaan_anggota as $index => $item)
                         <tr>
-                            <td>{{$id}}</td>
+                            <td>{{$index + 1}}</td>
                             <td>
                                 <div class="form-group">
                                     {{  
                                         Form::text(
-                                            'nama[' . $id . ']', 
-                                            '', 
+                                            'nama[' . $item['id_jenis_pekerjaan_rumahtg'] . ']', 
+                                            $item['nama'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'Nama anggota keluarga'
@@ -60,9 +60,9 @@
                             <td>
                                 {{
                                     Form::select(
-                                        'status_keluarga[' . $id . ']', 
+                                        'status_keluarga[' . $item['id_jenis_pekerjaan_rumahtg'] . ']', 
                                         $status_keluarga, 
-                                        null, 
+                                        $item['status_keluarga'], 
                                         [
                                             'class' => 'form-control',
                                             'placeholder' => 'Pilih'
@@ -72,8 +72,8 @@
                                 <br>
                                 {{  
                                     Form::text(
-                                        'status_keluarga_lain[' . $id . ']', 
-                                        '', 
+                                        'status_keluarga_lain[' . $item['id_jenis_pekerjaan_rumahtg'] . ']', 
+                                        $item['status_keluarga_lain'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'Sebutkan'
@@ -84,9 +84,9 @@
                             <td>
                                 {{
                                     Form::select(
-                                        'jenis_pekerjaan1[' . $id . ']', 
+                                        'jenis_pekerjaan1[' . $item['id_jenis_pekerjaan_rumahtg'] . ']', 
                                         $jenis_pekerjaan, 
-                                        null, 
+                                        $item['jenis_pekerjaan1'], 
                                         [
                                             'class' => 'form-control',
                                             'placeholder' => 'Pilih'
@@ -98,8 +98,8 @@
                                 <div class="form-group">
                                     {{  
                                         Form::text(
-                                            'pendapatan1[' . $id . ']', 
-                                            '', 
+                                            'pendapatan1[' . $item['id_jenis_pekerjaan_rumahtg'] . ']', 
+                                            $item['pendapatan1'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'Rp/Tahun'
@@ -111,9 +111,9 @@
                             <td>
                                 {{
                                     Form::select(
-                                        'jenis_pekerjaan2[' . $id . ']', 
+                                        'jenis_pekerjaan2[' . $item['id_jenis_pekerjaan_rumahtg'] . ']', 
                                         $jenis_pekerjaan, 
-                                        null, 
+                                        $item['jenis_pekerjaan2'], 
                                         [
                                             'class' => 'form-control',
                                             'placeholder' => 'Pilih'
@@ -125,8 +125,8 @@
                                 <div class="form-group">
                                     {{  
                                         Form::text(
-                                            'pendapatan2[' . $id . ']', 
-                                            '', 
+                                            'pendapatan2[' . $item['id_jenis_pekerjaan_rumahtg'] . ']', 
+                                            $item['pendapatan2'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'Rp/Tahun'
@@ -138,9 +138,9 @@
                             <td>
                                 {{
                                     Form::select(
-                                        'jenis_pekerjaan3[' . $id . ']', 
+                                        'jenis_pekerjaan3[' . $item['id_jenis_pekerjaan_rumahtg'] . ']', 
                                         $jenis_pekerjaan, 
-                                        null, 
+                                        $item['jenis_pekerjaan3'], 
                                         [
                                             'class' => 'form-control',
                                             'placeholder' => 'Pilih'
@@ -152,8 +152,8 @@
                                 <div class="form-group">
                                     {{  
                                         Form::text(
-                                            'pendapatan3[' . $id . ']', 
-                                            '', 
+                                            'pendapatan3[' . $item['id_jenis_pekerjaan_rumahtg'] . ']', 
+                                            $item['pendapatan3'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'Rp/Tahun'
@@ -163,7 +163,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endfor
+                        @endforeach
                     </table>
                     @include('components.form.prev_next_btn')
                 {{ Form::close() }}

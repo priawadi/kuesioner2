@@ -219,7 +219,6 @@ class KarRumahTanggaController extends Controller
             
             $kar_rumahtangga->jenis_kelamin          = $request->input('jenis_kelamin.' . $id_kar_rumah_tangga, null);
             $kar_rumahtangga->umur                   = $request->input('umur.' . $id_kar_rumah_tangga, null);
-            $kar_rumahtangga->id_responden           = $request->session()->get('id_responden');
             $kar_rumahtangga->lama_pendidikan_formal = $request->input('lama_pendidikan_formal.' . $id_kar_rumah_tangga, null);
             $kar_rumahtangga->jenis_pelatihan        = $request->input('jenis_pelatihan.' . $id_kar_rumah_tangga, null);
             $kar_rumahtangga->waktu_pelaksanaan      = $request->input('waktu_pelaksanaan.' . $id_kar_rumah_tangga, null);

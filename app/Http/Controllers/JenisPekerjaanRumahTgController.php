@@ -11,6 +11,13 @@ use Validator;
 
 class JenisPekerjaanRumahTgController extends Controller
 {
+    var $status_keluarga = [
+        1 => 'Kepala Keluarga', 
+        2 => 'Istri', 
+        3 => 'Anak', 
+        4 => 'Anggota Rumah Tangga Lainnya'
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -38,11 +45,12 @@ class JenisPekerjaanRumahTgController extends Controller
         }
 
         return view('jenis_pekerjaan_rumah_tangga.form', [
-            'subtitle'         => 'Jenis Pekerjaan Rumah Tangga',
-            'action'           => 'jenis-pekerjaan-rumah-tangga/tambah',
-            'status_keluarga'  => [ 1 => 'Kepala Keluarga', 2 => 'Istri', 3 => 'Anak', 4 => 'Anggota Rumah Tangga Lainnya (Sebutkan)'],
-            'jml_isian'        => 8,
-            'jenis_pekerjaan'  => $jenis_pekerjaan
+            'subtitle'        => 'Jenis Pekerjaan Rumah Tangga',
+            'action'          => 'jenis-pekerjaan-rumah-tangga/tambah',
+            'method'          => 'post',
+            'status_keluarga' => $this->status_keluarga,
+            'jml_isian'       => 8,
+            'jenis_pekerjaan' => $jenis_pekerjaan
         ]);
     }
 
@@ -56,86 +64,31 @@ class JenisPekerjaanRumahTgController extends Controller
     {
         // Init
         $jml_isian = 8;
-        $rules     = [];
-
-        // Validate input if choose other option
-        for ($i = 1; $i <= $jml_isian; $i++)
-        {
-            
-            if ($request->get('nama')[$i])
-            {   
-                $rules['nama.' . $i]            = 'max:150';
-                $rules['status_keluarga.' . $i] = 'required';
-
-                // Validate if input status keluarga is Other
-                if ($request->get('status_keluarga')[$i] == 4)
-                {
-                    $rules['status_keluarga_lain.' . $i] = 'required|max:100';
-                }
-
-                $rules['jenis_pekerjaan1.' . $i] = 'required';
-
-                if ($request->get('jenis_pekerjaan1')[$i] == 17)
-                {
-                    $rules['jenis_pekerjaan_lain1.' . $i] = 'required|max:150';
-                }
-
-                $rules['pendapatan1.' . $i]      = 'required|numeric';
-
-                // Validate if input jenis pekerjaan2 is filled
-                if ($request->get('jenis_pekerjaan2')[$i])
-                {
-                    if ($request->get('jenis_pekerjaan2')[$i] == 17)
-                    {
-                        $rules['jenis_pekerjaan_lain2.' . $i] = 'required|max:150';
-                    }
-
-                    $rules['pendapatan2.' . $i] = 'required|numeric';
-                }
-
-                // Validate if input jenis pekerjaan2 is filled
-                if ($request->get('jenis_pekerjaan3')[$i])
-                {
-                    if ($request->get('jenis_pekerjaan3')[$i] == 17)
-                    {
-                        $rules['jenis_pekerjaan_lain3.' . $i] = 'required|max:150';
-                    }
-
-                    $rules['pendapatan3.' . $i] = 'required|numeric';
-                }
-            }
-        }
-        
-        // Validate input
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return redirect('jenis-pekerjaan-rumah-tangga/tambah')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
 
         // Save data
         for ($i = 1; $i <= $jml_isian; $i++)
         {
-            
             // Save karakteristik rumah tangga
             $jenis_pekerjaan_rumahtg                  = new JenisPekerjaanRumahTg;
-            $jenis_pekerjaan_rumahtg->nama            = $request->get('nama')[$i];
+            $jenis_pekerjaan_rumahtg->nama            = $request->input('nama.' . $i, null);
             $jenis_pekerjaan_rumahtg->id_responden    = $request->session()->get('id_responden');
-            $jenis_pekerjaan_rumahtg->status_keluarga = $request->get('status_keluarga')[$i];
+            $jenis_pekerjaan_rumahtg->status_keluarga = $request->input('status_keluarga.' . $i, null);
             
-            if ($request->get('status_keluarga')[$i] == 4)
+            if ($request->input('status_keluarga.' . $i) == 4)
             {
-                $jenis_pekerjaan_rumahtg->status_keluarga_lain = $request->get('status_keluarga_lain')[$i];
+                $jenis_pekerjaan_rumahtg->status_keluarga_lain = $request->input('status_keluarga_lain.' . $i, null);
+            }
+            else
+            {
+                $jenis_pekerjaan_rumahtg->status_keluarga_lain = null;   
             }
             
-            $jenis_pekerjaan_rumahtg->jenis_pekerjaan1 = $request->get('jenis_pekerjaan1')[$i];
-            $jenis_pekerjaan_rumahtg->pendapatan1      = $request->get('pendapatan1')[$i];
-            $jenis_pekerjaan_rumahtg->jenis_pekerjaan2 = $request->get('jenis_pekerjaan2')[$i];
-            $jenis_pekerjaan_rumahtg->pendapatan2      = $request->get('pendapatan2')[$i];
-            $jenis_pekerjaan_rumahtg->jenis_pekerjaan3 = $request->get('jenis_pekerjaan3')[$i];
-            $jenis_pekerjaan_rumahtg->pendapatan3      = $request->get('pendapatan3')[$i];
+            $jenis_pekerjaan_rumahtg->jenis_pekerjaan1 = $request->input('jenis_pekerjaan1.' . $i, null);
+            $jenis_pekerjaan_rumahtg->pendapatan1      = $request->input('pendapatan1.' . $i, null);
+            $jenis_pekerjaan_rumahtg->jenis_pekerjaan2 = $request->input('jenis_pekerjaan2.' . $i, null);
+            $jenis_pekerjaan_rumahtg->pendapatan2      = $request->input('pendapatan2.' . $i, null);
+            $jenis_pekerjaan_rumahtg->jenis_pekerjaan3 = $request->input('jenis_pekerjaan3.' . $i, null);
+            $jenis_pekerjaan_rumahtg->pendapatan3      = $request->input('pendapatan3.' . $i, null);
             
             $jenis_pekerjaan_rumahtg->save();
         }
@@ -160,9 +113,28 @@ class JenisPekerjaanRumahTgController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+        
+        // Init
+        $jenis_pekerjaan = [];
+        foreach (MasterJenisPekerjaan::all() as $key => $item) {
+            $jenis_pekerjaan[$item->id_master_jenis_pekerjaan] = $item->jenis_pekerjaan;
+        }
+
+        return view('jenis_pekerjaan_rumah_tangga.edit', [
+            'subtitle'        => 'Jenis Pekerjaan Rumah Tangga',
+            'action'          => 'jenis-pekerjaan-rumah-tangga/edit/' . $id,
+            'method'          => 'patch',
+            'status_keluarga' => $this->status_keluarga,
+            'jml_isian'       => 8,
+            'jenis_pekerjaan' => $jenis_pekerjaan,
+
+            // Data
+            'pekerjaan_anggota' => JenisPekerjaanRumahTg::where('id_responden', $id)->get(),
+        ]);
     }
 
     /**
@@ -174,7 +146,34 @@ class JenisPekerjaanRumahTgController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Save data
+        foreach ($request->input('nama') as $id_jenis_pekerjaan_rumahtg => $value)
+        {
+            // Save karakteristik rumah tangga
+            $jenis_pekerjaan_rumahtg                  = JenisPekerjaanRumahTg::find($id_jenis_pekerjaan_rumahtg);
+            $jenis_pekerjaan_rumahtg->nama            = $request->input('nama.' . $id_jenis_pekerjaan_rumahtg, null);
+            $jenis_pekerjaan_rumahtg->status_keluarga = $request->input('status_keluarga.' . $id_jenis_pekerjaan_rumahtg, null);
+            
+            if ($request->input('status_keluarga.' . $id_jenis_pekerjaan_rumahtg) == 4)
+            {
+                $jenis_pekerjaan_rumahtg->status_keluarga_lain = $request->input('status_keluarga_lain.' . $id_jenis_pekerjaan_rumahtg, null);
+            } 
+            else 
+            {
+                $jenis_pekerjaan_rumahtg->status_keluarga_lain = null;  
+            }
+            
+            $jenis_pekerjaan_rumahtg->jenis_pekerjaan1 = $request->input('jenis_pekerjaan1.' . $id_jenis_pekerjaan_rumahtg, null);
+            $jenis_pekerjaan_rumahtg->pendapatan1      = $request->input('pendapatan1.' . $id_jenis_pekerjaan_rumahtg, null);
+            $jenis_pekerjaan_rumahtg->jenis_pekerjaan2 = $request->input('jenis_pekerjaan2.' . $id_jenis_pekerjaan_rumahtg, null);
+            $jenis_pekerjaan_rumahtg->pendapatan2      = $request->input('pendapatan2.' . $id_jenis_pekerjaan_rumahtg, null);
+            $jenis_pekerjaan_rumahtg->jenis_pekerjaan3 = $request->input('jenis_pekerjaan3.' . $id_jenis_pekerjaan_rumahtg, null);
+            $jenis_pekerjaan_rumahtg->pendapatan3      = $request->input('pendapatan3.' . $id_jenis_pekerjaan_rumahtg, null);
+            
+            $jenis_pekerjaan_rumahtg->save();
+        }
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**
@@ -183,8 +182,9 @@ class JenisPekerjaanRumahTgController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        JenisPekerjaanRumahTg::where('id_responden', $id)->delete();
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }
