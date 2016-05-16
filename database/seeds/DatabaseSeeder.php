@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RasaPercayaOrgSeeder::class);
         $this->call(RasaPercayaPolSeeder::class);
         $this->call(MasterPlagisBesarSeeder::class);
-        $this->call(PendidikanFormalSeeder::class);
         $this->call(MasterBiayaVariabelSeeder::class);
         $this->call(MasterDemersalSeeder::class);
         $this->call(MasterJenisAlatTangkapSeeder::class);

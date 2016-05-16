@@ -170,6 +170,11 @@ class RespondenController extends Controller
      */
     public function detail(Request $request, $id_responden)
     {
+        if (!Responden::where('id_responden', $id_responden)->count())
+        {
+            return redirect('responden');
+        }
+
         // Save id responden in session
         $request->session()->put('id_responden', $id_responden);
         $kuesioner = [];
@@ -305,6 +310,7 @@ class RespondenController extends Controller
             ],
         ];
         return view('responden.detail', [
+            'subtitle'   => 'Detil Responden',
             'responden'  => Responden::find($id_responden),
             'kuesioner'  => $kuesioner,
             'enumerator' => Enumerator::where('id_responden', $request->session()->get('id_responden'))->get(),

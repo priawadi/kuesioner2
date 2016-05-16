@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{$subtitle}}
+@endsection
+
 @section('content')
 <script type="text/javascript">
     function show_modal(url, kuesioner)
@@ -108,7 +112,7 @@
                                     <center>
                                         @if ($item['is_done'])
                                             <button type="button" onclick="show_modal('{{url($item['link'])}}/hapus/{{$responden['id_responden']}}', '{{$key + 1}}. {{$item['kuesioner']}}')" class="btn btn-sm btn-danger">Hapus</button>
-                                            <a class="btn btn-success btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Edit</a>
+                                            <a class="btn btn-success btn-sm" href="{{url($item['link'])}}/edit/{{$responden['id_responden']}}">Edit</a>
                                         @else
                                             <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
                                         @endif
@@ -142,7 +146,7 @@
                                     <center>
                                         @if ($item['is_done'])
                                             <button type="button" onclick="show_modal('{{url($item['link'])}}/hapus/{{$responden['id_responden']}}', '{{$key + 1}}. {{$item['kuesioner']}}')" class="btn btn-sm btn-danger">Hapus</button>
-                                            <a class="btn btn-success btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Edit</a>
+                                            <a class="btn btn-success btn-sm" href="{{url($item['link'])}}/edit/{{$responden['id_responden']}}">Edit</a>
                                         @else
                                             <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
                                         @endif
@@ -176,7 +180,7 @@
                                     <center>
                                         @if ($item['is_done'])
                                             <button type="button" onclick="show_modal('{{url($item['link'])}}/hapus/{{$responden['id_responden']}}', '{{$key + 1}}. {{$item['kuesioner']}}')" class="btn btn-sm btn-danger">Hapus</button>
-                                            <a class="btn btn-success btn-sm" href="{{url($item['link'])}}/hapus/{{$responden['id_responden']}}">Edit</a>
+                                            <a class="btn btn-success btn-sm" href="{{url($item['link'])}}/edit/{{$responden['id_responden']}}">Edit</a>
                                         @else
                                             <a class="btn btn-primary btn-sm" href="{{url($item['link'])}}/tambah">Tambah</a>
                                         @endif

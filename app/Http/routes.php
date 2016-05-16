@@ -92,6 +92,9 @@ Route::delete('/nilai-norma/hapus/{id_responden}', 'NilaiNormaController@destroy
 Route::get('/karakteristik-rumah-tangga', 'KarRumahTanggaController@index');
 Route::get('/karakteristik-rumah-tangga/tambah', 'KarRumahTanggaController@create');
 Route::post('/karakteristik-rumah-tangga/tambah', 'KarRumahTanggaController@store');
+Route::get('/karakteristik-rumah-tangga/edit/{id_responden}', 'KarRumahTanggaController@edit');
+Route::patch('/karakteristik-rumah-tangga/edit/{id_responden}', 'KarRumahTanggaController@update');
+Route::delete('/karakteristik-rumah-tangga/hapus/{id_responden}', 'KarRumahTanggaController@destroy');
 
 // Jenis Pekerjaan Rumah Tangga
 Route::get('/jenis-pekerjaan-rumah-tangga', 'JenisPekerjaanRumahTgController@index');

@@ -20,7 +20,12 @@ class CreateTableKarRumahtangga extends Migration
             $table->string('nama', 150)->nullable();
             $table->smallInteger('status_keluarga')->nullable();
             $table->string('status_keluarga_lain', 100)->nullable();
-            $table->integer('id_pendidikan_formal')->nullable();
+            $table->integer('lama_pendidikan_formal')->nullable();
+            $table->string('jenis_pelatihan', 300)->nullable();
+            $table->smallInteger('waktu_pelaksanaan')->nullable();
+            $table->integer('sumber_dana')->nullable();
+            $table->integer('tujuan_pelatihan')->nullable();
+            $table->string('tujuan_pelatihan_lain', 300)->nullable();
 
             $table->softDeletes();
             $table->timestamps();
