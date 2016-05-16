@@ -32,7 +32,7 @@
                                 {{
                                     Form::text(
                                         'id_id', 
-                                        '', 
+                                        $responden['id_id'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'ID',
@@ -58,7 +58,7 @@
                                 {{
                                     Form::text(
                                         'nama_responden', 
-                                        '', 
+                                        $responden['nama_responden'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'Nama Responden'
@@ -82,7 +82,7 @@
                                 {{
                                     Form::text(
                                         'suku', 
-                                        '', 
+                                        $responden['suku'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'Etnis / Suku'
@@ -106,7 +106,7 @@
                                 {{
                                     Form::text(
                                         'kampung', 
-                                        '', 
+                                        $responden['kampung'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'RT / Kampung'
@@ -130,7 +130,7 @@
                                 {{
                                     Form::text(
                                         'dusun', 
-                                        '', 
+                                        $responden['dusun'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'RW / Dusun'
@@ -154,7 +154,7 @@
                                 {{
                                     Form::text(
                                         'kelurahan', 
-                                        '', 
+                                        $responden['kelurahan'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'Desa / Kelurahan'
@@ -178,7 +178,7 @@
                                 {{
                                     Form::text(
                                         'kecamatan', 
-                                        '', 
+                                        $responden['kecamatan'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'Kecamatan'
@@ -202,7 +202,7 @@
                                 {{
                                     Form::text(
                                         'kabupaten', 
-                                        '', 
+                                        $responden['kabupaten'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'Kabupaten'
@@ -226,7 +226,7 @@
                                 {{
                                     Form::text(
                                         'provinsi', 
-                                        '', 
+                                        $responden['provinsi'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'Provinsi'
@@ -253,7 +253,7 @@
                                                 Form::radio(
                                                     'stat_responden', 
                                                     $k,
-                                                    false,
+                                                    $k == $responden['stat_responden'],
                                                     [
                                                         'class' => 'control-label'
                                                     ]
@@ -281,7 +281,7 @@
                                 {{
                                     Form::text(
                                         'pengalaman_usaha', 
-                                        '', 
+                                        $responden['pengalaman_usaha'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'tahun'

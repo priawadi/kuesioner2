@@ -1,11 +1,49 @@
 @extends('layouts.app')
 
+@section('title')
+    {{$subtitle}}
+@endsection
+
 @section('content')
+<script type="text/javascript">
+    function show_modal(url, kuesioner)
+    {
+        form_delete.action = url;
+        $('#delete-info').text(kuesioner);
+        $('#modal-delete').modal('show');
+
+    }
+</script>
+
+<div id="modal-delete" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        {!! Form::open(array('url' => '', 'class' => 'form-horizontal', 'method' => 'delete', 'name' => 'form_delete')) !!}
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Konfirmasi</h4>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin akan menghapus data:</p>
+                <b><p id="delete-info"></p></b>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Hapus</button>
+            </div>
+        </div>
+        {!! Form::close() !!}
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Data Responden</div>
+                <div class="panel-heading">{{$subtitle}}</div>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -34,8 +72,8 @@
                                 <td>{{$item->kampung}}</td> 
                                 <td>{{$item->dusun}}</td> 
                                 <td>
-                                    <!-- <a href="" title="Hapus"><i class="glyphicon glyphicon-trash"></i></a> -->
-                                    <a href="" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+                                    <a href="#" onclick="show_modal('{{url('responden/hapus/' . $item->id_responden)}}', '{{$item->nama_responden}}');return false;" title="Hapus"><i class="glyphicon glyphicon-trash"></i></a>
+                                    <a href="{{url('responden/edit/' . $item->id_responden)}}" title="Edit Responden"><i class="glyphicon glyphicon-pencil"></i></a>
                                     <a href="{{url('responden/lihat/' . $item->id_responden)}}" title="Lihat"><i class="glyphicon glyphicon-file"></i></a>
                                 </td> 
                             </tr>

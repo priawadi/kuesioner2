@@ -19,6 +19,9 @@ Route::get('/', function () {
 Route::get('/responden', 'RespondenController@index');
 Route::get('/responden/tambah', 'RespondenController@create');
 Route::post('/responden/tambah', 'RespondenController@store');
+Route::get('/responden/edit/{id_responden}', 'RespondenController@edit');
+Route::patch('/responden/edit/{id_responden}', 'RespondenController@update');
+Route::delete('/responden/hapus/{id_responden}', 'RespondenController@destroy');
 
 Route::get('/enumerator', 'EnumeratorController@index');
 Route::get('/enumerator/tambah', 'EnumeratorController@create');
