@@ -158,7 +158,7 @@
                                         Form::select(
                                             'sumber_dana[' . $item['id_kar_rumah_tangga'] . ']', 
                                             $sumber_pelatihan, 
-                                            $item['sumber_pelatihan'], 
+                                            $item['sumber_dana'], 
                                             [
                                                 'class' => 'form-control',
                                                 'placeholder' => 'Pilih'
