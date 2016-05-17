@@ -109,6 +109,9 @@ Route::delete('/jenis-pekerjaan-rumah-tangga/hapus/{id_responden}', 'JenisPekerj
 Route::get('/aset-rumah-tangga', 'AsetRumahTanggaController@index');
 Route::get('/aset-rumah-tangga/tambah', 'AsetRumahTanggaController@create');
 Route::post('/aset-rumah-tangga/tambah', 'AsetRumahTanggaController@store');
+Route::get('/aset-rumah-tangga/edit/{id_responden}', 'AsetRumahTanggaController@edit');
+Route::patch('/aset-rumah-tangga/edit/{id_responden}', 'AsetRumahTanggaController@update');
+Route::delete('/aset-rumah-tangga/hapus/{id_responden}', 'AsetRumahTanggaController@destroy');
 
 // Kesehatan
 Route::get('/kesehatan', 'KesehatanController@index');

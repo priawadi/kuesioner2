@@ -17,6 +17,7 @@ class CreateTableMasterJenisAset extends Migration
             
             $table->integer('parent_master_jenis_aset');
             $table->string('jenis_aset', 150);
+            $table->string('satuan', 30);
             $table->boolean('parent')->default(FALSE);
             
             $table->timestamps();

@@ -46,8 +46,8 @@
                                     @if (!$item->parent)
                                     {{
                                         Form::text(
-                                            'volume['. $item -> id_master_jenis_aset .']', 
-                                            '', 
+                                            'volume['. $aset_rumah_tangga[$item->id_master_jenis_aset]['id_aset_rumah_tangga'] .']', 
+                                            $aset_rumah_tangga[$item -> id_master_jenis_aset]['volume'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'unit'
@@ -61,8 +61,8 @@
                                     @if (!$item->parent)
                                     {{
                                         Form::text(
-                                            'nilai_satuan['. $item -> id_master_jenis_aset .']', 
-                                            '', 
+                                            'nilai_satuan['. $aset_rumah_tangga[$item -> id_master_jenis_aset]['id_aset_rumah_tangga'] .']', 
+                                            $aset_rumah_tangga[$item -> id_master_jenis_aset]['nilai_satuan'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'Rp'
@@ -75,8 +75,8 @@
                                     @if (!$item->parent)
                                     {{
                                         Form::text(
-                                            'nilai_total['. $item -> id_master_jenis_aset .']', 
-                                            '', 
+                                            'nilai_total['. $aset_rumah_tangga[$item -> id_master_jenis_aset]['id_aset_rumah_tangga'] .']', 
+                                            $aset_rumah_tangga[$item -> id_master_jenis_aset]['nilai_total'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'Rp'
@@ -89,9 +89,9 @@
                                     @if (!$item->parent)
                                     {{
                                         Form::select(
-                                            'cara_perolehan[' . $item->id_master_jenis_aset . ']', 
+                                            'cara_perolehan[' . $aset_rumah_tangga[$item -> id_master_jenis_aset]['id_aset_rumah_tangga'] . ']', 
                                             $cara_perolehan, 
-                                            null, 
+                                            $aset_rumah_tangga[$item -> id_master_jenis_aset]['cara_perolehan'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'Pilih',
@@ -104,9 +104,9 @@
                                     @if (!$item->parent)
                                     {{
                                         Form::select(
-                                            'jenis_aset[' . $item->id_master_jenis_aset . ']', 
+                                            'jenis_aset[' . $aset_rumah_tangga[$item -> id_master_jenis_aset]['id_aset_rumah_tangga'] . ']', 
                                             $jenis_aset, 
-                                            null, 
+                                            $aset_rumah_tangga[$item -> id_master_jenis_aset]['jenis_aset'], 
                                             [
                                                 'class'    => 'form-control',
                                                 'placeholder'    => 'Pilih',
@@ -119,8 +119,8 @@
                                     @if (!$item->parent)
                                     {{
                                         Form::text(
-                                            'pendapatan_produktif['. $item -> id_master_jenis_aset .']', 
-                                            '', 
+                                            'pendapatan_produktif['. $aset_rumah_tangga[$item -> id_master_jenis_aset]['id_aset_rumah_tangga'] .']', 
+                                            $aset_rumah_tangga[$item -> id_master_jenis_aset]['pendapatan_produktif'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'Rp/tahun'
