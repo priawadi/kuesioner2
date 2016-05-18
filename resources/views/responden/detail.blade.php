@@ -55,7 +55,7 @@
                     <br>
                     @include('components.message_info')
                     <b>ENUMERATOR</b>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-hover">
                         <thead> 
                             <tr> 
                                 <th>Nama Enumerator</th> 
@@ -89,7 +89,7 @@
                         </tbody> 
                     </table>
                     <b>KARAKTERISTIK RUMAH TANGGA, PENDAPATAN, KESEHATAN, DAN ASET RUMAH TANGGA</b>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-hover">
                         <thead>
                             <tr> 
                                 <th width="40px">#</th> 
@@ -123,7 +123,7 @@
                         </tbody> 
                     </table>
                     <b>USAHA DAN TENAGA KERJA PERIKANAN TANGKAP LAUT</b>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-hover">
                         <thead>
                             <tr> 
                                 <th width="40px">#</th> 
@@ -157,7 +157,7 @@
                         </tbody> 
                     </table>
                     <b>KONSUMSI</b>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-hover">
                         <thead>
                             <tr> 
                                 <th width="40px">#</th> 
@@ -191,7 +191,7 @@
                         </tbody> 
                     </table>                                                            
                     <b>ASPEK MODAL SOSIAL</b>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-hover">
                         <thead> 
                             <tr> 
                                 <th width="40px">#</th> 

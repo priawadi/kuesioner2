@@ -42,7 +42,7 @@ class RasaPercayaMasyController extends Controller
         return view('rasa_percaya_masy.form', [
             'subtitle'   => 'Rasa Percaya Antar Masyarakat',
             'action'     => 'rasa-percaya-masyarakat/tambah',
-            'pertanyaan' => RasaPercaya::where('kateg_rasa_percaya', 1)->get(),
+            'pertanyaan' => RasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.MASYARAKAT'))->get(),
             'opsi'       => $opsi,
             'nomor'      => 1
         ]);
@@ -82,7 +82,7 @@ class RasaPercayaMasyController extends Controller
         // }
 
         // Save jawaban into database
-        $pertanyaan = RasaPercaya::where('kateg_rasa_percaya', 1)->select('id_rasa_percaya', 'parent_rasa_percaya', 'is_reason')->get();
+        $pertanyaan = RasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.MASYARAKAT'))->select('id_rasa_percaya', 'parent_rasa_percaya', 'is_reason')->get();
         foreach($pertanyaan as $key => $item)
         {
            
@@ -90,7 +90,7 @@ class RasaPercayaMasyController extends Controller
                 $jwb_rasa_percaya->id_master_opsional = $request->input('jawaban.' . $item->id_rasa_percaya, null);
                 $jwb_rasa_percaya->id_responden       = $request->session()->get('id_responden');
                 $jwb_rasa_percaya->id_rasa_percaya    = $item->id_rasa_percaya;
-                $jwb_rasa_percaya->kateg_rasa_percaya = 1;
+                $jwb_rasa_percaya->kateg_rasa_percaya = \Config::get('constants.RASA_PERCAYA.MASYARAKAT');
                 if ($item->is_reason)
                 {
                     $jwb_rasa_percaya->jwb_teks_rasa_percaya = $request->input('alasan.' . $item->id_rasa_percaya, null);
@@ -129,7 +129,7 @@ class RasaPercayaMasyController extends Controller
             $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
         }
 
-        $result = JwbRasaPercaya::where('kateg_rasa_percaya', 1)->where('id_responden', $request->session()->get('id_responden'))->get();
+        $result = JwbRasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.MASYARAKAT'))->where('id_responden', $request->session()->get('id_responden'))->get();
         $jwb_rasa_percaya = [];
         foreach ($result as $idx => $item) {
             $jwb_rasa_percaya[$item->id_rasa_percaya] = [
@@ -142,7 +142,7 @@ class RasaPercayaMasyController extends Controller
         return view('rasa_percaya_masy.edit', [
             'subtitle'          => 'Rasa Percaya Antar Masyarakat',
             'action'            => 'rasa-percaya-masyarakat/edit/' . $request->session()->get('id_responden'),
-            'pertanyaan'        => RasaPercaya::where('kateg_rasa_percaya', 1)->get(),
+            'pertanyaan'        => RasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.MASYARAKAT'))->get(),
             'jwb_rasa_percaya'  => $jwb_rasa_percaya,
             'opsi'              => $opsi,
             'prev_action'       => 'responden'
@@ -181,9 +181,7 @@ class RasaPercayaMasyController extends Controller
      */
     public function destroy($id, Request $request)
     {
-        echo "ID: " . $id;
-        JwbRasaPercaya::where('id_responden', $id)->where('kateg_rasa_percaya', 1)->delete();
-
+        JwbRasaPercaya::where('id_responden', $id)->where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.MASYARAKAT'))->delete();
         return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }
