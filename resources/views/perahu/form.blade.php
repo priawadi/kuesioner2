@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{$subtitle}}
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -13,140 +17,201 @@
                     @endforeach
                 </ul>
                 <div class="panel-body">
-                    {!! Form::open(array('url' => $action, 'class' => 'form-horizontal')) !!}
-                    <table class="table table-hover"> 
-                        <thead>
-                            <tr class="info"> 
-                                <td colspan="10"><center><b>Perahu</b></center></td> 
-                            </tr>                          
-                            <tr>
-                                <th style="display:table-cell; vertical-align:middle; text-align:center"><center>URUTAN ARMADA YANG DIMILIKI</center></th> 
-                                <th style="display:table-cell; vertical-align:middle; text-align:center"><center>JENIS ARMADA</center></th>
-                                <th style="display:table-cell; vertical-align:middle; text-align:center"><center>UKURAN TONASE (GT)</center></th> 
-                                <th style="display:table-cell; vertical-align:middle; text-align:center"><center>STATUS KEPEMILIKAN</center></th>
-                                <th style="display:table-cell; vertical-align:middle; text-align:center"><center>TAHUN PEMBELIAN</center></th>
-                                <th style="display:table-cell; vertical-align:middle; text-align:center"><center>KONDISI</center></th>
-                                <th style="display:table-cell; vertical-align:middle; text-align:center"><center>HARGA BELI (Rp)</center></th>
-                                <th style="display:table-cell; vertical-align:middle; text-align:center"><center>UMUR EKONOMIS (Tahun)</center></th>
-                                <th style="display:table-cell; vertical-align:middle; text-align:center"><center>SUMBER MODAL</center></th>
-                            </tr> 
-                        </thead> 
-                        <tbody> 
-                            @foreach($armada_dimiliki as $key => $perahu)               
-                            <tr>
-                                <td>{{$perahu}}</td> 
-                                <td class="col-xs-2">      
+                    {!! Form::open(array('url' => $action, 'class' => 'form-horizontal', 'method' => $method)) !!}
+                    <table class="table table-hover">
+                        <tr>
+                            <td colspan="4">Jenis perahu/kapal yang digunakan</td>
+                        </tr>
+                        <tr>
+                            <td width="40">a.</td>
+                            <td width="200">Ukuran perahu/kapal</td>
+                            <td width="200"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>panjang</td>
+                            <td>
                                 {{
-                                    Form::select(
-                                        'jenis_armada['. $key .']', 
-                                        
-                                            $jenis_armada
-                                        , 
-                                        null, 
+                                    Form::text(
+                                        'panjang', 
+                                        '', 
                                         [
-                                            'class' => 'form-control',
-                                            'placeholder' => 'Pilih'
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'm'
                                         ]
                                     )
-                                }}
-                                </td> 
-                                <td>
-                                    {{
-                                        Form::text(
-                                            'ukuran_tonase['. $key .']', 
-                                            '', 
-                                            [
-                                                'class'       => 'form-control',
-                                                'placeholder' => ''
-                                            ]
-                                        )
-                                    }} 
-                                </td> 
-                                <td class="col-xs-1">
+                                }} 
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>lebar</td>
+                            <td>
                                 {{
-                                    Form::select(
-                                        'status_kepemilikan['. $key .']', 
-                                        
-                                            $status_kepemilikan
-                                        , 
-                                        null, 
+                                    Form::text(
+                                        'lebar', 
+                                        '', 
                                         [
-                                            'class' => 'form-control',
-                                            'placeholder' => 'Pilih'
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'm'
                                         ]
                                     )
-                                }}
-                                </td> 
-                                <td>
-                                    {{
-                                        Form::text(
-                                            'tahun_pembelian['. $key .']', 
-                                            '', 
-                                            [
-                                                'class'       => 'form-control',
-                                                'placeholder' => ''
-                                            ]
-                                        )
-                                    }} 
-                                </td> 
-                                <td class="col-xs-2">
+                                }} 
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>tinggi</td>
+                            <td>
                                 {{
-                                    Form::select(
-                                        'kondisi['. $key .']', 
-                                        
-                                            $kondisi
-                                        , 
-                                        null, 
+                                    Form::text(
+                                        'tinggi', 
+                                        '', 
                                         [
-                                            'class' => 'form-control',
-                                            'placeholder' => 'Pilih'
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'm'
                                         ]
                                     )
-                                }}
-                                </td> 
-                                <td class="col-xs-3">
-                                    {{
-                                        Form::text(
-                                            'harga_beli['. $key .']', 
-                                            '', 
-                                            [
-                                                'class'       => 'form-control',
-                                                'placeholder' => ''
-                                            ]
-                                        )
-                                    }}  
-                                </td> 
-                                <td>
-                                    {{
-                                        Form::text(
-                                            'umur_ekonomis['. $key .']', 
-                                            '', 
-                                            [
-                                                'class'       => 'form-control',
-                                                'placeholder' => ''
-                                            ]
-                                        )
-                                    }}
-                                </td> 
-                                <td class="col-xs-3">
+                                }} 
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>b.</td>
+                            <td>Tonase perahu/kapal</td>
+                            <td>
                                 {{
-                                    Form::select(
-                                        'sumber_modal['. $key .']', 
-                                        
-                                            $sumber_modal
-                                        , 
-                                        null, 
+                                    Form::text(
+                                        'tonase', 
+                                        '', 
                                         [
-                                            'class' => 'form-control',
-                                            'placeholder' => 'Pilih'
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'GT'
                                         ]
                                     )
-                                }}
-                                </td> 
-                            </tr>   
-                            @endforeach
-                            <tr> 
-                        </tbody> 
+                                }} 
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>c.</td>
+                            <td>Jumlah perahu/kapal</td>
+                            <td>
+                                {{
+                                    Form::text(
+                                        'jumlah', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'unit'
+                                        ]
+                                    )
+                                }} 
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>d.</td>
+                            <td>Kondisi waktu beli</td>
+                            <td>
+                                @foreach($kondisi_perahu as $id_kondisi => $value)
+                                    <div class="radio">
+                                        <label>
+                                            {{
+                                                Form::radio(
+                                                    'kondisi', 
+                                                    $id_kondisi,
+                                                    false,
+                                                    [
+                                                        'class' => 'control-label'
+                                                    ]
+                                                )
+                                            }} 
+                                            {{$value}}
+                                        </label>
+                                    </div>
+                                @endforeach 
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>e.</td>
+                            <td>Tahun pembelian</td>
+                            <td>
+                                {{
+                                    Form::text(
+                                        'tahun_pembelian', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => ''
+                                        ]
+                                    )
+                                }} 
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>f.</td>
+                            <td>Harga beli perahu/kapal</td>
+                            <td>
+                                {{
+                                    Form::text(
+                                        'harga_beli', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Rp/unit'
+                                        ]
+                                    )
+                                }} 
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>g.</td>
+                            <td>Umur teknis perahu/kapal</td>
+                            <td>
+                                {{
+                                    Form::text(
+                                        'umur_teknis', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'tahun'
+                                        ]
+                                    )
+                                }} 
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>h.</td>
+                            <td>Sumber modal</td>
+                            <td>
+                                @foreach($sumber_modal as $id_sumber_modal => $value)
+                                    <div class="radio">
+                                        <label>
+                                            {{
+                                                Form::radio(
+                                                    'kondisi', 
+                                                    $id_sumber_modal,
+                                                    false,
+                                                    [
+                                                        'class' => 'control-label'
+                                                    ]
+                                                )
+                                            }} 
+                                            {{$value}}
+                                        </label>
+                                    </div>
+                                @endforeach 
+                            </td>
+                            <td></td>
+                        </tr>
                     </table>
                     @include('components.form.prev_next_btn')
                     {!! Form::close() !!}

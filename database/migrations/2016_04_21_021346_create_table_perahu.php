@@ -15,14 +15,17 @@ class CreateTablePerahu extends Migration
         Schema::create('perahu', function (Blueprint $table) {
             $table->increments('id_perahu');
             $table->integer('id_responden');
-            $table->string('armada_dimiliki', 150)->nullable();
-            $table->integer('jenis_armada')->nullable();
-            $table->integer('ukuran_tonase')->nullable();
-            $table->integer('status_kepemilikan')->nullable();
-            $table->integer('tahun_pembelian')->nullable();
+
+            $table->integer('panjang')->nullable();
+            $table->integer('lebar')->nullable();
+            $table->integer('tinggi')->nullable();
+            
+            $table->integer('tonase')->nullable();
+            $table->integer('jumlah')->nullable();
             $table->integer('kondisi')->nullable();
-            $table->float('harga_beli')->nullable();
-            $table->integer('umur_ekonomis')->nullable();
+            $table->integer('tahun_pembelian')->nullable();
+            $table->double('harga_beli')->nullable();
+            $table->integer('umur_teknis')->nullable();
             $table->integer('sumber_modal')->nullable();
 
             $table->softDeletes();

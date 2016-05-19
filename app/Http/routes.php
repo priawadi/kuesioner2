@@ -187,3 +187,6 @@ Route::post('/tenaga-penggerak/tambah', 'TenagaPenggerakController@store');
 Route::get('/perahu', 'PerahuController@index');
 Route::get('/perahu/tambah', 'PerahuController@create');
 Route::post('/perahu/tambah', 'PerahuController@store');
+Route::get('/perahu/edit/{id_responden}', 'PerahuController@edit');
+Route::patch('/perahu/edit/{id_responden}', 'PerahuController@update');
+Route::delete('/perahu/hapus/{id_responden}', 'PerahuController@destroy');
