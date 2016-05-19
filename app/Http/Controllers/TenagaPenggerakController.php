@@ -10,6 +10,33 @@ use App\Mesin;
 
 class TenagaPenggerakController extends Controller
 {
+    var $jenis_mesin_penggerak = [ 
+        1 => 'Perahu tanpa motor', 
+        2 => 'Motor tempel',
+        3 => 'On board',
+    ];
+
+    var $jenis_bahan_bakar = [ 
+        1 => 'Bensin', 
+        2 => 'Solar',
+        3 => 'Minyak tanah',
+        4 => 'Campuran',
+        5 => 'Lainnya',
+    ];
+
+    var $kondisi = [ 
+        1 => 'Baru', 
+        2 => 'Bekas',
+    ];
+
+    var $sumber_modal = [ 
+        1 => 'Modal sendiri', 
+        2 => 'Kredit formal',
+        3 => 'Kredit informal',
+        4 => 'Bantuan pemerintah',
+        5 => 'Keluarga',
+        6 => 'Campuran',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -31,52 +58,14 @@ class TenagaPenggerakController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
         
         return view('tenaga_penggerak.form', [
-            'subtitle'    => 'Tenaga Penggerak',
-            'action'      => 'tenaga-penggerak/tambah',
-            'mesin'       => [
-                1 => 'Mesin 1', 
-                2 => 'Mesin 2', 
-                3 => 'Mesin 3', 
-                4 => 'Mesin 4'
-            ],
-            'merek_mesin' => [
-                1 => 'Donfeng', 
-                2 => 'Yanmar', 
-                3 => 'Honda', 
-                4 => 'Kubota', 
-                5 => 'Yamaha', 
-                6 => 'Hino', 
-                7 => 'Mitsubishi', 
-                8 => 'Sanghyang', 
-                9 => 'Lainnya'
-            ],
-            'jenis_bbm_mesin' => [
-                1 => 'Bensin', 
-                2 => 'Solar', 
-                3 => 'Minyak Tanah', 
-                4 => 'Campuran', 
-                5 => 'Bio Diesel', 
-                6 => 'Lainnya'
-            ],
-            'status_kepemilikan' => [
-                1 => 'Sendiri', 
-                2 => 'Juragan', 
-                3 => 'Kelompok', 
-                4 => 'Sewa'
-            ],
-            'kondisi' => [
-                1 => 'Baru',
-                2 => 'Bekas', 
-            ],
-            'sumber_modal' => [
-                1 => 'Modal sendiri',
-                2 => 'Kredit formal', 
-                3 => 'Kredit informal',
-                4 => 'Bantuan pemerintah',
-                5 => 'Keluarga',
-                6 => 'Campuran',
-            ],
-            'nomor'        => 1
+            'subtitle'              => 'Tenaga Penggerak',
+            'action'                => 'tenaga-penggerak/tambah',
+            'method'                => 'post',
+            'jenis_mesin_penggerak' => $this->jenis_mesin_penggerak,
+            'jenis_bahan_bakar'     => $this->jenis_bahan_bakar,
+            'sumber_modal'          => $this->sumber_modal,
+            'kondisi'               => $this->kondisi,
+            'nomor'                 => 1
         ]);
     }
 
@@ -88,55 +77,25 @@ class TenagaPenggerakController extends Controller
      */
     public function store(Request $request)
     {
-        $mesin  = [
-            1 => 'Mesin 1', 
-            2 => 'Mesin 2', 
-            3 => 'Mesin 3', 
-            4 => 'Mesin 4'
-        ];
 
-        foreach ($mesin as $key => $value) 
+        $mesin               = new Mesin;
+        $mesin->id_responden = $request->session()->get('id_responden');
+        $mesin->jenis        = $request->input('mesin_penggerak.jenis', null);
+
+        if (in_array($request->input('mesin_penggerak.jenis', null), [2, 3]))
         {
-            if ($request->get('merek_mesin')[$key])
-            {
-                $rules['ukuran_mesin.' . $key]             = 'required';
-                $rules['status_kepemilikan_mesin.' . $key] = 'required';
-                $rules['jenis_bbm_mesin.' . $key]          = 'required';
-                $rules['tahun_pembelian_mesin.' . $key]    = 'required|numeric';
-                $rules['kondisi_mesin.' . $key]            = 'required';
-                $rules['harga_beli_mesin.' . $key]         = 'required|numeric';
-                $rules['umur_ekonomis_mesin.' . $key]      = 'required|numeric';
-                $rules['sumber_modal_mesin.' . $key]       = 'required';
-            }
+            $mesin->merk            = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.merk', null);
+            $mesin->bahan_bakar     = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.bahan_bakar', null);
+            $mesin->kekuatan        = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.kekuatan', null);
+            $mesin->jumlah          = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.jumlah', null);
+            $mesin->kondisi         = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.kondisi', null);
+            $mesin->tahun_pembelian = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.tahun_pembelian', null);
+            $mesin->harga_beli      = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.harga_beli', null);
+            $mesin->umur_teknis     = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.umur_teknis', null);
+            $mesin->sumber_modal    = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.sumber_modal', null);
         }
         
-        // Validate input
-        // $validator = Validator::make($request->all(), $rules);
-
-        // if ($validator->fails()) {
-        //     return redirect('tenaga-penggerak/tambah')
-        //                 ->withErrors($validator)
-        //                 ->withInput();
-        // }
-
-        // Save data
-        foreach ($mesin as $key => $value) 
-        {
-            $mesin                           = new Mesin;
-            $mesin->id_responden             = $request->session()->get('id_responden');
-            $mesin->mesin                    = $key;
-            $mesin->merek_mesin              = $request->get('merek_mesin')[$key];
-            $mesin->ukuran_mesin             = $request->get('ukuran_mesin')[$key];
-            $mesin->status_kepemilikan_mesin = $request->get('status_kepemilikan_mesin')[$key];
-            $mesin->jenis_bbm_mesin          = $request->get('jenis_bbm_mesin')[$key];
-            $mesin->tahun_pembelian_mesin    = $request->get('tahun_pembelian_mesin')[$key];
-            $mesin->kondisi_mesin            = $request->get('kondisi_mesin')[$key];
-            $mesin->harga_beli_mesin         = $request->get('harga_beli_mesin')[$key];
-            $mesin->umur_ekonomis_mesin      = $request->get('umur_ekonomis_mesin')[$key];
-            $mesin->sumber_modal_mesin       = $request->get('sumber_modal_mesin')[$key];
-            
-            $mesin->save();
-        }
+        $mesin->save();
 
         return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
@@ -158,9 +117,24 @@ class TenagaPenggerakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+        
+        return view('tenaga_penggerak.edit', [
+            'subtitle'              => 'Tenaga Penggerak',
+            'action'                => 'tenaga-penggerak/edit/' . $request->session()->get('id_responden'),
+            'method'                => 'patch',
+            'jenis_mesin_penggerak' => $this->jenis_mesin_penggerak,
+            'jenis_bahan_bakar'     => $this->jenis_bahan_bakar,
+            'sumber_modal'          => $this->sumber_modal,
+            'kondisi'               => $this->kondisi,
+            'nomor'                 => 1,
+            
+            // Data
+            'mesin'                 => Mesin::where('id_responden', $request->session()->get('id_responden'))->first(),
+        ]);
     }
 
     /**
@@ -172,7 +146,37 @@ class TenagaPenggerakController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $mesin               = Mesin::where('id_responden', $request->session()->get('id_responden'))->first();
+        $mesin->jenis        = $request->input('mesin_penggerak.jenis', null);
+
+        if (in_array($request->input('mesin_penggerak.jenis', null), [2, 3]))
+        {
+            $mesin->merk            = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.merk', null);
+            $mesin->bahan_bakar     = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.bahan_bakar', null);
+            $mesin->kekuatan        = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.kekuatan', null);
+            $mesin->jumlah          = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.jumlah', null);
+            $mesin->kondisi         = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.kondisi', null);
+            $mesin->tahun_pembelian = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.tahun_pembelian', null);
+            $mesin->harga_beli      = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.harga_beli', null);
+            $mesin->umur_teknis     = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.umur_teknis', null);
+            $mesin->sumber_modal    = $request->input('mesin_penggerak.' . $request->input('mesin_penggerak.jenis') . '.sumber_modal', null);
+        }
+        else
+        {
+            $mesin->merk            = null;
+            $mesin->bahan_bakar     = null;
+            $mesin->kekuatan        = null;
+            $mesin->jumlah          = null;
+            $mesin->kondisi         = null;
+            $mesin->tahun_pembelian = null;
+            $mesin->harga_beli      = null;
+            $mesin->umur_teknis     = null;
+            $mesin->sumber_modal    = null;   
+        }
+        
+        $mesin->save();
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**
@@ -181,8 +185,9 @@ class TenagaPenggerakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        Mesin::where('id_responden', $request->session()->get('id_responden'))->delete();
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }

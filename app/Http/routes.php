@@ -181,10 +181,13 @@ Route::get('/alat-tangkap/edit/{id_responden}', 'AlatTangkapController@edit');
 Route::patch('/alat-tangkap/edit/{id_responden}', 'AlatTangkapController@update');
 Route::delete('/alat-tangkap/hapus/{id_responden}', 'AlatTangkapController@destroy');
 
-// Tenaga Kerja
+// Tenaga Penggerak
 Route::get('/tenaga-penggerak', 'TenagaPenggerakController@index');
 Route::get('/tenaga-penggerak/tambah', 'TenagaPenggerakController@create');
 Route::post('/tenaga-penggerak/tambah', 'TenagaPenggerakController@store');
+Route::get('/tenaga-penggerak/edit/{id_responden}', 'TenagaPenggerakController@edit');
+Route::patch('/tenaga-penggerak/edit/{id_responden}', 'TenagaPenggerakController@update');
+Route::delete('/tenaga-penggerak/hapus/{id_responden}', 'TenagaPenggerakController@destroy');
 
 // Perahu
 Route::get('/perahu', 'PerahuController@index');

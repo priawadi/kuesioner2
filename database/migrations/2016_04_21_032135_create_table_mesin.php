@@ -14,17 +14,18 @@ class CreateTableMesin extends Migration
     {
         Schema::create('mesin', function (Blueprint $table) {
             $table->increments('id_mesin');
-            $table->string('mesin', 150)->nullable();
-            $table->integer('merek_mesin')->nullable();
-            $table->integer('ukuran_mesin')->nullable();
-            $table->integer('status_kepemilikan_mesin')->nullable();
-            $table->integer('jenis_bbm_mesin')->nullable();
-            $table->integer('tahun_pembelian_mesin')->nullable();
-            $table->integer('kondisi_mesin')->nullable();
-            $table->float('harga_beli_mesin')->nullable();
-            $table->integer('umur_ekonomis_mesin')->nullable();
-            $table->integer('sumber_modal_mesin')->nullable();
             $table->integer('id_responden');
+
+            $table->integer('jenis')->nullable();
+            $table->string('merk', 300)->nullable();
+            $table->integer('bahan_bakar')->nullable();
+            $table->integer('kekuatan')->nullable();
+            $table->integer('jumlah')->nullable();
+            $table->integer('kondisi')->nullable();
+            $table->integer('tahun_pembelian')->nullable();
+            $table->double('harga_beli')->nullable();
+            $table->integer('umur_teknis')->nullable();
+            $table->integer('sumber_modal')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

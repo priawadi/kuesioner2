@@ -28,7 +28,7 @@
                                                 Form::radio(
                                                     'mesin_penggerak[jenis]', 
                                                     $id_mesin_penggerak,
-                                                    false,
+                                                    $id_mesin_penggerak == $mesin['jenis'],
                                                     [
                                                         'class' => 'control-label'
                                                     ]
@@ -47,7 +47,7 @@
                                         {{
                                             Form::text(
                                                 'mesin_penggerak[' . $id_mesin_penggerak . '][merk]', 
-                                                '', 
+                                                $id_mesin_penggerak == $mesin['jenis']? $mesin['merk']: '', 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'merk',
@@ -68,8 +68,8 @@
                                                 {{
                                                     Form::radio(
                                                         'mesin_penggerak[' . $id_mesin_penggerak . '][bahan_bakar]', 
-                                                        $id_bahan_bakar,
-                                                        false,
+                                                        $id_bahan_bakar, 
+                                                        $id_mesin_penggerak == $mesin['jenis'] && $mesin['bahan_bakar'] == $id_bahan_bakar,
                                                         [
                                                             'class' => 'control-label'
                                                         ]
@@ -89,7 +89,7 @@
                                         {{
                                             Form::text(
                                                 'mesin_penggerak[' . $id_mesin_penggerak . '][kekuatan]', 
-                                                '', 
+                                                $id_mesin_penggerak == $mesin['jenis']? $mesin['kekuatan']: '', 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'PK',
@@ -107,7 +107,7 @@
                                         {{
                                             Form::text(
                                                 'mesin_penggerak[' . $id_mesin_penggerak . '][jumlah]', 
-                                                '', 
+                                                $id_mesin_penggerak == $mesin['jenis']? $mesin['jumlah']: '', 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'unit',
@@ -129,7 +129,7 @@
                                                     Form::radio(
                                                         'mesin_penggerak[' . $id_mesin_penggerak . '][kondisi]', 
                                                         $id_kondisi,
-                                                        false,
+                                                        $id_mesin_penggerak == $mesin['jenis'] && $id_kondisi == $mesin['kondisi'], 
                                                         [
                                                             'class' => 'control-label'
                                                         ]
@@ -149,7 +149,7 @@
                                         {{
                                             Form::text(
                                                 'mesin_penggerak[' . $id_mesin_penggerak . '][tahun_pembelian]', 
-                                                '', 
+                                                $id_mesin_penggerak == $mesin['jenis']? $mesin['tahun_pembelian']: '', 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => '',
@@ -166,7 +166,7 @@
                                         {{
                                             Form::text(
                                                 'mesin_penggerak[' . $id_mesin_penggerak . '][harga_beli]', 
-                                                '', 
+                                                $id_mesin_penggerak == $mesin['jenis']? $mesin['harga_beli']: '', 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Rp/unit',
@@ -184,7 +184,7 @@
                                         {{
                                             Form::text(
                                                 'mesin_penggerak[' . $id_mesin_penggerak . '][umur_teknis]', 
-                                                '', 
+                                                $id_mesin_penggerak == $mesin['jenis']? $mesin['umur_teknis']: '', 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'tahun',
@@ -206,7 +206,7 @@
                                                     Form::radio(
                                                         'mesin_penggerak[' . $id_mesin_penggerak . '][sumber_modal]', 
                                                         $id_sumber_modal,
-                                                        false,
+                                                        $id_mesin_penggerak == $mesin['jenis'] && $id_sumber_modal == $mesin['sumber_modal'],
                                                         [
                                                             'class' => 'control-label'
                                                         ]
