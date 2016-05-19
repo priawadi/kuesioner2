@@ -147,6 +147,9 @@ Route::post('/hasil-tangkapan-ikan/tambah', 'HasilTangkapanController@store');
 Route::get('/aset-pendukung-usaha', 'AsetPendukungUsahaController@index');
 Route::get('/aset-pendukung-usaha/tambah', 'AsetPendukungUsahaController@create');
 Route::post('/aset-pendukung-usaha/tambah', 'AsetPendukungUsahaController@store');
+Route::get('/aset-pendukung-usaha/edit/{id_responden}', 'AsetPendukungUsahaController@edit');
+Route::patch('/aset-pendukung-usaha/edit/{id_responden}', 'AsetPendukungUsahaController@update');
+Route::delete('/aset-pendukung-usaha/hapus/{id_responden}', 'AsetPendukungUsahaController@destroy');
 
 // Biaya Perijinan
 Route::get('/biaya-perijinan', 'BiayaPerijinanController@index');

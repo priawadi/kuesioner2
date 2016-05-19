@@ -39,9 +39,9 @@
                                 <td class="col-xs-1">
                                     {{
                                         Form::select(
-                                            'status_kepemilikan[' . $id_peralatan_tambahan . ']', 
+                                            'status_kepemilikan[' . $aset_pendukung_usaha[$id_peralatan_tambahan]['id_aset_pendukung_usaha'] . ']', 
                                             $master_status_kepemilikan, 
-                                            null, 
+                                            $aset_pendukung_usaha[$id_peralatan_tambahan]['status_kepemilikan'], 
                                             [
                                                 'class'    => 'form-control',
                                                 'placeholder'    => 'Pilih',
@@ -52,8 +52,8 @@
                                 <td>
                                     {{
                                         Form::text(
-                                            'jumlah[' . $id_peralatan_tambahan . ']', 
-                                            null, 
+                                            'jumlah[' . $aset_pendukung_usaha[$id_peralatan_tambahan]['id_aset_pendukung_usaha'] . ']', 
+                                            $aset_pendukung_usaha[$id_peralatan_tambahan]['jumlah'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'Jumlah'
@@ -64,9 +64,9 @@
                                 <td class="col-xs-1">
                                     {{
                                         Form::select(
-                                            'kondisi[' . $id_peralatan_tambahan . ']', 
+                                            'kondisi[' . $aset_pendukung_usaha[$id_peralatan_tambahan]['id_aset_pendukung_usaha'] . ']', 
                                             $master_kondisi, 
-                                            null, 
+                                            $aset_pendukung_usaha[$id_peralatan_tambahan]['kondisi'], 
                                             [
                                                 'class'    => 'form-control',
                                                 'placeholder'    => 'Pilih',
@@ -77,8 +77,8 @@
                                 <td>
                                     {{
                                         Form::text(
-                                            'umur_ekonomis[' . $id_peralatan_tambahan . ']', 
-                                            null, 
+                                            'umur_ekonomis[' . $aset_pendukung_usaha[$id_peralatan_tambahan]['id_aset_pendukung_usaha'] . ']', 
+                                            $aset_pendukung_usaha[$id_peralatan_tambahan]['umur_ekonomis'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'Umur Ekonomis'
@@ -89,8 +89,8 @@
                                 <td class="col-xs-2">
                                     {{
                                         Form::text(
-                                            'harga_beli[' . $id_peralatan_tambahan . ']', 
-                                            null, 
+                                            'harga_beli[' . $aset_pendukung_usaha[$id_peralatan_tambahan]['id_aset_pendukung_usaha'] . ']', 
+                                            $aset_pendukung_usaha[$id_peralatan_tambahan]['harga_beli'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'Harga Beli'
@@ -101,9 +101,9 @@
                                 <td class="col-xs-2">
                                     {{
                                         Form::select(
-                                            'sumber_modal[' . $id_peralatan_tambahan . ']', 
+                                            'sumber_modal[' . $aset_pendukung_usaha[$id_peralatan_tambahan]['id_aset_pendukung_usaha'] . ']', 
                                             $master_sumber_modal, 
-                                            null, 
+                                            $aset_pendukung_usaha[$id_peralatan_tambahan]['sumber_modal'], 
                                             [
                                                 'class'    => 'form-control',
                                                 'placeholder'    => 'Pilih',

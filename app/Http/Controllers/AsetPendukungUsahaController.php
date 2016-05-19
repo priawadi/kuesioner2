@@ -11,6 +11,27 @@ use Validator;
 
 class AsetPendukungUsahaController extends Controller
 {
+    var $master_status_kepemilikan = [
+        1 => 'Sendiri', 
+        2 => 'Juragan', 
+        3 => 'Kelompok', 
+        4 => 'Sewa'
+    ];
+    
+    var $master_kondisi = [
+        1 => 'Baru',
+        2 => 'Bekas', 
+    ];
+
+    var $master_sumber_modal = [
+        1 => 'Modal sendiri',
+        2 => 'Kredit formal', 
+        3 => 'Kredit informal',
+        4 => 'Bantuan pemerintah',
+        5 => 'Keluarga',
+        6 => 'Campuran',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -39,26 +60,12 @@ class AsetPendukungUsahaController extends Controller
         return view('aset_pendukung_usaha.form', [
             'subtitle'                  => 'Aset Pendukung Usaha',
             'action'                    => 'aset-pendukung-usaha/tambah',
+            'method'                    => 'post',
             'master_peralatan_tambahan' => $master_peralatan_tambahan,
-            'master_status_kepemilikan' => [
-                    1 => 'Sendiri', 
-                    2 => 'Juragan', 
-                    3 => 'Kelompok', 
-                    4 => 'Sewa'
-                ],
-            'master_kondisi' => [
-                    1 => 'Baru',
-                    2 => 'Bekas', 
-                ],
-            'master_sumber_modal' => [
-                    1 => 'Modal sendiri',
-                    2 => 'Kredit formal', 
-                    3 => 'Kredit informal',
-                    4 => 'Bantuan pemerintah',
-                    5 => 'Keluarga',
-                    6 => 'Campuran',
-            ],
-            'nomor' => 1
+            'master_status_kepemilikan' => $this->master_status_kepemilikan,
+            'master_kondisi'            => $this->master_kondisi,
+            'master_sumber_modal'       => $this->master_sumber_modal,
+            'nomor'                     => 1
         ]);
     }
 
@@ -70,50 +77,8 @@ class AsetPendukungUsahaController extends Controller
      */
     public function store(Request $request)
     {
-        // Init 
-        $rules = [];
 
         $master_peralatan_tambahan = MasterPeralatanTambahan::select('id_master_peralatan_tambahan', 'peralatan_tambahan')->get();
-
-        foreach($master_peralatan_tambahan as $key => $item)
-        {
-            // Validate peralatan tambahan, if peralatan_tambahan_lain is filled
-            if ($item->id_master_peralatan_tambahan > 8)
-            {
-                if($request->get('peralatan_tambahan_lain')[$item->id_master_peralatan_tambahan])
-                {
-                    $rules['status_kepemilikan.' . $item->id_master_peralatan_tambahan] = 'required';
-                    $rules['jumlah.' . $item->id_master_peralatan_tambahan]             = 'required|numeric';
-                    $rules['kondisi.' . $item->id_master_peralatan_tambahan]            = 'required';
-                    $rules['umur_ekonomis.' . $item->id_master_peralatan_tambahan]      = 'required|numeric';
-                    $rules['harga_beli.' . $item->id_master_peralatan_tambahan]         = 'required|numeric';
-                    $rules['sumber_modal.' . $item->id_master_peralatan_tambahan]       = 'required';                   
-                }
-            }
-
-            // Validate peralatan lain
-            else if ($item->id_master_peralatan_tambahan > 0 && $item->id_master_peralatan_tambahan < 9)
-            {
-                if ($request->get('status_kepemilikan')[$item->id_master_peralatan_tambahan])
-                {
-                    $rules['jumlah.' . $item->id_master_peralatan_tambahan]        = 'required|numeric';
-                    $rules['kondisi.' . $item->id_master_peralatan_tambahan]       = 'required';
-                    $rules['umur_ekonomis.' . $item->id_master_peralatan_tambahan] = 'required|numeric';
-                    $rules['harga_beli.' . $item->id_master_peralatan_tambahan]    = 'required|numeric';
-                    $rules['sumber_modal.' . $item->id_master_peralatan_tambahan]  = 'required';
-                    
-                }
-            }
-        }
-        
-        // Validate input
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return redirect('aset-pendukung-usaha/tambah')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
 
         // Save aset pendukung usaha
         foreach($master_peralatan_tambahan as $key => $item)
@@ -127,11 +92,6 @@ class AsetPendukungUsahaController extends Controller
             $aset_pendukung_usaha->umur_ekonomis         = $request->get('umur_ekonomis')[$item->id_master_peralatan_tambahan];
             $aset_pendukung_usaha->harga_beli            = $request->get('harga_beli')[$item->id_master_peralatan_tambahan];
             $aset_pendukung_usaha->sumber_modal          = $request->get('sumber_modal')[$item->id_master_peralatan_tambahan];
-            
-            if ($item->id_master_peralatan_tambahan > 8)
-            {
-                $aset_pendukung_usaha->peralatan_tambahan_lain = $request->get('peralatan_tambahan_lain')[$item->id_master_peralatan_tambahan];
-            }
             
             $aset_pendukung_usaha->save();
         }
@@ -156,9 +116,42 @@ class AsetPendukungUsahaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+        
+        $master_peralatan_tambahan = [];
+        foreach (MasterPeralatanTambahan::all() as $item) {
+            $master_peralatan_tambahan[$item->id_master_peralatan_tambahan] = $item->peralatan_tambahan;
+        }
+
+        $aset_pendukung_usaha = [];
+        foreach (AsetPendukungUsaha::where('id_responden', $request->session()->get('id_responden'))->get() as $index => $item) {
+            $aset_pendukung_usaha[$item->id_peralatan_tambahan] = [
+                'id_aset_pendukung_usaha' =>$item->id_aset_pendukung_usaha,
+                'status_kepemilikan'      =>$item->status_kepemilikan,
+                'jumlah'                  =>$item->jumlah,
+                'kondisi'                 =>$item->kondisi,
+                'umur_ekonomis'           =>$item->umur_ekonomis,
+                'harga_beli'              =>$item->harga_beli,
+                'sumber_modal'            =>$item->sumber_modal,
+            ];
+        }
+
+        return view('aset_pendukung_usaha.edit', [
+            'subtitle'                  => 'Aset Pendukung Usaha',
+            'action'                    => 'aset-pendukung-usaha/edit/' . $request->session()->get('id_responden'),
+            'method'                    => 'patch',
+            'master_peralatan_tambahan' => $master_peralatan_tambahan,
+            'master_status_kepemilikan' => $this->master_status_kepemilikan,
+            'master_kondisi'            => $this->master_kondisi,
+            'master_sumber_modal'       => $this->master_sumber_modal,
+            'nomor'                     => 1,
+            
+            //Data
+            'aset_pendukung_usaha'      => $aset_pendukung_usaha,
+        ]);
     }
 
     /**
@@ -170,7 +163,20 @@ class AsetPendukungUsahaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        foreach($request->input('status_kepemilikan') as $id_aset_pendukung_usaha => $item)
+        {
+            $aset_pendukung_usaha                     = AsetPendukungUsaha::find($id_aset_pendukung_usaha);
+            $aset_pendukung_usaha->status_kepemilikan = $request->input('status_kepemilikan.' . $id_aset_pendukung_usaha, null);
+            $aset_pendukung_usaha->jumlah             = $request->input('jumlah.' . $id_aset_pendukung_usaha, null);
+            $aset_pendukung_usaha->kondisi            = $request->input('kondisi.' . $id_aset_pendukung_usaha, null);
+            $aset_pendukung_usaha->umur_ekonomis      = $request->input('umur_ekonomis.' . $id_aset_pendukung_usaha, null);
+            $aset_pendukung_usaha->harga_beli         = $request->input('harga_beli.' . $id_aset_pendukung_usaha, null);
+            $aset_pendukung_usaha->sumber_modal       = $request->input('sumber_modal.' . $id_aset_pendukung_usaha, null);
+            
+            $aset_pendukung_usaha->save();
+        }
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**
@@ -179,8 +185,9 @@ class AsetPendukungUsahaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        AsetPendukungUsaha::where('id_responden', $request->session()->get('id_responden'))->delete();
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }

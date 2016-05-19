@@ -55,16 +55,59 @@ class MasterPeralatanTambahanSeeder extends Seeder
             ],
             [
 				'id_master_peralatan_tambahan' => 9, 
-				'peralatan_tambahan'           => 'Lainnya (sebutkan)', 
+				'peralatan_tambahan'           => 'Rumpon', 
 				'created_at'                   => \Carbon\Carbon::now()->toDateTimeString(),
             ],
             [
 				'id_master_peralatan_tambahan' => 10, 
-				'peralatan_tambahan'           => 'Lainnya (sebutkan)', 
+				'peralatan_tambahan'           => 'Kompresor', 
 				'created_at'                   => \Carbon\Carbon::now()->toDateTimeString(),
             ],
-
-
+            [
+                'id_master_peralatan_tambahan' => 11, 
+                'peralatan_tambahan'           => 'Pelampung', 
+                'created_at'                   => \Carbon\Carbon::now()->toDateTimeString(),
+            ],
+            [
+                'id_master_peralatan_tambahan' => 12, 
+                'peralatan_tambahan'           => 'Rumah Bagan', 
+                'created_at'                   => \Carbon\Carbon::now()->toDateTimeString(),
+            ],
+            [
+                'id_master_peralatan_tambahan' => 13, 
+                'peralatan_tambahan'           => 'Alat selam', 
+                'created_at'                   => \Carbon\Carbon::now()->toDateTimeString(),
+            ],
+            [
+                'id_master_peralatan_tambahan' => 14, 
+                'peralatan_tambahan'           => 'Alat Snorkling', 
+                'created_at'                   => \Carbon\Carbon::now()->toDateTimeString(),
+            ],
+            [
+                'id_master_peralatan_tambahan' => 15, 
+                'peralatan_tambahan'           => 'Ganco', 
+                'created_at'                   => \Carbon\Carbon::now()->toDateTimeString(),
+            ],
+            [
+                'id_master_peralatan_tambahan' => 16, 
+                'peralatan_tambahan'           => 'Layang-layang', 
+                'created_at'                   => \Carbon\Carbon::now()->toDateTimeString(),
+            ],
+            [
+                'id_master_peralatan_tambahan' => 17, 
+                'peralatan_tambahan'           => 'Box pendingin (coolbox)', 
+                'created_at'                   => \Carbon\Carbon::now()->toDateTimeString(),
+            ],
+            [
+                'id_master_peralatan_tambahan' => 18, 
+                'peralatan_tambahan'           => 'Layar', 
+                'created_at'                   => \Carbon\Carbon::now()->toDateTimeString(),
+            ],
+            [
+                'id_master_peralatan_tambahan' => 19, 
+                'peralatan_tambahan'           => 'Lainnya', 
+                'created_at'                   => \Carbon\Carbon::now()->toDateTimeString(),
+            ],
         ];
         DB::table('master_peralatan_tambahan')->insert($master_peralatan_tambahan);
     }

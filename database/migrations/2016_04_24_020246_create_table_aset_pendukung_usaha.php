@@ -15,14 +15,13 @@ class CreateTableAsetPendukungUsaha extends Migration
         Schema::create('aset_pendukung_usaha', function (Blueprint $table) {
             $table->increments('id_aset_pendukung_usaha');
             $table->integer('id_responden');
-            $table->integer('id_peralatan_tambahan');
 
-            $table->string('peralatan_tambahan_lain', 150)->nullable();
+            $table->integer('id_peralatan_tambahan');
             $table->smallInteger('status_kepemilikan')->nullable();
             $table->integer('jumlah')->nullable();
             $table->smallInteger('kondisi')->nullable();
             $table->integer('umur_ekonomis')->nullable();
-            $table->float('harga_beli')->nullable();
+            $table->double('harga_beli')->nullable();
             $table->smallInteger('sumber_modal')->nullable();
 
             $table->softDeletes();
