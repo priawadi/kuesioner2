@@ -17,7 +17,7 @@
                     @endforeach
                 </ul>
                 <div class="panel-body">
-                    {!! Form::open(array('url' => $action, 'class' => 'form-horizontal')) !!}
+                    {!! Form::open(array('url' => $action, 'class' => 'form-horizontal', 'method' => $method)) !!}
                     <table class="table table-hover">
                         @foreach ($jenis_alat_tangkap as $id_jenis_alat_tangkap => $item)
                             <tr>
@@ -29,9 +29,9 @@
                                 <td width="200">
                                     {{
                                         Form::select(
-                                            'nama_alat_tangkap[' . $id_jenis_alat_tangkap . ']', 
+                                            'nama_alat_tangkap[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
                                             $master_jenis_alat_tangkap, 
-                                            null, 
+                                            $alat_tangkap[$id_jenis_alat_tangkap]['nama_alat_tangkap'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'Pilih',
@@ -51,8 +51,8 @@
                                 <td width="200">
                                     {{
                                         Form::text(
-                                            'ukuran_panjang[' . $id_jenis_alat_tangkap . ']', 
-                                            '', 
+                                            'ukuran_panjang[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
+                                            $alat_tangkap[$id_jenis_alat_tangkap]['ukuran_panjang'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'm'
@@ -68,8 +68,8 @@
                                 <td width="200">
                                     {{
                                         Form::text(
-                                            'ukuran_lebar[' . $id_jenis_alat_tangkap . ']', 
-                                            '', 
+                                            'ukuran_lebar[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
+                                            $alat_tangkap[$id_jenis_alat_tangkap]['ukuran_lebar'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'm'
@@ -85,8 +85,8 @@
                                 <td width="200">
                                     {{
                                         Form::text(
-                                            'ukuran_tinggi[' . $id_jenis_alat_tangkap . ']', 
-                                            '', 
+                                            'ukuran_tinggi[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
+                                            $alat_tangkap[$id_jenis_alat_tangkap]['ukuran_tinggi'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'm'
@@ -102,8 +102,8 @@
                                 <td width="200">
                                     {{
                                         Form::text(
-                                            'ukuran_mata_jaring[' . $id_jenis_alat_tangkap . ']', 
-                                            '', 
+                                            'ukuran_mata_jaring[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
+                                            $alat_tangkap[$id_jenis_alat_tangkap]['ukuran_mata_jaring'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => ''
@@ -119,8 +119,8 @@
                                 <td width="200">
                                     {{
                                         Form::text(
-                                            'ukuran_mata_pancing[' . $id_jenis_alat_tangkap . ']', 
-                                            '', 
+                                            'ukuran_mata_pancing[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
+                                            $alat_tangkap[$id_jenis_alat_tangkap]['ukuran_mata_pancing'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => ''
@@ -136,8 +136,8 @@
                                 <td width="200">
                                     {{
                                         Form::text(
-                                            'jumlah[' . $id_jenis_alat_tangkap . ']', 
-                                            '', 
+                                            'jumlah[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
+                                            $alat_tangkap[$id_jenis_alat_tangkap]['jumlah'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => ''
@@ -148,8 +148,8 @@
                                 <td>
                                     {{
                                         Form::text(
-                                            'satuan_jumlah[' . $id_jenis_alat_tangkap . ']', 
-                                            '', 
+                                            'satuan_jumlah[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
+                                            $alat_tangkap[$id_jenis_alat_tangkap]['satuan_jumlah'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'satuan'
@@ -167,9 +167,9 @@
                                             <label>
                                                 {{
                                                     Form::radio(
-                                                        'kondisi[' . $id_jenis_alat_tangkap . ']', 
+                                                        'kondisi[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
                                                         $id_kondisi,
-                                                        false,
+                                                        $alat_tangkap[$id_jenis_alat_tangkap]['kondisi'] == $id_kondisi,
                                                         [
                                                             'class' => 'control-label'
                                                         ]
@@ -188,8 +188,8 @@
                                 <td width="200">
                                     {{
                                         Form::text(
-                                            'tahun_pembelian[' . $id_jenis_alat_tangkap . ']', 
-                                            '', 
+                                            'tahun_pembelian[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
+                                            $alat_tangkap[$id_jenis_alat_tangkap]['tahun_pembelian'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => ''
@@ -205,8 +205,8 @@
                                 <td width="200">
                                     {{
                                         Form::text(
-                                            'harga_beli[' . $id_jenis_alat_tangkap . ']', 
-                                            '', 
+                                            'harga_beli[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
+                                            $alat_tangkap[$id_jenis_alat_tangkap]['harga_beli'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => ''
@@ -217,8 +217,8 @@
                                 <td>
                                     {{
                                         Form::text(
-                                            'satuan_harga_beli[' . $id_jenis_alat_tangkap . ']', 
-                                            '', 
+                                            'satuan_harga_beli[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
+                                            $alat_tangkap[$id_jenis_alat_tangkap]['satuan_harga_beli'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'satuan'
@@ -233,8 +233,8 @@
                                 <td width="200">
                                     {{
                                         Form::text(
-                                            'umur_teknis[' . $id_jenis_alat_tangkap . ']', 
-                                            '', 
+                                            'umur_teknis[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
+                                            $alat_tangkap[$id_jenis_alat_tangkap]['umur_teknis'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'tahun'
@@ -253,9 +253,9 @@
                                             <label>
                                                 {{
                                                     Form::radio(
-                                                        'sumber_modal[' . $id_jenis_alat_tangkap . ']', 
-                                                        $id_kondisi,
-                                                        false,
+                                                        'sumber_modal[' . $alat_tangkap[$id_jenis_alat_tangkap]['id_alat_tangkap'] . ']', 
+                                                        $id_sumber_modal,
+                                                        $alat_tangkap[$id_jenis_alat_tangkap]['sumber_modal'] == $id_sumber_modal,
                                                         [
                                                             'class' => 'control-label'
                                                         ]

@@ -11,6 +11,27 @@ use Validator;
 
 class AlatTangkapController extends Controller
 {
+    var $jenis_alat_tangkap = [
+        1 => 'Alat Tangkap Utama',
+        2 => 'Alat Tangkap Alternatif 1',
+        3 => 'Alat Tangkap Alternatif 2',
+        4 => 'Alat Tangkap Alternatif 3',
+        4 => 'Alat Tangkap Alternatif 4',
+    ];
+
+    var $master_kondisi = [
+        1 => 'Baru',
+        2 => 'Bekas', 
+    ];
+
+    var $master_sumber_modal = [
+        1 => 'Modal sendiri',
+        2 => 'Kredit formal', 
+        3 => 'Kredit informal',
+        4 => 'Bantuan pemerintah',
+        5 => 'Keluarga',
+        6 => 'Campuran',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -30,32 +51,21 @@ class AlatTangkapController extends Controller
     {
         // Redirect to list of responden if id_responden
         if (!$request->session()->get('id_responden')) return redirect('responden');
+
+        $master_jenis_alat_tangkap = [];
+        foreach (MasterJenisAlatTangkap::all() as $index => $item) {
+            $master_jenis_alat_tangkap[$item->id_master_jenis_alat_tangkap] = $item->jenis_alat_tangkap;
+        }
         
         return view('alat_tangkap.form', [
             'subtitle'                  => 'Alat Tangkap',
             'action'                    => 'alat-tangkap/tambah',
-            'master_status_kepemilikan' => [
-                    1 => 'Sendiri', 
-                    2 => 'Juragan', 
-                    3 => 'Kelompok', 
-                    4 => 'Sewa'
-                ],
-            'master_kondisi' => [
-                    1 => 'Baru',
-                    2 => 'Bekas', 
-                ],
-            'master_sumber_modal' => [
-                    1 => 'Modal sendiri',
-                    2 => 'Kredit formal', 
-                    3 => 'Kredit informal',
-                    4 => 'Bantuan pemerintah',
-                    5 => 'Keluarga',
-                    6 => 'Campuran',
-            ],
-            'plagis_kecil' => MasterJenisAlatTangkap::where('kateg_jenis_alat_tangkap', 1)->get(),
-            'plagis_besar' => MasterJenisAlatTangkap::where('kateg_jenis_alat_tangkap', 2)->get(),
-            'demersal'     => MasterJenisAlatTangkap::where('kateg_jenis_alat_tangkap', 3)->get(),
-            'nomor'        => 1
+            'method'                    => 'post',
+            'jenis_alat_tangkap'        => $this->jenis_alat_tangkap,
+            'master_kondisi'            => $this->master_kondisi,
+            'master_sumber_modal'       => $this->master_sumber_modal,
+            'master_jenis_alat_tangkap' => $master_jenis_alat_tangkap,
+            'nomor'                     => 1
         ]);
     }
 
@@ -67,78 +77,28 @@ class AlatTangkapController extends Controller
      */
     public function store(Request $request)
     {
-        // Init 
-        $rules = [];
-
-        $master_jenis_alat_tangkap = MasterJenisAlatTangkap::select('id_master_jenis_alat_tangkap', 'is_freetext')->get();
-
-        foreach($master_jenis_alat_tangkap as $index => $item)
-        {
-            // Validate input jumlah_alat, if jenis_alat_tangkap lain is filled
-            if ($item->is_freetext)
-            {
-                if($request->get('jenis_alat_tangkap_lain')[$item->id_master_jenis_alat_tangkap])
-                {
-                    $rules['jumlah_alat_tangkap.' . $item->id_master_jenis_alat_tangkap]   = 'required|numeric';
-                    $rules['waktu_penggunaan_alat.' . $item->id_master_jenis_alat_tangkap] = 'required|numeric';
-                    $rules['kondisi_alat.' . $item->id_master_jenis_alat_tangkap]          = 'required';
-                    $rules['harga_beli_alat.' . $item->id_master_jenis_alat_tangkap]       = 'required|numeric';
-                    $rules['spesifikasi_alat.' . $item->id_master_jenis_alat_tangkap]      = 'required';                   
-                    $rules['kondisi_alat.' . $item->id_master_jenis_alat_tangkap]          = 'required';
-                    $rules['harga_beli_alat.' . $item->id_master_jenis_alat_tangkap]       = 'required|numeric';
-                    $rules['umur_ekonomis_alat.' . $item->id_master_jenis_alat_tangkap]    = 'required|numeric';
-                    $rules['sumber_modal_alat.' . $item->id_master_jenis_alat_tangkap]     = 'required';                   
-                }
-            }
-
-            // Validate peralatan lain
-            else
-            {
-                if ($request->get('jumlah_alat_tangkap')[$item->id_master_jenis_alat_tangkap])
-                {
-                    $rules['jumlah_alat_tangkap.' . $item->id_master_jenis_alat_tangkap]   = 'numeric';
-                    $rules['waktu_penggunaan_alat.' . $item->id_master_jenis_alat_tangkap] = 'required|numeric';
-                    $rules['kondisi_alat.' . $item->id_master_jenis_alat_tangkap]          = 'required';
-                    $rules['harga_beli_alat.' . $item->id_master_jenis_alat_tangkap]       = 'required|numeric';
-                    $rules['spesifikasi_alat.' . $item->id_master_jenis_alat_tangkap]      = 'required';                   
-                    $rules['kondisi_alat.' . $item->id_master_jenis_alat_tangkap]          = 'required';
-                    $rules['harga_beli_alat.' . $item->id_master_jenis_alat_tangkap]       = 'required|numeric';
-                    $rules['umur_ekonomis_alat.' . $item->id_master_jenis_alat_tangkap]    = 'required|numeric';
-                    $rules['sumber_modal_alat.' . $item->id_master_jenis_alat_tangkap]     = 'required';                   
-                }
-            }
-        }
-        
-        // Validate input
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return redirect('alat-tangkap/tambah')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
 
         // Save alat tangkap
-        foreach($master_jenis_alat_tangkap as $index => $item)
+        foreach($request->input('nama_alat_tangkap') as $id_jenis_alat_tangkap => $item)
         {
-            $jenis_alat_tangkap                     = new AlatTangkap;
-            $jenis_alat_tangkap->id_responden       = $request->session()->get('id_responden');
-            $jenis_alat_tangkap->jenis_alat_tangkap = $item->id_master_jenis_alat_tangkap;
-            
-            if ($item->is_freetext)
-            {
-                $jenis_alat_tangkap->jenis_alat_tangkap_lain = $request->get('jenis_alat_tangkap_lain')[$item->id_master_jenis_alat_tangkap];
-            }
+            $jenis_alat_tangkap                      = new AlatTangkap;
+            $jenis_alat_tangkap->id_responden        = $request->session()->get('id_responden');
+            $jenis_alat_tangkap->jenis_alat_tangkap  = $id_jenis_alat_tangkap;
+            $jenis_alat_tangkap->nama_alat_tangkap   = $request->input('nama_alat_tangkap.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->ukuran_panjang      = $request->input('ukuran_panjang.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->ukuran_lebar        = $request->input('ukuran_lebar.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->ukuran_tinggi       = $request->input('ukuran_tinggi.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->ukuran_mata_pancing = $request->input('ukuran_mata_pancing.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->ukuran_mata_jaring  = $request->input('ukuran_mata_jaring.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->jumlah              = $request->input('jumlah.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->satuan_jumlah       = $request->input('satuan_jumlah.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->kondisi             = $request->input('kondisi.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->tahun_pembelian     = $request->input('tahun_pembelian.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->harga_beli          = $request->input('harga_beli.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->satuan_harga_beli   = $request->input('satuan_harga_beli.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->umur_teknis         = $request->input('umur_teknis.' . $id_jenis_alat_tangkap, null);
+            $jenis_alat_tangkap->sumber_modal        = $request->input('sumber_modal.' . $id_jenis_alat_tangkap, null);
 
-            $jenis_alat_tangkap->waktu_penggunaan_alat   = $request->get('waktu_penggunaan_alat')[$item->id_master_jenis_alat_tangkap];
-            $jenis_alat_tangkap->status_kepemilikan_alat = $request->get('status_kepemilikan_alat')[$item->id_master_jenis_alat_tangkap];
-            $jenis_alat_tangkap->jumlah_alat_tangkap     = $request->get('jumlah_alat_tangkap')[$item->id_master_jenis_alat_tangkap];
-            $jenis_alat_tangkap->spesifikasi_alat        = $request->get('spesifikasi_alat')[$item->id_master_jenis_alat_tangkap];
-            $jenis_alat_tangkap->kondisi_alat            = $request->get('kondisi_alat')[$item->id_master_jenis_alat_tangkap];
-            $jenis_alat_tangkap->umur_ekonomis_alat      = $request->get('umur_ekonomis_alat')[$item->id_master_jenis_alat_tangkap];
-            $jenis_alat_tangkap->harga_beli_alat         = $request->get('harga_beli_alat')[$item->id_master_jenis_alat_tangkap];
-            $jenis_alat_tangkap->sumber_modal_alat       = $request->get('sumber_modal_alat')[$item->id_master_jenis_alat_tangkap];
-            
             $jenis_alat_tangkap->save();
         }
 
@@ -162,9 +122,50 @@ class AlatTangkapController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+
+        $master_jenis_alat_tangkap = [];
+        foreach (MasterJenisAlatTangkap::all() as $index => $item) {
+            $master_jenis_alat_tangkap[$item->id_master_jenis_alat_tangkap] = $item->jenis_alat_tangkap;
+        }
+        
+        //Prep data
+        $alat_tangkap = [];
+        foreach (AlatTangkap::where('id_responden', $request->session()->get('id_responden'))->get() as $index => $item) {
+            $alat_tangkap[$item->jenis_alat_tangkap] =
+            [
+                'id_alat_tangkap'     => $item->id_alat_tangkap,
+                'nama_alat_tangkap'   => $item->nama_alat_tangkap,
+                'ukuran_panjang'      => $item->ukuran_panjang,
+                'ukuran_lebar'        => $item->ukuran_lebar,
+                'ukuran_tinggi'       => $item->ukuran_tinggi,
+                'ukuran_mata_jaring'  => $item->ukuran_mata_jaring,
+                'ukuran_mata_pancing' => $item->ukuran_mata_pancing,
+                'jumlah'              => $item->jumlah,
+                'satuan_jumlah'       => $item->satuan_jumlah,
+                'kondisi'             => $item->kondisi,
+                'tahun_pembelian'     => $item->tahun_pembelian,
+                'harga_beli'          => $item->harga_beli,
+                'satuan_harga_beli'   => $item->satuan_harga_beli,
+                'umur_teknis'         => $item->umur_teknis,
+                'sumber_modal'        => $item->sumber_modal,
+            ];
+        }
+
+        return view('alat_tangkap.edit', [
+            'subtitle'                  => 'Alat Tangkap',
+            'action'                    => 'alat-tangkap/edit/' . $request->session()->get('id_responden'),
+            'method'                    => 'patch',
+            'jenis_alat_tangkap'        => $this->jenis_alat_tangkap,
+            'master_kondisi'            => $this->master_kondisi,
+            'master_sumber_modal'       => $this->master_sumber_modal,
+            'master_jenis_alat_tangkap' => $master_jenis_alat_tangkap,
+            'alat_tangkap'              => $alat_tangkap,
+            'nomor'                     => 1
+        ]);
     }
 
     /**
@@ -176,7 +177,29 @@ class AlatTangkapController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Save alat tangkap
+        foreach($request->input('nama_alat_tangkap') as $id_alat_tangkap => $item)
+        {
+            $jenis_alat_tangkap                      = AlatTangkap::find($id_alat_tangkap);
+            $jenis_alat_tangkap->nama_alat_tangkap   = $request->input('nama_alat_tangkap.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->ukuran_panjang      = $request->input('ukuran_panjang.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->ukuran_lebar        = $request->input('ukuran_lebar.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->ukuran_tinggi       = $request->input('ukuran_tinggi.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->ukuran_mata_pancing = $request->input('ukuran_mata_pancing.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->ukuran_mata_jaring  = $request->input('ukuran_mata_jaring.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->jumlah              = $request->input('jumlah.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->satuan_jumlah       = $request->input('satuan_jumlah.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->kondisi             = $request->input('kondisi.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->tahun_pembelian     = $request->input('tahun_pembelian.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->harga_beli          = $request->input('harga_beli.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->satuan_harga_beli   = $request->input('satuan_harga_beli.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->umur_teknis         = $request->input('umur_teknis.' . $id_alat_tangkap, null);
+            $jenis_alat_tangkap->sumber_modal        = $request->input('sumber_modal.' . $id_alat_tangkap, null);
+
+            $jenis_alat_tangkap->save();
+        }
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**
@@ -185,8 +208,9 @@ class AlatTangkapController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        AlatTangkap::where('id_responden', $request->session()->get('id_responden'))->delete();
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }

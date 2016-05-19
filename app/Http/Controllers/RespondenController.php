@@ -264,14 +264,14 @@ class RespondenController extends Controller
                 'link'      => 'perahu',
             ],
             [
-                'kuesioner' => 'Tenaga Penggerak / Mesin',
-                'is_done'   => (Mesin::where('id_responden', $request->session()->get('id_responden'))->count()),
-                'link'      => 'tenaga-penggerak',
-            ],
-            [
                 'kuesioner' => 'Alat Tangkap',
                 'is_done'   => (AlatTangkap::where('id_responden', $request->session()->get('id_responden'))->count()),
                 'link'      => 'alat-tangkap',
+            ],
+            [
+                'kuesioner' => 'Tenaga Penggerak / Mesin',
+                'is_done'   => (Mesin::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'link'      => 'tenaga-penggerak',
             ],
             [
                 'kuesioner' => 'Aset Pendukung Usaha',

@@ -15,9 +15,7 @@ class CreateTableMasterJenisAlatTangkap extends Migration
         Schema::create('master_jenis_alat_tangkap', function (Blueprint $table) {
             $table->increments('id_master_jenis_alat_tangkap');
 
-            $table->integer('kateg_jenis_alat_tangkap');
             $table->string('jenis_alat_tangkap', 150);
-            $table->boolean('is_freetext')->default(FALSE);
             
             $table->timestamps();
             $table->softDeletes();
