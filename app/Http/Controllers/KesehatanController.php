@@ -94,7 +94,6 @@ class KesehatanController extends Controller
         $kesehatan->frek_bpjs      = $request->input('kesehatan.frek_bpjs', null);
         $kesehatan->frek_asuransi  = $request->input('kesehatan.frek_asuransi', null);
 
-
         $kesehatan->save();
 
         return redirect('responden/lihat/' . $request->session()->get('id_responden'));
@@ -121,8 +120,6 @@ class KesehatanController extends Controller
     {
         // Redirect to list of responden if id_responden
         if (!$request->session()->get('id_responden')) return redirect('responden');
-        print_r(Kesehatan::where('id_responden', $request->session()->get('id_responden'))->first());
-        die();
         return view('kesehatan.edit', [
             'subtitle'            => 'Kesehatan',
             'action'              => 'kesehatan/edit/' . $request->session()->get('id_responden'),
@@ -145,7 +142,42 @@ class KesehatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Save data 
+        $kesehatan                       = Kesehatan::where('id_responden', $request->session()->get('id_responden'))->first();
+        $kesehatan->sakit_setahun_ringan = $request->input('kesehatan.sakit_setahun_ringan', null);
+        $kesehatan->sakit_setahun_berat  = $request->input('kesehatan.sakit_setahun_berat', null);
+
+        $kesehatan->ringan_dibiarkan   = $request->input('kesehatan.ringan_dibiarkan', null);
+        $kesehatan->ringan_beli_obat   = $request->input('kesehatan.ringan_beli_obat', null);
+        $kesehatan->ringan_puskesmas   = $request->input('kesehatan.ringan_puskesmas', null);
+        $kesehatan->ringan_dokter      = $request->input('kesehatan.ringan_dokter', null);
+        $kesehatan->ringan_alternatif  = $request->input('kesehatan.ringan_alternatif', null);
+        $kesehatan->ringan_rumah_sakit = $request->input('kesehatan.ringan_rumah_sakit', null);
+        $kesehatan->berat_dibiarkan    = $request->input('kesehatan.berat_dibiarkan', null);
+        $kesehatan->berat_beli_obat    = $request->input('kesehatan.berat_beli_obat', null);
+        $kesehatan->berat_puskesmas    = $request->input('kesehatan.berat_puskesmas', null);
+        $kesehatan->berat_dokter       = $request->input('kesehatan.berat_dokter', null);
+        $kesehatan->berat_alternatif   = $request->input('kesehatan.berat_alternatif', null);
+        $kesehatan->berat_rumah_sakit  = $request->input('kesehatan.berat_rumah_sakit', null);
+
+        $kesehatan->alasan_dibiarkan   = $request->input('kesehatan.alasan_dibiarkan', null);
+        $kesehatan->alasan_beli_obat   = $request->input('kesehatan.alasan_beli_obat', null);
+        $kesehatan->alasan_puskesmas   = $request->input('kesehatan.alasan_puskesmas', null);
+        $kesehatan->alasan_dokter      = $request->input('kesehatan.alasan_dokter', null);
+        $kesehatan->alasan_alternatif  = $request->input('kesehatan.alasan_alternatif', null);
+        $kesehatan->alasan_rumah_sakit = $request->input('kesehatan.alasan_rumah_sakit', null);
+
+        $kesehatan->jamkesmas      = $request->input('kesehatan.jamkesmas', null);
+        $kesehatan->bpjs           = $request->input('kesehatan.bpjs', null);
+        $kesehatan->asuransi       = $request->input('kesehatan.asuransi', null);
+        $kesehatan->frek_jamkesmas = $request->input('kesehatan.frek_jamkesmas', null);
+        $kesehatan->frek_bpjs      = $request->input('kesehatan.frek_bpjs', null);
+        $kesehatan->frek_asuransi  = $request->input('kesehatan.frek_asuransi', null);
+
+
+        $kesehatan->save();
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**

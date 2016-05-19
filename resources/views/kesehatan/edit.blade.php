@@ -322,6 +322,7 @@
                                         Form::textarea(
                                             'kesehatan[alasan_rumah_sakit]', 
                                             $kesehatan['alasan_rumah_sakit'], 
+                                            [
                                                 'class'       => 'form-control col-sm-6',
                                                 'placeholder' => 'Alasan',
                                                 'rows'        => 4
