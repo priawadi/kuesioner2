@@ -31,7 +31,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[sakit_setahun_ringan]', 
-                                            null, 
+                                            $kesehatan['sakit_setahun_ringan'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -48,7 +48,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[sakit_setahun_berat]', 
-                                            '', 
+                                            $kesehatan['sakit_setahun_berat'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -77,7 +77,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[ringan_dibiarkan]', 
-                                            '', 
+                                            $kesehatan['ringan_dibiarkan'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -89,7 +89,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[ringan_beli_obat]', 
-                                            '', 
+                                            $kesehatan['ringan_beli_obat'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -101,7 +101,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[ringan_puskesmas]', 
-                                            '', 
+                                            $kesehatan['ringan_puskesmas'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -113,7 +113,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[ringan_dokter]', 
-                                            '', 
+                                            $kesehatan['ringan_dokter'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -125,7 +125,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[ringan_alternatif]', 
-                                            '', 
+                                            $kesehatan['ringan_alternatif'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -137,7 +137,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[ringan_rumah_sakit]', 
-                                            '', 
+                                            $kesehatan['ringan_rumah_sakit'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -153,7 +153,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[berat_dibiarkan]', 
-                                            '', 
+                                            $kesehatan['berat_dibiarkan'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -165,7 +165,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[berat_beli_obat]', 
-                                            '', 
+                                            $kesehatan['berat_beli_obat'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -177,7 +177,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[berat_puskesmas]', 
-                                            '', 
+                                            $kesehatan['berat_puskesmas'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -189,7 +189,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[berat_dokter]', 
-                                            '', 
+                                            $kesehatan['berat_dokter'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -201,7 +201,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[berat_alternatif]', 
-                                            '', 
+                                            $kesehatan['berat_alternatif'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -213,7 +213,7 @@
                                     {{  
                                         Form::text(
                                             'kesehatan[berat_rumah_sakit]', 
-                                            '', 
+                                            $kesehatan['berat_rumah_sakit'], 
                                             [
                                                 'class'       => 'form-control',
                                                 'placeholder' => 'kali/tahun'
@@ -236,7 +236,7 @@
                                     {{
                                         Form::textarea(
                                             'kesehatan[alasan_dibiarkan]', 
-                                            '', 
+                                            $kesehatan['alasan_dibiarkan'], 
                                             [
                                                 'class'       => 'form-control col-sm-6',
                                                 'placeholder' => 'Alasan',
@@ -253,7 +253,7 @@
                                     {{
                                         Form::textarea(
                                             'kesehatan[alasan_beli_obat]', 
-                                            '', 
+                                            $kesehatan['alasan_beli_obat'], 
                                             [
                                                 'class'       => 'form-control col-sm-6',
                                                 'placeholder' => 'Alasan',
@@ -270,7 +270,7 @@
                                     {{
                                         Form::textarea(
                                             'kesehatan[alasan_puskesmas]', 
-                                            '', 
+                                            $kesehatan['alasan_puskesmas'], 
                                             [
                                                 'class'       => 'form-control col-sm-6',
                                                 'placeholder' => 'Alasan',
@@ -287,7 +287,7 @@
                                     {{
                                         Form::textarea(
                                             'kesehatan[alasan_dokter]', 
-                                            '', 
+                                            $kesehatan['alasan_dokter'], 
                                             [
                                                 'class'       => 'form-control col-sm-6',
                                                 'placeholder' => 'Alasan',
@@ -304,7 +304,7 @@
                                     {{
                                         Form::textarea(
                                             'kesehatan[alasan_alternatif]', 
-                                            '', 
+                                            $kesehatan['alasan_alternatif'], 
                                             [
                                                 'class'       => 'form-control col-sm-6',
                                                 'placeholder' => 'Alasan',
@@ -321,8 +321,7 @@
                                     {{
                                         Form::textarea(
                                             'kesehatan[alasan_rumah_sakit]', 
-                                            '', 
-                                            [
+                                            $kesehatan['alasan_rumah_sakit'], 
                                                 'class'       => 'form-control col-sm-6',
                                                 'placeholder' => 'Alasan',
                                                 'rows'        => 4
@@ -349,7 +348,7 @@
                                                 Form::radio(
                                                     'kesehatan[jamkesmas]', 
                                                     $id_status_daftar,
-                                                    false,
+                                                    $id_status_daftar == $kesehatan['jamkesmas'],
                                                     [
                                                         'class' => 'control-label'
                                                     ]
@@ -372,7 +371,7 @@
                                                 Form::radio(
                                                     'kesehatan[bpjs]', 
                                                     $id_status_daftar,
-                                                    false,
+                                                    $id_status_daftar == $kesehatan['bpjs'],
                                                     [
                                                         'class' => 'control-label'
                                                     ]
@@ -395,7 +394,7 @@
                                                 Form::radio(
                                                     'kesehatan[asuransi]', 
                                                     $id_status_daftar,
-                                                    false,
+                                                    $id_status_daftar == $kesehatan['asuransi'],
                                                     [
                                                         'class' => 'control-label'
                                                     ]
@@ -425,7 +424,7 @@
                                                 Form::radio(
                                                     'kesehatan[frek_jamkesmas]', 
                                                     $id_penggunaan_asuransi,
-                                                    false,
+                                                    $id_penggunaan_asuransi == $kesehatan['frek_jamkesmas'],
                                                     [
                                                         'class' => 'control-label'
                                                     ]
@@ -448,7 +447,7 @@
                                                 Form::radio(
                                                     'kesehatan[frek_bpjs]', 
                                                     $id_penggunaan_asuransi,
-                                                    false,
+                                                    $id_penggunaan_asuransi == $kesehatan['frek_bpjs'],
                                                     [
                                                         'class' => 'control-label'
                                                     ]
@@ -471,7 +470,7 @@
                                                 Form::radio(
                                                     'kesehatan[frek_asuransi]', 
                                                     $id_penggunaan_asuransi,
-                                                    false,
+                                                    $id_penggunaan_asuransi == $kesehatan['frek_asuransi'],
                                                     [
                                                         'class' => 'control-label'
                                                     ]

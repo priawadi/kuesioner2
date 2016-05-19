@@ -33,11 +33,17 @@ class CreateTableKesehatan extends Migration
             $table->integer('berat_dokter')->nullable();
             $table->integer('berat_alternatif')->nullable();
             $table->integer('berat_rumah_sakit')->nullable();
-            
 
-            $table->boolean('jamkesmas')->default(FALSE);
-            $table->boolean('bpjs')->default(FALSE);
-            $table->boolean('asuransi')->default(FALSE);
+            $table->text('alasan_dibiarkan')->nullable();
+            $table->text('alasan_beli_obat')->nullable();
+            $table->text('alasan_puskesmas')->nullable();
+            $table->text('alasan_dokter')->nullable();
+            $table->text('alasan_alternatif')->nullable();
+            $table->text('alasan_rumah_sakit')->nullable();
+
+            $table->boolean('jamkesmas')->nullable();
+            $table->boolean('bpjs')->nullable();
+            $table->boolean('asuransi')->nullable();
 
             $table->smallInteger('frek_jamkesmas')->nullable();
             $table->smallInteger('frek_bpjs')->nullable();

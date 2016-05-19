@@ -117,6 +117,9 @@ Route::delete('/aset-rumah-tangga/hapus/{id_responden}', 'AsetRumahTanggaControl
 Route::get('/kesehatan', 'KesehatanController@index');
 Route::get('/kesehatan/tambah', 'KesehatanController@create');
 Route::post('/kesehatan/tambah', 'KesehatanController@store');
+Route::get('/kesehatan/edit/{id_responden}', 'KesehatanController@edit');
+Route::patch('/kesehatan/edit/{id_responden}', 'KesehatanController@update');
+Route::delete('/kesehatan/hapus/{id_responden}', 'KesehatanController@destroy');
 
 Route::get('/sample', 'SampleController@create');
 Route::post('/sample', 'SampleController@store');
