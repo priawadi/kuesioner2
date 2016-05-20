@@ -155,6 +155,9 @@ Route::delete('/aset-pendukung-usaha/hapus/{id_responden}', 'AsetPendukungUsahaC
 Route::get('/biaya-perijinan', 'BiayaPerijinanController@index');
 Route::get('/biaya-perijinan/tambah', 'BiayaPerijinanController@create');
 Route::post('/biaya-perijinan/tambah', 'BiayaPerijinanController@store');
+Route::get('/biaya-perijinan/edit/{id_responden}', 'BiayaPerijinanController@edit');
+Route::patch('/biaya-perijinan/edit/{id_responden}', 'BiayaPerijinanController@update');
+Route::delete('/biaya-perijinan/hapus/{id_responden}', 'BiayaPerijinanController@destroy');
 
 // Biaya Operasional
 Route::get('/biaya-operasional', 'BiayaOperasionalController@index');

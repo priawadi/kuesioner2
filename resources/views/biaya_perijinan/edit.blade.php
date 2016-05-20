@@ -35,8 +35,8 @@
                                     <td>
                                         {{  
                                             Form::text(
-                                                'frek_satuan[' . $key . ']', 
-                                                '', 
+                                                'frek_satuan[' . $biaya_tetap[$key]['id_biaya_perijinan'] . ']', 
+                                                $biaya_tetap[$key]['frek_satuan'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Frekuensi Setahun'
@@ -47,8 +47,8 @@
                                     <td>
                                         {{  
                                             Form::text(
-                                                'harga_satuan[' . $key . ']', 
-                                                '', 
+                                                'harga_satuan[' . $biaya_tetap[$key]['id_biaya_perijinan'] . ']', 
+                                                $biaya_tetap[$key]['harga_satuan'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Harga Satuan'
@@ -59,8 +59,8 @@
                                     <td>
                                         {{  
                                             Form::text(
-                                                'total_biaya[' . $key . ']', 
-                                                '', 
+                                                'total_biaya[' . $biaya_tetap[$key]['id_biaya_perijinan'] . ']', 
+                                                $biaya_tetap[$key]['total_biaya'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Total Biaya'

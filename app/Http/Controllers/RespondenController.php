@@ -279,7 +279,7 @@ class RespondenController extends Controller
                 'link'      => 'aset-pendukung-usaha',
             ],
             [
-                'kuesioner' => 'Biaya Perizinan dan Pemeliharaan Selama 1 Tahun',
+                'kuesioner' => 'Biaya Tetap',
                 'is_done'   => (BiayaPerijinan::where('id_responden', $request->session()->get('id_responden'))->count()),
                 'link'      => 'biaya-perijinan',
             ],
