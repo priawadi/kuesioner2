@@ -57,8 +57,8 @@
                                     <td>
                                         {{  
                                             Form::text(
-                                                'rataan_musim_puncak[' . $item['id_master_biaya_variabel'] . ']', 
-                                                '', 
+                                                'rataan_musim_puncak[' . $biaya_variabel[$item['id_master_biaya_variabel']]['id_biaya_operasional'] . ']', 
+                                                $biaya_variabel[$item['id_master_biaya_variabel']]['rataan_musim_puncak'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'satuan/trip'
@@ -69,8 +69,8 @@
                                     <td>
                                         {{  
                                             Form::text(
-                                                'rataan_musim_sedang[' . $item['id_master_biaya_variabel'] . ']', 
-                                                '', 
+                                                'rataan_musim_sedang[' . $biaya_variabel[$item['id_master_biaya_variabel']]['id_biaya_operasional'] . ']', 
+                                                $biaya_variabel[$item['id_master_biaya_variabel']]['rataan_musim_sedang'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'satuan/trip'
@@ -81,8 +81,8 @@
                                     <td>
                                         {{  
                                             Form::text(
-                                                'rataan_musim_paceklik[' . $item['id_master_biaya_variabel'] . ']', 
-                                                '', 
+                                                'rataan_musim_paceklik[' . $biaya_variabel[$item['id_master_biaya_variabel']]['id_biaya_operasional'] . ']', 
+                                                $biaya_variabel[$item['id_master_biaya_variabel']]['rataan_musim_paceklik'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'satuan/trip'
@@ -93,8 +93,8 @@
                                     <td>
                                         {{  
                                             Form::text(
-                                                'harga_satuan_puncak[' . $item['id_master_biaya_variabel'] . ']', 
-                                                '', 
+                                                'harga_satuan_puncak[' . $biaya_variabel[$item['id_master_biaya_variabel']]['id_biaya_operasional'] . ']', 
+                                                $biaya_variabel[$item['id_master_biaya_variabel']]['harga_satuan_puncak'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Rp/trip'
@@ -105,8 +105,8 @@
                                     <td>
                                         {{  
                                             Form::text(
-                                                'harga_satuan_sedang[' . $item['id_master_biaya_variabel'] . ']', 
-                                                '', 
+                                                'harga_satuan_sedang[' . $biaya_variabel[$item['id_master_biaya_variabel']]['id_biaya_operasional'] . ']', 
+                                                $biaya_variabel[$item['id_master_biaya_variabel']]['harga_satuan_sedang'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Rp/trip'
@@ -117,8 +117,8 @@
                                     <td>
                                         {{  
                                             Form::text(
-                                                'harga_satuan_paceklik[' . $item['id_master_biaya_variabel'] . ']', 
-                                                '', 
+                                                'harga_satuan_paceklik[' . $biaya_variabel[$item['id_master_biaya_variabel']]['id_biaya_operasional'] . ']', 
+                                                $biaya_variabel[$item['id_master_biaya_variabel']]['harga_satuan_paceklik'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Rp/trip'

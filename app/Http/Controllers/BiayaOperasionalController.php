@@ -34,8 +34,9 @@ class BiayaOperasionalController extends Controller
         return view('biaya_operasional.form', [
             'subtitle'          => 'Biaya Operasional',
             'action'            => 'biaya-operasional/tambah',
+            'method'            => 'post',
             'jenis_operasional' => MasterBiayaVariabel::where('kateg_biaya_variabel', 1)->get(),
-            'nomor' => 1
+            'nomor'             => 1
         ]);
     }
 
@@ -47,43 +48,18 @@ class BiayaOperasionalController extends Controller
      */
     public function store(Request $request)
     {
-        $rules['satuan.*'] = '';
-        $rules['rataan_puncak.*']      = 'numeric';
-        $rules['rataan_sedang.*']      = 'numeric';
-        $rules['rataan_paceklik.*']    = 'numeric';
-        $rules['harga.*']              = 'numeric';
-        $rules['total_puncak.*']       = 'numeric';
-        $rules['total_sedang.*']       = 'numeric';
-        $rules['total_paceklik.*']     = 'numeric';
-        
-        // Validate input
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return redirect('biaya-operasional/tambah')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
 
         // Save data
-        foreach (MasterBiayaVariabel::where('kateg_biaya_variabel', 1)->get() as $key => $value) {
+        foreach ($request->input('rataan_musim_puncak') as $id_biaya_variabel => $value) {
             $biaya_operasional                        = new BiayaOperasional;
             $biaya_operasional->id_responden          = $request->session()->get('id_responden');
-            $biaya_operasional->jenis_biaya           = $value['id_master_biaya_variabel'];
-            
-            if (isset($request->get('jenis_biaya_lain')[$value['id_master_biaya_variabel']]))
-            {
-                $biaya_operasional->jenis_biaya_lain = $request->get('jenis_biaya_lain')[$value['id_master_biaya_variabel']];
-            }
-
-            $biaya_operasional->satuan                = $request->get('satuan')[$value['id_master_biaya_variabel']];
-            $biaya_operasional->rataan_musim_puncak   = $request->get('rataan_musim_puncak')[$value['id_master_biaya_variabel']];
-            $biaya_operasional->rataan_musim_sedang   = $request->get('rataan_musim_sedang')[$value['id_master_biaya_variabel']];
-            $biaya_operasional->rataan_musim_paceklik = $request->get('rataan_musim_paceklik')[$value['id_master_biaya_variabel']];
-            $biaya_operasional->harga                 = $request->get('harga')[$value['id_master_biaya_variabel']];
-            $biaya_operasional->total_puncak          = $request->get('total_puncak')[$value['id_master_biaya_variabel']];
-            $biaya_operasional->total_sedang          = $request->get('total_sedang')[$value['id_master_biaya_variabel']];
-            $biaya_operasional->total_paceklik        = $request->get('total_paceklik')[$value['id_master_biaya_variabel']];
+            $biaya_operasional->jenis_biaya           = $id_biaya_variabel;
+            $biaya_operasional->rataan_musim_puncak   = $request->input('rataan_musim_puncak.' . $id_biaya_variabel);
+            $biaya_operasional->rataan_musim_sedang   = $request->input('rataan_musim_sedang.' . $id_biaya_variabel);
+            $biaya_operasional->rataan_musim_paceklik = $request->input('rataan_musim_paceklik.' . $id_biaya_variabel);
+            $biaya_operasional->harga_satuan_puncak   = $request->input('harga_satuan_puncak.' . $id_biaya_variabel);
+            $biaya_operasional->harga_satuan_sedang   = $request->input('harga_satuan_sedang.' . $id_biaya_variabel);
+            $biaya_operasional->harga_satuan_paceklik = $request->input('harga_satuan_paceklik.' . $id_biaya_variabel);
 
             $biaya_operasional->save();
         }
@@ -108,9 +84,35 @@ class BiayaOperasionalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+        // Redirect to list of responden if id_responden
+        if (!$request->session()->get('id_responden')) return redirect('responden');
+        
+        $biaya_variabel = [];
+        foreach (BiayaOperasional::where('id_responden', $request->session()->get('id_responden'))->get() as $index => $item) {
+            $biaya_variabel[$item->jenis_biaya] = [
+                'id_biaya_operasional'  => $item->id_biaya_operasional,
+                'rataan_musim_puncak'   => $item->rataan_musim_puncak,
+                'rataan_musim_sedang'   => $item->rataan_musim_sedang,
+                'rataan_musim_paceklik' => $item->rataan_musim_paceklik,
+                'harga_satuan_puncak'   => $item->harga_satuan_puncak,
+                'harga_satuan_sedang'   => $item->harga_satuan_sedang,
+                'harga_satuan_paceklik' => $item->harga_satuan_paceklik,
+            ];
+        }
+
+        return view('biaya_operasional.edit', [
+            'subtitle'          => 'Biaya Operasional',
+            'action'            => 'biaya-operasional/edit/' . $request->session()->get('id_responden'),
+            'method'            => 'patch',
+            'jenis_operasional' => MasterBiayaVariabel::where('kateg_biaya_variabel', 1)->get(),
+            'nomor'             => 1,
+            
+            // Data
+            'biaya_variabel'    => $biaya_variabel,
+        ]);
+
     }
 
     /**
@@ -122,7 +124,20 @@ class BiayaOperasionalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Save data
+        foreach ($request->input('rataan_musim_puncak') as $id_biaya_operasional => $value) {
+            $biaya_operasional                        = BiayaOperasional::find($id_biaya_operasional);
+            $biaya_operasional->rataan_musim_puncak   = $request->input('rataan_musim_puncak.' . $id_biaya_operasional);
+            $biaya_operasional->rataan_musim_sedang   = $request->input('rataan_musim_sedang.' . $id_biaya_operasional);
+            $biaya_operasional->rataan_musim_paceklik = $request->input('rataan_musim_paceklik.' . $id_biaya_operasional);
+            $biaya_operasional->harga_satuan_puncak   = $request->input('harga_satuan_puncak.' . $id_biaya_operasional);
+            $biaya_operasional->harga_satuan_sedang   = $request->input('harga_satuan_sedang.' . $id_biaya_operasional);
+            $biaya_operasional->harga_satuan_paceklik = $request->input('harga_satuan_paceklik.' . $id_biaya_operasional);
+
+            $biaya_operasional->save();
+        }
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**
@@ -131,8 +146,9 @@ class BiayaOperasionalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
-        //
+        BiayaOperasional::where('id_responden', $request->session()->get('id_responden'))->delete();
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }
