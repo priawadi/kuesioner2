@@ -113,10 +113,10 @@ class KonsumsiController extends Controller
     public function update(Request $request, $id)
     {
         // Save data
-        foreach($request->input('jawaban') as $id_jawaban_konsumsi => $value)
+        foreach($request->input('konsumsi.jawaban') as $id_jawaban_konsumsi => $value)
         {
             $jawabankonsum                       = JawabanKonsumsi::find($id_jawaban_konsumsi);
-            $jawabankonsum->jawaban              = $request->input('jawaban.' . $id_jawaban_konsumsi, null);
+            $jawabankonsum->jawaban              = $request->input('konsumsi.jawaban.' . $id_jawaban_konsumsi, null);
             $jawabankonsum->save();
         }
 
