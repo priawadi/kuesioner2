@@ -87,7 +87,20 @@ class KonsumsiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $jawaban_konsumsi = [];
+        foreach (JawabanKonsumsi::where('id_responden', $id)->get() as $index => $item) {
+            $jawaban_konsumsi[$item->id_konsumsi] = [
+                'id_jawaban_konsumsi'   => $item->id_jawaban_konsumsi,
+                'jawaban'               => $item->jawaban,
+            ];
+        }       
+
+        return view('konsumsi.edit', [
+            'subtitle'          => 'I PENGELUARAN PANGAN MINGGUAN RUMAH TANGGA PERIKANAN',
+            'action'            => 'konsumsi/edit/' . $id,
+            'konsumsi'          => Konsumsi::all(),
+            'jawaban_konsumsi'  => $jawaban_konsumsi,
+        ]);
     }
 
     /**
@@ -99,7 +112,15 @@ class KonsumsiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Save data
+        foreach($request->input('jawaban') as $id_jawaban_konsumsi => $value)
+        {
+            $jawabankonsum                       = JawabanKonsumsi::find($id_jawaban_konsumsi);
+            $jawabankonsum->jawaban              = $request->input('jawaban.' . $id_jawaban_konsumsi, null);
+            $jawabankonsum->save();
+        }
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**
@@ -108,8 +129,10 @@ class KonsumsiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        JawabanKonsumsi::where('id_responden', $id)->delete();
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }

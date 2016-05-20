@@ -132,6 +132,9 @@ Route::get('/sample/session/delete', 'SampleController@delete_session');
 Route::get('/konsumsi', 'KonsumsiController@index');
 Route::get('/konsumsi/tambah', 'KonsumsiController@create');
 Route::post('/konsumsi/tambah', 'KonsumsiController@store');
+Route::get('/konsumsi/edit/{id_responden}', 'KonsumsiController@edit');
+Route::patch('/konsumsi/edit/{id_responden}', 'KonsumsiController@update');
+Route::delete('/konsumsi/hapus/{id_responden}', 'KonsumsiController@destroy');
 
 //tenaker
 Route::get('/tenaker', 'TenakerController@index');
