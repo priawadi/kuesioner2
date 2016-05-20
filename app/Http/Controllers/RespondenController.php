@@ -288,16 +288,16 @@ class RespondenController extends Controller
                 'is_done'   => (BiayaOperasional::where('id_responden', $request->session()->get('id_responden'))->count()),
                 'link'      => 'biaya-operasional',
             ],
-            [
-                'kuesioner' => 'Biaya Variabel Berdasarkan Musim (Biaya Ransum / Perbekalan per Trip)',
-                'is_done'   => (BiayaRansum::where('id_responden', $request->session()->get('id_responden'))->count()),
-                'link'      => 'biaya-ransum',
-            ],
-            [
-                'kuesioner' => 'Biaya Jasa',
-                'is_done'   => (BiayaJasa::where('id_responden', $request->session()->get('id_responden'))->count()),
-                'link'      => 'biaya-jasa',
-            ],
+            // [
+            //     'kuesioner' => 'Biaya Variabel Berdasarkan Musim (Biaya Ransum / Perbekalan per Trip)',
+            //     'is_done'   => (BiayaRansum::where('id_responden', $request->session()->get('id_responden'))->count()),
+            //     'link'      => 'biaya-ransum',
+            // ],
+            // [
+            //     'kuesioner' => 'Biaya Jasa',
+            //     'is_done'   => (BiayaJasa::where('id_responden', $request->session()->get('id_responden'))->count()),
+            //     'link'      => 'biaya-jasa',
+            // ],
             [
                 'kuesioner' => 'Penerimaan Usaha Berdasarkan Musim',
                 'is_done'   => (HasilTangkapan::where('id_responden', $request->session()->get('id_responden'))->count()),
