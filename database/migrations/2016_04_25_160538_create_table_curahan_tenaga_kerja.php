@@ -14,7 +14,7 @@ class CreateTableCurahanTenagaKerja extends Migration
     {
         Schema::create('curahan_tenaga_kerja', function (Blueprint $table) {
             $table->increments('id_curahan_tenaga_kerja');
-            $table->integer('id_ketenagakerjaan');
+            $table->integer('id_responden');
             $table->integer('status_pekerjaan');
             $table->integer('status_tenaga_kerja')->nullable();
             $table->integer('jumlah_tenaga_kerja')->nullable();

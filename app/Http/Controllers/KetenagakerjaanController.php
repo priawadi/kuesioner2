@@ -42,7 +42,7 @@ class KetenagakerjaanController extends Controller
                 4 => 'Juru Masak',
                 5 => 'ABK',
                 6 => 'Buang Umpan',
-                7 => '',
+                7 => 'Lainnya',
             ],
             'status_tenaga_kerja' =>
             [
@@ -73,17 +73,13 @@ class KetenagakerjaanController extends Controller
                 4 => 'Juru Masak',
                 5 => 'ABK',
                 6 => 'Buang Umpan',
-                7 => '',
+                7 => 'Lainnya',
             ];
 
             foreach($status_pekerjaan as $id => $value)
             {
                 $curahan_tenaga_kerja = new CurahanTenagaKerja;
                 $curahan_tenaga_kerja->status_pekerjaan     = $id;
-                if ($id == 7)
-                {
-                    $curahan_tenaga_kerja->status_pekerjaan_lain = $request->get('status_pekerjaan_lain')[$id];
-                }
                 $curahan_tenaga_kerja->id_responden         = $request->session()->get('id_responden');
                 $curahan_tenaga_kerja->status_tenaga_kerja  = $request->get('status_tenaga_kerja')[$id];
                 $curahan_tenaga_kerja->jumlah_tenaga_kerja  = $request->get('jumlah_tenaga_kerja')[$id];
