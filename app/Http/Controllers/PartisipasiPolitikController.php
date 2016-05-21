@@ -57,27 +57,6 @@ class PartisipasiPolitikController extends Controller
     public function store(Request $request)
     {
 
-        // // Get ids of pertanyaan
-        // foreach($pertanyaan as $key => $item)
-        // {
-        //     $rules['jawaban.' . $item->id_partisipasi] = '';
-
-        //     // validate reason
-        //     if ($item->is_reason)
-        //     {
-        //         $rules['alasan.' . $item->id_partisipasi] = 'max:500';
-        //     }   
-        // }
-
-        // // Validate input
-        // $validator = Validator::make($request->all(), $rules);
-
-        // if ($validator->fails()) {
-        //     return redirect('partisipasi-politik/tambah')
-        //                 ->withErrors($validator)
-        //                 ->withInput();
-        // }
-
         // Save jawaban into database
         $pertanyaan = Partisipasi::where('kateg_partisipasi', 3)->select('id_partisipasi', 'parent_partisipasi', 'is_reason')->get();
         foreach($pertanyaan as $key => $item)
@@ -126,15 +105,6 @@ class PartisipasiPolitikController extends Controller
             $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
         }
 
-        /**
-         * $jwb_partisipasi = [ 
-         *     id_pertanyaan => [
-         *         'id_jwb_partisipasi' =>, 
-         *         'id_master_opsional' =>,
-         *         'jwb_teks_pertanyaan' =>
-         *     ]
-         * ]
-         */
         $result = JwbPartisipasi::where('kateg_partisipasi', 3)->where('id_responden', $request->session()->get('id_responden'))->get();
         $jwb_partisipasi = [];
         foreach ($result as $idx => $item) {
@@ -152,6 +122,7 @@ class PartisipasiPolitikController extends Controller
             'pertanyaan'      => Partisipasi::where('kateg_partisipasi', 3)->get(),
             'jwb_partisipasi' => $jwb_partisipasi,
             'opsi'            => $opsi,
+            'nomor'           => 1,
             'prev_action'     => 'responden'
         ]);
     }

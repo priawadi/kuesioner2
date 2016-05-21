@@ -218,22 +218,62 @@ class MasterOpsionalSeeder extends Seeder
 				'id_master_opsional'    => 35, 
 				'kateg_master_ops' 		=> 10, 
 				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
-				'opsional_master_ops'   => 'pertemuan 1 thn 1 kali',
+				'opsional_master_ops'   => 'Pertemuan 1 tahun 1 kali',
             ],[
 				'id_master_opsional'    => 36, 
 				'kateg_master_ops' 		=> 10, 
 				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
-				'opsional_master_ops'   => 'pertemuan 6 bln 1 kali',
+				'opsional_master_ops'   => 'Pertemuan 6 bulan 1 kali',
             ],[
 				'id_master_opsional'    => 37, 
 				'kateg_master_ops' 		=> 10, 
 				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
-				'opsional_master_ops'   => 'pertemuan 1 bln 1 kali',
+				'opsional_master_ops'   => 'Pertemuan 1 bulan 1 kali',
             ],[
 				'id_master_opsional'    => 38, 
 				'kateg_master_ops' 		=> 10, 
 				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
-				'opsional_master_ops'   => 'pertemuan 1 minggu 1 kali',
+				'opsional_master_ops'   => 'Pertemuan 1 minggu 1 kali',
+            ],[
+				'id_master_opsional'    => 39, 
+				'kateg_master_ops' 		=> 11, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Tidak pernah',
+            ],[
+				'id_master_opsional'    => 40, 
+				'kateg_master_ops' 		=> 11, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Pernah tapi jarang',
+            ],[
+				'id_master_opsional'    => 41, 
+				'kateg_master_ops' 		=> 11, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Sering',
+            ],[
+				'id_master_opsional'    => 42, 
+				'kateg_master_ops' 		=> 11, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Ya',
+            ],[
+				'id_master_opsional'    => 43, 
+				'kateg_master_ops' 		=> 12, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Tidak aktif',
+            ],[
+				'id_master_opsional'    => 44, 
+				'kateg_master_ops' 		=> 12, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Kurang aktif',
+            ],[
+				'id_master_opsional'    => 45, 
+				'kateg_master_ops' 		=> 12, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Aktif',
+            ],[
+				'id_master_opsional'    => 46, 
+				'kateg_master_ops' 		=> 12, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'Sangat aktif',
             ],
 
         ];

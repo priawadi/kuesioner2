@@ -17,38 +17,29 @@ class PartisipasiPolSeeder extends Seeder
             [
 				'id_partisipasi'         => 27,
 				'parent_partisipasi'     => '', 
-				'pertanyaan_partisipasi' => 'Seberapa  sering  anda ikut  aktif (partisan) dalam salah satu partai politik?', 
+				'pertanyaan_partisipasi' => 'Apakah anda menjadi anggota aktif dalam salah satu partai politik?', 
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 3,
-				'id_master_opsional'     => 6,
+				'id_master_opsional'     => 12,
 				'is_reason'              => FALSE
             ],
             [
 				'id_partisipasi'         => 28, 
 				'parent_partisipasi'     => '', 
-				'pertanyaan_partisipasi' => 'Seberapa sering  anda aktif (simpatisan) dalam salah satu partai politik?', 
+				'pertanyaan_partisipasi' => 'Apakah anda menjadi pengurus dari  salah satu partai politik?', 
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 3,
-				'id_master_opsional'     => 6,
+				'id_master_opsional'     => 11,
 				'is_reason'              => FALSE
             ],
             [
 				'id_partisipasi'         => 29, 
 				'parent_partisipasi'     => '', 
-				'pertanyaan_partisipasi' => 'Seberapa sering  anda menjadi pendukung dalam salah satu partai politik?', 
-				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
-				'kateg_partisipasi'      => 3,
-				'id_master_opsional'     => 6,
-				'is_reason'              => FALSE
-            ],
-            [
-				'id_partisipasi'         => 30, 
-				'parent_partisipasi'     => '', 
-				'pertanyaan_partisipasi' => 'Organisani Perikanan', 
+				'pertanyaan_partisipasi' => 'Apakah keterlibatan anda dalam partai politik memberikan kemudahan-kemudahan dalam menjalankan usaha?', 
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_partisipasi'      => 3,
 				'id_master_opsional'     => 7,
-				'is_reason'              => TRUE
+				'is_reason'              => FALSE
             ],
         ];
         DB::table('partisipasi')->insert($partisipasi_politik);

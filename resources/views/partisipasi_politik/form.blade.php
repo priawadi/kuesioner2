@@ -18,26 +18,11 @@
                         <tr>
                             <td>
                                 @if(!$item->parent_partisipasi)
-                                    {{ $nomor++ }}
+                                    1301.3.{{ $nomor++ }}
                                 @endif
                             </td>
                             <td>
                                 {{$item->pertanyaan_partisipasi}}
-                                @if ($item->is_reason)
-                                <br>
-                                Alasan:                             
-                                {{
-                                    Form::textarea(
-                                        'alasan[' . $item->id_partisipasi . ']', 
-                                        '', 
-                                        [
-                                            'class'       => 'form-control col-sm-6',
-                                            'placeholder' => 'Alasan',
-                                            'rows'  => 4
-                                        ]
-                                    )
-                                }} 
-                                @endif
                             </td>
                             <td>
                                 @if($item->id_master_opsional)
