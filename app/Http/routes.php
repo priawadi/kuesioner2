@@ -145,6 +145,9 @@ Route::post('/tenaker/tambah', 'TenakerController@store');
 Route::get('/hasil-tangkapan-ikan', 'HasilTangkapanController@index');
 Route::get('/hasil-tangkapan-ikan/tambah', 'HasilTangkapanController@create');
 Route::post('/hasil-tangkapan-ikan/tambah', 'HasilTangkapanController@store');
+Route::get('/hasil-tangkapan-ikan/edit/{id_responden}', 'HasilTangkapanController@edit');
+Route::patch('/hasil-tangkapan-ikan/edit/{id_responden}', 'HasilTangkapanController@update');
+Route::delete('/hasil-tangkapan-ikan/hapus/{id_responden}', 'HasilTangkapanController@destroy');
 
 // Aset pendukung usaha
 Route::get('/aset-pendukung-usaha', 'AsetPendukungUsahaController@index');

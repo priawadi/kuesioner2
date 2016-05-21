@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{$subtitle}}
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -13,127 +17,132 @@
                 </ul>
                 <div class="panel-body"> 
                     {!! Form::open(array('url' => $action, 'class' => 'form-horizontal')) !!}
-                    <p>1.   Dalam setahun terakhir, pada bulan apa yang saudara tidak melakukan kegiatan penangkapan ikan</p>       
-                        {{
-                            Form::select(
-                                'bulan_tidak_tangkap[]', 
-                                $master_bulan, 
-                                null, 
-                                [
-                                    'class'    => 'form-control',
-                                    'multiple' => 'multiple',
-                                    'id'       => 'daftar-bulan'
-                                ]
-                            )
-                        }}           
-
-                <br>
-                <p>
-                    Total bulan dalam setahun: 
-                    {{
-                        Form::text(
-                            'total_bulan', 
-                            '', 
-                            [
-                                'class'       => 'form-control',
-                                'placeholder' => 'Total bulan dalam setahun'
-                            ]
-                        )
-                    }}
-                </p>
-                <br>
-                <p>
-                    Alasan tidak melaut:  
-                    {{
-                        Form::textarea(
-                            'alasan_tidak_melaut', 
-                            '', 
-                            [
-                                'class'       => 'form-control',
-                                'placeholder' => 'Alasan tidak melaut'
-                            ]
-                        )
-                    }}
-                </p>
-                <br><p>2.   Adakah hari-hari tertentu saudara tidak melakukan penangkapan ikan?  </p> 
-                    <div class="radio-inline">
-                        <label>
-                            {{
-                                Form::radio(
-                                    'hari_tidak_tangkap', 
-                                    1,
-                                    false,
-                                    [
-                                        'class' => 'control-label'
-                                    ]
-                                )
-                            }} 
-                            Ya
-                        </label>
-                    </div>
-                    <div class="radio-inline">
-                        <label>
-                            {{
-                                Form::radio(
-                                    'hari_tidak_tangkap', 
-                                    0,
-                                    false,
-                                    [
-                                        'class' => 'control-label'
-                                    ]
-                                )
-                            }} 
-                            Tidak
-                        </label>
-                    </div>  
-                <br><p>Bila ya, sebutkan pada hari apa saja:  </p> 
-                   
-                        {{
-                            Form::select(
-                                'daftar_hari[]', 
-                                $master_hari, 
-                                null, 
-                                [
-                                    'class'    => 'form-control',
-                                    'multiple' => 'multiple',
-                                    'id'       => 'daftar-hari'
-                                ]
-                            )
-                        }}       
-                    
-                <br>
-                <p>
-                    Total hari tidak melaut dalam setahun:  
-                    {{
-                        Form::text(
-                            'total_hari_tidak_melaut', 
-                            '', 
-                            [
-                                'class'       => 'form-control',
-                                'placeholder' => 'Total hari tidak melaut dlm setahun'
-                            ]
-                        )
-                    }}
-                </p> 
-                <br><p>3.   Dalam setahun terakhir, bagaimana hasil tangkapan saudara berdasarkan bulan-bulan sebagaimana tabel berikut :</p> 
-                <br>
-
+                    <table class="table">
+                        <tr>
+                            <td width="40">1.</td>
+                            <td width="630">Dalam setahun terakhir, pada bulan apa yang saudara tidak melakukan kegiatan penangkapan ikan</td>
+                            <td>
+                                {{
+                                    Form::select(
+                                        'bulan_tidak_tangkap[]', 
+                                        $master_bulan, 
+                                        null, 
+                                        [
+                                            'class'    => 'form-control',
+                                            'multiple' => 'multiple',
+                                            'id'       => 'daftar-bulan'
+                                        ]
+                                    )
+                                }} 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                Alasan tidak melaut:
+                                {{
+                                    Form::textarea(
+                                        'alasan_tidak_melaut', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Alasan tidak melaut'
+                                        ]
+                                    )
+                                }}
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td>Adakah hari-hari tertentu saudara tidak melakukan penangkapan ikan?</td>
+                            <td>
+                                <div class="radio-inline">
+                                    <label>
+                                        {{
+                                            Form::radio(
+                                                'hari_tidak_tangkap', 
+                                                1,
+                                                false,
+                                                [
+                                                    'class' => 'control-label'
+                                                ]
+                                            )
+                                        }} 
+                                        Ya
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        {{
+                                            Form::radio(
+                                                'hari_tidak_tangkap', 
+                                                0,
+                                                false,
+                                                [
+                                                    'class' => 'control-label'
+                                                ]
+                                            )
+                                        }} 
+                                        Tidak
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                Bila ya, sebutkan pada hari apa saja:
+                                {{
+                                    Form::select(
+                                        'daftar_hari[]', 
+                                        $master_hari, 
+                                        null, 
+                                        [
+                                            'class'    => 'form-control',
+                                            'multiple' => 'multiple',
+                                            'id'       => 'daftar-hari'
+                                        ]
+                                    )
+                                }}
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Dalam 1 bulan, berapa hari tidak melaut?</td>
+                            <td>
+                                {{
+                                    Form::text(
+                                        'total_hari_tidak_melaut', 
+                                        '', 
+                                        [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'hari'
+                                        ]
+                                    )
+                                }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3. </td>
+                            <td>Dalam setahun terakhir, bagaimana hasil tangkapan saudara berdasarkan bulan-bulan sebagaimana tabel berikut:</td>
+                            <td></td>
+                        </tr>       
+                    </table>
                     <table class="table table-hover"> 
                         <thead> 
                             <tr class="warning"> 
-                                <th><center>BULAN</center></th> 
-                                <th><center>MUSIM PRODUKSI</center></th> 
-                                <th COLSPAN="4"><center>HASIL TANGKAPAN</center></th> 
-                                <th><center>TOTAL TRIP</center></th> 
+                                <td rowspan="2"><center>BULAN</center></td> 
+                                <td rowspan="2"><center>MUSIM PRODUKSI</center></td> 
+                                <td colspan="4"><center>HASIL TANGKAPAN</center></td> 
+                                <td rowspan="2"><center>TOTAL TRIP</center></td> 
                             </tr> 
                             <tr> 
-                                <th></th> 
-                                <th></th> 
-                                <th><center>Jenis Ikan Dominan</center></th> 
-                                <th><center>Produksi Dalam Sebulan (Kg)</center></th> 
-                                <th><center>Harga Ikan (Rp/Kg)</center></th> 
-                                <th><center>Nilai Produksi (Rp)</center></th> 
-                                <th></th>
+                                <td><center>Jenis Ikan Dominan</center></td> 
+                                <td><center>Produksi Dalam Sebulan (Kg)</center></td> 
+                                <td><center>Harga Ikan (Rp/Kg)</center></td> 
+                                <td><center>Nilai Produksi (Rp)</center></td> 
                             </tr>                             
                         </thead> 
                         <tbody> 
@@ -158,6 +167,7 @@
                                             @if($i != 1)
                                                 <br>
                                             @endif
+                                            {{$i}}.
                                             {{
                                                 Form::select(
                                                     'jenis_ikan_dominan[' . $id_bulan . ']['. $i . ']', 

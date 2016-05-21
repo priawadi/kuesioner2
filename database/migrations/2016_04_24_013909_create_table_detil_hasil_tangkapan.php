@@ -14,15 +14,16 @@ class CreateTableDetilHasilTangkapan extends Migration
     {
         Schema::create('detil_hasil_tangkapan', function (Blueprint $table) {
             $table->increments('id_detil_hasil_tangkapan');
-            $table->integer('id_master_jenis_ikan');
             $table->integer('id_responden');
+
+            $table->integer('id_jenis_ikan')->nullable();
 
             $table->integer('id_bulan')->nullable();
             $table->smallInteger('urutan_isian')->nullable();
             $table->integer('produksi_sebulan')->nullable();
-            $table->float('harga_ikan')->nullable();
+            $table->double('harga_ikan')->nullable();
             $table->string('jenis_ikan_lain', 100)->nullable();
-            $table->float('nilai_produksi')->nullable();
+            $table->double('nilai_produksi')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

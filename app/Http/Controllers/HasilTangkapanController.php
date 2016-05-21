@@ -56,7 +56,7 @@ class HasilTangkapanController extends Controller
                     11 => 'Nopember', 
                     12 => 'Desember'
                 ],
-            'jml_isian'    => 4,
+            'jml_isian'    => 5,
             'master_musim' => [
                     1 => 'Tinggi',
                     2 => 'Sedang', 
