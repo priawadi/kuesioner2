@@ -18,7 +18,7 @@
                         <tr>
                             <td>
                                 @if(!$item->parent_partisipasi)
-                                    {{ $nomor++ }}
+                                    1301.2.{{ $nomor++ }}
                                 @endif
                             </td>
                             <td>

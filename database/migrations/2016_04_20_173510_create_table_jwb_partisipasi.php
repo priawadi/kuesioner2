@@ -17,7 +17,6 @@ class CreateTableJwbPartisipasi extends Migration
             $table->integer('id_master_opsional')->nullable();
             $table->integer('id_responden');
             $table->integer('id_partisipasi');
-            $table->text('jwb_teks_partisipasi')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

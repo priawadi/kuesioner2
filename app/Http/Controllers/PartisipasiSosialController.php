@@ -59,27 +59,6 @@ class PartisipasiSosialController extends Controller
     {
         $pertanyaan = Partisipasi::where('kateg_partisipasi', 1)->select('id_partisipasi', 'is_reason')->get();
 
-        // Get ids of pertanyaan
-        foreach($pertanyaan as $key => $item)
-        {
-            // $rules['jawaban.' . $item->id_partisipasi] = '';
-
-            // validate reason
-            if ($item->is_reason)
-            {
-                $rules['alasan.' . $item->id_partisipasi] = 'max:500';
-            }
-        }
-        
-        // Validate input
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return redirect('partisipasi-sosial/tambah')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
         // Save jawaban into database
         foreach($pertanyaan as $key => $item)
         {
@@ -88,8 +67,7 @@ class PartisipasiSosialController extends Controller
             $jwb_partisipasi->id_responden         = $request->session()->get('id_responden');
             $jwb_partisipasi->id_partisipasi       = $item->id_partisipasi;
             $jwb_partisipasi->kateg_partisipasi    = 1;
-            $jwb_partisipasi->jwb_teks_partisipasi = $request->input('alasan.' . $item->id_partisipasi, null);
-            
+           
             $jwb_partisipasi->save();
         }
 
@@ -125,16 +103,6 @@ class PartisipasiSosialController extends Controller
             $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
         }
 
-
-        /**
-         * $jwb_partisipasi = [ 
-         *     id_pertanyaan => [
-         *         'id_jwb_partisipasi' =>, 
-         *         'id_master_opsional' =>,
-         *         'jwb_teks_pertanyaan' =>
-         *     ]
-         * ]
-         */
         $result = JwbPartisipasi::where('kateg_partisipasi', 1)->where('id_responden', $request->session()->get('id_responden'))->get();
         $jwb_partisipasi = [];
         foreach ($result as $idx => $item) {
@@ -168,12 +136,6 @@ class PartisipasiSosialController extends Controller
         foreach ($request->input('jawaban') as $id_jwb_partisipasi => $id_master_opsional) {
             $jwb_partisipasi                     = JwbPartisipasi::find($id_jwb_partisipasi);
             $jwb_partisipasi->id_master_opsional = $id_master_opsional;
-            $jwb_partisipasi->save();
-        }
-        
-        foreach ($request->input('alasan') as $id_jwb_partisipasi => $jwb_teks_partisipasi) {
-            $jwb_partisipasi                       = JwbPartisipasi::find($id_jwb_partisipasi);
-            $jwb_partisipasi->jwb_teks_partisipasi = $jwb_teks_partisipasi;
             $jwb_partisipasi->save();
         }
 

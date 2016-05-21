@@ -214,7 +214,28 @@ class MasterOpsionalSeeder extends Seeder
 				'kateg_master_ops' 		=> 9, 
 				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
 				'opsional_master_ops'   => 'Sangat Percaya',
+            ],[
+				'id_master_opsional'    => 35, 
+				'kateg_master_ops' 		=> 10, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'pertemuan 1 thn 1 kali',
+            ],[
+				'id_master_opsional'    => 36, 
+				'kateg_master_ops' 		=> 10, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'pertemuan 6 bln 1 kali',
+            ],[
+				'id_master_opsional'    => 37, 
+				'kateg_master_ops' 		=> 10, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'pertemuan 1 bln 1 kali',
+            ],[
+				'id_master_opsional'    => 38, 
+				'kateg_master_ops' 		=> 10, 
+				'created_at'            => \Carbon\Carbon::now()->toDateTimeString(),
+				'opsional_master_ops'   => 'pertemuan 1 minggu 1 kali',
             ],
+
         ];
         DB::table('master_opsional')->insert($opsional);
     }
