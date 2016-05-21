@@ -10,6 +10,12 @@ use Validator;
 
 class KetenagakerjaanController extends Controller
 {
+
+    var $status_tenaga_kerja = [
+        1 => 'Keluarga Inti',
+        2 => 'Keluarga Besar',
+        3 => 'Luar Keluarga',
+    ];    
     /**
      * Display a listing of the resource.
      *
@@ -112,14 +118,12 @@ class KetenagakerjaanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id, Request $request)
-    {
+    {    
 
         $curahan_tenaga_kerja = [];
         foreach (CurahanTenagaKerja::where('id_responden', $request->session()->get('id_responden'))->get() as $index => $item) {
             $curahan_tenaga_kerja[$item->id_curahan_tenaga_kerja] = [
                 'id_curahan_tenaga_kerja'   => $item->id_curahan_tenaga_kerja,
-                'status_pekerjaan'          => $item->status_pekerjaan,
-                'status_pekerjaan_lain'     => $item->status_pekerjaan_lain,
                 'status_tenaga_kerja'       => $item->status_tenaga_kerja,
                 'jumlah_tenaga_kerja'       => $item->jumlah_tenaga_kerja,
                 'lama_trip'                 => $item->lama_trip,
@@ -132,7 +136,9 @@ class KetenagakerjaanController extends Controller
         return view('ketenagakerjaan.edit', [
             'subtitle'                      => 'Ketenagakerjaan',
             'action'                        => 'ketenagakerjaan/edit/' . $id,
+            'method'                        => 'patch',
             'curahan_tenaga_kerja'          => $curahan_tenaga_kerja,
+            'status_tenaga_kerja'           => $this->status_tenaga_kerja,
         ]);
     }
 

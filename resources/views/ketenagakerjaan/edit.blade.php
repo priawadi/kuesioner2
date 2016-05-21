@@ -12,7 +12,7 @@
                     @endforeach
                 </ul>
                 <div class="panel-body">
-                    {{ Form::open(array('url' => $action, 'method' => 'patch')) }}
+                    {!! Form::open(array('url' => $action, 'class' => 'form-horizontal', 'method' => $method)) !!}
                         <table class="table">
                             <thead>
                                 <tr>
@@ -26,25 +26,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($curahan_tenaga_kerja as $id => $value)
+                               @foreach ($curahan_tenaga_kerja as $id => $item)
                                 <tr>
                                     <td>
-                                        @if ($value == 7)
-                                            {{
-                                                Form::text(
-                                                'status_pekerjaan_lain[' . $curahan_tenaga_kerja[$id]['id_curahan_tenaga_kerja']['status_pekerjaan_lain'] . ']', 
-                                                $curahan_tenaga_kerja[$value]['status_pekerjaan_lain'], 
-                                                    [
-                                                        'class'       => 'form-control',
-                                                        'placeholder' => 'Jenis Pekerjaan'
-                                                    ]
-                                                )
-                                            }}
-                                        @else
-                                            {{$value}}
-                                        @endif
-
-                                    </td>
+                                        {{
+                                            Form::select(
+                                            'status_tenaga_kerja[' . $curahan_tenaga_kerja[$id]['id_curahan_tenaga_kerja'] . ']', 
+                                            null, 
+                                            $curahan_tenaga_kerja[$id]['status_tenaga_kerja'], 
+                                                [
+                                                    'class' => 'form-control',
+                                                    'placeholder' => 'Pilih'
+                                                ]
+                                            )
+                                        }}
+                                    </td>    
+                                    <td>
+                                        {{
+                                            Form::text(
+                                            'jumlah_tenaga_kerja[' . $curahan_tenaga_kerja[$id]['id_alat_tangkap'] . ']', 
+                                            $curahan_tenaga_kerja[$id]['jumlah_tenaga_kerja'], 
+                                                [
+                                                    'class'       => 'form-control',
+                                                    'placeholder' => 'Jumlah Tenaga Kerja'
+                                                ]
+                                            )
+                                        }}
+                                    </td>                                                                    
                                 </tr>
                                 @endforeach
                             </tbody>

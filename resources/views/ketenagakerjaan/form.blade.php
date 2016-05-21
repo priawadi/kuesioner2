@@ -13,49 +13,6 @@
                 </ul>
                 <div class="panel-body">
                     {{ Form::open(array('url' => $action)) }}
-<!--                         <div class="form-group">
-                            {{
-                                Form::label(
-                                    'jml_tenaga_kerja_sama', 
-                                    'Apakah jumlah tenaga kerja yang terlibat dalam unit usaha penangkapan sama dalam satu tahun? ya/tidak, Jika ya, lanjut ke pertanyaan berikut.', 
-                                    [
-                                        'class' => 'col-sm-9 control-label'
-                                    ]
-                                )
-                            }}
-                            <div class="col-sm-3">
-                                <div class="radio">
-                                    <label>
-                                        {{
-                                            Form::radio(
-                                                'jml_tenaga_kerja_sama', 
-                                                1,
-                                                false,
-                                                [
-                                                    'class' => 'control-label'
-                                                ]
-                                            )
-                                        }} 
-                                        Ya
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        {{
-                                            Form::radio(
-                                                'jml_tenaga_kerja_sama', 
-                                                0,
-                                                false,
-                                                [
-                                                    'class' => 'control-label'
-                                                ]
-                                            )
-                                        }} 
-                                        Tidak
-                                    </label>
-                                </div>
-                            </div>
-                        </div> -->
                         <table class="table">
                             <thead>
                                 <tr>
@@ -72,21 +29,7 @@
                                 @foreach ($status_pekerjaan as $id => $value)
                                 <tr>
                                     <td>
-                                        @if ($value == '')
-                                            {{
-                                                Form::text(
-                                                    'status_pekerjaan_lain[' . $id . ']', 
-                                                    '', 
-                                                    [
-                                                        'class'       => 'form-control',
-                                                        'placeholder' => 'Jenis Pekerjaan'
-                                                    ]
-                                                )
-                                            }}
-                                        @else
                                             {{$value}}
-                                        @endif
-
                                     </td>
                                     <td>
                                         {{
