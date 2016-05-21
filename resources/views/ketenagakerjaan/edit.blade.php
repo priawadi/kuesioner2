@@ -26,13 +26,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               @foreach ($curahan_tenaga_kerja as $id => $item)
+                               @foreach ($status_pekerjaan as $id => $item)
                                 <tr>
+                                    <td>{{$item}}</td>
                                     <td>
                                         {{
                                             Form::select(
                                             'status_tenaga_kerja[' . $curahan_tenaga_kerja[$id]['id_curahan_tenaga_kerja'] . ']', 
-                                            null, 
+                                            $status_tenaga_kerja, 
                                             $curahan_tenaga_kerja[$id]['status_tenaga_kerja'], 
                                                 [
                                                     'class' => 'form-control',
@@ -44,7 +45,7 @@
                                     <td>
                                         {{
                                             Form::text(
-                                            'jumlah_tenaga_kerja[' . $curahan_tenaga_kerja[$id]['id_alat_tangkap'] . ']', 
+                                            'jumlah_tenaga_kerja[' . $curahan_tenaga_kerja[$id]['id_curahan_tenaga_kerja'] . ']', 
                                             $curahan_tenaga_kerja[$id]['jumlah_tenaga_kerja'], 
                                                 [
                                                     'class'       => 'form-control',
@@ -52,7 +53,55 @@
                                                 ]
                                             )
                                         }}
-                                    </td>                                                                    
+                                    </td>    
+                                    <td>
+                                        {{
+                                            Form::text(
+                                                'lama_trip[' . $curahan_tenaga_kerja[$id]['id_curahan_tenaga_kerja'] . ']', 
+                                                $curahan_tenaga_kerja[$id]['lama_trip'], 
+                                                [
+                                                    'class'       => 'form-control',
+                                                    'placeholder' => 'Lama Trip'
+                                                ]
+                                            )
+                                        }}
+                                    </td>
+                                    <td>
+                                        {{
+                                            Form::text(
+                                                'jumlah_trip[' . $curahan_tenaga_kerja[$id]['id_curahan_tenaga_kerja'] . ']', 
+                                                $curahan_tenaga_kerja[$id]['jumlah_trip'], 
+                                                [
+                                                    'class'       => 'form-control',
+                                                    'placeholder' => 'Jumlah Trip'
+                                                ]
+                                            )
+                                        }}
+                                    </td>
+                                    <td>
+                                        {{
+                                            Form::text(
+                                                'bagi_hasil[' . $curahan_tenaga_kerja[$id]['id_curahan_tenaga_kerja'] . ']', 
+                                                $curahan_tenaga_kerja[$id]['bagi_hasil'], 
+                                                [
+                                                    'class'       => 'form-control',
+                                                    'placeholder' => 'Bagi Hasil'
+                                                ]
+                                            )
+                                        }}
+                                    </td>
+                                    <td>
+                                        {{
+                                            Form::text(
+                                                'upah_trip[' . $curahan_tenaga_kerja[$id]['id_curahan_tenaga_kerja'] . ']', 
+                                                $curahan_tenaga_kerja[$id]['upah_trip'], 
+                                                [
+                                                    'class'       => 'form-control',
+                                                    'placeholder' => 'Upah Trip'
+                                                ]
+                                            )
+                                        }}
+                                    </td>                                                                                                    
                                 </tr>
                                 @endforeach
                             </tbody>

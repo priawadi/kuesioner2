@@ -16,6 +16,16 @@ class KetenagakerjaanController extends Controller
         2 => 'Keluarga Besar',
         3 => 'Luar Keluarga',
     ];    
+
+    var $status_pekerjaan = [
+        1 => 'Pemilik',
+        2 => 'Nahkoda',
+        3 => 'Juru Mesin',
+        4 => 'Juru Masak',
+        5 => 'ABK',
+        6 => 'Buang Umpan',
+        7 => 'Lainnya',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -122,8 +132,9 @@ class KetenagakerjaanController extends Controller
 
         $curahan_tenaga_kerja = [];
         foreach (CurahanTenagaKerja::where('id_responden', $request->session()->get('id_responden'))->get() as $index => $item) {
-            $curahan_tenaga_kerja[$item->id_curahan_tenaga_kerja] = [
+            $curahan_tenaga_kerja[$item->status_pekerjaan] = [
                 'id_curahan_tenaga_kerja'   => $item->id_curahan_tenaga_kerja,
+                'status_pekerjaan'          => $item->status_pekerjaan,
                 'status_tenaga_kerja'       => $item->status_tenaga_kerja,
                 'jumlah_tenaga_kerja'       => $item->jumlah_tenaga_kerja,
                 'lama_trip'                 => $item->lama_trip,
@@ -139,6 +150,7 @@ class KetenagakerjaanController extends Controller
             'method'                        => 'patch',
             'curahan_tenaga_kerja'          => $curahan_tenaga_kerja,
             'status_tenaga_kerja'           => $this->status_tenaga_kerja,
+            'status_pekerjaan'              => $this->status_pekerjaan, 
         ]);
     }
 
@@ -151,7 +163,18 @@ class KetenagakerjaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        foreach ($request->input('status_tenaga_kerja') as $key => $value) {
+            $tenaker                        = CurahanTenagaKerja::find($key);
+            $tenaker->status_tenaga_kerja   = $request->input('status_tenaga_kerja.' . $key, null);
+            $tenaker->jumlah_tenaga_kerja   = $request->input('jumlah_tenaga_kerja.' . $key, null);
+            $tenaker->lama_trip             = $request->input('lama_trip.' . $key, null);
+            $tenaker->jumlah_trip           = $request->input('jumlah_trip.' . $key, null);
+            $tenaker->bagi_hasil            = $request->input('bagi_hasil.' . $key, null);
+            $tenaker->upah_trip             = $request->input('upah_trip.' . $key, null);
+
+            $tenaker->save();
+        }
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 
     /**
