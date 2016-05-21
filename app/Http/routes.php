@@ -187,6 +187,9 @@ Route::post('/biaya-jasa/tambah', 'BiayaJasaController@store');
 Route::get('/ketenagakerjaan', 'KetenagakerjaanController@index');
 Route::get('/ketenagakerjaan/tambah', 'KetenagakerjaanController@create');
 Route::post('/ketenagakerjaan/tambah', 'KetenagakerjaanController@store');
+Route::get('/ketenagakerjaan/edit/{id_responden}', 'KetenagakerjaanController@edit');
+Route::patch('/ketenagakerjaan/edit/{id_responden}', 'KetenagakerjaanController@update');
+Route::delete('/ketenagakerjaan/hapus/{id_responden}', 'KetenagakerjaanController@destroy');
 
 // Alat Tangkap
 Route::get('/alat-tangkap', 'AlatTangkapController@index');

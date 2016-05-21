@@ -13,7 +13,7 @@
                 </ul>
                 <div class="panel-body">
                     {{ Form::open(array('url' => $action)) }}
-                        <div class="form-group">
+<!--                         <div class="form-group">
                             {{
                                 Form::label(
                                     'jml_tenaga_kerja_sama', 
@@ -55,15 +55,15 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>Status Pekerjaan</th>
-                                    <th>Status Tenaga Kerja</th>
+                                    <th>Hubungan Kekerabatan Tenaga Kerja</th>
                                     <th>Jumlah Tenaga Kerja (org)</th>
                                     <th>Lama waktu per trip (Hari/trip)</th>
-                                    <th>Jumlah Trip</th>
+                                    <th>Jumlah Trip per bulan</th>
                                     <th>Bagi Hasil (%)</th>
                                     <th>Upah Trip (Rp.)</th>
                                 </tr>

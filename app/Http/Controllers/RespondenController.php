@@ -17,11 +17,11 @@ use App\HasilTangkapan;
 use App\BiayaPerijinan;
 use App\BiayaOperasional;
 use App\BiayaRansum;
-use App\Ketenagakerjaan;
 use App\BiayaJasa;
 use App\AlatTangkap;
 use App\Mesin;
 use App\Perahu;
+use App\CurahanTenagaKerja;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
@@ -305,7 +305,7 @@ class RespondenController extends Controller
             ],
             [
                 'kuesioner' => 'Ketenagakerjaan',
-                'is_done'   => (Ketenagakerjaan::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'is_done'   => (CurahanTenagaKerja::where('id_responden', $request->session()->get('id_responden'))->count()),
                 'link'      => 'ketenagakerjaan',
             ],
         ];

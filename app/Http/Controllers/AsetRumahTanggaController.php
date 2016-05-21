@@ -50,7 +50,7 @@ class AsetRumahTanggaController extends Controller
             'master_jenis_aset' => MasterJenisAset::all(),
             'cara_perolehan'    => $this->cara_perolehan,
             'jenis_aset'        => $this->jenis_aset,
-            'nomor'             => 1
+            'nomor'             => 501
         ]);
     }
 

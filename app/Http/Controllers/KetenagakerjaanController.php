@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Ketenagakerjaan;
 use App\CurahanTenagaKerja;
 use Validator;
 
@@ -42,7 +41,7 @@ class KetenagakerjaanController extends Controller
                 3 => 'Juru Mesin',
                 4 => 'Juru Masak',
                 5 => 'ABK',
-                6 => '',
+                6 => 'Buang Umpan',
                 7 => '',
             ],
             'status_tenaga_kerja' =>
@@ -73,81 +72,28 @@ class KetenagakerjaanController extends Controller
                 3 => 'Juru Mesin',
                 4 => 'Juru Masak',
                 5 => 'ABK',
-                6 => '',
+                6 => 'Buang Umpan',
                 7 => '',
             ];
 
-        // Validate form pencacah tenaga kerja if, jml_tenaga_kerja_sama is 1
-        if ($request->get('jml_tenaga_kerja_sama'))
-        {
-            foreach($status_pekerjaan as $id => $value)
-            {
-                // Validate of status_pekerjaan_lain is filled
-                if ($id == 6 || $id == 7)
-                {
-                    if ($request->get('status_pekerjaan_lain')[6])
-                    {
-                        $rules['status_tenaga_kerja.6']         = 'required';
-                    }
-
-                    if ($request->get('status_pekerjaan_lain')[7])
-                    {
-                        $rules['status_tenaga_kerja.7']         = 'required';
-                    }
-                }
-
-                if ($request->get('status_tenaga_kerja')[$id])
-                {
-                    $rules['jumlah_tenaga_kerja.' . $id] = 'required|numeric';
-                    $rules['lama_trip.' . $id]           = 'required|numeric';
-                    $rules['jumlah_trip.' . $id]         = 'required|numeric';
-                    $rules['bagi_hasil.' . $id]          = 'required|numeric';
-                    $rules['upah_trip.' . $id]           = 'required|numeric';
-                }
-            }
-        }
-        
-        
-        // Validate input
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return redirect('ketenagakerjaan/tambah')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-        // Save data
-        $ketenagakerjaan                        = new Ketenagakerjaan;
-        $ketenagakerjaan->jml_tenaga_kerja_sama = $request->get('jml_tenaga_kerja_sama');
-        $ketenagakerjaan->id_responden          = $request->session()->get('id_responden');
-        $ketenagakerjaan->save();
-
-
-        // If, jml_tenaga_kerja_sama is 1
-        if ($request->get('jml_tenaga_kerja_sama'))
-        {
             foreach($status_pekerjaan as $id => $value)
             {
                 $curahan_tenaga_kerja = new CurahanTenagaKerja;
-
-                if ($id == 6 || $id == 7)
+                $curahan_tenaga_kerja->status_pekerjaan     = $id;
+                if ($id == 7)
                 {
                     $curahan_tenaga_kerja->status_pekerjaan_lain = $request->get('status_pekerjaan_lain')[$id];
                 }
-
-                $curahan_tenaga_kerja->status_pekerjaan    = $id;
-                $curahan_tenaga_kerja->id_ketenagakerjaan  = $ketenagakerjaan->id_ketenagakerjaan;
-                $curahan_tenaga_kerja->status_tenaga_kerja = $request->get('status_tenaga_kerja')[$id];
-                $curahan_tenaga_kerja->jumlah_tenaga_kerja = $request->get('jumlah_tenaga_kerja')[$id];
-                $curahan_tenaga_kerja->lama_trip           = $request->get('lama_trip')[$id];
-                $curahan_tenaga_kerja->jumlah_trip         = $request->get('jumlah_trip')[$id];
-                $curahan_tenaga_kerja->bagi_hasil          = $request->get('bagi_hasil')[$id];
-                $curahan_tenaga_kerja->upah_trip           = $request->get('upah_trip')[$id];
+                $curahan_tenaga_kerja->id_responden         = $request->session()->get('id_responden');
+                $curahan_tenaga_kerja->status_tenaga_kerja  = $request->get('status_tenaga_kerja')[$id];
+                $curahan_tenaga_kerja->jumlah_tenaga_kerja  = $request->get('jumlah_tenaga_kerja')[$id];
+                $curahan_tenaga_kerja->lama_trip            = $request->get('lama_trip')[$id];
+                $curahan_tenaga_kerja->jumlah_trip          = $request->get('jumlah_trip')[$id];
+                $curahan_tenaga_kerja->bagi_hasil           = $request->get('bagi_hasil')[$id];
+                $curahan_tenaga_kerja->upah_trip            = $request->get('upah_trip')[$id];
 
                 $curahan_tenaga_kerja->save();
             }
-        }
 
         return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
@@ -169,9 +115,29 @@ class KetenagakerjaanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+
+        $curahan_tenaga_kerja = [];
+        foreach (CurahanTenagaKerja::where('id_responden', $request->session()->get('id_responden'))->get() as $index => $item) {
+            $curahan_tenaga_kerja[$item->id_curahan_tenaga_kerja] = [
+                'id_curahan_tenaga_kerja'   => $item->id_curahan_tenaga_kerja,
+                'status_pekerjaan'          => $item->status_pekerjaan,
+                'status_pekerjaan_lain'     => $item->status_pekerjaan_lain,
+                'status_tenaga_kerja'       => $item->status_tenaga_kerja,
+                'jumlah_tenaga_kerja'       => $item->jumlah_tenaga_kerja,
+                'lama_trip'                 => $item->lama_trip,
+                'jumlah_trip'               => $item->jumlah_trip,
+                'bagi_hasil'                => $item->bagi_hasil,
+                'upah_trip'                 => $item->upah_trip,
+            ];
+        }
+
+        return view('ketenagakerjaan.edit', [
+            'subtitle'                      => 'Ketenagakerjaan',
+            'action'                        => 'ketenagakerjaan/edit/' . $id,
+            'curahan_tenaga_kerja'          => $curahan_tenaga_kerja,
+        ]);
     }
 
     /**
@@ -192,8 +158,11 @@ class KetenagakerjaanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        //Ketenagakerjaan::where('id_responden', $id)->delete();
+        CurahanTenagaKerja::where('id_responden', $id)->delete();
+
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }
