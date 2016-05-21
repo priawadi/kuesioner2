@@ -48,7 +48,7 @@ class RespondenController extends Controller
 
         return view('responden.index', [
             'subtitle'  => 'Responden',
-            'responden' => Responden::orderBy('id_responden', 'DESC')->get(),
+            'responden' => Responden::orderBy('id_responden', 'DESC')->paginate(10),
         ]);
     }
 

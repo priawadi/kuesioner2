@@ -80,6 +80,7 @@
                             @endforeach
                         </tbody> 
                     </table>
+                    <div class="pull-right">{!! $responden->render() !!}</div>
                 </div>
             </div>
         </div>
