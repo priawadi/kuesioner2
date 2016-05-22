@@ -58,7 +58,7 @@ class TenagaPenggerakController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
         
         return view('tenaga_penggerak.form', [
-            'subtitle'              => 'Tenaga Penggerak',
+            'subtitle'              => '703. Mesin penggerak perahu/kapal: ',
             'action'                => 'tenaga-penggerak/tambah',
             'method'                => 'post',
             'jenis_mesin_penggerak' => $this->jenis_mesin_penggerak,
@@ -123,7 +123,7 @@ class TenagaPenggerakController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
         
         return view('tenaga_penggerak.edit', [
-            'subtitle'              => 'Tenaga Penggerak',
+            'subtitle'              => '703. Mesin penggerak perahu/kapal: ',
             'action'                => 'tenaga-penggerak/edit/' . $request->session()->get('id_responden'),
             'method'                => 'patch',
             'jenis_mesin_penggerak' => $this->jenis_mesin_penggerak,

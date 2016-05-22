@@ -19,7 +19,7 @@
                     {{ Form::open(array('url' => $action, 'method' => $method)) }}
                         <table class="table">
                             <tr>
-                                <td width="40">1.</td>
+                                <td width="40">601.</td>
                                 <td>Berapa kali anda dan anggota keluarga anda sakit dalam satu tahun terakhir</td>
                                 <td></td>
                                 <td></td>
@@ -61,7 +61,7 @@
                         </table>
                         <table class="table table-bordered">
                             <tr>
-                                <td width="40">2. </td>
+                                <td width="40">602. </td>
                                 <td>Kemana anda dan anggota keluarga berobat ketika sakit, sebutkan frekuensinya (dalam setahun)</td>
                                 <td>Dibiarkan</td>
                                 <td>Beli Obat Warung</td>
@@ -225,7 +225,7 @@
                         </table>
                         <table class="table table-bordered">
                             <tr>
-                                <td width="40">3. </td>
+                                <td width="40">603. </td>
                                 <td width="364">Alasan memilih cara pengobatan ketika sakit</td>
                                 <td></td>
                             </tr>
@@ -334,7 +334,7 @@
                         </table>
                         <table class="table">
                             <tr>
-                                <td width="40">4. </td>
+                                <td width="40">604. </td>
                                 <td width="400">Apakah anda terdaftar sebagai peserta asuransi kesehatan</td>
                                 <td></td>
                             </tr>
@@ -410,7 +410,7 @@
                         </table>
                         <table class="table">
                             <tr>
-                                <td width="40">5. </td>
+                                <td width="40">605. </td>
                                 <td width="400">Apakah anda sering menggunakan asuransi kesehatan</td>
                                 <td></td>
                             </tr>

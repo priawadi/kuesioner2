@@ -58,7 +58,7 @@ class AsetPendukungUsahaController extends Controller
         }
 
         return view('aset_pendukung_usaha.form', [
-            'subtitle'                  => 'Aset Pendukung Usaha',
+            'subtitle'                  => '704. Aset Pendukung Usaha ',
             'action'                    => 'aset-pendukung-usaha/tambah',
             'method'                    => 'post',
             'master_peralatan_tambahan' => $master_peralatan_tambahan,
@@ -140,7 +140,7 @@ class AsetPendukungUsahaController extends Controller
         }
 
         return view('aset_pendukung_usaha.edit', [
-            'subtitle'                  => 'Aset Pendukung Usaha',
+            'subtitle'                  => '704. Aset Pendukung Usaha ',
             'action'                    => 'aset-pendukung-usaha/edit/' . $request->session()->get('id_responden'),
             'method'                    => 'patch',
             'master_peralatan_tambahan' => $master_peralatan_tambahan,

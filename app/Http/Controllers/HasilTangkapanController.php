@@ -65,7 +65,7 @@ class HasilTangkapanController extends Controller
         }
 
         return view('hasil_tangkapan.form', [
-            'subtitle'                  => 'Penerimaan Usaha Berdasarkan Musim',
+            'subtitle'                  => 'X. Penerimaan Usaha Berdasarkan Musim',
             'action'                    => 'hasil-tangkapan-ikan/tambah',
             'method'                    => 'post',
             'master_jenis_ikan'         => $master_jenis_ikan,
@@ -218,7 +218,7 @@ class HasilTangkapanController extends Controller
         }
 
         return view('hasil_tangkapan.edit', [
-            'subtitle'                  => 'Penerimaan Usaha Berdasarkan Musim',
+            'subtitle'                  => 'X. Penerimaan Usaha Berdasarkan Musim',
             'action'                    => 'hasil-tangkapan-ikan/edit/' . $id,
             'method'                    => 'patch',
             'master_jenis_ikan'         => $master_jenis_ikan,

@@ -56,7 +56,7 @@ class KarRumahTanggaController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
 
         return view('karakteristik_rumah_tangga.form', [
-            'subtitle'         => 'Karakteristik Anggota Rumah Tangga dan Pendatapan',
+            'subtitle'         => 'III. KARAKTERISTIK ANGGOTA RUMAH TANGGA',
             'action'           => 'karakteristik-rumah-tangga/tambah',
             'method'           => 'post',
             'jenis_kelamin'    => $this->jenis_kelamin,
@@ -179,7 +179,7 @@ class KarRumahTanggaController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
 
         return view('karakteristik_rumah_tangga.edit', [
-            'subtitle'         => 'Karakteristik Anggota Rumah Tangga dan Pendatapan',
+            'subtitle'         => 'III. KARAKTERISTIK ANGGOTA RUMAH TANGGA',
             'action'           => 'karakteristik-rumah-tangga/edit/' . $id,
             'method'           => 'patch',
             'jenis_kelamin'    => $this->jenis_kelamin,

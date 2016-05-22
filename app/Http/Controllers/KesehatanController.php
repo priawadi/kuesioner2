@@ -44,7 +44,7 @@ class KesehatanController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
         
         return view('kesehatan.form', [
-            'subtitle'            => 'Kesehatan',
+            'subtitle'            => 'VI. KESEHATAN',
             'action'              => 'kesehatan/tambah',
             'method'              => 'post',
             'status_daftar'       => $this->status_daftar,
@@ -121,7 +121,7 @@ class KesehatanController extends Controller
         // Redirect to list of responden if id_responden
         if (!$request->session()->get('id_responden')) return redirect('responden');
         return view('kesehatan.edit', [
-            'subtitle'            => 'Kesehatan',
+            'subtitle'            => 'VI. KESEHATAN',
             'action'              => 'kesehatan/edit/' . $request->session()->get('id_responden'),
             'method'              => 'patch',
             'status_daftar'       => $this->status_daftar,

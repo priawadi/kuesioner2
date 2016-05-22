@@ -241,7 +241,7 @@ class RespondenController extends Controller
 
         $kuesioner['konsumsi'] = [
             [
-                'kuesioner' => 'Pengeluaran Pangan Mingguan Rumah Tangga Perikanan',
+                'kuesioner' => 'Pengeluaran Pangan Mingguan Rumah Tangga Perikanan.',
                 'is_done'   => (JawabanKonsumsi::where('id_responden', $request->session()->get('id_responden'))->count()),
                 'link'      => 'konsumsi',
             ],

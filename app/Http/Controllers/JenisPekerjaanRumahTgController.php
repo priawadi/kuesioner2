@@ -45,7 +45,7 @@ class JenisPekerjaanRumahTgController extends Controller
         }
 
         return view('jenis_pekerjaan_rumah_tangga.form', [
-            'subtitle'        => 'Jenis Pekerjaan Rumah Tangga',
+            'subtitle'        => 'IV.  JENIS PEKERJAAN DAN PENDAPATAN RUMAH TANGGA',
             'action'          => 'jenis-pekerjaan-rumah-tangga/tambah',
             'method'          => 'post',
             'status_keluarga' => $this->status_keluarga,
@@ -125,7 +125,7 @@ class JenisPekerjaanRumahTgController extends Controller
         }
 
         return view('jenis_pekerjaan_rumah_tangga.edit', [
-            'subtitle'        => 'Jenis Pekerjaan Rumah Tangga',
+            'subtitle'        => 'IV.  JENIS PEKERJAAN DAN PENDAPATAN RUMAH TANGGA',
             'action'          => 'jenis-pekerjaan-rumah-tangga/edit/' . $id,
             'method'          => 'patch',
             'status_keluarga' => $this->status_keluarga,

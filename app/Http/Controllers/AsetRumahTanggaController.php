@@ -44,7 +44,7 @@ class AsetRumahTanggaController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
         
         return view('aset_rumah_tangga.form', [
-            'subtitle'          => 'Aset Rumah Tangga',
+            'subtitle'          => 'V. ASET RUMAH TANGGA',
             'action'            => 'aset-rumah-tangga/tambah',
             'method'            => 'post',
             'master_jenis_aset' => MasterJenisAset::all(),
@@ -119,7 +119,7 @@ class AsetRumahTanggaController extends Controller
 
 
         return view('aset_rumah_tangga.edit', [
-            'subtitle'          => 'Aset Rumah Tangga',
+            'subtitle'          => 'V. ASET RUMAH TANGGA',
             'action'            => 'aset-rumah-tangga/edit/' . $id,
             'method'            => 'patch',
             'master_jenis_aset' => MasterJenisAset::all(),

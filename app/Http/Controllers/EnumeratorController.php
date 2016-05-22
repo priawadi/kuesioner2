@@ -32,7 +32,7 @@ class EnumeratorController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
 
         return view('enumerator.form', [
-            'subtitle'          => 'Enumerator',
+            'subtitle'          => 'II. KETERANGAN ENUMERATOR',
             'action'            => 'enumerator/tambah',
         ]);
     }

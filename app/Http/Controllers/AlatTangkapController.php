@@ -58,7 +58,7 @@ class AlatTangkapController extends Controller
         }
         
         return view('alat_tangkap.form', [
-            'subtitle'                  => 'Alat Tangkap',
+            'subtitle'                  => '702. Jenis alat tangkap yang digunakan',
             'action'                    => 'alat-tangkap/tambah',
             'method'                    => 'post',
             'jenis_alat_tangkap'        => $this->jenis_alat_tangkap,
@@ -156,7 +156,7 @@ class AlatTangkapController extends Controller
         }
 
         return view('alat_tangkap.edit', [
-            'subtitle'                  => 'Alat Tangkap',
+            'subtitle'                  => '702. Jenis alat tangkap yang digunakan',
             'action'                    => 'alat-tangkap/edit/' . $request->session()->get('id_responden'),
             'method'                    => 'patch',
             'jenis_alat_tangkap'        => $this->jenis_alat_tangkap,

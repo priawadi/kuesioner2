@@ -48,7 +48,7 @@ class PerahuController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
         
         return view('perahu.form', [
-            'subtitle'       => 'Perahu',
+            'subtitle'       => '701. Jenis perahu/kapal yang digunakan',
             'action'         => 'perahu/tambah',
             'method'         => 'post',
             'kondisi_perahu' => $this->kondisi_perahu,
@@ -106,7 +106,7 @@ class PerahuController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
         
         return view('perahu.edit', [
-            'subtitle'       => 'Perahu',
+            'subtitle'       => '701. Jenis perahu/kapal yang digunakan',
             'action'         => 'perahu/edit/' . $id_responden,
             'method'         => 'patch',
             'kondisi_perahu' => $this->kondisi_perahu,

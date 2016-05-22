@@ -13,12 +13,12 @@ class BiayaPerijinanController extends Controller
 
     var $jenis_biaya_tetap = 
     [
-        1 => 'Ijin Usaha / Ijin Penangkapan, Retribusi, Pajak',
-        2 => 'Pemeliharaan / Perbaikan Perahu (pengecatan, ganti kayu, dll)',
-        3 => 'Pemeliharaan / Perbaikan Mesin (ganti oli)',
-        4 => 'Pemeliharaan / Perbaikan Alat Tangkap',
-        5 => 'Docking Kapal',
-        6 => 'Lainnya'
+        1 => '1. Ijin Usaha / Ijin Penangkapan, Retribusi, Pajak',
+        2 => '2. Pemeliharaan / Perbaikan Perahu (pengecatan, ganti kayu, dll)',
+        3 => '3. Pemeliharaan / Perbaikan Mesin (ganti oli)',
+        4 => '4. Pemeliharaan / Perbaikan Alat Tangkap',
+        5 => '5. Docking Kapal',
+        6 => '6. Lainnya'
     ];
     /**
      * Display a listing of the resource.
@@ -41,7 +41,7 @@ class BiayaPerijinanController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
         
         return view('biaya_perijinan.form', [
-            'subtitle'        => 'Biaya Tetap',
+            'subtitle'        => 'VIII.  BIAYA TETAP Kode: 801',
             'action'          => 'biaya-perijinan/tambah',
             'method'          => 'post',
             'jenis_perijinan' => $this->jenis_biaya_tetap,
@@ -107,7 +107,7 @@ class BiayaPerijinanController extends Controller
         }
 
         return view('biaya_perijinan.edit', [
-            'subtitle'        => 'Biaya Tetap',
+            'subtitle'        => 'VIII.  BIAYA TETAP Kode: 801',
             'action'          => 'biaya-perijinan/edit/' . $request->session()->get('id_responden'),
             'method'          => 'patch',
             'jenis_perijinan' => $this->jenis_biaya_tetap,

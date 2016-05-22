@@ -32,7 +32,7 @@ class BiayaOperasionalController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
         
         return view('biaya_operasional.form', [
-            'subtitle'          => 'Biaya Operasional',
+            'subtitle'          => 'IX. BIAYA VARIABEL  BERDASARKAN MUSIM (per trip) Kode:901',
             'action'            => 'biaya-operasional/tambah',
             'method'            => 'post',
             'jenis_operasional' => MasterBiayaVariabel::where('kateg_biaya_variabel', 1)->get(),
@@ -103,7 +103,7 @@ class BiayaOperasionalController extends Controller
         }
 
         return view('biaya_operasional.edit', [
-            'subtitle'          => 'Biaya Operasional',
+            'subtitle'          => 'IX. BIAYA VARIABEL  BERDASARKAN MUSIM (per trip) Kode: 901',
             'action'            => 'biaya-operasional/edit/' . $request->session()->get('id_responden'),
             'method'            => 'patch',
             'jenis_operasional' => MasterBiayaVariabel::where('kateg_biaya_variabel', 1)->get(),
