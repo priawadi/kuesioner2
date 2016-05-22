@@ -56,27 +56,6 @@ class RasaPercayaOrgController extends Controller
     public function store(Request $request)
     {
 
-        // // Get ids of pertanyaan
-        // foreach($pertanyaan as $key => $item)
-        // {
-        //     $rules['jawaban.' . $item->id_rasa_percaya] = 'required';
-
-        //     // validate reason
-        //     if ($item->is_reason)
-        //     {
-        //         $rules['alasan.' . $item->id_rasa_percaya] = 'required|max:500';
-        //     }
-        // }
-        
-        // // Validate input
-        // $validator = Validator::make($request->all(), $rules);
-
-        // if ($validator->fails()) {
-        //     return redirect('rasa-percaya-organisasi/tambah')
-        //                 ->withErrors($validator)
-        //                 ->withInput();
-        // }
-
         // Save jawaban into database
         $pertanyaan = RasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.ORGANISASI'))->select('id_rasa_percaya', 'is_reason')->get();
         foreach($pertanyaan as $key => $item)
@@ -86,7 +65,6 @@ class RasaPercayaOrgController extends Controller
             $jwb_rasa_percaya->id_responden          = $request->session()->get('id_responden');
             $jwb_rasa_percaya->id_rasa_percaya       = $item->id_rasa_percaya;
             $jwb_rasa_percaya->kateg_rasa_percaya    = \Config::get('constants.RASA_PERCAYA.ORGANISASI');
-            $jwb_rasa_percaya->jwb_teks_rasa_percaya = $request->input('alasan.' . $item->id_rasa_percaya, null);
             $jwb_rasa_percaya->save();
         }
 
@@ -129,7 +107,6 @@ class RasaPercayaOrgController extends Controller
             $jwb_rasa_percaya[$item->id_rasa_percaya] = [
                 'id_jwb_rasa_percaya'   => $item->id_jwb_rasa_percaya,
                 'id_master_opsional'    => $item->id_master_opsional,
-                'jwb_teks_rasa_percaya' => $item->jwb_teks_rasa_percaya,
             ];
         }        
 
@@ -159,12 +136,6 @@ class RasaPercayaOrgController extends Controller
             $jwb_rasa_percaya->save();
         }
         
-        foreach ($request->input('alasan') as $id_jwb_rasa_percaya => $jwb_teks_rasa_percaya) {
-            $jwb_rasa_percaya                        = JwbRasaPercaya::find($id_jwb_rasa_percaya);
-            $jwb_rasa_percaya->jwb_teks_rasa_percaya = $jwb_teks_rasa_percaya;
-            $jwb_rasa_percaya->save();
-        }
-
         return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 

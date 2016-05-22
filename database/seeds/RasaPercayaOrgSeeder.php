@@ -15,15 +15,15 @@ class RasaPercayaOrgSeeder extends Seeder
         $rasa_percaya_org = [
             [
 				'id_rasa_percaya'         => 15, 
-				'pertanyaan_rasa_percaya' => 'Apakah anda memiliki rasa percaya terhadap   kelompok usaha bersama (KUB) (rasa percaya dalam penyampaian aspirasi dan keuangan)', 
+				'pertanyaan_rasa_percaya' => 'Apakah anda pernah meminjam/ mendapatkan bantuan lewat KUB tersebut?', 
 				'created_at'     		  => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_rasa_percaya'      => 2,
-				'id_master_opsional'      => 9,
+				'id_master_opsional'      => 8,
 				'is_reason'               => TRUE
             ],
             [
 				'id_rasa_percaya'         => 16, 
-				'pertanyaan_rasa_percaya' => 'Apakah anda memiliki rasa Percaya terhadap Koperasi Nelayan?', 
+				'pertanyaan_rasa_percaya' => 'Apakah anda memiliki rasa percaya terhadap organisasi HNSI? (rasa percaya dalam penyampaian aspirasi dan keuangan)', 
 				'created_at'              => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_rasa_percaya'      => 2,
 				'id_master_opsional'      => 9,
@@ -31,14 +31,6 @@ class RasaPercayaOrgSeeder extends Seeder
             ],
             [
 				'id_rasa_percaya'         => 17, 
-				'pertanyaan_rasa_percaya' => 'Apakah anda memiliki rasa percaya terhadap HNSI? (rasa percaya dalam penyampaian aspirasi dan keuangan)', 
-				'created_at'              => \Carbon\Carbon::now()->toDateTimeString(),
-				'kateg_rasa_percaya'      => 2,
-				'id_master_opsional'      => 9,
-				'is_reason'               => TRUE
-            ],
-            [
-				'id_rasa_percaya'         => 18, 
 				'pertanyaan_rasa_percaya' => 'Apakah anda memiliki rasa percaya terhadap Syahbandar?', 
 				'created_at'              => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_rasa_percaya'      => 2,
@@ -46,7 +38,7 @@ class RasaPercayaOrgSeeder extends Seeder
 				'is_reason'               => TRUE
             ],
             [
-				'id_rasa_percaya'         => 19, 
+				'id_rasa_percaya'         => 18, 
 				'pertanyaan_rasa_percaya' => 'Apakah anda memiliki rasa percaya terhadap Polairud?', 
 				'created_at'              => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_rasa_percaya'      => 2,
@@ -54,7 +46,7 @@ class RasaPercayaOrgSeeder extends Seeder
 				'is_reason'               => TRUE
             ],
             [
-				'id_rasa_percaya'         => 20, 
+				'id_rasa_percaya'         => 19, 
 				'pertanyaan_rasa_percaya' => 'Apakah anda memiliki rasa percaya terhadap Lembaga adat?', 
 				'created_at'              => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_rasa_percaya'      => 2,
