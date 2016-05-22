@@ -15,7 +15,8 @@ class AsetPendukungUsahaController extends Controller
         1 => 'Sendiri', 
         2 => 'Juragan', 
         3 => 'Kelompok', 
-        4 => 'Sewa'
+        4 => 'Sewa',
+        5 => 'Lainnya'
     ];
     
     var $master_kondisi = [

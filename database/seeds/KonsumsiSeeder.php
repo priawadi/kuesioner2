@@ -333,7 +333,7 @@ class KonsumsiSeeder extends Seeder
 				'id_parentkonsum' 	=> 33,
 				'id_kateg_konsum'  	=> 2,
 				'nomor_sub'		  	=> 2.3,
-				'rincian' 			=> 'Biaya kesehatan (rumah sakit, puskesmas, dokter praktek, dukun, obat-obatan, dll.)',
+				'rincian' 			=> 'Biaya Pendidikan',
 				'created_at'		=> \Carbon\Carbon::now()->toDateTimeString(),
             ], 
 

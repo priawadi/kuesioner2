@@ -21,7 +21,7 @@
                             <thead>
                                 <tr>
                                     <th>Jenis</th>
-                                    <th>Frekuensi Selama 1 Tahun (Tahun)</th>
+                                    <th>Frekuensi Selama 1 Tahun (Kali)</th>
                                     <th>Harga Satuan (Rp.)</th>
                                     <th>Total Biaya (Rp./Tahun)</th>
                                 </tr>
