@@ -18,26 +18,11 @@
                         <tr>
                             <td>
                                 @if(!$item->parent_nilai_norma)
-                                    {{ $nomor++ }}
+                                    1303.{{ $nomor++ }}
                                 @endif
                             </td>
                             <td>
                                 {{$item->pertanyaan_nilai_norma}}
-                                @if ($item->is_reason)
-                                <br>
-                                Alasan:                             
-                                {{
-                                    Form::textarea(
-                                        'alasan[' . $item->id_nilai_norma . ']', 
-                                        '', 
-                                        [
-                                            'class'       => 'form-control col-sm-6',
-                                            'placeholder' => 'Alasan',
-                                            'rows'  => 4
-                                        ]
-                                    )
-                                }} 
-                                @endif
                             </td>
                             <td width="200px">
                                 @if($item->id_master_opsional)

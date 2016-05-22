@@ -102,22 +102,12 @@ class NilaiNormaController extends Controller
             $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
         }
 
-        /**
-         * $jwb_partisipasi = [ 
-         *     id_pertanyaan => [
-         *         'id_jwb_partisipasi' =>, 
-         *         'id_master_opsional' =>,
-         *         'jwb_teks_pertanyaan' =>
-         *     ]
-         * ]
-         */
         $result = JwbNilaiNorma::where('id_responden', $request->session()->get('id_responden'))->get();
         $jwb_nilai_norma = [];
         foreach ($result as $idx => $item) {
             $jwb_nilai_norma[$item->id_nilai_norma] = [
                 'id_jwb_nilai_norma'   => $item->id_jwb_nilai_norma,
                 'id_master_opsional'   => $item->id_master_opsional,
-                'jwb_teks_partisipasi' => $item->jwb_teks_partisipasi,
             ];
         }
 
@@ -128,7 +118,8 @@ class NilaiNormaController extends Controller
             'pertanyaan'      => NilaiNorma::all(),
             'jwb_nilai_norma' => $jwb_nilai_norma,
             'opsi'            => $opsi,
-            'prev_action'     => 'responden'
+            'prev_action'     => 'responden',
+            'nomor'           => 1
         ]);
     }
 

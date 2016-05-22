@@ -17,25 +17,25 @@ class NilaiNormaSeeder extends Seeder
 				'id_nilai_norma'         => 1, 
 				'pertanyaan_nilai_norma' => 'Apakah ada aturan lokal/ adat yang mewajibkan bapak sebagai anggota masyarakat untuk ikut serta dalam kegiatan gotong royong untuk kepentingan bersama?', 
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
-				'id_master_opsional'     => 9,
+				'id_master_opsional'     => 3,
             ],
             [
 				'id_nilai_norma'         => 2, 
 				'pertanyaan_nilai_norma' => 'Apakah ada sanksi  jika bapak melanggar aturan di atas?', 
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
-				'id_master_opsional'     => 9,
+				'id_master_opsional'     => 3,
             ],
             [
 				'id_nilai_norma'         => 3, 
 				'pertanyaan_nilai_norma' => 'Apakah ada aturan lokal/ adat yang mewajibkan bapak sebagai anggota masyarakat untuk membantu orang lain yang sedang kesusahan?', 
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
-				'id_master_opsional'     => 9,
+				'id_master_opsional'     => 3,
             ],
             [
 				'id_nilai_norma'         => 4, 
 				'pertanyaan_nilai_norma' => 'Apakah ada sanksi jika bapak melanggar aturan di atas?', 
 				'created_at'             => \Carbon\Carbon::now()->toDateTimeString(),
-				'id_master_opsional'     => 9,
+				'id_master_opsional'     => 3,
             ],
         ];
         DB::table('nilai_norma')->insert($nilai_norma);

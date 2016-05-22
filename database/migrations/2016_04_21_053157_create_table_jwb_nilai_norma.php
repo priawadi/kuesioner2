@@ -17,7 +17,6 @@ class CreateTableJwbNilaiNorma extends Migration
             $table->integer('id_master_opsional')->nullable();
             $table->integer('id_responden');
             $table->integer('id_nilai_norma');
-            $table->text('jwb_teks_nilai_norma')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
