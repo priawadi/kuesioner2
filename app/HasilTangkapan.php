@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class HasilTangkapan extends Model
 {
-    protected $table = 'hasil_tangkapan';
+	protected $table      = 'hasil_tangkapan';
+	protected $primaryKey = 'id_hasil_tangkapan';
 }

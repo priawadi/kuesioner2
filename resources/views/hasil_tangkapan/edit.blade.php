@@ -36,7 +36,7 @@
                                     Form::select(
                                         'bulan_tidak_tangkap[]', 
                                         $master_bulan, 
-                                        null, 
+                                        $bulan_tidak_tangkap, 
                                         [
                                             'class'    => 'form-control',
                                             'multiple' => 'multiple',
@@ -53,7 +53,7 @@
                                 {{
                                     Form::textarea(
                                         'alasan_tidak_melaut', 
-                                        '', 
+                                        $penerimaan_usaha['alasan_tidak_melaut'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'Alasan tidak melaut'
@@ -73,7 +73,7 @@
                                             Form::radio(
                                                 'hari_tidak_tangkap', 
                                                 1,
-                                                false,
+                                                1 == $penerimaan_usaha['hari_tidak_tangkap'],
                                                 [
                                                     'class' => 'control-label'
                                                 ]
@@ -88,7 +88,7 @@
                                             Form::radio(
                                                 'hari_tidak_tangkap', 
                                                 2,
-                                                false,
+                                                2 == $penerimaan_usaha['hari_tidak_tangkap'],
                                                 [
                                                     'class' => 'control-label'
                                                 ]
@@ -107,7 +107,7 @@
                                     Form::select(
                                         'daftar_hari[]', 
                                         $master_hari, 
-                                        null, 
+                                        $daftar_hari, 
                                         [
                                             'class'    => 'form-control',
                                             'multiple' => 'multiple',
@@ -125,7 +125,7 @@
                                 {{
                                     Form::text(
                                         'total_hari_tidak_melaut', 
-                                        '', 
+                                        $penerimaan_usaha['total_hari_tidak_melaut'], 
                                         [
                                             'class'       => 'form-control',
                                             'placeholder' => 'hari'
@@ -163,9 +163,9 @@
                                     <td class="col-xs-2" rowspan="5">
                                         {{
                                             Form::select(
-                                                'musim_produksi[' . $id_bulan . ']', 
+                                                'musim_produksi[' . $hasil_tangkapan[$id_bulan]['id_hasil_tangkapan'] . ']', 
                                                 $master_musim, 
-                                                null, 
+                                                $hasil_tangkapan[$id_bulan]['id_musim'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Pilih'
@@ -176,9 +176,9 @@
                                     <td rowspan="5">
                                         {{
                                             Form::select(
-                                                'jenis_alat_tangkap[' . $id_bulan . ']', 
+                                                'jenis_alat_tangkap[' . $hasil_tangkapan[$id_bulan]['id_hasil_tangkapan'] . ']', 
                                                 $master_jenis_alat_tangkap, 
-                                                null, 
+                                                $hasil_tangkapan[$id_bulan]['id_jenis_alat_tangkap'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Pilih'
@@ -190,9 +190,9 @@
                                     <td>
                                         {{
                                             Form::select(
-                                                'jenis_ikan_dominan[' . $id_bulan . '][1]', 
+                                                'jenis_ikan_dominan[' . $detil_hasil_tangkapan[$id_bulan][1]['id_detil_hasil_tangkapan'] . ']', 
                                                 $master_jenis_ikan, 
-                                                null, 
+                                                $detil_hasil_tangkapan[$id_bulan][1]['id_jenis_ikan'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Pilih'
@@ -203,8 +203,8 @@
                                     <td>
                                         {{
                                             Form::text(
-                                                'produksi_sebulan[' . $id_bulan . '][1]', 
-                                                '', 
+                                                'produksi_sebulan[' . $detil_hasil_tangkapan[$id_bulan][1]['id_detil_hasil_tangkapan'] . ']', 
+                                                $detil_hasil_tangkapan[$id_bulan][1]['produksi_sebulan'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Produksi Sebulan'
@@ -215,8 +215,8 @@
                                     <td>
                                         {{
                                             Form::text(
-                                                'harga_ikan[' . $id_bulan . '][1]', 
-                                                '', 
+                                                'harga_ikan[' . $detil_hasil_tangkapan[$id_bulan][1]['id_detil_hasil_tangkapan'] . ']', 
+                                                $detil_hasil_tangkapan[$id_bulan][1]['harga_ikan'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Harga Ikan'
@@ -227,8 +227,8 @@
                                     <td>
                                         {{
                                             Form::text(
-                                                'nilai_produksi[' . $id_bulan . '][1]', 
-                                                '', 
+                                                'nilai_produksi[' . $detil_hasil_tangkapan[$id_bulan][1]['id_detil_hasil_tangkapan'] . ']', 
+                                                $detil_hasil_tangkapan[$id_bulan][1]['nilai_produksi'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Nilai Produksi'
@@ -239,8 +239,8 @@
                                     <td rowspan="5">
                                         {{
                                             Form::text(
-                                                'total_trip[' . $id_bulan . ']', 
-                                                '', 
+                                                'total_trip[' . $hasil_tangkapan[$id_bulan]['id_hasil_tangkapan'] . ']', 
+                                                $hasil_tangkapan[$id_bulan]['total_trip'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Total Trip'
@@ -255,9 +255,9 @@
                                     <td class="col-xs-2">
                                         {{
                                             Form::select(
-                                                'jenis_ikan_dominan[' . $id_bulan . ']['. $i . ']', 
+                                                'jenis_ikan_dominan[' . $detil_hasil_tangkapan[$id_bulan][$i]['id_detil_hasil_tangkapan'] . ']',
                                                 $master_jenis_ikan, 
-                                                null, 
+                                                $detil_hasil_tangkapan[$id_bulan][$i]['id_jenis_ikan'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Pilih'
@@ -268,8 +268,8 @@
                                     <td>
                                         {{
                                             Form::text(
-                                                'produksi_sebulan[' . $id_bulan . '][' . $i . ']', 
-                                                '', 
+                                                'produksi_sebulan[' . $detil_hasil_tangkapan[$id_bulan][$i]['id_detil_hasil_tangkapan'] . ']',
+                                                $detil_hasil_tangkapan[$id_bulan][$i]['produksi_sebulan'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Produksi Sebulan'
@@ -280,8 +280,8 @@
                                     <td>
                                         {{
                                             Form::text(
-                                                'harga_ikan[' . $id_bulan . '][' . $i . ']', 
-                                                '', 
+                                                'harga_ikan[' . $detil_hasil_tangkapan[$id_bulan][$i]['id_detil_hasil_tangkapan'] . ']',
+                                                $detil_hasil_tangkapan[$id_bulan][$i]['harga_ikan'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Harga Ikan'
@@ -292,8 +292,8 @@
                                     <td>
                                         {{
                                             Form::text(
-                                                'nilai_produksi[' . $id_bulan . '][' . $i . ']', 
-                                                '', 
+                                                'nilai_produksi[' . $detil_hasil_tangkapan[$id_bulan][$i]['id_detil_hasil_tangkapan'] . ']',
+                                                $detil_hasil_tangkapan[$id_bulan][$i]['nilai_produksi'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Nilai Produksi'
