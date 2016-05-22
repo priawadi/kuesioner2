@@ -47,7 +47,7 @@ class KetenagakerjaanController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
 
         return view('ketenagakerjaan.form', [
-            'subtitle'         => 'Ketenagakerjaan',
+            'subtitle'         => '1101. Curahan Tenaga Kerja dalam 1 unit penangkapan',
             'action'           => 'ketenagakerjaan/tambah',
             'nomor'            => 1,
             'status_pekerjaan' => 
@@ -145,7 +145,7 @@ class KetenagakerjaanController extends Controller
         }
 
         return view('ketenagakerjaan.edit', [
-            'subtitle'                      => 'Ketenagakerjaan',
+            'subtitle'                      => '1101. Curahan Tenaga Kerja dalam 1 unit penangkapan',
             'action'                        => 'ketenagakerjaan/edit/' . $id,
             'method'                        => 'patch',
             'curahan_tenaga_kerja'          => $curahan_tenaga_kerja,

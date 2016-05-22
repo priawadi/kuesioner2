@@ -24,7 +24,7 @@
                         </thead> 
                         <tbody> 
                             <tr> 
-                                <th></th> 
+                                <th>((1201.1))</th> 
                                 <td><center>Jenis</center></td> 
                                 <td><center>Jumlah Pengeluaran (Rp/Minggu)</center></td> 
                             </tr>
@@ -61,7 +61,7 @@
 
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">II PENGELUARAN NON PANGAN BULANAN RUMAH TANGGA PERIKANAN</div>
+                <div class="panel-heading">1202. PENGELUARAN NON PANGAN BULANAN RUMAH TANGGA PERIKANAN</div>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -78,7 +78,7 @@
                         </thead> 
                         <tbody> 
                             <tr> 
-                                <th></th> 
+                                <th>((1202.1))</th>
                                 <td><center>Jenis</center></td> 
                                 <td><center>Jumlah Pengeluaran (Rp/Bulan)</center></td> 
                             </tr> 
@@ -114,7 +114,7 @@
 
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">III PENGELUARAN NON PANGAN TAHUNAN RUMAH TANGGA PERIKANAN</div>
+                <div class="panel-heading">1203. PENGELUARAN NON PANGAN TAHUNAN RUMAH TANGGA PERIKANAN</div>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -131,7 +131,7 @@
                         </thead> 
                         <tbody> 
                             <tr> 
-                                <th></th> 
+                                <th>((1203.1))</th>
                                 <td><center>Jenis</center></td> 
                                 <td><center>Jumlah Pengeluaran (Rp/Tahun)</center></td> 
                             </tr> 

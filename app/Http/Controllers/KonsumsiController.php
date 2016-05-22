@@ -32,7 +32,7 @@ class KonsumsiController extends Controller
         if (!$request->session()->get('id_responden')) return redirect('responden');
 
         return view('konsumsi.form', [
-            'subtitle'   => 'I PENGELUARAN PANGAN MINGGUAN RUMAH TANGGA PERIKANAN',
+            'subtitle'   => '1201.PENGELUARAN PANGAN MINGGUAN RUMAH TANGGA PERIKANAN',
             'konsumsi' => Konsumsi::all(),
         ]);
 
