@@ -16,24 +16,9 @@
                         <table class="table">
                         @foreach ($pertanyaan as $idx_pertanyaan => $item)
                         <tr>
-                            <td>{{$item->id_rasa_percaya}}.</td>
+                            <td>1302.1.{{$item->id_rasa_percaya}}</td>
                             <td>
                                 {{$item->pertanyaan_rasa_percaya}}
-                                @if ($item->is_reason)
-                                <br>
-                                Alasan:                             
-                                {{
-                                    Form::textarea(
-                                        'alasan[' . $jwb_rasa_percaya[$item->id_rasa_percaya]['id_jwb_rasa_percaya'] . ']', 
-                                        $jwb_rasa_percaya[$item->id_rasa_percaya]['jwb_teks_rasa_percaya'], 
-                                        [
-                                            'class'       => 'form-control col-sm-6',
-                                            'placeholder' => 'Alasan',
-                                            'rows'        => 4
-                                        ]
-                                    )
-                                }} 
-                                @endif
                             </td>
                             <td>
                                 @if ($item->id_master_opsional)

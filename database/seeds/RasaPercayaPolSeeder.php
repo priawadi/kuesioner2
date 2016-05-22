@@ -14,7 +14,7 @@ class RasaPercayaPolSeeder extends Seeder
         Eloquent::unguard();
         $rasa_percaya_pol = [
             [
-				'id_rasa_percaya'         => 21, 
+				'id_rasa_percaya'         => 27, 
 				'pertanyaan_rasa_percaya' => 'Apakah anda memiliki rasa percaya terhadap Pemerintah Daerah?', 
 				'created_at'     		  => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_rasa_percaya'      => 3,
@@ -22,7 +22,7 @@ class RasaPercayaPolSeeder extends Seeder
 				'is_reason'               => TRUE
             ],
             [
-				'id_rasa_percaya'         => 22, 
+				'id_rasa_percaya'         => 28, 
 				'pertanyaan_rasa_percaya' => 'Apakah anda memiliki rasa percaya terhadap pemerintah Pusat?', 
 				'created_at'              => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_rasa_percaya'      => 3,
@@ -30,7 +30,7 @@ class RasaPercayaPolSeeder extends Seeder
 				'is_reason'               => TRUE
             ],
             [
-				'id_rasa_percaya'         => 23, 
+				'id_rasa_percaya'         => 29, 
 				'pertanyaan_rasa_percaya' => 'Apakah anda memiliki rasa percaya terhadap DPR & DPRD ?', 
 				'created_at'              => \Carbon\Carbon::now()->toDateTimeString(),
 				'kateg_rasa_percaya'      => 3,
