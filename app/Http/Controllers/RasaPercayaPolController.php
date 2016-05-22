@@ -38,7 +38,7 @@ class RasaPercayaPolController extends Controller
             $opsi[$item->kateg_master_ops][$item->id_master_opsional] = $item->opsional_master_ops;
         }
 
-        return view('rasa_percaya_org.form', [
+        return view('rasa_percaya_pol.form', [
             'subtitle'   => 'Rasa Percaya Politik',
             'action'     => 'rasa-percaya-politik/tambah',
             'pertanyaan' => RasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.POLITIK'))->get(),
@@ -55,27 +55,6 @@ class RasaPercayaPolController extends Controller
      */
     public function store(Request $request)
     {
-
-        // // Get ids of pertanyaan
-        // foreach($pertanyaan as $key => $item)
-        // {
-        //     $rules['jawaban.' . $item->id_rasa_percaya] = 'required';
-
-        //     // validate reason
-        //     if ($item->is_reason)
-        //     {
-        //         $rules['alasan.' . $item->id_rasa_percaya] = 'required|max:500';
-        //     }
-        // }
-        
-        // // Validate input
-        // $validator = Validator::make($request->all(), $rules);
-
-        // if ($validator->fails()) {
-        //     return redirect('rasa-percaya-politik/tambah')
-        //                 ->withErrors($validator)
-        //                 ->withInput();
-        // }
 
         // Save jawaban into database
         $pertanyaan = RasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.POLITIK'))->select('id_rasa_percaya', 'is_reason')->get();
@@ -134,8 +113,8 @@ class RasaPercayaPolController extends Controller
         }        
 
         return view('rasa_percaya_pol.edit', [
-            'subtitle'         => 'Rasa Percaya Organisasi',
-            'action'           => 'rasa-percaya-organisasi/edit/' . $request->session()->get('id_responden'),
+            'subtitle'         => 'Rasa Percaya Politik',
+            'action'           => 'rasa-percaya-politik/edit/' . $request->session()->get('id_responden'),
             'pertanyaan'       => RasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.POLITIK'))->get(),
             'jwb_rasa_percaya' => $jwb_rasa_percaya,
             'opsi'             => $opsi,
@@ -156,12 +135,6 @@ class RasaPercayaPolController extends Controller
         foreach ($request->input('jawaban') as $id_jwb_rasa_percaya => $id_master_opsional) {
             $jwb_rasa_percaya                     = JwbRasaPercaya::find($id_jwb_rasa_percaya);
             $jwb_rasa_percaya->id_master_opsional = $id_master_opsional;
-            $jwb_rasa_percaya->save();
-        }
-        
-        foreach ($request->input('alasan') as $id_jwb_rasa_percaya => $jwb_teks_rasa_percaya) {
-            $jwb_rasa_percaya                        = JwbRasaPercaya::find($id_jwb_rasa_percaya);
-            $jwb_rasa_percaya->jwb_teks_rasa_percaya = $jwb_teks_rasa_percaya;
             $jwb_rasa_percaya->save();
         }
 

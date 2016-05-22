@@ -17,7 +17,6 @@ class CreateTableJwbRasaPercaya extends Migration
             $table->integer('id_master_opsional')->nullable();
             $table->integer('id_responden');
             $table->integer('id_rasa_percaya');
-            $table->text('jwb_teks_rasa_percaya')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
