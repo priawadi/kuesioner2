@@ -133,6 +133,7 @@ class AsetPendukungUsahaController extends Controller
             $aset_pendukung_usaha[$item->id_peralatan_tambahan] = [
                 'id_aset_pendukung_usaha' =>$item->id_aset_pendukung_usaha,
                 'status_kepemilikan'      =>$item->status_kepemilikan,
+                'status_kepemilikan_lain'      =>$item->status_kepemilikan_lain,
                 'jumlah'                  =>$item->jumlah,
                 'kondisi'                 =>$item->kondisi,
                 'umur_ekonomis'           =>$item->umur_ekonomis,
@@ -169,6 +170,7 @@ class AsetPendukungUsahaController extends Controller
         {
             $aset_pendukung_usaha                     = AsetPendukungUsaha::find($id_aset_pendukung_usaha);
             $aset_pendukung_usaha->status_kepemilikan = $request->input('status_kepemilikan.' . $id_aset_pendukung_usaha, null);
+            $aset_pendukung_usaha->status_kepemilikan_lain = $request->input('status_kepemilikan_lain.' . $id_aset_pendukung_usaha, null);
             $aset_pendukung_usaha->jumlah             = $request->input('jumlah.' . $id_aset_pendukung_usaha, null);
             $aset_pendukung_usaha->kondisi            = $request->input('kondisi.' . $id_aset_pendukung_usaha, null);
             $aset_pendukung_usaha->umur_ekonomis      = $request->input('umur_ekonomis.' . $id_aset_pendukung_usaha, null);

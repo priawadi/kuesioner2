@@ -43,25 +43,22 @@
                                             $master_status_kepemilikan, 
                                             $aset_pendukung_usaha[$id_peralatan_tambahan]['status_kepemilikan'], 
                                             [
-                                                'class'    => 'form-control',
-                                                'id'             => 'status',
+                                                'class'          => 'form-control status',
                                                 'placeholder'    => 'Pilih',
                                             ]
                                         )
                                     }} 
-                                    <div id="5" class="id_lain" style="display:none">
-                                        {{
-                                            Form::text(
-                                                'status_kepemilikan_lain[' . $id_peralatan_tambahan . ']', 
-                                                null, 
-                                                [
-                                                    'class'       => 'form-control',
-                                                    'id'          => 'hide',
-                                                    'placeholder' => 'Sebutkan'
-                                                ]
-                                            )
-                                        }}
-                                    </div>                                     
+                                    {{
+                                        Form::text(
+                                            'status_kepemilikan_lain[' . $aset_pendukung_usaha[$id_peralatan_tambahan]['id_aset_pendukung_usaha'] . ']',
+                                            $aset_pendukung_usaha[$id_peralatan_tambahan]['status_kepemilikan_lain'], 
+                                            [
+                                                'class'       => 'form-control status 5',
+                                                'placeholder' => 'Sebutkan',
+                                                'style'       => 'display:none'
+                                            ]
+                                        )
+                                    }}                                                                       
                                 </td>
                                 <td>
                                     {{
@@ -137,11 +134,31 @@
     </div>
 </div>
 <script>
-    $(function() {
-        $('#status').change(function(){
-            $('.id_lain').hide();
-            $('#' + $(this).val()).show();
-        });
-    });
+// $(function() {
+//     $(".status").change(function(){
+//         $(".5").hide();
+//         $("." + $(this).val()).show();               
+//     });
+// });
+// $(function() {
+//     $(document).change(function(e){
+//         e.preventDefault();
+//         if ('.status[value=5]') {
+//             $('.5').show();
+//         } else {
+//             $('.5').hide();
+//         };
+//     });
+// });
+$(function(){
+    $( ".status" ).change(function(e) {
+        e.preventDefault();
+        if ($(this).val() == '5') {
+            $(this).next(".status").slideToggle();
+        } else {
+            $(this).next(".status").slideUp();
+        }; 
+    });      
+}); 
 </script>
 @endsection

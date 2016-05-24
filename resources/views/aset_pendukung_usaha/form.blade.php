@@ -44,8 +44,7 @@
                                             null, 
                                             [
                                                 'class'          => 'form-control status',
-                                                'placeholder'    => 'Pilih',
-                                                
+                                                'placeholder'    => 'Pilih',                                                
                                             ]
                                         )
                                     }}  
@@ -135,22 +134,15 @@
     </div>
 </div>
 <script>
-// $(function() {
-//     $(".status").change(function(){
-//         $(".5").hide();
-//         $("." + $(this).val()).show();               
-//     });
-// });
 $(function(){
-$( ".status" ).change(function(e) {
-    e.preventDefault();
-    if ($(this).val() == '5') {
-        $(this).next(".status").slideToggle();
-    } else {
-        $(this).next(".status").slideUp();
-    }; 
-});      
-});
- 
+    $( ".status" ).change(function(e) {
+        e.preventDefault();
+        if ($(this).val() == '5') {
+            $(this).next(".status").slideToggle();
+        } else {
+            $(this).next(".status").slideUp();
+        }; 
+    });      
+}); 
 </script>
 @endsection
