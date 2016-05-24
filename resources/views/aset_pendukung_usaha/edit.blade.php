@@ -141,8 +141,8 @@
 //     });
 // });
 // $(function() {
-//     $(document).change(function(e){
-//         e.preventDefault();
+//     $(document).ready(function(e){
+//         e.stopPropagation();
 //         if ('.status[value=5]') {
 //             $('.5').show();
 //         } else {

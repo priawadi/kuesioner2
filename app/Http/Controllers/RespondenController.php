@@ -242,18 +242,13 @@ class RespondenController extends Controller
         $kuesioner['konsumsi'] = [
             [
                 'kuesioner' => 'Pengeluaran Pangan Mingguan Rumah Tangga Perikanan.',
-                'is_done'   => (JawabanKonsumsi::where('id_responden', $request->session()->get('id_responden'))->count()),
+                'is_done'   => (JawabanKonsumsi::where('id_responden', $request->session()->get('id_responden'))->where('kateg_konsum', 1)->count()),
                 'link'      => 'konsumsi',
             ],
             [
-                'kuesioner' => 'Pengeluaran Non Pangan Bulanan Rumah Tangga',
-                'is_done'   => (JawabanKonsumsi::where('id_responden', $request->session()->get('id_responden'))->count()),
-                'link'      => 'konsumsi',
-            ],
-            [
-                'kuesioner' => 'Pengeluaran Non Pangan Tahunan Rumah Tangga Perikanan',
-                'is_done'   => (JawabanKonsumsi::where('id_responden', $request->session()->get('id_responden'))->count()),
-                'link'      => 'konsumsi',
+                'kuesioner' => 'Pengeluaran Non Pangan Bulanan dan Tahunan Rumah Tangga Perikanan',
+                'is_done'   => (JawabanKonsumsi::where('id_responden', $request->session()->get('id_responden'))->where('kateg_konsum', 2)->count()),
+                'link'      => 'konsumsinon',
             ],
         ];
 

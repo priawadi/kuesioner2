@@ -136,6 +136,14 @@ Route::get('/konsumsi/edit/{id_responden}', 'KonsumsiController@edit');
 Route::patch('/konsumsi/edit/{id_responden}', 'KonsumsiController@update');
 Route::delete('/konsumsi/hapus/{id_responden}', 'KonsumsiController@destroy');
 
+//konsumsi
+Route::get('/konsumsinon', 'KonsumsiNonController@index');
+Route::get('/konsumsinon/tambah', 'KonsumsiNonController@create');
+Route::post('/konsumsinon/tambah', 'KonsumsiNonController@store');
+Route::get('/konsumsinon/edit/{id_responden}', 'KonsumsiNonController@edit');
+Route::patch('/konsumsinon/edit/{id_responden}', 'KonsumsiNonController@update');
+Route::delete('/konsumsinon/hapus/{id_responden}', 'KonsumsiNonController@destroy');
+
 //tenaker
 Route::get('/tenaker', 'TenakerController@index');
 Route::get('/tenaker/tambah', 'TenakerController@create');

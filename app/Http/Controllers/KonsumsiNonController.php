@@ -8,7 +8,7 @@ use App\JawabanKonsumsi;
 use App\Http\Requests;
 use Validator;
 
-class KonsumsiController extends Controller
+class KonsumsiNonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,9 +31,10 @@ class KonsumsiController extends Controller
         // Redirect to list of responden if id_responden
         if (!$request->session()->get('id_responden')) return redirect('responden');
 
-        return view('konsumsi.form', [
+        return view('konsumsinon.form', [
             'subtitle'   => '1201.PENGELUARAN PANGAN MINGGUAN RUMAH TANGGA PERIKANAN',
             'konsumsi' => Konsumsi::all(),
+            'action'     => 'konsumsinon/tambah',
         ]);
 
     }
@@ -51,7 +52,7 @@ class KonsumsiController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('konsumsi/tambah')
+            return redirect('konsumsinon/tambah')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -59,10 +60,10 @@ class KonsumsiController extends Controller
         $input = $request->all();
         foreach ($input['konsumsi'] as $key => $value) {
             $konsumsi = new JawabanKonsumsi;
-            $konsumsi -> id_konsumsi    = isset($key)? $key: null;;
-            $konsumsi -> id_responden   = $request->session()->get('id_responden');
-            $konsumsi-> kateg_konsum    = \Config::get('constants.KONSUMSI.PANGAN');
-            $konsumsi -> jawaban        = $value;
+            $konsumsi -> id_konsumsi 	= isset($key)? $key: null;;
+            $konsumsi -> id_responden 	= $request->session()->get('id_responden');
+            $konsumsi-> kateg_konsum    = \Config::get('constants.KONSUMSI.NONPANGAN');
+            $konsumsi -> jawaban 		= $value;
             $konsumsi->save();
         }
 
@@ -96,9 +97,9 @@ class KonsumsiController extends Controller
             ];
         }       
 
-        return view('konsumsi.edit', [
+        return view('konsumsinon.edit', [
             'subtitle'          => 'I PENGELUARAN PANGAN MINGGUAN RUMAH TANGGA PERIKANAN',
-            'action'            => 'konsumsi/edit/' . $id,
+            'action'            => 'konsumsinon/edit/' . $id,
             'konsumsi'          => Konsumsi::all(),
             'jawaban_konsumsi'  => $jawaban_konsumsi,
         ]);

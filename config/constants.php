@@ -32,5 +32,10 @@ return [
         'HASIL_PENERIMAAN'  => 1,
         'BIAYA_INVESTASI'   => 2,
         'BIAYA_OPERASIONAL' => 3,
-    ],    
+    ], 
+
+    'KONSUMSI' => [
+        'PANGAN'            => 1,
+        'NONPANGAN'         => 2,
+    ],        
 ];
