@@ -88,6 +88,7 @@ class AsetPendukungUsahaController extends Controller
             $aset_pendukung_usaha->id_responden          = $request->session()->get('id_responden');
             $aset_pendukung_usaha->id_peralatan_tambahan = $item->id_master_peralatan_tambahan;
             $aset_pendukung_usaha->status_kepemilikan    = $request->get('status_kepemilikan')[$item->id_master_peralatan_tambahan];
+            $aset_pendukung_usaha->status_kepemilikan_lain    = $request->get('status_kepemilikan_lain')[$item->id_master_peralatan_tambahan];
             $aset_pendukung_usaha->jumlah                = $request->get('jumlah')[$item->id_master_peralatan_tambahan];
             $aset_pendukung_usaha->kondisi               = $request->get('kondisi')[$item->id_master_peralatan_tambahan];
             $aset_pendukung_usaha->umur_ekonomis         = $request->get('umur_ekonomis')[$item->id_master_peralatan_tambahan];

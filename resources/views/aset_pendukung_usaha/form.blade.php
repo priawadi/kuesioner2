@@ -43,11 +43,23 @@
                                             $master_status_kepemilikan, 
                                             null, 
                                             [
-                                                'class'    => 'form-control',
+                                                'class'          => 'form-control status',
                                                 'placeholder'    => 'Pilih',
+                                                
                                             ]
                                         )
                                     }}  
+                                    {{
+                                        Form::text(
+                                            'status_kepemilikan_lain[' . $id_peralatan_tambahan . ']', 
+                                            null, 
+                                            [
+                                                'class'       => 'form-control status 5',
+                                                'placeholder' => 'Sebutkan',
+                                                'style'       => 'display:none'
+                                            ]
+                                        )
+                                    }}
                                 </td>
                                 <td>
                                     {{
@@ -122,4 +134,23 @@
         </div>
     </div>
 </div>
+<script>
+// $(function() {
+//     $(".status").change(function(){
+//         $(".5").hide();
+//         $("." + $(this).val()).show();               
+//     });
+// });
+$(function(){
+$( ".status" ).change(function(e) {
+    e.preventDefault();
+    if ($(this).val() == '5') {
+        $(this).next(".status").slideToggle();
+    } else {
+        $(this).next(".status").slideUp();
+    }; 
+});      
+});
+ 
+</script>
 @endsection

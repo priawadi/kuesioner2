@@ -18,6 +18,7 @@ class CreateTableAsetPendukungUsaha extends Migration
 
             $table->integer('id_peralatan_tambahan');
             $table->smallInteger('status_kepemilikan')->nullable();
+            $table->string('status_kepemilikan_lain', 100)->nullable();
             $table->integer('jumlah')->nullable();
             $table->smallInteger('kondisi')->nullable();
             $table->integer('umur_ekonomis')->nullable();

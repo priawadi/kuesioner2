@@ -44,10 +44,24 @@
                                             $aset_pendukung_usaha[$id_peralatan_tambahan]['status_kepemilikan'], 
                                             [
                                                 'class'    => 'form-control',
+                                                'id'             => 'status',
                                                 'placeholder'    => 'Pilih',
                                             ]
                                         )
-                                    }}  
+                                    }} 
+                                    <div id="5" class="id_lain" style="display:none">
+                                        {{
+                                            Form::text(
+                                                'status_kepemilikan_lain[' . $id_peralatan_tambahan . ']', 
+                                                null, 
+                                                [
+                                                    'class'       => 'form-control',
+                                                    'id'          => 'hide',
+                                                    'placeholder' => 'Sebutkan'
+                                                ]
+                                            )
+                                        }}
+                                    </div>                                     
                                 </td>
                                 <td>
                                     {{
@@ -122,4 +136,12 @@
         </div>
     </div>
 </div>
+<script>
+    $(function() {
+        $('#status').change(function(){
+            $('.id_lain').hide();
+            $('#' + $(this).val()).show();
+        });
+    });
+</script>
 @endsection
