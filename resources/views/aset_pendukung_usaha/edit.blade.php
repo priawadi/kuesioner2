@@ -158,7 +158,14 @@ $(function(){
         } else {
             $(this).next(".status").slideUp();
         }; 
-    });      
+    });
+
+    $.each($( "select[name*='status_kepemilikan']" ), function( key, value ) {
+      if ($(value).val() == 5)
+       $(value).next(".status").show();
+    });
 }); 
+
+$()
 </script>
 @endsection
