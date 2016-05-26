@@ -290,6 +290,37 @@
                                 }}
                             </div>
                         </div>
+                        <div class="form-group">
+                            {{
+                                Form::label(
+                                    'lokasi', 
+                                    'Lokasi', 
+                                    [
+                                        'class' => 'col-sm-2 control-label'
+                                    ]
+                                )
+                            }}
+                            <div class="col-sm-10">
+                                @foreach ($lokasi as $k => $v)
+                                    <div class="radio">
+                                        <label>
+                                            {{
+                                                Form::radio(
+                                                    'lokasi', 
+                                                    $k,
+                                                    false,
+                                                    [
+                                                        'class' => 'control-label'
+                                                    ]
+                                                )
+                                            }} 
+                                            {{ $v }}
+                                        </label>
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        </div>                        
 
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">

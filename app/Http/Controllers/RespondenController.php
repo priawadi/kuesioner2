@@ -35,6 +35,19 @@ class RespondenController extends Controller
         3 => 'ABK',
     ];
 
+    var $lokasi = [
+        1 => 'Batam',
+        2 => 'Sibolga',
+        3 => 'Langkat',
+        4 => 'Indramayu',
+        5 => 'Pangkajene Kepulauan',
+        6 => 'Bitung',
+        7 => 'Sorong',
+        8 => 'Merauke',
+        9 => 'Maluku Tengah',
+        10 => 'Cilacap',
+    ];    
+
     /**
      * Display a listing of the resource.
      *
@@ -63,7 +76,8 @@ class RespondenController extends Controller
             'subtitle' => 'Tambah Responden',
             'action'   => 'responden/tambah',
             'method'   => 'post',
-            'status'   => $this->status_responden
+            'status'   => $this->status_responden,
+            'lokasi'   => $this->lokasi,
         ]);
     }
 
@@ -86,6 +100,7 @@ class RespondenController extends Controller
         $responden->kabupaten        = $request->input('kabupaten', null);
         $responden->provinsi         = $request->input('provinsi', null);
         $responden->stat_responden   = $request->input('stat_responden', null);
+        $responden->lokasi           = $request->input('lokasi', null);
         $responden->pengalaman_usaha = $request->input('pengalaman_usaha', null);
 
         $responden->save();
@@ -117,6 +132,7 @@ class RespondenController extends Controller
             'action'    => 'responden/edit/' . $id,
             'method'    => 'patch',
             'status'    => $this->status_responden,
+            'lokasi'    => $this->lokasi,
 
             // Data
             'responden' => Responden::find($id),
@@ -143,6 +159,7 @@ class RespondenController extends Controller
         $responden->kabupaten        = $request->input('kabupaten', null);
         $responden->provinsi         = $request->input('provinsi', null);
         $responden->stat_responden   = $request->input('stat_responden', null);
+        $responden->lokasi           = $request->input('lokasi', null);
         $responden->pengalaman_usaha = $request->input('pengalaman_usaha', null);
 
         $responden->save();

@@ -24,6 +24,7 @@ class CreateTableResponden extends Migration
             $table->string('kecamatan', 150)->nullable();
             $table->string('kabupaten', 150)->nullable();
             $table->string('provinsi', 150)->nullable();
+            $table->smallInteger('lokasi')->nullable();
             $table->smallInteger('stat_responden')->nullable();
             $table->integer('pengalaman_usaha')->nullable();
             

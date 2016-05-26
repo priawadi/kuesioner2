@@ -59,7 +59,8 @@
                                 <th>Nama Responden</th> 
                                 <th>Suku</th> 
                                 <th>Kampung</th> 
-                                <th>Dusun</th> 
+                                <th>Dusun</th>
+                                <th>Lokasi</th> 
                                 <th>Aksi</th> 
                             </tr> 
                         </thead> 
@@ -71,6 +72,34 @@
                                 <td>{{$item->suku}}</td> 
                                 <td>{{$item->kampung}}</td> 
                                 <td>{{$item->dusun}}</td> 
+                                <td>
+                                    <?php
+                                    if ($item->lokasi == 1) {
+                                        echo "Batam";
+                                    } elseif ($item->lokasi == 2) {
+                                        echo "Sibolga";
+                                    } elseif ($item->lokasi == 3) {
+                                        echo "Langkat";
+                                    } elseif ($item->lokasi == 4) {
+                                        echo "Indramayu";
+                                    } elseif ($item->lokasi == 5) {
+                                        echo "Pangkajene Kepulauan";
+                                    } elseif ($item->lokasi == 6) {
+                                        echo "Bitung";
+                                    } elseif ($item->lokasi == 7) {
+                                        echo "Sorong";
+                                    } elseif ($item->lokasi == 8) {
+                                        echo "Merauke";
+                                    } elseif ($item->lokasi == 9) {
+                                        echo "Maluku Tengah";
+                                    } elseif ($item->lokasi == 10) {
+                                        echo "Cilacap";
+                                    } else {
+                                        echo "";
+                                    }
+                                    ?>
+                                </td>
+                                
                                 <td>
                                     <a href="#" onclick="show_modal('{{url('responden/hapus/' . $item->id_responden)}}', '{{$item->nama_responden}}');return false;" title="Hapus"><i class="glyphicon glyphicon-trash"></i></a>
                                     <a href="{{url('responden/edit/' . $item->id_responden)}}" title="Edit Responden"><i class="glyphicon glyphicon-pencil"></i></a>
