@@ -18,6 +18,7 @@
     <link href="{!! asset('css/bootstrap-multiselect.css') !!}" media="all" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="{!! asset('js/jquery.min.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('bootstrap-datetimepicker/moment.min.js') !!}"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
 
     <style>
         body {
@@ -80,6 +81,7 @@
     <script src="{!! asset('bootstrap/js/bootstrap.min.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('js/bootstrap-multiselect.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') !!}"></script>
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

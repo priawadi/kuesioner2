@@ -52,10 +52,10 @@
                 <div class="panel-body">
                     <a href="{{url('responden/tambah')}}" class="btn btn-warning btn-sm"><i class="glyphicon glyphicon-plus"></i> Tambah</a>
                     <br><br>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="responden-table">
                         <thead> 
                             <tr> 
-                                <th>#</th> 
+                                <!-- <th>#</th>  -->
                                 <th>Nama Responden</th> 
                                 <th>Suku</th> 
                                 <th>Kampung</th> 
@@ -67,7 +67,7 @@
                         <tbody> 
                             @foreach ($responden as $index => $item)
                             <tr> 
-                                <th scope="row">{{ $index + 1 }}</th> 
+<!--                                 <th scope="row">{{ $index + 1 }}</th> 
                                 <td>{{$item->nama_responden}}</td> 
                                 <td>{{$item->suku}}</td> 
                                 <td>{{$item->kampung}}</td> 
@@ -104,7 +104,7 @@
                                     <a href="#" onclick="show_modal('{{url('responden/hapus/' . $item->id_responden)}}', '{{$item->nama_responden}}');return false;" title="Hapus"><i class="glyphicon glyphicon-trash"></i></a>
                                     <a href="{{url('responden/edit/' . $item->id_responden)}}" title="Edit Responden"><i class="glyphicon glyphicon-pencil"></i></a>
                                     <a href="{{url('responden/lihat/' . $item->id_responden)}}" title="Lihat"><i class="glyphicon glyphicon-file"></i></a>
-                                </td> 
+                                </td>  -->
                             </tr>
                             @endforeach
                         </tbody> 
@@ -115,4 +115,32 @@
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function() {
+    $.fn.dataTable.ext.errMode = 'throw';
+    var t = $('#responden-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{!! route('datatables.data') !!}',
+        columns: [
+            // { data: null, searchable: false, orderable: false, targets: 0 },
+            { data: 'nama_responden', name: 'nama_responden' },
+            { data: 'suku', name: 'suku' },
+            { data: 'kampung', name: 'kampung' },
+            { data: 'dusun', name: 'dusun' },
+            { data: 'lokasi', name: 'lokasi' },
+            { data: null, orderable: false, searchable: false, 
+             render: function(data, type, full) {
+                return '<a class="btn btn-danger btn-sm" onclick="show_modal(\'responden/hapus/'+ full.id_responden +'\',\''+ full.nama_responden +'\')">' + 'Hapus' + '</a> <a class="btn btn-info btn-sm" href=responden/edit/' + full.id_responden + '>' + 'Edit' + '</a> <a class="btn btn-primary btn-sm" href=responden/lihat/' + full.id_responden + '>' + 'Isi Kuesioner' + '</a>';
+            }}
+        ],
+        // order: [[1, 'asc']],
+    });
+    // t.on( 'order.dt search.dt', function () {
+    //     t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    //         cell.innerHTML = i+1;
+    //     } );
+    // } ).draw();    
+});
+</script>
 @endsection
