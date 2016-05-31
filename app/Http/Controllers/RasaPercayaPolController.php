@@ -65,7 +65,6 @@ class RasaPercayaPolController extends Controller
             $jwb_rasa_percaya->id_responden          = $request->session()->get('id_responden');
             $jwb_rasa_percaya->id_rasa_percaya       = $item->id_rasa_percaya;
             $jwb_rasa_percaya->kateg_rasa_percaya    = \Config::get('constants.RASA_PERCAYA.POLITIK');
-            $jwb_rasa_percaya->jwb_teks_rasa_percaya = $request->input('alasan.' . $item->id_rasa_percaya, null);
             $jwb_rasa_percaya->save();
         }
 
@@ -108,7 +107,6 @@ class RasaPercayaPolController extends Controller
             $jwb_rasa_percaya[$item->id_rasa_percaya] = [
                 'id_jwb_rasa_percaya'   => $item->id_jwb_rasa_percaya,
                 'id_master_opsional'    => $item->id_master_opsional,
-                'jwb_teks_rasa_percaya' => $item->jwb_teks_rasa_percaya,
             ];
         }        
 

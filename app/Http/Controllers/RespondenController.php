@@ -25,6 +25,7 @@ use App\CurahanTenagaKerja;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
+use Yajra\Datatables\Datatables;
 
 class RespondenController extends Controller
 {
@@ -328,4 +329,9 @@ class RespondenController extends Controller
             'enumerator' => Enumerator::where('id_responden', $request->session()->get('id_responden'))->get(),
         ]);
     }
+
+        public function anyData()
+    {
+        return Datatables::of(Responden::query())->make(true);
+    }    
 }

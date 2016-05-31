@@ -222,3 +222,8 @@ Route::post('/perahu/tambah', 'PerahuController@store');
 Route::get('/perahu/edit/{id_responden}', 'PerahuController@edit');
 Route::patch('/perahu/edit/{id_responden}', 'PerahuController@update');
 Route::delete('/perahu/hapus/{id_responden}', 'PerahuController@destroy');
+
+Route::controller('datatables', 'RespondenController', [
+    'anyData'  => 'datatables.data',
+    'getIndex' => 'responden',
+]);
