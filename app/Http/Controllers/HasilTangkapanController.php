@@ -300,7 +300,7 @@ class HasilTangkapanController extends Controller
             $detil_hasil_tangkapan                              = DetilHasilTangkapan::find($id_detil_hasil_tangkapan);
             $detil_hasil_tangkapan->id_jenis_ikan               = $request->input('jenis_ikan_dominan.' . $id_detil_hasil_tangkapan, null);
             $detil_hasil_tangkapan->id_jenis_alat_tangkap       = $request->input('jenis_alat_tangkap.' . $id_detil_hasil_tangkapan, null);
-            $detil_hasil_tangkapan->id_jenis_alat_tangkap_lain  = $request->input('jenis_alat_tangkap_lain.' . $id_detil_hasil_tangkapan_lain, null);
+            $detil_hasil_tangkapan->id_jenis_alat_tangkap_lain  = $request->input('jenis_alat_tangkap_lain.' . $id_detil_hasil_tangkapan, null);
             $detil_hasil_tangkapan->produksi_sebulan            = $request->input('produksi_sebulan.' . $id_detil_hasil_tangkapan, null);
             $detil_hasil_tangkapan->harga_ikan                  = $request->input('harga_ikan.' . $id_detil_hasil_tangkapan, null);
             $detil_hasil_tangkapan->nilai_produksi              = $request->input('nilai_produksi.' . $id_detil_hasil_tangkapan, null);
