@@ -129,21 +129,23 @@ class HasilTangkapanController extends Controller
             $hasil_tangkapan->id_bulan              = $id_bulan;
             $hasil_tangkapan->id_responden          = $request->session()->get('id_responden');
             $hasil_tangkapan->id_musim              = $request->input('musim_produksi.' . $id_bulan, null);
-            $hasil_tangkapan->id_jenis_alat_tangkap = $request->input('jenis_alat_tangkap.' . $id_bulan, null);
+            // $hasil_tangkapan->id_jenis_alat_tangkap = $request->input('jenis_alat_tangkap.' . $id_bulan, null);
             $hasil_tangkapan->total_trip            = $request->input('total_trip.' . $id_bulan, null);
 
             $hasil_tangkapan->save();
 
             // Save data detil hasil tangkapan
             for ($id_input = 1; $id_input <= 5 ; $id_input++) { 
-                $detil_hasil_tangkapan                   = new DetilHasilTangkapan;
-                $detil_hasil_tangkapan->id_responden     = $request->session()->get('id_responden');
-                $detil_hasil_tangkapan->id_bulan         = $id_bulan;
-                $detil_hasil_tangkapan->id_jenis_ikan    = $jenis_ikan_dominan[$id_bulan][$id_input];
-                $detil_hasil_tangkapan->urutan_isian     = $id_input;
-                $detil_hasil_tangkapan->produksi_sebulan = $request->input('produksi_sebulan.' . $id_bulan . '.' . $id_input, null);
-                $detil_hasil_tangkapan->harga_ikan       = $request->input('harga_ikan.' . $id_bulan . '.' . $id_input, null);
-                $detil_hasil_tangkapan->nilai_produksi   = $request->input('nilai_produksi.' . $id_bulan . '.' . $id_input, null);
+                $detil_hasil_tangkapan                              = new DetilHasilTangkapan;
+                $detil_hasil_tangkapan->id_responden                = $request->session()->get('id_responden');
+                $detil_hasil_tangkapan->id_bulan                    = $id_bulan;
+                $detil_hasil_tangkapan->id_jenis_ikan               = $jenis_ikan_dominan[$id_bulan][$id_input];
+                $detil_hasil_tangkapan->urutan_isian                = $id_input;
+                $detil_hasil_tangkapan->id_jenis_alat_tangkap       = $request->input('jenis_alat_tangkap.' . $id_bulan . '.' . $id_input, null);
+                $detil_hasil_tangkapan->id_jenis_alat_tangkap_lain  = $request->input('jenis_alat_tangkap_lain.' . $id_bulan . '.' . $id_input, null);
+                $detil_hasil_tangkapan->produksi_sebulan            = $request->input('produksi_sebulan.' . $id_bulan . '.' . $id_input, null);
+                $detil_hasil_tangkapan->harga_ikan                  = $request->input('harga_ikan.' . $id_bulan . '.' . $id_input, null);
+                $detil_hasil_tangkapan->nilai_produksi              = $request->input('nilai_produksi.' . $id_bulan . '.' . $id_input, null);
                 $detil_hasil_tangkapan->save();
             }
         }
@@ -201,7 +203,7 @@ class HasilTangkapanController extends Controller
             $hasil_tangkapan[$item->id_bulan] = [
                 'id_hasil_tangkapan'    => $item->id_hasil_tangkapan,
                 'id_musim'              => $item->id_musim,
-                'id_jenis_alat_tangkap' => $item->id_jenis_alat_tangkap,
+                // 'id_jenis_alat_tangkap' => $item->id_jenis_alat_tangkap,
                 'total_trip'            => $item->total_trip,
             ];
         }
@@ -209,11 +211,13 @@ class HasilTangkapanController extends Controller
         $detil_hasil_tangkapan = [];
         foreach (DetilHasilTangkapan::where('id_responden', $request->session()->get('id_responden'))->get() as $index => $item) {
             $detil_hasil_tangkapan[$item->id_bulan][$item->urutan_isian] =[
-                'id_detil_hasil_tangkapan' => $item->id_detil_hasil_tangkapan,
-                'id_jenis_ikan'            => $item->id_jenis_ikan,
-                'produksi_sebulan'         => $item->produksi_sebulan,
-                'harga_ikan'               => $item->harga_ikan,
-                'nilai_produksi'           => $item->nilai_produksi,
+                'id_detil_hasil_tangkapan'      => $item->id_detil_hasil_tangkapan,
+                'id_jenis_ikan'                 => $item->id_jenis_ikan,
+                'id_jenis_alat_tangkap'         => $item->id_jenis_alat_tangkap,
+                'id_jenis_alat_tangkap_lain'    => $item->id_jenis_alat_tangkap_lain,
+                'produksi_sebulan'              => $item->produksi_sebulan,
+                'harga_ikan'                    => $item->harga_ikan,
+                'nilai_produksi'                => $item->nilai_produksi,
             ];
         }
 
@@ -285,7 +289,7 @@ class HasilTangkapanController extends Controller
         foreach ($request->input('musim_produksi' ) as $id_hasil_tangkapan => $value) {
             $hasil_tangkapan                        = HasilTangkapan::find($id_hasil_tangkapan);
             $hasil_tangkapan->id_musim              = $request->input('musim_produksi.' . $id_hasil_tangkapan, null);
-            $hasil_tangkapan->id_jenis_alat_tangkap = $request->input('jenis_alat_tangkap.' . $id_hasil_tangkapan, null);
+            // $hasil_tangkapan->id_jenis_alat_tangkap = $request->input('jenis_alat_tangkap.' . $id_hasil_tangkapan, null);
             $hasil_tangkapan->total_trip            = $request->input('total_trip.' . $id_hasil_tangkapan, null);
 
             $hasil_tangkapan->save();
@@ -293,11 +297,13 @@ class HasilTangkapanController extends Controller
 
         // Save data detil hasil tangkapan
         foreach ($request->input('jenis_ikan_dominan') as $id_detil_hasil_tangkapan => $value) {
-            $detil_hasil_tangkapan                   = DetilHasilTangkapan::find($id_detil_hasil_tangkapan);
-            $detil_hasil_tangkapan->id_jenis_ikan    = $request->input('jenis_ikan_dominan.' . $id_detil_hasil_tangkapan, null);
-            $detil_hasil_tangkapan->produksi_sebulan = $request->input('produksi_sebulan.' . $id_detil_hasil_tangkapan, null);
-            $detil_hasil_tangkapan->harga_ikan       = $request->input('harga_ikan.' . $id_detil_hasil_tangkapan, null);
-            $detil_hasil_tangkapan->nilai_produksi   = $request->input('nilai_produksi.' . $id_detil_hasil_tangkapan, null);
+            $detil_hasil_tangkapan                              = DetilHasilTangkapan::find($id_detil_hasil_tangkapan);
+            $detil_hasil_tangkapan->id_jenis_ikan               = $request->input('jenis_ikan_dominan.' . $id_detil_hasil_tangkapan, null);
+            $detil_hasil_tangkapan->id_jenis_alat_tangkap       = $request->input('jenis_alat_tangkap.' . $id_detil_hasil_tangkapan, null);
+            $detil_hasil_tangkapan->id_jenis_alat_tangkap_lain  = $request->input('jenis_alat_tangkap_lain.' . $id_detil_hasil_tangkapan_lain, null);
+            $detil_hasil_tangkapan->produksi_sebulan            = $request->input('produksi_sebulan.' . $id_detil_hasil_tangkapan, null);
+            $detil_hasil_tangkapan->harga_ikan                  = $request->input('harga_ikan.' . $id_detil_hasil_tangkapan, null);
+            $detil_hasil_tangkapan->nilai_produksi              = $request->input('nilai_produksi.' . $id_detil_hasil_tangkapan, null);
             $detil_hasil_tangkapan->save();
         }
 

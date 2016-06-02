@@ -146,11 +146,11 @@
                                 <th rowspan="2"><center>BULAN</center></th> 
                                 <th rowspan="2"><center>MUSIM PRODUKSI</center></th> 
                                 <th rowspan="2"><center>JENIS ALAT TANGKAP</center></th> 
-                                <th colspan="5"><center>HASIL TANGKAPAN</center></th> 
+                                <th colspan="4"><center>HASIL TANGKAPAN</center></th> 
                                 <th rowspan="2"><center>TOTAL TRIP</center></th> 
                             </tr> 
                             <tr> 
-                                <th colspan="2"><center>Jenis Ikan Dominan</center></th> 
+                                <th><center>Jenis Ikan Dominan</center></th> 
                                 <th><center>Produksi Dalam Sebulan (Kg)</center></th> 
                                 <th><center>Harga Ikan (Rp/Kg)</center></th> 
                                 <th><center>Nilai Produksi (Rp)</center></th> 
@@ -173,12 +173,12 @@
                                             )
                                         }}
                                     </td>
-                                    <td rowspan="5">
+                                    <td>
                                         {{
                                             Form::select(
-                                                'jenis_alat_tangkap[' . $hasil_tangkapan[$id_bulan]['id_hasil_tangkapan'] . ']', 
+                                                'jenis_alat_tangkap[' . $detil_hasil_tangkapan[$id_bulan][1]['id_detil_hasil_tangkapan'] . ']', 
                                                 $master_jenis_alat_tangkap, 
-                                                $hasil_tangkapan[$id_bulan]['id_jenis_alat_tangkap'], 
+                                                $detil_hasil_tangkapan[$id_bulan][1]['id_jenis_alat_tangkap'], 
                                                 [
                                                     'class'       => 'form-control',
                                                     'placeholder' => 'Pilih'
@@ -186,7 +186,7 @@
                                             )
                                         }}
                                     </td>
-                                    <td width="40">1.</td>
+                                    <!-- <td width="40">1.</td> -->
                                     <td>
                                         {{
                                             Form::select(
@@ -251,7 +251,35 @@
                                 </tr>
                                 @for($i = 2; $i <= $jml_isian; $i++)
                                 <tr>
-                                    <td>{{$i}}.</td>
+                                    <!-- <td>{{$i}}.</td> -->
+                                    <?php if ($i == 5): ?>
+                                    <td>
+                                        {{
+                                            Form::text(
+                                                'jenis_alat_tangkap_lain[' . $detil_hasil_tangkapan[$id_bulan][$i]['id_detil_hasil_tangkapan'] . ']',
+                                                $detil_hasil_tangkapan[$id_bulan][$i]['id_jenis_alat_tangkap_lain'], 
+                                                [
+                                                    'class'       => 'form-control',
+                                                    'placeholder' => 'Lainnya'
+                                                ]
+                                            )
+                                        }}
+                                    </td>
+                                    <?php else: ?>
+                                    <td>
+                                        {{
+                                            Form::select(
+                                                'jenis_alat_tangkap[' . $detil_hasil_tangkapan[$id_bulan][$i]['id_detil_hasil_tangkapan'] . ']', 
+                                                $master_jenis_alat_tangkap, 
+                                                $detil_hasil_tangkapan[$id_bulan][$i]['id_jenis_alat_tangkap'], 
+                                                [
+                                                    'class'       => 'form-control',
+                                                    'placeholder' => 'Pilih'
+                                                ]
+                                            )
+                                        }}
+                                    </td>   
+                                    <?php endif ?>
                                     <td class="col-xs-2">
                                         {{
                                             Form::select(

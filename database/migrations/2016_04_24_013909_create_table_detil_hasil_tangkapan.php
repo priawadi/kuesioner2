@@ -18,6 +18,8 @@ class CreateTableDetilHasilTangkapan extends Migration
 
             $table->integer('id_jenis_ikan')->nullable();
 
+            $table->integer('id_jenis_alat_tangkap')->nullable();
+            $table->string('id_jenis_alat_tangkap_lain', 255)->nullable();
             $table->integer('id_bulan')->nullable();
             $table->smallInteger('urutan_isian')->nullable();
             $table->integer('produksi_sebulan')->nullable();

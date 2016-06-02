@@ -18,7 +18,7 @@ class CreateTableHasilTangkapan extends Migration
 
             $table->integer('id_bulan')->nullable();
             $table->integer('id_musim')->nullable();
-            $table->integer('id_jenis_alat_tangkap')->nullable();
+            // $table->integer('id_jenis_alat_tangkap')->nullable();
             
             $table->integer('jumlah_produksi')->nullable();
             $table->integer('jumlah_nilai_produksi')->nullable();

@@ -17,7 +17,7 @@ class CreateTableJawabanKonsumsi extends Migration
             $table->integer('id_responden');
             $table->integer('id_konsumsi');
             $table->integer('kateg_konsum');
-            $table->float('jawaban')->nullable();
+            $table->double('jawaban')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
