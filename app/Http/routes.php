@@ -227,3 +227,5 @@ Route::controller('datatables', 'RespondenController', [
     'anyData'  => 'datatables.data',
     'getIndex' => 'responden',
 ]);
+
+Route::get('/export', 'ExportKuesionerController@export_to_excel');
