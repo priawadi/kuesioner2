@@ -8,6 +8,10 @@ use App\Http\Requests;
 use App\Responden;
 use App\Enumerator;
 use App\KarakteristikRumahTangga;
+use App\MasterJenisPekerjaan;
+use App\JenisPekerjaanRumahTg;
+use App\MasterJenisAset;
+use App\AsetRumahTangga;
 use Excel;
 
 class ExportKuesionerController extends Controller
@@ -22,21 +26,25 @@ class ExportKuesionerController extends Controller
         // Init
         $table   = [];
         $columns = [];
-        
+        // print_r(MasterJenisAset::all());die();
         // Set column
         $columns = array_merge($columns, 
             $this->get_column_responden(),
-            $this->get_column_karak_rumah_tangga()
+            $this->get_column_karak_rumah_tangga(),
+            $this->get_column_pekerjaan_rumah_tangga(),
+            $this->get_column_aset_rumah_tangga()
         );
         
         $table[] = $columns;
 
-        $count = 0;
+        // Set data each responden
         foreach (Responden::all() as $key => $value) {
             $row = [];
             $row = array_merge($row, 
                 $this->get_data_responden($value->id_responden),
-                $this->get_data_karak_rumah_tangga($value->id_responden)
+                $this->get_data_karak_rumah_tangga($value->id_responden),
+                $this->get_data_pekerjaan_rumah_tangga($value->id_responden),
+                $this->get_data_aset_rumah_tangga($value->id_responden)
             );
 
             $table[] = $row;
@@ -45,9 +53,7 @@ class ExportKuesionerController extends Controller
         // print_r($table); die();
 
         Excel::create('Panelkanas_2016', function($excel) use($table){
-            // Our first sheet
             $excel->sheet('Sheet1', function($sheet) use($table){
-                
                 $sheet->fromArray(
                     $table,
                     null,
@@ -65,7 +71,7 @@ class ExportKuesionerController extends Controller
                 });
             });
 
-        })->export('xls');
+        })->export('xlsx');
     }
 
     public function get_column_responden()
@@ -110,6 +116,63 @@ class ExportKuesionerController extends Controller
 
         return $column;
     }
+
+    public function get_column_pekerjaan_rumah_tangga()
+    {
+        $column = [];
+        for ($i = 1; $i <= 8; $i++) { 
+            $column = array_merge($column, [
+                'Nama ART yang Bekerja_' . $i,
+                'Status Dalam Rumah Tangga ART_' . $i,
+                'Pekerjaan 1_' . $i,
+                'Jumlah Pendapatan (Rp/Tahun) 1_' . $i,
+                'Pekerjaan 2_' . $i,
+                'Jumlah Pendapatan (Rp/Tahun) 2_' . $i,
+                'Pekerjaan 3_' . $i,
+                'Jumlah Pendapatan (Rp/Tahun) 3_' . $i
+            ]);
+        }
+
+        return $column;
+    }
+
+
+    public function get_column_aset_rumah_tangga()
+    {
+        $column = [];
+            
+        for ($i = 1; $i <= 10 ; $i++) { 
+            $column = array_merge($column, [
+                'Jenis Aset_50' . $i,
+                'Volume (unit)_50' . $i,
+                'Satuan_50' . $i,
+                'Nilai Satuan (Rp.)_50' . $i,
+                'Nilai Total (Rp.)_50' . $i,
+                'Cara Perolehan_50' . $i,
+                'Jenis Aset (P/TP)_50' . $i,
+                'Berapakah Pendapatan Dari Aset Produktif Tersebut (Rp/Tahun)_50' . $i,
+            ]);
+
+            if ($i == 3)
+            {
+                for ($j = 2; $j <= 4 ; $j++) { 
+                    $column = array_merge($column, [
+                        'Jenis Aset_50' . $i . $j,
+                        'Volume (unit)_50' . $i . $j,
+                        'Satuan_50' . $i . $j,
+                        'Nilai Satuan (Rp.)_50' . $i . $j,
+                        'Nilai Total (Rp.)_50' . $i . $j,
+                        'Cara Perolehan_50' . $i . $j,
+                        'Jenis Aset (P/TP)_50' . $i . $j,
+                        'Berapakah Pendapatan Dari Aset Produktif Tersebut (Rp/Tahun)_50' . $i . $j,
+                    ]);
+                }
+            }
+        }
+
+        return $column;
+    }
+
 
     public function get_data_responden($id_responden)
     {
@@ -179,6 +242,76 @@ class ExportKuesionerController extends Controller
                 isset($sumber_pelatihan[$item['sumber_dana']])? $sumber_pelatihan[$item['sumber_dana']]: null,
                 isset($tujuan_pelatihan[$item['tujuan_pelatihan']])? $tujuan_pelatihan[$item['tujuan_pelatihan']]: null,
                 $item['tujuan_pelatihan_lain']
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_pekerjaan_rumah_tangga($id_responden)
+    {
+        $status_keluarga = [
+            1 => 'Kepala Keluarga', 
+            2 => 'Istri', 
+            3 => 'Anak', 
+            4 => 'Anggota Rumah Tangga Lainnya'
+        ];
+
+        // Master jenis pekerjaan
+        $jenis_pekerjaan = [];
+        foreach (MasterJenisPekerjaan::all() as $key => $item) {
+            $jenis_pekerjaan[$item->id_master_jenis_pekerjaan] = $item->jenis_pekerjaan;
+        }
+
+        $data = [];
+        foreach (JenisPekerjaanRumahTg::where('id_responden', $id_responden)->get() as $key => $item) {
+            $data = array_merge($data, [
+                $item['nama'],
+                isset($status_keluarga[$item['status_keluarga']])? $status_keluarga[$item['status_keluarga']]: null,
+                isset($jenis_pekerjaan[$item['jenis_pekerjaan1']])? $jenis_pekerjaan[$item['jenis_pekerjaan1']]: null,
+                $item['pendapatan1'],
+                isset($jenis_pekerjaan[$item['jenis_pekerjaan2']])? $jenis_pekerjaan[$item['jenis_pekerjaan2']]: null,
+                $item['pendapatan2'],
+                isset($jenis_pekerjaan[$item['jenis_pekerjaan3']])? $jenis_pekerjaan[$item['jenis_pekerjaan3']]: null,
+                $item['pendapatan3']
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_aset_rumah_tangga($id_responden)
+    {
+        $cara_perolehan = [
+            1 => 'Beli', 
+            2 => 'Warisan', 
+            3 => 'Pemberian'
+        ];
+
+        $jenis_aset = [
+            1 => 'Produktif', 
+            2 => 'Tidak Produktif'
+        ];
+
+        $master_jenis_aset = [];
+        foreach (MasterJenisAset::all() as $index => $item) {
+            $master_jenis_aset[$item->id_master_jenis_aset] = [
+                'jenis_aset' => $item->jenis_aset,
+                'satuan'     => $item->satuan,
+            ];
+        }
+
+        $data = [];
+        foreach (AsetRumahTangga::where('id_responden', $id_responden)->orderBy('id_master_jenis_aset', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                $master_jenis_aset[$item['id_master_jenis_aset']]['jenis_aset'],
+                $item['volume'],
+                $master_jenis_aset[$item['id_master_jenis_aset']]['satuan'],
+                $item['nilai_satuan'],
+                $item['nilai_total'],
+                isset($cara_perolehan[$item['cara_perolehan']])? $cara_perolehan[$item['cara_perolehan']]: null,
+                isset($jenis_aset[$item['jenis_aset']])? $jenis_aset[$item['jenis_aset']]: null,
+                $item['pendapatan_produktif']
             ]);
         }
 
