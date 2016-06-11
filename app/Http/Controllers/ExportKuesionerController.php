@@ -12,6 +12,7 @@ use App\MasterJenisPekerjaan;
 use App\JenisPekerjaanRumahTg;
 use App\MasterJenisAset;
 use App\AsetRumahTangga;
+use App\Kesehatan;
 use Excel;
 
 class ExportKuesionerController extends Controller
@@ -32,7 +33,8 @@ class ExportKuesionerController extends Controller
             $this->get_column_responden(),
             $this->get_column_karak_rumah_tangga(),
             $this->get_column_pekerjaan_rumah_tangga(),
-            $this->get_column_aset_rumah_tangga()
+            $this->get_column_aset_rumah_tangga(),
+            $this->get_column_kesehatan()
         );
         
         $table[] = $columns;
@@ -44,13 +46,16 @@ class ExportKuesionerController extends Controller
                 $this->get_data_responden($value->id_responden),
                 $this->get_data_karak_rumah_tangga($value->id_responden),
                 $this->get_data_pekerjaan_rumah_tangga($value->id_responden),
-                $this->get_data_aset_rumah_tangga($value->id_responden)
+                $this->get_data_aset_rumah_tangga($value->id_responden),
+                $this->get_data_kesehatan($value->id_responden)
             );
 
             $table[] = $row;
         }
-
-        // print_r($table); die();
+        echo 'kolom: ' . count($table[0]) . '<br>';
+        echo 'data: ' . count($table[1]);
+        // print_r($table); 
+        die();
 
         Excel::create('Panelkanas_2016', function($excel) use($table){
             $excel->sheet('Sheet1', function($sheet) use($table){
@@ -141,7 +146,7 @@ class ExportKuesionerController extends Controller
     {
         $column = [];
             
-        for ($i = 1; $i <= 10 ; $i++) { 
+        for ($i = 1; $i <= 7 ; $i++) { 
             $column = array_merge($column, [
                 'Jenis Aset_50' . $i,
                 'Volume (unit)_50' . $i,
@@ -173,6 +178,78 @@ class ExportKuesionerController extends Controller
         return $column;
     }
 
+
+    public function get_column_kesehatan()
+    {
+        return [
+            'Berapa kali anda dan anggota keluarga anda sakit dalam satu tahun terakhir_601A',
+            'Frekuensi (kali/tahun)_601A',
+            'Berapa kali anda dan anggota keluarga anda sakit dalam satu tahun terakhir_601B',
+            'Frekuensi (kali/tahun)_601B',
+            'Kemana anda dan anggota keluarga berobat ketika sakit_602A',
+            'Dibiarkan (kali)_602A',
+            'Beli obat Warung (kali)_602A',
+            'Puskesmas (kali)_602A',
+            'Dokter (kali)_602A',
+            'Pengobatan Alternatif (kali)_602A',
+            'Rumah Sakit (kali)_602A',
+            'Kemana anda dan anggota keluarga berobat ketika sakit_602B',
+            'Dibiarkan (kali)_602B',
+            'Beli obat Warung (kali)_602B',
+            'Puskesmas (kali)_602B',
+            'Dokter (kali)_602B',
+            'Pengobatan Alternatif (kali)_602B',
+            'Rumah Sakit (kali)_602B',
+            'Alasan memilih dibiarkan ketika sakit_603A',
+            'Alasan memilih Beli obat Warung ketika sakit_603B',
+            'Alasan memilih Puskesmas ketika sakit_603C',
+            'Alasan memilih Dokter ketika sakit_603D',
+            'Alasan memilih Pengobatan Alternatif ketika sakit_603E',
+            'Alasan memilih Rumah Sakit ketika sakit_603F',
+            'Apakah anda terdaftar sebagai peserta jamkesmas_6041',
+            'Apakah anda terdaftar sebagai peserta BPJS/Askes_6042',
+            'Apakah anda terdaftar sebagai peserta Asuransi swasta_6043',
+            'Apakah anda sering menggunakan asuransi jamkesmas_605',
+            'Apakah anda sering menggunakan asuransiBPJS/Askes_6052',
+            'Apakah anda sering menggunakan asuransi Asuransi swasta_6053'
+        ];
+    }
+
+    public function get_column_perahu()
+    {
+       return [
+            'Berapa kali anda dan anggota keluarga anda sakit dalam satu tahun terakhir_601A',
+            'Frekuensi (kali/tahun)_601A',
+            'Berapa kali anda dan anggota keluarga anda sakit dalam satu tahun terakhir_601B',
+            'Frekuensi (kali/tahun)_601B',
+            'Kemana anda dan anggota keluarga berobat ketika sakit_602A',
+            'Dibiarkan (kali)_602A',
+            'Beli obat Warung (kali)_602A',
+            'Puskesmas (kali)_602A',
+            'Dokter (kali)_602A',
+            'Pengobatan Alternatif (kali)_602A',
+            'Rumah Sakit (kali)_602A',
+            'Kemana anda dan anggota keluarga berobat ketika sakit_602B',
+            'Dibiarkan (kali)_602B',
+            'Beli obat Warung (kali)_602B',
+            'Puskesmas (kali)_602B',
+            'Dokter (kali)_602B',
+            'Pengobatan Alternatif (kali)_602B',
+            'Rumah Sakit (kali)_602B',
+            'Alasan memilih dibiarkan ketika sakit_603A',
+            'Alasan memilih Beli obat Warung ketika sakit_603B',
+            'Alasan memilih Puskesmas ketika sakit_603C',
+            'Alasan memilih Dokter ketika sakit_603D',
+            'Alasan memilih Pengobatan Alternatif ketika sakit_603E',
+            'Alasan memilih Rumah Sakit ketika sakit_603F',
+            'Apakah anda terdaftar sebagai peserta jamkesmas_6041',
+            'Apakah anda terdaftar sebagai peserta BPJS/Askes_6042',
+            'Apakah anda terdaftar sebagai peserta Asuransi swasta_6043',
+            'Apakah anda sering menggunakan asuransi jamkesmas_605',
+            'Apakah anda sering menggunakan asuransiBPJS/Askes_6052',
+            'Apakah anda sering menggunakan asuransi Asuransi swasta_6053'
+        ];
+    }
 
     public function get_data_responden($id_responden)
     {
@@ -314,6 +391,58 @@ class ExportKuesionerController extends Controller
                 $item['pendapatan_produktif']
             ]);
         }
+
+        return $data;
+    }
+
+    public function get_data_kesehatan($id_responden)
+    {
+        $status_daftar = 
+        [
+            1 => 'Ya',
+            2 => 'Tidak',
+        ];
+
+        $penggunaan_asuransi =
+        [
+            1 => 'Sering',
+            2 => 'Jarang',
+            3 => 'Tidak Pernah',
+        ];
+
+        $kesehatan = Kesehatan::where('id_responden', $id_responden)->first();
+        $data = [
+            'Sakit ringan (flu, sakit kepala, masuk angin, dsb)',
+            $kesehatan['sakit_setahun_ringan'],
+            'Sakit berat (tipes, DBD, TBC dsb atau yang harus rawat inap)',
+            $kesehatan['sakit_setahun_berat'],
+            'Sakit Ringan',
+            $kesehatan['ringan_dibiarkan'],
+            $kesehatan['ringan_beli_obat'],
+            $kesehatan['ringan_puskesmas'],
+            $kesehatan['ringan_dokter'],
+            $kesehatan['ringan_alternatif'],
+            $kesehatan['ringan_rumah_sakit'],
+            'Sakit Berat',
+            $kesehatan['berat_dibiarkan'],
+            $kesehatan['berat_beli_obat'],
+            $kesehatan['berat_puskesmas'],
+            $kesehatan['berat_dokter'],
+            $kesehatan['berat_alternatif'],
+            $kesehatan['berat_rumah_sakit'],
+            $kesehatan['alasan_dibiarkan'],
+            $kesehatan['alasan_beli_obat'],
+            $kesehatan['alasan_puskesmas'],
+            $kesehatan['alasan_dokter'],
+            $kesehatan['alasan_alternatif'],
+            $kesehatan['alasan_rumah_sakit'],
+            isset($status_daftar[$kesehatan['jamkesmas']])? $status_daftar[$kesehatan['jamkesmas']]: null,
+            isset($status_daftar[$kesehatan['bpjs']])? $status_daftar[$kesehatan['bpjs']]: null,
+            isset($status_daftar[$kesehatan['asuransi']])? $status_daftar[$kesehatan['asuransi']]: null,
+            isset($penggunaan_asuransi[$kesehatan['jamkesmas']])? $penggunaan_asuransi[$kesehatan['jamkesmas']]: null,
+            isset($penggunaan_asuransi[$kesehatan['bpjs']])? $penggunaan_asuransi[$kesehatan['bpjs']]: null,
+            isset($penggunaan_asuransi[$kesehatan['asuransi']])? $penggunaan_asuransi[$kesehatan['asuransi']]: null,
+        ];
 
         return $data;
     }
