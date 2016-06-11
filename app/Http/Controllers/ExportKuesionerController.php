@@ -13,6 +13,7 @@ use App\JenisPekerjaanRumahTg;
 use App\MasterJenisAset;
 use App\AsetRumahTangga;
 use App\Kesehatan;
+use App\Perahu;
 use Excel;
 
 class ExportKuesionerController extends Controller
@@ -34,7 +35,8 @@ class ExportKuesionerController extends Controller
             $this->get_column_karak_rumah_tangga(),
             $this->get_column_pekerjaan_rumah_tangga(),
             $this->get_column_aset_rumah_tangga(),
-            $this->get_column_kesehatan()
+            $this->get_column_kesehatan(),
+            $this->get_column_perahu()
         );
         
         $table[] = $columns;
@@ -47,15 +49,16 @@ class ExportKuesionerController extends Controller
                 $this->get_data_karak_rumah_tangga($value->id_responden),
                 $this->get_data_pekerjaan_rumah_tangga($value->id_responden),
                 $this->get_data_aset_rumah_tangga($value->id_responden),
-                $this->get_data_kesehatan($value->id_responden)
+                $this->get_data_kesehatan($value->id_responden),
+                $this->get_data_perahu($value->id_responden)
             );
 
             $table[] = $row;
         }
-        echo 'kolom: ' . count($table[0]) . '<br>';
-        echo 'data: ' . count($table[1]);
+        // echo 'kolom: ' . count($table[0]) . '<br>';
+        // echo 'data: ' . count($table[1]);
         // print_r($table); 
-        die();
+        // die();
 
         Excel::create('Panelkanas_2016', function($excel) use($table){
             $excel->sheet('Sheet1', function($sheet) use($table){
@@ -218,36 +221,16 @@ class ExportKuesionerController extends Controller
     public function get_column_perahu()
     {
        return [
-            'Berapa kali anda dan anggota keluarga anda sakit dalam satu tahun terakhir_601A',
-            'Frekuensi (kali/tahun)_601A',
-            'Berapa kali anda dan anggota keluarga anda sakit dalam satu tahun terakhir_601B',
-            'Frekuensi (kali/tahun)_601B',
-            'Kemana anda dan anggota keluarga berobat ketika sakit_602A',
-            'Dibiarkan (kali)_602A',
-            'Beli obat Warung (kali)_602A',
-            'Puskesmas (kali)_602A',
-            'Dokter (kali)_602A',
-            'Pengobatan Alternatif (kali)_602A',
-            'Rumah Sakit (kali)_602A',
-            'Kemana anda dan anggota keluarga berobat ketika sakit_602B',
-            'Dibiarkan (kali)_602B',
-            'Beli obat Warung (kali)_602B',
-            'Puskesmas (kali)_602B',
-            'Dokter (kali)_602B',
-            'Pengobatan Alternatif (kali)_602B',
-            'Rumah Sakit (kali)_602B',
-            'Alasan memilih dibiarkan ketika sakit_603A',
-            'Alasan memilih Beli obat Warung ketika sakit_603B',
-            'Alasan memilih Puskesmas ketika sakit_603C',
-            'Alasan memilih Dokter ketika sakit_603D',
-            'Alasan memilih Pengobatan Alternatif ketika sakit_603E',
-            'Alasan memilih Rumah Sakit ketika sakit_603F',
-            'Apakah anda terdaftar sebagai peserta jamkesmas_6041',
-            'Apakah anda terdaftar sebagai peserta BPJS/Askes_6042',
-            'Apakah anda terdaftar sebagai peserta Asuransi swasta_6043',
-            'Apakah anda sering menggunakan asuransi jamkesmas_605',
-            'Apakah anda sering menggunakan asuransiBPJS/Askes_6052',
-            'Apakah anda sering menggunakan asuransi Asuransi swasta_6053'
+            '701A_Panjang (m)',
+            '701A_Lebar (m)',
+            '701A_Tinggi (m)',
+            '701B (GT)',
+            '701C (unit)',
+            '701D',
+            '701E',
+            '701F (/unit)',
+            '701G (tahun)',
+            '701H',
         ];
     }
 
@@ -442,6 +425,41 @@ class ExportKuesionerController extends Controller
             isset($penggunaan_asuransi[$kesehatan['jamkesmas']])? $penggunaan_asuransi[$kesehatan['jamkesmas']]: null,
             isset($penggunaan_asuransi[$kesehatan['bpjs']])? $penggunaan_asuransi[$kesehatan['bpjs']]: null,
             isset($penggunaan_asuransi[$kesehatan['asuransi']])? $penggunaan_asuransi[$kesehatan['asuransi']]: null,
+        ];
+
+        return $data;
+    }
+
+    public function get_data_perahu($id_responden)
+    {
+        $sumber_modal = 
+        [
+            1 => 'Modal Sendiri', 
+            2 => 'Kredit Formal', 
+            3 => 'Kredit Informal', 
+            4 => 'Bantuan Pemerintah', 
+            5 => 'Keluarga', 
+            6 => 'Campuran',
+        ];
+
+        $kondisi_perahu = 
+        [
+            1 => 'Baru', 
+            2 => 'Bekas',
+        ];
+
+        $perahu = Perahu::where('id_responden', $id_responden)->first();
+        $data = [
+            $perahu['panjang'],
+            $perahu['lebar'],
+            $perahu['tinggi'],
+            $perahu['tonase'],
+            $perahu['jumlah'],
+            isset($kondisi_perahu[$perahu['kondisi']])? $kondisi_perahu[$perahu['kondisi']]: null,
+            $perahu['tahun_pembelian'],
+            $perahu['harga_beli'],
+            $perahu['umur_teknis'],
+            isset($sumber_modal[$perahu['sumber_modal']])? $sumber_modal[$perahu['sumber_modal']]: null,
         ];
 
         return $data;
