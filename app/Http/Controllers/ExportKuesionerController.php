@@ -406,13 +406,20 @@ class ExportKuesionerController extends Controller
             12 => 'Des',
         ];
 
-        $column = [
-            'Dalam setahun terakhir, pada bulan apasaja saudara tidak melakukan kegiatan penangkapan ikan?_1001',
+        $column = [];
+        foreach ($short_month as $key => $month) {
+            $column = array_merge($column, [
+                'Dalam setahun terakhir, pada bulan apasaja saudara tidak melakukan kegiatan penangkapan ikan?_1001.' . $month,
+            ]);
+        }
+
+        $column = array_merge($column, [
+            // 'Dalam setahun terakhir, pada bulan apasaja saudara tidak melakukan kegiatan penangkapan ikan?_1001',
             'Alasan tidak melaut_1001.1',
             '1002',
             'Bila ya, sebutkan pada hari apa saja_1002.1',
             'Dalam 1 bulan, berapa hari tidak melaut_1002.3',
-        ];
+        ]);
 
         foreach ($short_month as $key => $month) {
             $column = array_merge($column, [
@@ -1217,5 +1224,92 @@ class ExportKuesionerController extends Controller
         }
 
         return $data;
+    }
+
+    public function get_statistic_data()
+    {
+         // Init
+        $table  = [];
+        $column = 
+        [
+            'ID',
+            'Nama Responden',
+
+            'Karakteristik Rumah Tangga',
+            'Pekerjaan Rumah Tangga',
+            'Aset Rumah Tangga',
+            'Kesehatan',
+            'Perahu',
+            'Alat Tangkap',
+            'Tenaga Penggerak / Mesin',
+            'Alat Pendukung Usaha',
+            'Biaya Tetap',
+            'Biaya Variabel',
+            'Penerimaan Usaha',
+            'Ketenagakerjaan',
+            'Konsumsi Pangan',
+            'Konsumsi Non Pangan',
+            'Partisipasi Sosial',
+            'Partisipasi Organisasi',
+            'Partisipasi Politik',
+            'Rasa Percaya Masyarakat',
+            'Rasa Percaya Organisasi',
+            'Rasa Percaya Politik',
+            'Nilai dan Norma'
+        ];
+
+        $table[] = $column;
+        foreach (Responden::all() as $index => $item) {
+            $row = [];
+            $row = array_merge($row, 
+                [
+                    $item['id_responden'],
+                    $item['nama_responden'],
+                    KarakteristikRumahTangga::where('id_responden', $item['id_responden'])->count(),
+                    JenisPekerjaanRumahTg::where('id_responden', $item['id_responden'])->count(),
+                    AsetRumahTangga::where('id_responden', $item['id_responden'])->orderBy('id_master_jenis_aset', 'ASC')->count(),
+                    Kesehatan::where('id_responden', $item['id_responden'])->count(),
+                    Perahu::where('id_responden', $item['id_responden'])->count(),
+                    AlatTangkap::where('id_responden', $item['id_responden'])->orderBy('jenis_alat_tangkap', 'ASC')->count(),
+                    Mesin::where('id_responden', $item['id_responden'])->count(),
+                    AsetPendukungUsaha::where('id_responden', $item['id_responden'])->orderBy('id_peralatan_tambahan', 'ASC')->count(),
+                    BiayaPerijinan::where('id_responden', $item['id_responden'])->orderBy('jenis_biaya_perijinan', 'ASC')->count(),
+                    BiayaOperasional::where('id_responden', $item['id_responden'])->orderBy('jenis_biaya', 'ASC')->count(),
+                    BiayaOperasional::where('id_responden', $item['id_responden'])->orderBy('jenis_biaya', 'ASC')->count(),
+                    CurahanTenagaKerja::where('id_responden', $item['id_responden'])->orderBy('status_pekerjaan', 'ASC')->count(),
+                    JawabanKonsumsi::where('id_responden', $item['id_responden'])->where('kateg_konsum', \Config::get('constants.KONSUMSI.PANGAN'))->orderBy('id_konsumsi', 'ASC')->count(),
+                    JawabanKonsumsi::where('id_responden', $item['id_responden'])->where('kateg_konsum', \Config::get('constants.KONSUMSI.NONPANGAN'))->orderBy('id_konsumsi', 'ASC')->count(),
+                    JwbPartisipasi::where('kateg_partisipasi', 1)->where('id_responden', $item['id_responden'])->orderBy('id_jwb_partisipasi', 'ASC')->count(),
+                    JwbPartisipasi::where('kateg_partisipasi', 2)->where('id_responden', $item['id_responden'])->orderBy('id_jwb_partisipasi', 'ASC')->count(),
+                    JwbPartisipasi::where('kateg_partisipasi', 3)->where('id_responden', $item['id_responden'])->orderBy('id_jwb_partisipasi', 'ASC')->count(),
+                    JwbRasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.MASYARAKAT'))->where('id_responden', $item['id_responden'])->orderBy('id_rasa_percaya', 'ASC')->count(),
+                    JwbRasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.ORGANISASI'))->where('id_responden', $item['id_responden'])->orderBy('id_rasa_percaya', 'ASC')->count(),
+                    JwbRasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.POLITIK'))->where('id_responden', $item['id_responden'])->orderBy('id_rasa_percaya', 'ASC')->count(),
+                    JwbNilaiNorma::where('id_responden', $item['id_responden'])->orderBy('id_nilai_norma', 'ASC')->count(),
+                ]
+            );
+            $table[] = $row;
+        }
+
+        Excel::create('Statistik_Data_Panelkanas', function($excel) use($table){
+            $excel->sheet('Sheet1', function($sheet) use($table){
+                $sheet->fromArray(
+                    $table,
+                    null,
+                    'A1',
+                    false,
+                    false
+                );
+
+
+                // Set format of cell
+                $sheet->row(1, function($row) {
+                    // call cell manipulation methods
+                    $row->setFontWeight('bold');
+
+                });
+            });
+
+        })->export('xlsx');
     }
 }

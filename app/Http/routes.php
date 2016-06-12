@@ -230,3 +230,4 @@ Route::controller('datatables', 'RespondenController', [
 ]);
 
 Route::get('/export', 'ExportKuesionerController@export_to_excel');
+Route::get('/statistic-data', 'ExportKuesionerController@get_statistic_data');
