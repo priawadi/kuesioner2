@@ -17,6 +17,7 @@ use App\Perahu;
 use App\MasterJenisAlatTangkap;
 use App\AlatTangkap;
 use App\Mesin;
+use App\AsetPendukungUsaha;
 use Excel;
 
 class ExportKuesionerController extends Controller
@@ -41,7 +42,8 @@ class ExportKuesionerController extends Controller
             $this->get_column_kesehatan(),
             $this->get_column_perahu(),
             $this->get_column_alat_tangkap(),
-            $this->get_column_tenaga_penggerak()
+            $this->get_column_tenaga_penggerak(),
+            $this->get_column_aset_pendukung_usaha()
         );
         
         $table[] = $columns;
@@ -57,7 +59,8 @@ class ExportKuesionerController extends Controller
                 $this->get_data_kesehatan($value->id_responden),
                 $this->get_data_perahu($value->id_responden),
                 $this->get_data_alat_tangkap($value->id_responden),
-                $this->get_data_tenaga_penggerak($value->id_responden)
+                $this->get_data_tenaga_penggerak($value->id_responden),
+                $this->get_data_aset_pendukung_usaha($value->id_responden)
             );
 
             $table[] = $row;
@@ -291,6 +294,23 @@ class ExportKuesionerController extends Controller
             '703.3H',
             '703.3I',
         ];
+    }
+
+    public function get_column_aset_pendukung_usaha()
+    {
+        $column = [];
+        for ($i = 1; $i <= 19 ; $i++) { 
+            $column = array_merge($column, [
+                '704.' . $i . '(2)',
+                '704.' . $i . '(3) (unit)',
+                '704.' . $i . '(4)',
+                '704.' . $i . '(5) (tahun)',
+                '704.' . $i . '(6)',
+                '704.' . $i . '(7)'
+            ]);
+        }
+
+        return $column;
     }
 
     public function get_data_responden($id_responden)
@@ -630,5 +650,44 @@ class ExportKuesionerController extends Controller
             isset($mesin['jenis']) && $mesin['jenis'] == 3? $mesin['umur_teknis']: null,
             isset($mesin['jenis']) && $mesin['jenis'] == 3 && isset($sumber_modal[$mesin['sumber_modal']])? $sumber_modal[$mesin['sumber_modal']]: null,
         ];
+    }
+
+    public function get_data_aset_pendukung_usaha($id_responden)
+    {
+        $master_status_kepemilikan = [
+            1 => 'Sendiri', 
+            2 => 'Juragan', 
+            3 => 'Kelompok', 
+            4 => 'Sewa',
+            5 => 'Lainnya'
+        ];
+        
+        $master_kondisi = [
+            1 => 'Baru',
+            2 => 'Bekas', 
+        ];
+
+        $master_sumber_modal = [
+            1 => 'Modal sendiri',
+            2 => 'Kredit formal', 
+            3 => 'Kredit informal',
+            4 => 'Bantuan pemerintah',
+            5 => 'Keluarga',
+            6 => 'Campuran',
+        ];
+
+        $data = [];
+        foreach (AsetPendukungUsaha::where('id_responden', $id_responden)->orderBy('id_peralatan_tambahan', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                isset($master_status_kepemilikan[$item['status_kepemilikan']])? $master_status_kepemilikan[$item['status_kepemilikan']]: null,
+                $item['jumlah'],
+                isset($master_kondisi[$item['kondisi']])? $master_kondisi[$item['kondisi']]: null,
+                $item['umur_ekonomis'],
+                $item['harga_beli'],
+                isset($master_sumber_modal[$item['sumber_modal']])? $master_sumber_modal[$item['sumber_modal']]: null,
+            ]);
+        }
+
+        return $data;
     }
 }
