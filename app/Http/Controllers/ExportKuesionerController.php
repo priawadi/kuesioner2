@@ -14,6 +14,8 @@ use App\MasterJenisAset;
 use App\AsetRumahTangga;
 use App\Kesehatan;
 use App\Perahu;
+use App\MasterJenisAlatTangkap;
+use App\AlatTangkap;
 use Excel;
 
 class ExportKuesionerController extends Controller
@@ -36,7 +38,8 @@ class ExportKuesionerController extends Controller
             $this->get_column_pekerjaan_rumah_tangga(),
             $this->get_column_aset_rumah_tangga(),
             $this->get_column_kesehatan(),
-            $this->get_column_perahu()
+            $this->get_column_perahu(),
+            $this->get_column_alat_tangkap()
         );
         
         $table[] = $columns;
@@ -50,7 +53,8 @@ class ExportKuesionerController extends Controller
                 $this->get_data_pekerjaan_rumah_tangga($value->id_responden),
                 $this->get_data_aset_rumah_tangga($value->id_responden),
                 $this->get_data_kesehatan($value->id_responden),
-                $this->get_data_perahu($value->id_responden)
+                $this->get_data_perahu($value->id_responden),
+                $this->get_data_alat_tangkap($value->id_responden)
             );
 
             $table[] = $row;
@@ -232,6 +236,31 @@ class ExportKuesionerController extends Controller
             '701G (tahun)',
             '701H',
         ];
+    }
+
+    public function get_column_alat_tangkap()
+    {
+        $column = [];
+        for ($i = 1; $i <= 5 ; $i++) { 
+            $column = array_merge($column, [
+                '702.' . $i . 'A',
+                '702.' . $i . 'B_Panjang (m)',
+                '702.' . $i . 'B_Lebar (m)',
+                '702.' . $i . 'B_Tinggi (m)',
+                '702.' . $i . 'B_ukuran mata jaring',
+                '702.' . $i . 'B_ukuran mata pancing',
+                '702.' . $i . 'C',
+                '702.' . $i . 'C',
+                '702.' . $i . 'D',
+                '702.' . $i . 'E',
+                '702.' . $i . 'F (/satuan)',
+                '702.' . $i . 'F (/satuan)',
+                '702.' . $i . 'G (tahun)',
+                '702.' . $i . 'H',
+            ]);
+        }
+
+        return $column;
     }
 
     public function get_data_responden($id_responden)
@@ -461,6 +490,58 @@ class ExportKuesionerController extends Controller
             $perahu['umur_teknis'],
             isset($sumber_modal[$perahu['sumber_modal']])? $sumber_modal[$perahu['sumber_modal']]: null,
         ];
+
+        return $data;
+    }
+
+    public function get_data_alat_tangkap($id_responden)
+    {
+        $jenis_alat_tangkap = [
+            1 => 'Alat Tangkap Utama',
+            2 => 'Alat Tangkap Alternatif 1',
+            3 => 'Alat Tangkap Alternatif 2',
+            4 => 'Alat Tangkap Alternatif 3',
+            5 => 'Alat Tangkap Alternatif 4',
+        ];
+
+        $master_kondisi = [
+            1 => 'Baru',
+            2 => 'Bekas', 
+        ];
+
+        $master_sumber_modal = [
+            1 => 'Modal sendiri',
+            2 => 'Kredit formal', 
+            3 => 'Kredit informal',
+            4 => 'Bantuan pemerintah',
+            5 => 'Keluarga',
+            6 => 'Campuran',
+        ];
+
+        $master_jenis_alat_tangkap = [];
+        foreach (MasterJenisAlatTangkap::all() as $index => $item) {
+            $master_jenis_alat_tangkap[$item->id_master_jenis_alat_tangkap] = $item->jenis_alat_tangkap;
+        }
+
+        $data = [];
+        foreach (AlatTangkap::where('id_responden', $id_responden)->orderBy('jenis_alat_tangkap', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                isset($master_jenis_alat_tangkap[$item['nama_alat_tangkap']])? $master_jenis_alat_tangkap[$item['nama_alat_tangkap']]: null,
+                $item['ukuran_panjang'],
+                $item['ukuran_lebar'],
+                $item['ukuran_tinggi'],
+                $item['ukuran_mata_pancing'],
+                $item['ukuran_mata_jaring'],
+                $item['jumlah'],
+                $item['satuan_jumlah'],
+                $item['kondisi'],
+                $item['tahun_pembelian'],
+                $item['harga_beli'],
+                $item['satuan_harga_beli'],
+                $item['umur_teknis'],
+                $item['sumber_modal'],
+            ]);
+        }
 
         return $data;
     }
