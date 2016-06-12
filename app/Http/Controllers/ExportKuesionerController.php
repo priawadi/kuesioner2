@@ -18,6 +18,7 @@ use App\MasterJenisAlatTangkap;
 use App\AlatTangkap;
 use App\Mesin;
 use App\AsetPendukungUsaha;
+use App\BiayaPerijinan;
 use Excel;
 
 class ExportKuesionerController extends Controller
@@ -43,7 +44,8 @@ class ExportKuesionerController extends Controller
             $this->get_column_perahu(),
             $this->get_column_alat_tangkap(),
             $this->get_column_tenaga_penggerak(),
-            $this->get_column_aset_pendukung_usaha()
+            $this->get_column_aset_pendukung_usaha(),
+            $this->get_column_biaya_tetap()
         );
         
         $table[] = $columns;
@@ -60,7 +62,8 @@ class ExportKuesionerController extends Controller
                 $this->get_data_perahu($value->id_responden),
                 $this->get_data_alat_tangkap($value->id_responden),
                 $this->get_data_tenaga_penggerak($value->id_responden),
-                $this->get_data_aset_pendukung_usaha($value->id_responden)
+                $this->get_data_aset_pendukung_usaha($value->id_responden),
+                $this->get_data_biaya_tetap($value->id_responden)
             );
 
             $table[] = $row;
@@ -307,6 +310,21 @@ class ExportKuesionerController extends Controller
                 '704.' . $i . '(5) (tahun)',
                 '704.' . $i . '(6)',
                 '704.' . $i . '(7)'
+            ]);
+        }
+
+        return $column;
+    }
+
+    public function get_column_biaya_tetap()
+    {
+        $column = [];
+        for ($i = 1; $i <= 6 ; $i++) { 
+            $column = array_merge($column, [
+                '801.' . $i . '(2) (kali)',
+                '801.' . $i . '(3)',
+                '801.' . $i . '(4) (/tahun)'
+
             ]);
         }
 
@@ -685,6 +703,21 @@ class ExportKuesionerController extends Controller
                 $item['umur_ekonomis'],
                 $item['harga_beli'],
                 isset($master_sumber_modal[$item['sumber_modal']])? $master_sumber_modal[$item['sumber_modal']]: null,
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_biaya_tetap($id_responden)
+    {
+
+        $data = [];
+        foreach (BiayaPerijinan::where('id_responden', $id_responden)->orderBy('jenis_biaya_perijinan', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                $item['frek_satuan'],
+                $item['harga_satuan'],
+                $item['total_biaya']
             ]);
         }
 
