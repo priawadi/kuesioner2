@@ -206,6 +206,7 @@ Route::post('/alat-tangkap/tambah', 'AlatTangkapController@store');
 Route::get('/alat-tangkap/edit/{id_responden}', 'AlatTangkapController@edit');
 Route::patch('/alat-tangkap/edit/{id_responden}', 'AlatTangkapController@update');
 Route::delete('/alat-tangkap/hapus/{id_responden}', 'AlatTangkapController@destroy');
+Route::get('/alat-tangkap/fix-alat-tangkap', 'AlatTangkapController@fix_alat_tangkap');
 
 // Tenaga Penggerak
 Route::get('/tenaga-penggerak', 'TenagaPenggerakController@index');

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\MasterJenisAlatTangkap;
 use App\AlatTangkap;
+use App\Responden;
 use Validator;
 
 class AlatTangkapController extends Controller
@@ -16,7 +17,7 @@ class AlatTangkapController extends Controller
         2 => 'Alat Tangkap Alternatif 1',
         3 => 'Alat Tangkap Alternatif 2',
         4 => 'Alat Tangkap Alternatif 3',
-        4 => 'Alat Tangkap Alternatif 4',
+        5 => 'Alat Tangkap Alternatif 4',
     ];
 
     var $master_kondisi = [
@@ -211,6 +212,36 @@ class AlatTangkapController extends Controller
     public function destroy($id, Request $request)
     {
         AlatTangkap::where('id_responden', $request->session()->get('id_responden'))->delete();
+        return redirect('responden/lihat/' . $request->session()->get('id_responden'));
+    }
+
+    public function fix_alat_tangkap(Request $request)
+    {
+
+        // Save alat tangkap
+        foreach(Responden::all() as $index => $item)
+        {
+            $jenis_alat_tangkap                      = new AlatTangkap;
+            $jenis_alat_tangkap->id_responden        = $item->id_responden;
+            $jenis_alat_tangkap->jenis_alat_tangkap  = 5;
+            $jenis_alat_tangkap->nama_alat_tangkap   = null;
+            $jenis_alat_tangkap->ukuran_panjang      = null;
+            $jenis_alat_tangkap->ukuran_lebar        = null;
+            $jenis_alat_tangkap->ukuran_tinggi       = null;
+            $jenis_alat_tangkap->ukuran_mata_pancing = null;
+            $jenis_alat_tangkap->ukuran_mata_jaring  = null;
+            $jenis_alat_tangkap->jumlah              = null;
+            $jenis_alat_tangkap->satuan_jumlah       = null;
+            $jenis_alat_tangkap->kondisi             = null;
+            $jenis_alat_tangkap->tahun_pembelian     = null;
+            $jenis_alat_tangkap->harga_beli          = null;
+            $jenis_alat_tangkap->satuan_harga_beli   = null;
+            $jenis_alat_tangkap->umur_teknis         = null;
+            $jenis_alat_tangkap->sumber_modal        = null;
+
+            $jenis_alat_tangkap->save();
+        }
+
         return redirect('responden/lihat/' . $request->session()->get('id_responden'));
     }
 }
