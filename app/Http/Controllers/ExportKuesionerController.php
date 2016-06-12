@@ -23,6 +23,9 @@ use App\MasterBiayaVariabel;
 use App\BiayaOperasional;
 
 use App\CurahanTenagaKerja;
+use App\JawabanKonsumsi;
+use App\MasterOpsional;
+use App\JwbPartisipasi;
 use Excel;
 
 class ExportKuesionerController extends Controller
@@ -35,8 +38,14 @@ class ExportKuesionerController extends Controller
     public function export_to_excel()
     {
         // Init
-        $table   = [];
-        $columns = [];
+        $table           = [];
+        $columns         = [];
+
+        $master_opsional = [];
+        foreach (MasterOpsional::all() as $index => $item) {
+            $master_opsional[$item['id_master_opsional']] = $item['opsional_master_ops'];   
+        }
+
         // print_r(MasterJenisAset::all());die();
         // Set column
         $columns = array_merge($columns, 
@@ -52,7 +61,12 @@ class ExportKuesionerController extends Controller
             $this->get_column_biaya_tetap(),
             $this->get_column_biaya_variabel(),
             // $this->get_column_penerimaan_usaha(),
-            $this->get_column_ketenagakerjaan()
+            $this->get_column_ketenagakerjaan(),
+            $this->get_column_konsumsi_pangan(),
+            $this->get_column_konsumsi_non_pangan(),
+            $this->get_column_partisiasi_sosial(),
+            $this->get_column_partisiasi_organisasi(),
+            $this->get_column_partisiasi_politik()
         );
         
         $table[] = $columns;
@@ -73,7 +87,12 @@ class ExportKuesionerController extends Controller
                 $this->get_data_biaya_tetap($value->id_responden),
                 $this->get_data_biaya_variabel($value->id_responden),
                 // $this->get_data_penerimaan_usaha($value->id_responden),
-                $this->get_data_ketenagakerjaan($value->id_responden)
+                $this->get_data_ketenagakerjaan($value->id_responden),
+                $this->get_data_konsumsi_pangan($value->id_responden),
+                $this->get_data_konsumsi_non_pangan($value->id_responden),
+                $this->get_data_partisipasi_sosial($value->id_responden, $master_opsional),
+                $this->get_data_partisipasi_organisasi($value->id_responden, $master_opsional),
+                $this->get_data_partisipasi_politik($value->id_responden, $master_opsional)
             );
 
             $table[] = $row;
@@ -346,13 +365,13 @@ class ExportKuesionerController extends Controller
         $column = [];
         for ($i = 1; $i <= 15 ; $i++) { 
             $column = array_merge($column, [
-                '901.1' . $i . '(2)',
-                '901.1' . $i . '(3) (/trip)',
-                '901.1' . $i . '(4)(/trip)',
-                '901.1' . $i . '(5)(/trip)',
-                '901.1' . $i . '(6)(/trip)',
-                '901.1' . $i . '(7)(/trip)',
-                '901.1' . $i . '(8)(/trip)',
+                '901.1' . (strlen($i) > 1? $i: '0' . $i) . '(2)',
+                '901.1' . (strlen($i) > 1? $i: '0' . $i) . '(3) (/trip)',
+                '901.1' . (strlen($i) > 1? $i: '0' . $i) . '(4)(/trip)',
+                '901.1' . (strlen($i) > 1? $i: '0' . $i) . '(5)(/trip)',
+                '901.1' . (strlen($i) > 1? $i: '0' . $i) . '(6)(/trip)',
+                '901.1' . (strlen($i) > 1? $i: '0' . $i) . '(7)(/trip)',
+                '901.1' . (strlen($i) > 1? $i: '0' . $i) . '(8)(/trip)',
             ]);
         }
 
@@ -424,6 +443,102 @@ class ExportKuesionerController extends Controller
                 '1101.' . $i . '.(7)',
             ]);
         }
+
+        return $column;
+    }
+
+    public function get_column_konsumsi_pangan()
+    {
+        return [
+            '1201.1.1 (/minggu)',
+            '1201.1.2 (/minggu)',
+            '1201.2 (/minggu)',
+            '1201.3.1 (/minggu)',
+            '1201.3.2 (/minggu)',
+            '1201.4 (/minggu)',
+            '1201.5.1 (/minggu)',
+            '1201.5.2 (/minggu)',
+            '1201.6 (/minggu)',
+            '1201.7 (/minggu)',
+            '1201.8 (/minggu)',
+            '1201.9 (/minggu)',
+            '1201.10 (/minggu)',
+            '1201.11 (/minggu)',
+            '1201.12.1 (/minggu)',
+            '1201.12.2 (/minggu)',
+            '1201.13.1 (/minggu)',
+            '1201.13.2 (/minggu)',
+            '1201.13.3 (/minggu)',
+            '1201.14.1 (/minggu)',
+            '1201.14.2 (/minggu)'
+
+        ];
+    }
+
+    public function get_column_konsumsi_non_pangan()
+    {
+        return [
+            '1202.1.1 (/bulan)',
+            '1202.1.2 (/bulan)',
+            '1202.1.3 (/bulan)',
+            '1202.1.4 (/bulan)',
+            '1202.2.1 (/bulan)',
+            '1202.2.2 (/bulan)',
+            '1202.2.3 (/bulan)',
+            '1202.2.4 (/bulan)',
+            '1202.2.5 (/bulan)',
+            '1203.3 (/tahun)',
+            '1203.4 (/tahun)',
+            '1203.5.1 (/tahun)',
+            '1203.5.2 (/tahun)',
+            '1203.5.3 (/tahun)',
+            '1203.5.4 (/tahun)',
+            '1203.6 (/tahun)'
+        ];
+    }
+
+    public function get_column_partisiasi_sosial()
+    {
+        $column = [];
+        for ($i = 1; $i <= 10 ; $i++) { 
+            $column = array_merge($column, [
+                '1301.1.' . $i
+            ]);
+        }
+
+        return $column;
+    }
+
+    public function get_column_partisiasi_organisasi()
+    {
+        return [
+            '1301.2.1_Karang taruna',
+            '1301.2.1_Organisasi Perikanan',
+            '1301.2.1_Organisasi Pendidikan',
+            '1301.2.1_Posyandu/Puskesmas/kesehatan',
+            '1301.2.1_Olahraga',
+            '1301.2.1_Organisasi Budaya',
+            '1301.2.1_Organisasi masjid/keagamaan lainnya',
+            '1301.2.1_Organisasi kenelayanan',
+            '1301.2.1_Organisasi Politik',
+            '1301.2.1_Arisan RT',
+            '1301.2.1_Pengajian',
+            '1301.2.2',
+            '1301.2.3',
+            '1301.2.4',
+            '1301.2.5'
+        ];
+
+        return $column;
+    }
+
+    public function get_column_partisiasi_politik()
+    {
+        return [
+            '1301.3.1',
+            '1301.3.2',
+            '1301.3.3'
+        ];
 
         return $column;
     }
@@ -922,6 +1037,66 @@ class ExportKuesionerController extends Controller
                 $item['jumlah_trip'],
                 $item['bagi_hasil'],
                 $item['upah_trip'],
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_konsumsi_pangan($id_responden)
+    {
+        $data = [];
+        foreach (JawabanKonsumsi::where('id_responden', $id_responden)->where('kateg_konsum', \Config::get('constants.KONSUMSI.PANGAN'))->orderBy('id_konsumsi', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                $item['jawaban']
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_konsumsi_non_pangan($id_responden)
+    {
+        $data = [];
+        foreach (JawabanKonsumsi::where('id_responden', $id_responden)->where('kateg_konsum', \Config::get('constants.KONSUMSI.NONPANGAN'))->orderBy('id_konsumsi', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                $item['jawaban']
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_partisipasi_sosial($id_responden, $master_opsional)
+    {
+        $data = [];
+        foreach (JwbPartisipasi::where('kateg_partisipasi', 1)->where('id_responden', $id_responden)->orderBy('id_jwb_partisipasi', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                isset($master_opsional[$item['id_master_opsional']])? $master_opsional[$item['id_master_opsional']]: null
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_partisipasi_organisasi($id_responden, $master_opsional)
+    {
+        $data = [];
+        foreach (JwbPartisipasi::where('kateg_partisipasi', 2)->where('id_responden', $id_responden)->orderBy('id_jwb_partisipasi', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                isset($master_opsional[$item['id_master_opsional']])? $master_opsional[$item['id_master_opsional']]: null
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_partisipasi_politik($id_responden, $master_opsional)
+    {
+        $data = [];
+        foreach (JwbPartisipasi::where('kateg_partisipasi', 3)->where('id_responden', $id_responden)->orderBy('id_jwb_partisipasi', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                isset($master_opsional[$item['id_master_opsional']])? $master_opsional[$item['id_master_opsional']]: null
             ]);
         }
 
