@@ -26,6 +26,8 @@ use App\CurahanTenagaKerja;
 use App\JawabanKonsumsi;
 use App\MasterOpsional;
 use App\JwbPartisipasi;
+use App\JwbRasaPercaya;
+use App\JwbNilaiNorma;
 use Excel;
 
 class ExportKuesionerController extends Controller
@@ -66,7 +68,11 @@ class ExportKuesionerController extends Controller
             $this->get_column_konsumsi_non_pangan(),
             $this->get_column_partisiasi_sosial(),
             $this->get_column_partisiasi_organisasi(),
-            $this->get_column_partisiasi_politik()
+            $this->get_column_partisiasi_politik(),
+            $this->get_column_rasa_percaya_masy(),
+            $this->get_column_rasa_percaya_org(),
+            $this->get_column_rasa_percaya_pol(),
+            $this->get_column_nilai_norma()
         );
         
         $table[] = $columns;
@@ -92,7 +98,11 @@ class ExportKuesionerController extends Controller
                 $this->get_data_konsumsi_non_pangan($value->id_responden),
                 $this->get_data_partisipasi_sosial($value->id_responden, $master_opsional),
                 $this->get_data_partisipasi_organisasi($value->id_responden, $master_opsional),
-                $this->get_data_partisipasi_politik($value->id_responden, $master_opsional)
+                $this->get_data_partisipasi_politik($value->id_responden, $master_opsional),
+                $this->get_data_rasa_percaya_masy($value->id_responden, $master_opsional),
+                $this->get_data_rasa_percaya_org($value->id_responden, $master_opsional),
+                $this->get_data_rasa_percaya_pol($value->id_responden, $master_opsional),
+                $this->get_data_nilai_norma($value->id_responden, $master_opsional)
             );
 
             $table[] = $row;
@@ -541,6 +551,61 @@ class ExportKuesionerController extends Controller
         ];
 
         return $column;
+    }
+
+    public function get_column_rasa_percaya_masy()
+    {
+        return [
+            '1302.1.1.A',
+            '1302.1.1.B',
+            '1302.1.1.C',
+            '1302.1.2.A',
+            '1302.1.2.B',
+            '1302.1.2.C',
+            '1302.1.3.A',
+            '1302.1.3.B',
+            '1302.1.3.C',
+            '1302.1.4.A',
+            '1302.1.4.B',
+            '1302.1.4.C',
+            '1302.1.5',
+            '1302.1.6.A',
+            '1302.1.6.A2',
+            '1302.1.6.A3'
+        ];
+    }
+
+    public function get_column_rasa_percaya_org()
+    {
+        $column = [];
+        for ($i = 1; $i <= 5 ; $i++) { 
+            $column = array_merge($column, [
+                '1302.2.' . $i
+            ]);
+        }
+
+        return $column;
+    }
+
+    public function get_column_rasa_percaya_pol()
+    {
+        return 
+        [
+            '1302.3.1',
+            '1302.3.2',
+            '1302.3.3'
+        ];
+    }
+
+    public function get_column_nilai_norma()
+    {
+        return 
+        [
+            '1303.1',
+            '1303.2',
+            '1303.3',
+            '1303.4'
+        ];
     }
 
     public function get_data_responden($id_responden)
@@ -1095,6 +1160,57 @@ class ExportKuesionerController extends Controller
     {
         $data = [];
         foreach (JwbPartisipasi::where('kateg_partisipasi', 3)->where('id_responden', $id_responden)->orderBy('id_jwb_partisipasi', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                isset($master_opsional[$item['id_master_opsional']])? $master_opsional[$item['id_master_opsional']]: null
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_rasa_percaya_masy($id_responden, $master_opsional)
+    {
+        $data = [];
+        foreach (JwbRasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.MASYARAKAT'))->where('id_responden', $id_responden)->orderBy('id_rasa_percaya', 'ASC')->get() as $key => $item) {
+            if(!in_array($item['id_rasa_percaya'], [1, 5, 9, 13, 18]))
+            {
+                $data = array_merge($data, [
+                    isset($master_opsional[$item['id_master_opsional']])? $master_opsional[$item['id_master_opsional']]: null
+                ]);
+            }
+        }
+
+        return $data;
+    }
+
+    public function get_data_rasa_percaya_org($id_responden, $master_opsional)
+    {
+        $data = [];
+        foreach (JwbRasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.ORGANISASI'))->where('id_responden', $id_responden)->orderBy('id_rasa_percaya', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                isset($master_opsional[$item['id_master_opsional']])? $master_opsional[$item['id_master_opsional']]: null
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_rasa_percaya_pol($id_responden, $master_opsional)
+    {
+        $data = [];
+        foreach (JwbRasaPercaya::where('kateg_rasa_percaya', \Config::get('constants.RASA_PERCAYA.POLITIK'))->where('id_responden', $id_responden)->orderBy('id_rasa_percaya', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                isset($master_opsional[$item['id_master_opsional']])? $master_opsional[$item['id_master_opsional']]: null
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_nilai_norma($id_responden, $master_opsional)
+    {
+        $data = [];
+        foreach (JwbNilaiNorma::where('id_responden', $id_responden)->orderBy('id_nilai_norma', 'ASC')->get() as $key => $item) {
             $data = array_merge($data, [
                 isset($master_opsional[$item['id_master_opsional']])? $master_opsional[$item['id_master_opsional']]: null
             ]);
