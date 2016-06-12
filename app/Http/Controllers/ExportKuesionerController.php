@@ -19,6 +19,10 @@ use App\AlatTangkap;
 use App\Mesin;
 use App\AsetPendukungUsaha;
 use App\BiayaPerijinan;
+use App\MasterBiayaVariabel;
+use App\BiayaOperasional;
+
+use App\CurahanTenagaKerja;
 use Excel;
 
 class ExportKuesionerController extends Controller
@@ -45,7 +49,10 @@ class ExportKuesionerController extends Controller
             $this->get_column_alat_tangkap(),
             $this->get_column_tenaga_penggerak(),
             $this->get_column_aset_pendukung_usaha(),
-            $this->get_column_biaya_tetap()
+            $this->get_column_biaya_tetap(),
+            $this->get_column_biaya_variabel(),
+            // $this->get_column_penerimaan_usaha(),
+            $this->get_column_ketenagakerjaan()
         );
         
         $table[] = $columns;
@@ -63,7 +70,10 @@ class ExportKuesionerController extends Controller
                 $this->get_data_alat_tangkap($value->id_responden),
                 $this->get_data_tenaga_penggerak($value->id_responden),
                 $this->get_data_aset_pendukung_usaha($value->id_responden),
-                $this->get_data_biaya_tetap($value->id_responden)
+                $this->get_data_biaya_tetap($value->id_responden),
+                $this->get_data_biaya_variabel($value->id_responden),
+                // $this->get_data_penerimaan_usaha($value->id_responden),
+                $this->get_data_ketenagakerjaan($value->id_responden)
             );
 
             $table[] = $row;
@@ -325,6 +335,93 @@ class ExportKuesionerController extends Controller
                 '801.' . $i . '(3)',
                 '801.' . $i . '(4) (/tahun)'
 
+            ]);
+        }
+
+        return $column;
+    }
+
+    public function get_column_biaya_variabel()
+    {
+        $column = [];
+        for ($i = 1; $i <= 15 ; $i++) { 
+            $column = array_merge($column, [
+                '901.1' . $i . '(2)',
+                '901.1' . $i . '(3) (/trip)',
+                '901.1' . $i . '(4)(/trip)',
+                '901.1' . $i . '(5)(/trip)',
+                '901.1' . $i . '(6)(/trip)',
+                '901.1' . $i . '(7)(/trip)',
+                '901.1' . $i . '(8)(/trip)',
+            ]);
+        }
+
+        return $column;
+    }
+
+    public function get_column_penerimaan_usaha()
+    {
+        $short_month = 
+        [
+            1  => 'Jan',
+            2  => 'Feb',
+            3  => 'Mar',
+            4  => 'Apr',
+            5  => 'Mei',
+            6  => 'Jun',
+            7  => 'Jul',
+            8  => 'Agu',
+            9  => 'Sept',
+            10 => 'Okt',
+            11 => 'Nov',
+            12 => 'Des',
+        ];
+
+        $column = [
+            'Dalam setahun terakhir, pada bulan apasaja saudara tidak melakukan kegiatan penangkapan ikan?_1001',
+            'Alasan tidak melaut_1001.1',
+            '1002',
+            'Bila ya, sebutkan pada hari apa saja_1002.1',
+            'Dalam 1 bulan, berapa hari tidak melaut_1002.3',
+        ];
+
+        foreach ($short_month as $key => $month) {
+            $column = array_merge($column, [
+                'Musim Produksi_1003.' . $month,
+                'Jenis Alat tangkap_1003.' . $month
+            ]); 
+
+            for ($i = 1; $i <= 5 ; $i++) { 
+                $column = array_merge($column, [
+                    'Hasil Tangkapan_1003.' . $month . '.' . $i,
+                    'Produksi dalam sebulan (kg)_1003.' . $month . '.' . $i,
+                    'Harga ikan (/kg)_1003.' . $month . '.' . $i,
+                    'Nilai Produksi_1003.' . $month . '.' . $i
+                ]);
+            }
+
+            $column = array_merge($column, [
+                'Jumlah Produksi dalam sebulan (kg)_1003.' . $month,
+                'Jumlah Nilai Produksi sebulan_1003.' . $month,
+                'Total Trip_1003.' . $month
+            ]);
+        }
+
+        return $column;
+    }
+
+    public function get_column_ketenagakerjaan()
+    {
+        $column = [];
+        for ($i = 1; $i <= 7 ; $i++) { 
+            $column = array_merge($column, [
+                '1101.' . $i . '.(1)',
+                '1101.' . $i . '.(2)',
+                '1101.' . $i . '.(3) (orang)',
+                '1101.' . $i . '.(4) (hari/trip)',
+                '1101.' . $i . '.(5) (trip/bulan)',
+                '1101.' . $i . '.(6) (%)',
+                '1101.' . $i . '.(7)',
             ]);
         }
 
@@ -718,6 +815,113 @@ class ExportKuesionerController extends Controller
                 $item['frek_satuan'],
                 $item['harga_satuan'],
                 $item['total_biaya']
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_biaya_variabel($id_responden)
+    {
+        $master_biaya_variabel = [];
+        foreach (MasterBiayaVariabel::where('kateg_biaya_variabel', 1)->get() as $index => $item) {
+            $master_biaya_variabel[$item['id_master_biaya_variabel']] = $item['satuan'];
+        }
+
+        $data = [];
+        foreach (BiayaOperasional::where('id_responden', $id_responden)->orderBy('jenis_biaya', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                $master_biaya_variabel[$item['jenis_biaya']],
+                $item['rataan_musim_puncak'],
+                $item['rataan_musim_sedang'],
+                $item['rataan_musim_paceklik'],
+                $item['harga_satuan_puncak'],
+                $item['harga_satuan_sedang'],
+                $item['harga_satuan_paceklik']
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_penerimaan_usaha($id_responden)
+    {
+        $full_month = 
+        [
+            1  => 'Januari',
+            2  => 'Februari',
+            3  => 'Maret',
+            4  => 'April',
+            5  => 'Mei',
+            6  => 'Juni',
+            7  => 'Juli',
+            8  => 'Agustus',
+            9  => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember',
+        ];
+
+        $day = 
+        [
+            1  => 'Senin',
+            2  => 'Selasa',
+            3  => 'Rabu',
+            4  => 'Kamis',
+            5  => 'Jumat',
+            6  => 'Sabtu',
+            7  => 'Minggu',
+        ];
+
+        $master_biaya_variabel = [];
+        foreach (MasterBiayaVariabel::where('kateg_biaya_variabel', 1)->get() as $index => $item) {
+            $master_biaya_variabel[$item['id_master_biaya_variabel']] = $item['satuan'];
+        }
+
+        $data = [];
+        foreach (BiayaOperasional::where('id_responden', $id_responden)->orderBy('jenis_biaya', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                $master_biaya_variabel[$item['jenis_biaya']],
+                $item['rataan_musim_puncak'],
+                $item['rataan_musim_sedang'],
+                $item['rataan_musim_paceklik'],
+                $item['harga_satuan_puncak'],
+                $item['harga_satuan_sedang'],
+                $item['harga_satuan_paceklik']
+            ]);
+        }
+
+        return $data;
+    }
+
+    public function get_data_ketenagakerjaan($id_responden)
+    {
+        $status_tenaga_kerja = [
+            1 => 'Keluarga Inti',
+            2 => 'Keluarga Besar',
+            3 => 'Luar Keluarga',
+        ];    
+
+        $status_pekerjaan = [
+            1 => 'Pemilik',
+            2 => 'Nahkoda',
+            3 => 'Juru Mesin',
+            4 => 'Juru Masak',
+            5 => 'ABK',
+            6 => 'Buang Umpan',
+            7 => 'Lainnya',
+        ];
+
+        $data = [];
+        foreach (CurahanTenagaKerja::where('id_responden', $id_responden)->orderBy('status_pekerjaan', 'ASC')->get() as $key => $item) {
+            $data = array_merge($data, [
+                isset($status_pekerjaan[$item['status_pekerjaan']])? $status_pekerjaan[$item['status_pekerjaan']]: null,
+                isset($status_tenaga_kerja[$item['status_tenaga_kerja']])? $status_tenaga_kerja[$item['status_tenaga_kerja']]: null,
+                $item['jumlah_tenaga_kerja'],
+                $item['lama_trip'],
+                $item['jumlah_trip'],
+                $item['bagi_hasil'],
+                $item['upah_trip'],
             ]);
         }
 
