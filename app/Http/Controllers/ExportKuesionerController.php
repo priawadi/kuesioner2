@@ -16,6 +16,7 @@ use App\Kesehatan;
 use App\Perahu;
 use App\MasterJenisAlatTangkap;
 use App\AlatTangkap;
+use App\Mesin;
 use Excel;
 
 class ExportKuesionerController extends Controller
@@ -39,7 +40,8 @@ class ExportKuesionerController extends Controller
             $this->get_column_aset_rumah_tangga(),
             $this->get_column_kesehatan(),
             $this->get_column_perahu(),
-            $this->get_column_alat_tangkap()
+            $this->get_column_alat_tangkap(),
+            $this->get_column_tenaga_penggerak()
         );
         
         $table[] = $columns;
@@ -54,7 +56,8 @@ class ExportKuesionerController extends Controller
                 $this->get_data_aset_rumah_tangga($value->id_responden),
                 $this->get_data_kesehatan($value->id_responden),
                 $this->get_data_perahu($value->id_responden),
-                $this->get_data_alat_tangkap($value->id_responden)
+                $this->get_data_alat_tangkap($value->id_responden),
+                $this->get_data_tenaga_penggerak($value->id_responden)
             );
 
             $table[] = $row;
@@ -261,6 +264,33 @@ class ExportKuesionerController extends Controller
         }
 
         return $column;
+    }
+
+    public function get_column_tenaga_penggerak()
+    {
+        return [
+            '703.1',
+            '703.2',
+            '703.2A',
+            '703.2B',
+            '703.2C (PK)',
+            '703.2D (unit)',
+            '703.2E',
+            '703.2F',
+            '703.2G (/unit)',
+            '703.2H',
+            '703.2I',
+            '703.3',
+            '703.3A',
+            '703.3B',
+            '703.3C (PK)',
+            '703.3D (unit)',
+            '703.3E',
+            '703.3F',
+            '703.3G (/unit)',
+            '703.3H',
+            '703.3I',
+        ];
     }
 
     public function get_data_responden($id_responden)
@@ -544,5 +574,61 @@ class ExportKuesionerController extends Controller
         }
 
         return $data;
+    }
+
+    public function get_data_tenaga_penggerak($id_responden)
+    {
+        $jenis_mesin_penggerak = [ 
+            1 => 'Perahu tanpa motor', 
+            2 => 'Motor tempel',
+            3 => 'On board',
+        ];
+
+        $jenis_bahan_bakar = [ 
+            1 => 'Bensin', 
+            2 => 'Solar',
+            3 => 'Minyak tanah',
+            4 => 'Campuran',
+            5 => 'Lainnya',
+        ];
+
+        $kondisi = [ 
+            1 => 'Baru', 
+            2 => 'Bekas',
+        ];
+
+        $sumber_modal = [ 
+            1 => 'Modal sendiri', 
+            2 => 'Kredit formal',
+            3 => 'Kredit informal',
+            4 => 'Bantuan pemerintah',
+            5 => 'Keluarga',
+            6 => 'Campuran',
+        ];
+
+        $mesin = Mesin::where('id_responden', $id_responden)->first();
+        return [
+            isset($mesin['jenis']) && $mesin['jenis'] == 1? $jenis_mesin_penggerak[$mesin['jenis']]: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 2? $jenis_mesin_penggerak[$mesin['jenis']]: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 2? $mesin['merk']: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 2 && isset($jenis_bahan_bakar[$mesin['bahan_bakar']])? $jenis_bahan_bakar[$mesin['bahan_bakar']]: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 2? $mesin['kekuatan']: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 2? $mesin['jumlah']: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 2 && isset($kondisi[$mesin['kondisi']])? $kondisi[$mesin['kondisi']]: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 2? $mesin['tahun_pembelian']: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 2? $mesin['harga_beli']: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 2? $mesin['umur_teknis']: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 2 && isset($sumber_modal[$mesin['sumber_modal']])? $sumber_modal[$mesin['sumber_modal']]: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 3? $jenis_mesin_penggerak[$mesin['jenis']]: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 3? $mesin['merk']: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 3 && isset($jenis_bahan_bakar[$mesin['bahan_bakar']])? $jenis_bahan_bakar[$mesin['bahan_bakar']]: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 3? $mesin['kekuatan']: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 3? $mesin['jumlah']: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 3 && isset($kondisi[$mesin['kondisi']])? $kondisi[$mesin['kondisi']]: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 3? $mesin['tahun_pembelian']: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 3? $mesin['harga_beli']: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 3? $mesin['umur_teknis']: null,
+            isset($mesin['jenis']) && $mesin['jenis'] == 3 && isset($sumber_modal[$mesin['sumber_modal']])? $sumber_modal[$mesin['sumber_modal']]: null,
+        ];
     }
 }
