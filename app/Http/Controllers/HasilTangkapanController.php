@@ -188,7 +188,7 @@ class HasilTangkapanController extends Controller
             $daftar_hari[] = $value;
         }
         
-        $master_jenis_ikans = [];
+        $master_jenis_ikan = [];
         foreach (MasterJenisIkan::all() as $item) {
             $master_jenis_ikan[$item->id_master_jenis_ikan] = $item->jenis_ikan;
         }

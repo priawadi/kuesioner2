@@ -21,7 +21,10 @@ use App\AsetPendukungUsaha;
 use App\BiayaPerijinan;
 use App\MasterBiayaVariabel;
 use App\BiayaOperasional;
-
+use App\PenerimaanUsaha;
+use App\HasilTangkapan;
+use App\DetilHasilTangkapan;
+use App\MasterJenisIkan;
 use App\CurahanTenagaKerja;
 use App\JawabanKonsumsi;
 use App\MasterOpsional;
@@ -62,7 +65,7 @@ class ExportKuesionerController extends Controller
             $this->get_column_aset_pendukung_usaha(),
             $this->get_column_biaya_tetap(),
             $this->get_column_biaya_variabel(),
-            // $this->get_column_penerimaan_usaha(),
+            $this->get_column_penerimaan_usaha(),
             $this->get_column_ketenagakerjaan(),
             $this->get_column_konsumsi_pangan(),
             $this->get_column_konsumsi_non_pangan(),
@@ -92,7 +95,7 @@ class ExportKuesionerController extends Controller
                 $this->get_data_aset_pendukung_usaha($value->id_responden),
                 $this->get_data_biaya_tetap($value->id_responden),
                 $this->get_data_biaya_variabel($value->id_responden),
-                // $this->get_data_penerimaan_usaha($value->id_responden),
+                $this->get_data_penerimaan_usaha($value->id_responden),
                 $this->get_data_ketenagakerjaan($value->id_responden),
                 $this->get_data_konsumsi_pangan($value->id_responden),
                 $this->get_data_konsumsi_non_pangan($value->id_responden),
@@ -406,6 +409,17 @@ class ExportKuesionerController extends Controller
             12 => 'Des',
         ];
 
+        $day = 
+        [
+            1  => 'Senin',
+            2  => 'Selasa',
+            3  => 'Rabu',
+            4  => 'Kamis',
+            5  => 'Jumat',
+            6  => 'Sabtu',
+            7  => 'Minggu',
+        ];
+
         $column = [];
         foreach ($short_month as $key => $month) {
             $column = array_merge($column, [
@@ -417,18 +431,28 @@ class ExportKuesionerController extends Controller
             // 'Dalam setahun terakhir, pada bulan apasaja saudara tidak melakukan kegiatan penangkapan ikan?_1001',
             'Alasan tidak melaut_1001.1',
             '1002',
-            'Bila ya, sebutkan pada hari apa saja_1002.1',
-            'Dalam 1 bulan, berapa hari tidak melaut_1002.3',
+            // 'Bila ya, sebutkan pada hari apa saja_1002.1',
+            // 'Dalam 1 bulan, berapa hari tidak melaut_1002.3',
+        ]);
+
+        foreach ($day as $key => $value) {
+            $column = array_merge($column, [
+                'Bila ya, sebutkan pada hari apa saja_1002.1.' . $value
+            ]);
+        }
+
+        $column = array_merge($column, [
+            'Dalam 1 bulan, berapa hari tidak melaut_1002.3'
         ]);
 
         foreach ($short_month as $key => $month) {
             $column = array_merge($column, [
                 'Musim Produksi_1003.' . $month,
-                'Jenis Alat tangkap_1003.' . $month
             ]); 
 
             for ($i = 1; $i <= 5 ; $i++) { 
                 $column = array_merge($column, [
+                    'Jenis Alat tangkap_1003.' . $month . '.' . $i,
                     'Hasil Tangkapan_1003.' . $month . '.' . $i,
                     'Produksi dalam sebulan (kg)_1003.' . $month . '.' . $i,
                     'Harga ikan (/kg)_1003.' . $month . '.' . $i,
@@ -1060,23 +1084,104 @@ class ExportKuesionerController extends Controller
             7  => 'Minggu',
         ];
 
-        $master_biaya_variabel = [];
-        foreach (MasterBiayaVariabel::where('kateg_biaya_variabel', 1)->get() as $index => $item) {
-            $master_biaya_variabel[$item['id_master_biaya_variabel']] = $item['satuan'];
+        $master_musim = [
+            1 => 'Tinggi',
+            2 => 'Sedang', 
+            3 => 'Rendah'
+        ];
+
+        $master_jenis_ikan = [];
+        foreach (MasterJenisIkan::all() as $item) {
+            $master_jenis_ikan[$item->id_master_jenis_ikan] = $item->jenis_ikan;
+        }
+
+        $master_jenis_alat_tangkap = [];
+        foreach (MasterJenisAlatTangkap::all() as $index => $item) {
+            $master_jenis_alat_tangkap[$item->id_master_jenis_alat_tangkap] = $item->jenis_alat_tangkap;
         }
 
         $data = [];
-        foreach (BiayaOperasional::where('id_responden', $id_responden)->orderBy('jenis_biaya', 'ASC')->get() as $key => $item) {
+        $penerimaan_usaha = PenerimaanUsaha::where('id_responden', $id_responden)->first();
+        if ($penerimaan_usaha)
+        {
+            $bulan_tidak_tangkap = explode(",", $penerimaan_usaha['bulan_tidak_tangkap']);
+            $hari_tidak_tangkap = explode(",", $penerimaan_usaha['daftar_hari']);
             $data = array_merge($data, [
-                $master_biaya_variabel[$item['jenis_biaya']],
-                $item['rataan_musim_puncak'],
-                $item['rataan_musim_sedang'],
-                $item['rataan_musim_paceklik'],
-                $item['harga_satuan_puncak'],
-                $item['harga_satuan_sedang'],
-                $item['harga_satuan_paceklik']
+                in_array(1, $bulan_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(2, $bulan_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(3, $bulan_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(4, $bulan_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(5, $bulan_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(6, $bulan_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(7, $bulan_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(8, $bulan_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(9, $bulan_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(10, $bulan_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(11, $bulan_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(12, $bulan_tidak_tangkap)? 'YA': 'TIDAK',
+                $penerimaan_usaha['alasan_tidak_melaut'],
+                $penerimaan_usaha['hari_tidak_tangkap']? 'YA': 'TIDAK',
+                in_array(1, $hari_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(2, $hari_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(3, $hari_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(4, $hari_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(5, $hari_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(6, $hari_tidak_tangkap)? 'YA': 'TIDAK', 
+                in_array(7, $hari_tidak_tangkap)? 'YA': 'TIDAK', 
+                $penerimaan_usaha['total_hari_tidak_melaut'], 
             ]);
         }
+
+        foreach (HasilTangkapan::where('id_responden', $id_responden)->orderBy('id_bulan', 'ASC')->get() as $index => $item) {
+            $data = array_merge($data, [
+                isset($master_musim[$item['id_musim']])? $master_musim[$item['id_musim']]: null,
+            ]);
+
+            foreach ($full_month as $id_bulan => $month) {
+                $jumlah_produksi       = 0;
+                $jumlah_nilai_produksi = 0;
+
+                foreach (DetilHasilTangkapan::where('id_responden', $id_responden)->where('id_bulan', $id_bulan)->orderBy('urutan_isian', 'ASC')->get() as $index => $detil_hasil_tangkapan) {
+                    $jumlah_produksi       += $detil_hasil_tangkapan['produksi_sebulan'];
+                    $jumlah_nilai_produksi += $detil_hasil_tangkapan['nilai_produksi'];
+
+                    $data = array_merge($data, [
+                        isset($master_jenis_alat_tangkap[$detil_hasil_tangkapan['id_jenis_alat_tangkap']])? $master_jenis_alat_tangkap[$detil_hasil_tangkapan['id_jenis_alat_tangkap']]: null,
+                        isset($master_jenis_ikan[$detil_hasil_tangkapan['id_jenis_ikan']])? $master_jenis_ikan[$detil_hasil_tangkapan['id_jenis_ikan']]: null,
+                        $detil_hasil_tangkapan['produksi_sebulan'],
+                        $detil_hasil_tangkapan['harga_ikan'],
+                        $detil_hasil_tangkapan['nilai_produksi']
+                    ]);
+                }
+
+                $data = array_merge($data, [
+                    $jumlah_produksi,
+                    $jumlah_nilai_produksi
+                ]);
+            }
+
+            $data = array_merge($data, [
+                $item['total_trip']
+            ]);
+        }
+
+        // $master_biaya_variabel = [];
+        // foreach (MasterBiayaVariabel::where('kateg_biaya_variabel', 1)->get() as $index => $item) {
+        //     $master_biaya_variabel[$item['id_master_biaya_variabel']] = $item['satuan'];
+        // }
+
+        // $data = [];
+        // foreach (BiayaOperasional::where('id_responden', $id_responden)->orderBy('jenis_biaya', 'ASC')->get() as $key => $item) {
+        //     $data = array_merge($data, [
+        //         $master_biaya_variabel[$item['jenis_biaya']],
+        //         $item['rataan_musim_puncak'],
+        //         $item['rataan_musim_sedang'],
+        //         $item['rataan_musim_paceklik'],
+        //         $item['harga_satuan_puncak'],
+        //         $item['harga_satuan_sedang'],
+        //         $item['harga_satuan_paceklik']
+        //     ]);
+        // }
 
         return $data;
     }
@@ -1245,7 +1350,10 @@ class ExportKuesionerController extends Controller
             'Alat Pendukung Usaha',
             'Biaya Tetap',
             'Biaya Variabel',
+            
             'Penerimaan Usaha',
+            'Hasil Tangkapan',
+            'Detil Hasil Tangkapan',
             'Ketenagakerjaan',
             'Konsumsi Pangan',
             'Konsumsi Non Pangan',
@@ -1275,7 +1383,10 @@ class ExportKuesionerController extends Controller
                     AsetPendukungUsaha::where('id_responden', $item['id_responden'])->orderBy('id_peralatan_tambahan', 'ASC')->count(),
                     BiayaPerijinan::where('id_responden', $item['id_responden'])->orderBy('jenis_biaya_perijinan', 'ASC')->count(),
                     BiayaOperasional::where('id_responden', $item['id_responden'])->orderBy('jenis_biaya', 'ASC')->count(),
-                    BiayaOperasional::where('id_responden', $item['id_responden'])->orderBy('jenis_biaya', 'ASC')->count(),
+                    
+                    PenerimaanUsaha::where('id_responden', $item['id_responden'])->count(),
+                    HasilTangkapan::where('id_responden', $item['id_responden'])->count(),
+                    DetilHasilTangkapan::where('id_responden', $item['id_responden'])->count(),
                     CurahanTenagaKerja::where('id_responden', $item['id_responden'])->orderBy('status_pekerjaan', 'ASC')->count(),
                     JawabanKonsumsi::where('id_responden', $item['id_responden'])->where('kateg_konsum', \Config::get('constants.KONSUMSI.PANGAN'))->orderBy('id_konsumsi', 'ASC')->count(),
                     JawabanKonsumsi::where('id_responden', $item['id_responden'])->where('kateg_konsum', \Config::get('constants.KONSUMSI.NONPANGAN'))->orderBy('id_konsumsi', 'ASC')->count(),
