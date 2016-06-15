@@ -1195,8 +1195,14 @@ class ExportKuesionerController extends Controller
                 $jumlah_produksi       += $detil_hasil_tangkapan['produksi_sebulan'];
                 $jumlah_nilai_produksi += $detil_hasil_tangkapan['nilai_produksi'];
 
+                if ($detil_hasil_tangkapan['urutan_isian'] == 5){
+                    $jenis_alat_tangkap = $detil_hasil_tangkapan['id_jenis_alat_tangkap_lain'];
+                } else {
+                    $jenis_alat_tangkap = isset($master_jenis_alat_tangkap[$detil_hasil_tangkapan['id_jenis_alat_tangkap']])? $master_jenis_alat_tangkap[$detil_hasil_tangkapan['id_jenis_alat_tangkap']]: null;
+                }
+
                 $data = array_merge($data, [
-                    isset($master_jenis_alat_tangkap[$detil_hasil_tangkapan['id_jenis_alat_tangkap']])? $master_jenis_alat_tangkap[$detil_hasil_tangkapan['id_jenis_alat_tangkap']]: null,
+                    $jenis_alat_tangkap,
                     isset($master_jenis_ikan[$detil_hasil_tangkapan['id_jenis_ikan']])? $master_jenis_ikan[$detil_hasil_tangkapan['id_jenis_ikan']]: null,
                     $detil_hasil_tangkapan['produksi_sebulan'],
                     $detil_hasil_tangkapan['harga_ikan'],
