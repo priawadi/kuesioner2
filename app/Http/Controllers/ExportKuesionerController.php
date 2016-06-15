@@ -137,6 +137,57 @@ class ExportKuesionerController extends Controller
         })->export('xlsx');
     }
 
+    public function export_to_excel_penerimaan_usaha()
+    {
+        // Init
+        $table           = [];
+        $columns         = [];
+
+        // Set column
+        $columns = array_merge($columns, 
+            $this->get_column_responden(),
+            $this->get_column_penerimaan_usaha()
+        );
+        
+        $table[] = $columns;
+
+        // Set data each responden
+        foreach (Responden::take(5)->get() as $key => $value) {
+            $row = [];
+            $row = array_merge($row, 
+                $this->get_data_responden($value->id_responden),
+                $this->get_data_penerimaan_usaha($value->id_responden)
+            );
+
+            $table[] = $row;
+        }
+        // echo 'kolom: ' . count($table[0]) . '<br>';
+        // echo 'data: ' . count($table[1]);
+        // print_r($table); 
+        // die();
+
+        Excel::create('Panelkanas_2016', function($excel) use($table){
+            $excel->sheet('Sheet1', function($sheet) use($table){
+                $sheet->fromArray(
+                    $table,
+                    null,
+                    'A1',
+                    false,
+                    false
+                );
+
+
+                // Set format of cell
+                $sheet->row(1, function($row) {
+                    // call cell manipulation methods
+                    $row->setFontWeight('bold');
+
+                });
+            });
+
+        })->export('xlsx');
+    }
+
     public function get_column_responden()
     {
         return [
@@ -1137,51 +1188,31 @@ class ExportKuesionerController extends Controller
                 isset($master_musim[$item['id_musim']])? $master_musim[$item['id_musim']]: null,
             ]);
 
-            foreach ($full_month as $id_bulan => $month) {
-                $jumlah_produksi       = 0;
-                $jumlah_nilai_produksi = 0;
+            $jumlah_produksi       = 0;
+            $jumlah_nilai_produksi = 0;
 
-                foreach (DetilHasilTangkapan::where('id_responden', $id_responden)->where('id_bulan', $id_bulan)->orderBy('urutan_isian', 'ASC')->get() as $index => $detil_hasil_tangkapan) {
-                    $jumlah_produksi       += $detil_hasil_tangkapan['produksi_sebulan'];
-                    $jumlah_nilai_produksi += $detil_hasil_tangkapan['nilai_produksi'];
-
-                    $data = array_merge($data, [
-                        isset($master_jenis_alat_tangkap[$detil_hasil_tangkapan['id_jenis_alat_tangkap']])? $master_jenis_alat_tangkap[$detil_hasil_tangkapan['id_jenis_alat_tangkap']]: null,
-                        isset($master_jenis_ikan[$detil_hasil_tangkapan['id_jenis_ikan']])? $master_jenis_ikan[$detil_hasil_tangkapan['id_jenis_ikan']]: null,
-                        $detil_hasil_tangkapan['produksi_sebulan'],
-                        $detil_hasil_tangkapan['harga_ikan'],
-                        $detil_hasil_tangkapan['nilai_produksi']
-                    ]);
-                }
+            foreach (DetilHasilTangkapan::where('id_responden', $id_responden)->where('id_bulan', $item['id_bulan'])->orderBy('urutan_isian', 'ASC')->get() as $index => $detil_hasil_tangkapan) {
+                $jumlah_produksi       += $detil_hasil_tangkapan['produksi_sebulan'];
+                $jumlah_nilai_produksi += $detil_hasil_tangkapan['nilai_produksi'];
 
                 $data = array_merge($data, [
-                    $jumlah_produksi,
-                    $jumlah_nilai_produksi
+                    isset($master_jenis_alat_tangkap[$detil_hasil_tangkapan['id_jenis_alat_tangkap']])? $master_jenis_alat_tangkap[$detil_hasil_tangkapan['id_jenis_alat_tangkap']]: null,
+                    isset($master_jenis_ikan[$detil_hasil_tangkapan['id_jenis_ikan']])? $master_jenis_ikan[$detil_hasil_tangkapan['id_jenis_ikan']]: null,
+                    $detil_hasil_tangkapan['produksi_sebulan'],
+                    $detil_hasil_tangkapan['harga_ikan'],
+                    $detil_hasil_tangkapan['nilai_produksi']
                 ]);
             }
+
+            $data = array_merge($data, [
+                $jumlah_produksi,
+                $jumlah_nilai_produksi
+            ]);
 
             $data = array_merge($data, [
                 $item['total_trip']
             ]);
         }
-
-        // $master_biaya_variabel = [];
-        // foreach (MasterBiayaVariabel::where('kateg_biaya_variabel', 1)->get() as $index => $item) {
-        //     $master_biaya_variabel[$item['id_master_biaya_variabel']] = $item['satuan'];
-        // }
-
-        // $data = [];
-        // foreach (BiayaOperasional::where('id_responden', $id_responden)->orderBy('jenis_biaya', 'ASC')->get() as $key => $item) {
-        //     $data = array_merge($data, [
-        //         $master_biaya_variabel[$item['jenis_biaya']],
-        //         $item['rataan_musim_puncak'],
-        //         $item['rataan_musim_sedang'],
-        //         $item['rataan_musim_paceklik'],
-        //         $item['harga_satuan_puncak'],
-        //         $item['harga_satuan_sedang'],
-        //         $item['harga_satuan_paceklik']
-        //     ]);
-        // }
 
         return $data;
     }
