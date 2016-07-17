@@ -12,8 +12,14 @@
 */
 
 Route::get('/', function () {
-    return redirect('responden');
+    return redirect('home');
 });
+
+Route::get('bladeTest', 'HomeController@index');
+Route::resource('users', 'UserController');
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
 
 // Responden
 Route::get('/responden', 'RespondenController@index');
