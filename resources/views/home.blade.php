@@ -14,9 +14,10 @@
                 <div class="panel-body">
                     Home
                     <br>
-                    <a href="{{ url('responden') }}" class="btn btn-primary">
+<!--                     <a href="{{ url('responden') }}" class="btn btn-primary">
                         <i class="fa fa-btn fa-sign-in"></i>Lanjut 
                     </a>
+-->					
                 </div>
             </div>
         </div>
