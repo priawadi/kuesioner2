@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('home');
+    return redirect('responden');
 });
 
 Route::get('bladeTest', 'HomeController@index');

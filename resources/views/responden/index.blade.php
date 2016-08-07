@@ -118,7 +118,7 @@
 <script>
 $(document).ready(function() {
     $.fn.dataTable.ext.errMode = 'throw';
-    var t = $('#responden-table').DataTable({
+    $('#responden-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: '{!! route('datatables.data') !!}',
@@ -128,8 +128,25 @@ $(document).ready(function() {
             { data: 'suku', name: 'suku' },
             { data: 'kampung', name: 'kampung' },
             { data: 'dusun', name: 'dusun' },
-            { data: 'lokasi', name: 'lokasi' },
-            { data: null, orderable: false, searchable: false, 
+            { data: 'lokasi_responden', name: 'lokasi_responden' },
+/*            { targets : [4],
+                render : function(data, type, row) {
+                    switch(row.lokasi) {
+                        case '1' : return 'Batam'; break;
+                        case '2' : return 'Sibolga'; break;
+                        case '3' : return 'Langkat'; break;
+                        case '4' : return 'Indramayu'; break;
+                        case '5' : return 'Pangkajene Kepulauan'; break;
+                        case '6' : return 'Bitung'; break;
+                        case '7' : return 'Sorong'; break;
+                        case '8' : return 'Merauke'; break;
+                        case '9' : return 'Maluku Tengah'; break;
+                        case '10' : return 'Cilacap'; break;
+                        default : return 'N/A';
+                    }
+                }
+             },*/
+            { targets : [5], 
              render: function(data, type, full) {
                 return '<a class="btn btn-danger btn-sm" onclick="show_modal(\'responden/hapus/'+ full.id_responden +'\',\''+ full.nama_responden +'\')">' + 'Hapus' + '</a> <a class="btn btn-info btn-sm" href=responden/edit/' + full.id_responden + '>' + 'Edit' + '</a> <a class="btn btn-primary btn-sm" href=responden/lihat/' + full.id_responden + '>' + 'Isi Kuesioner' + '</a>';
             }}

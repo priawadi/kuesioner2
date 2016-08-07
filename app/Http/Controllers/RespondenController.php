@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enumerator;
 use App\Responden;
+use App\RespondenView;
 use App\JwbPartisipasi;
 use App\JwbRasaPercaya;
 use App\JwbNilaiNorma;
@@ -67,7 +68,7 @@ class RespondenController extends Controller
 
         return view('responden.index', [
             'subtitle'  => 'Responden',
-            'responden' => Responden::orderBy('id_responden', 'DESC')->paginate(10),
+            'responden' => RespondenView::orderBy('id_responden', 'DESC')->paginate(10),
         ]);
     }
 
@@ -337,6 +338,6 @@ class RespondenController extends Controller
 
         public function anyData()
     {
-        return Datatables::of(Responden::query())->make(true);
+        return Datatables::of(RespondenView::query())->make(true);
     }    
 }
