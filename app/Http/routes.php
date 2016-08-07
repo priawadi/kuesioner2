@@ -235,6 +235,7 @@ Route::controller('datatables', 'RespondenController', [
     'getIndex' => 'responden',
 ]);
 
-Route::get('/export', 'ExportKuesionerController@export_to_excel');
+Route::get('/export/{part}', 'ExportKuesionerController@export_to_excel');
+Route::get('/export-list', 'ExportKuesionerController@index');
 Route::get('/export-penerimaan-usaha', 'ExportKuesionerController@export_to_excel_penerimaan_usaha');
 Route::get('/statistic-data', 'ExportKuesionerController@get_statistic_data');

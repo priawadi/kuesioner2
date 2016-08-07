@@ -56,7 +56,7 @@
 					<!-- <li><a href="{{ url('/') }}">Home</a></li> -->
 					@else
                     <!-- <li><a href="{{ url('/responden') }}">Responden</a></li> -->
- 					<li><a href="{{ url('/export') }}">Export</a></li>
+ 					<li><a href="{{ url('/export-list') }}">Export</a></li>
 					@endif
                 </ul>
 

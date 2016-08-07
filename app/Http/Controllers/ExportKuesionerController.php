@@ -35,12 +35,39 @@ use Excel;
 
 class ExportKuesionerController extends Controller
 {
+
+    
+     /**
+     * Export data into excel
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $total_record = Responden::count();
+        $limit = 100;
+
+        $data = [];
+
+        for ($i = 0; $i < ceil($total_record / $limit); $i++) { 
+            $data[] = [
+                'filename' => 'Panelkanas_2016_Rekod_' . (($i * $limit) + 1) . '_' . (($i * $limit) + $limit),
+                'page'     => $i + 1,
+            ];
+        }
+
+        return view('export_to_excel.index', [
+            'subtitle' => 'Export Data',
+            'data'     => $data
+        ]);
+    }
+
     /**
      * Export data into excel
      *
      * @return \Illuminate\Http\Response
      */
-    public function export_to_excel()
+    public function export_to_excel($part)
     {
         // Init
         $table           = [];
@@ -81,7 +108,11 @@ class ExportKuesionerController extends Controller
         $table[] = $columns;
 
         // Set data each responden
-        foreach (Responden::all() as $key => $value) {
+        // foreach (Responden::all() as $key => $value) {
+        $i = $part - 1;
+        $limit = 100;
+
+        foreach (Responden::skip($i * $limit)->take($limit)->get() as $key => $value) {
             $row = [];
             $row = array_merge($row, 
                 $this->get_data_responden($value->id_responden),
@@ -115,7 +146,7 @@ class ExportKuesionerController extends Controller
         // print_r($table); 
         // die();
 
-        Excel::create('Panelkanas_2016', function($excel) use($table){
+        Excel::create('Panelkanas_2016_Rekod_' . (($i * $limit) + 1) . '_' . (($i * $limit) + $limit), function($excel) use($table){
             $excel->sheet('Sheet1', function($sheet) use($table){
                 $sheet->fromArray(
                     $table,
