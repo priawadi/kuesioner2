@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect('responden');
-});
-
 Route::get('/generate_password', function () {
     echo bcrypt('Papank1989');
     // print_r(Auth::user());
@@ -24,10 +20,12 @@ Route::get('/generate_password', function () {
 });
 
 Route::get('bladeTest', 'HomeController@index');
-Route::resource('users', 'UserController');
 Route::auth();
 
 Route::group(['middleware' => ['auth']], function(){
+	Route::get('/', function () {
+	    return redirect('responden');
+	});
 	// User
 	Route::get('users',['as'=>'users.index','uses'=>'UserController@index','middleware' => ['permission:user-list|user-create|user-edit|user-delete']]);
 	Route::get('users/create',['as'=>'users.create','uses'=>'UserController@create','middleware' => ['permission:user-create']]);
@@ -49,12 +47,12 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/home', 'HomeController@index');
 
 	// Responden
-	Route::get('/responden', 'RespondenController@index');
-	Route::get('/responden/tambah', 'RespondenController@create');
-	Route::post('/responden/tambah', 'RespondenController@store');
-	Route::get('/responden/edit/{id_responden}', 'RespondenController@edit');
-	Route::patch('/responden/edit/{id_responden}', 'RespondenController@update');
-	Route::delete('/responden/hapus/{id_responden}', 'RespondenController@destroy');
+	Route::get('/responden', ['uses' => 'RespondenController@index', 'middleware' => ['permission:kuesioner-list']]);
+	Route::get('/responden/tambah', ['uses' => 'RespondenController@create', 'middleware' => ['permission:kuesioner-create']]);
+	Route::post('/responden/tambah', ['uses' => 'RespondenController@store', 'middleware' => ['permission:kuesioner-create']]);
+	Route::get('/responden/edit/{id_responden}', ['uses' => 'RespondenController@edit', 'middleware' => 'permission:kuesioner-edit']);
+	Route::patch('/responden/edit/{id_responden}', ['uses' => 'RespondenController@update', 'middleware' => 'permission:kuesioner-edit']);
+	Route::delete('/responden/hapus/{id_responden}', ['uses' => 'RespondenController@destroy', 'middleware' => 'permission:kuesioner-delete']);
 
 	Route::get('/enumerator', 'EnumeratorController@index');
 	Route::get('/enumerator/tambah', 'EnumeratorController@create');

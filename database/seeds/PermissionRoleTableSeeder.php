@@ -57,10 +57,10 @@ class PermissionRoleTableSeeder extends Seeder
                 'permission_id' => '11',
                 'role_id' => '1'
             ],
-            // [
-            //     'permission_id' => '12',
-            //     'role_id' => '1'
-            // ],
+            [
+                'permission_id' => '12',
+                'role_id' => '1'
+            ],
 
         	// Permission for enumerator
         	[

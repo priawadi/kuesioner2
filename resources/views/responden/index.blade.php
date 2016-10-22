@@ -50,6 +50,9 @@
                     @endforeach
                 </ul>
                 <div class="panel-body">
+                    @permission('kuesioner-delete')
+                        Hapus
+                    @endpermission
                     <a href="{{url('responden/tambah')}}" class="btn btn-warning btn-sm"><i class="glyphicon glyphicon-plus"></i> Tambah</a>
                     <br><br>
                     <table class="table table-bordered" id="responden-table">
@@ -109,7 +112,7 @@
                             @endforeach
                         </tbody> 
                     </table>
-                    <div class="pull-right">{!! $responden->render() !!}</div>
+                    <!-- <div class="pull-right">{!! $responden->render() !!}</div> -->
                 </div>
             </div>
         </div>
@@ -148,7 +151,17 @@ $(document).ready(function() {
              },*/
             { targets : [5], 
              render: function(data, type, full) {
-                return '<a class="btn btn-danger btn-sm" onclick="show_modal(\'responden/hapus/'+ full.id_responden +'\',\''+ full.nama_responden +'\')">' + 'Hapus' + '</a> <a class="btn btn-info btn-sm" href=responden/edit/' + full.id_responden + '>' + 'Edit' + '</a> <a class="btn btn-primary btn-sm" href=responden/lihat/' + full.id_responden + '>' + 'Isi Kuesioner' + '</a>';
+                var btn = '';
+                @permission('kuesioner-delete')
+                btn += '<a class="btn btn-danger btn-sm" onclick="show_modal(\'responden/hapus/'+ full.id_responden +'\',\''+ full.nama_responden +'\')">' + 'Hapus' + '</a>';
+                @endpermission
+                @permission('kuesioner-edit')
+                btn += ' <a class="btn btn-info btn-sm" href=responden/edit/' + full.id_responden + '>' + 'Edit' + '</a>';
+                @endpermission
+                @permission('kuesioner-edit')
+                btn += ' <a class="btn btn-primary btn-sm" href=responden/lihat/' + full.id_responden + '>' + 'Isi Kuesioner' + '</a>';
+                @endpermission
+                return btn;
             }}
         ],
         // order: [[1, 'asc']],
