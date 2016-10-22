@@ -63,9 +63,10 @@ class RespondenController extends Controller
     public function index(Request $request)
     {
         
+        // print_r(Datatables::of(RespondenView::query())->make(true));
+        // die();
         // Remove current session
         $request->session()->forget('id_responden');
-
         return view('responden.index', [
             'subtitle'  => 'Responden',
             'responden' => RespondenView::orderBy('id_responden', 'DESC')->paginate(10),
@@ -337,7 +338,8 @@ class RespondenController extends Controller
     }
 
         public function anyData()
-    {
+    {   
         return Datatables::of(RespondenView::query())->make(true);
+        // return Datatables::of(RespondenView::query())->make(true);
     }    
 }

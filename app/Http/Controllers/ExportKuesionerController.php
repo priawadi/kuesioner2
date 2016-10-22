@@ -36,6 +36,10 @@ use Excel;
 class ExportKuesionerController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
      /**
      * Export data into excel
