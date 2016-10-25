@@ -197,7 +197,7 @@
                                         <label>
                                             {{
                                                 Form::radio(
-                                                    'kondisi', 
+                                                    'sumber_modal', 
                                                     $id_sumber_modal,
                                                     false,
                                                     [
