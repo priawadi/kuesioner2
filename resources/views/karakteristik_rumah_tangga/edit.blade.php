@@ -67,6 +67,7 @@
                                         $item['status_keluarga'], 
                                         [
                                             'class' => 'form-control',
+                                            'id'    => 'stat_kel',
                                             'placeholder' => 'Pilih'
                                         ]
                                     )
@@ -78,6 +79,8 @@
                                             $item['status_keluarga_lain'], 
                                             [
                                                 'class'       => 'form-control',
+                                                'style'       => 'display:none;',
+                                                'id'          => 'stat_kel_hide',
                                                 'placeholder' => 'Sebutkan'
                                             ]
                                         )
@@ -176,6 +179,7 @@
                                             $item['tujuan_pelatihan'], 
                                             [
                                                 'class' => 'form-control',
+                                                'id'    => 'tujuan_pel',
                                                 'placeholder' => 'Pilih'
                                             ]
                                         )
@@ -188,6 +192,8 @@
                                             $item['tujuan_pelatihan_lain'], 
                                             [
                                                 'class'       => 'form-control',
+                                                'id'    => 'tujuan_pel_hide',
+                                                'style'    => 'display:none',
                                                 'placeholder' => 'Sebutkan'
                                             ]
                                         )
@@ -204,4 +210,36 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+$('document').ready(function(){
+    var e = document.getElementById("stat_kel");
+    var strUser = e.options[e.selectedIndex].value;
+    if(strUser==="4"){
+        $("#stat_kel_hide").show()
+    }
+    $('#stat_kel').on('click',function(){
+        if( $(this).val()==="4"){
+        $("#stat_kel_hide").show()
+        }
+        else{
+        $("#stat_kel_hide").hide()
+        }
+    });
+
+    var e = document.getElementById("tujuan_pel");
+    var strUser = e.options[e.selectedIndex].value;
+    if(strUser==="3"){
+        $("#tujuan_pel_hide").show()
+    }
+    $('#tujuan_pel').on('click',function(){
+        if( $(this).val()==="3"){
+        $("#tujuan_pel_hide").show()
+        }
+        else{
+        $("#tujuan_pel_hide").hide()
+        }
+    }); 
+
+});
+</script>
 @endsection

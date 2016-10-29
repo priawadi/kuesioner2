@@ -65,6 +65,7 @@
                                         $item['status_keluarga'], 
                                         [
                                             'class' => 'form-control',
+                                            'id'    => 'stat_kel',
                                             'placeholder' => 'Pilih'
                                         ]
                                     )
@@ -76,6 +77,8 @@
                                         $item['status_keluarga_lain'], 
                                         [
                                             'class'       => 'form-control',
+                                            'style'       => 'display:none;',
+                                            'id'          => 'stat_kel_hide',                                            
                                             'placeholder' => 'Sebutkan'
                                         ]
                                     )
@@ -171,4 +174,21 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+$('document').ready(function(){
+    var e = document.getElementById("stat_kel");
+    var strUser = e.options[e.selectedIndex].value;
+    if(strUser==="4"){
+        $("#stat_kel_hide").show()
+    }
+    $('#stat_kel').on('click',function(){
+        if( $(this).val()==="4"){
+        $("#stat_kel_hide").show()
+        }
+        else{
+        $("#stat_kel_hide").hide()
+        }
+    });
+});
+</script>
 @endsection

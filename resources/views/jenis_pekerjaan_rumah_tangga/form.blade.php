@@ -65,6 +65,7 @@
                                         null, 
                                         [
                                             'class' => 'form-control',
+                                            'id'    => 'status_kel',
                                             'placeholder' => 'Pilih'
                                         ]
                                     )
@@ -76,6 +77,8 @@
                                         '', 
                                         [
                                             'class'       => 'form-control',
+                                            'id'    => 'status_kel_hide',
+                                            'style'    => 'display:none',
                                             'placeholder' => 'Sebutkan'
                                         ]
                                     )
@@ -171,4 +174,25 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $('document').ready(function(){
+        $('#stat_kel').on('change',function(){
+            if( $(this).val()==="4"){
+            $("#stat_kel_hide").show()
+            }
+            else{
+            $("#stat_kel_hide").hide()
+            }
+        });
+
+        $('#tujuan_pel').on('change',function(){
+            if( $(this).val()==="3"){
+            $("#tujuan_pel_hide").show()
+            }
+            else{
+            $("#tujuan_pel_hide").hide()
+            }
+        }); 
+    });
+</script>
 @endsection
