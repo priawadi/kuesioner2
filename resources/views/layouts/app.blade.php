@@ -56,9 +56,11 @@
 					<!-- <li><a href="{{ url('/') }}">Home</a></li> -->
 					@else
                         <li><a href="{{ url('/export-list') }}">Export</a></li>
-                        @permission('role-create')
-                            <li><a href="{{ route('users.index') }}"> Manajemen Pengguna</a></li>
-                            <li><a href="{{ route('roles.index') }}"> Role</a></li>
+                        @permission('user-list')
+                        <li><a href="{{ route('users.index') }}"> Manajemen Pengguna</a></li>
+                        @endpermission
+                        @permission('role-list')
+                        <li><a href="{{ route('roles.index') }}"> Role</a></li>
                         @endpermission
                     @endif
 
