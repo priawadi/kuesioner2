@@ -25,15 +25,26 @@ class HighchartController extends Controller
         $lokasi = Responden::select(DB::raw("count(lokasi) as jumlah_responden, CASE WHEN lokasi = 1 THEN 'Batam' WHEN lokasi = 2 THEN 'Sibolga' WHEN lokasi = 3 THEN 'Langkat' WHEN lokasi = 4 THEN 'Indramayu' WHEN lokasi = 5 THEN 'Pangkajene Kepulauan' WHEN lokasi = 6 THEN 'Bitung' WHEN lokasi = 7 THEN 'Sorong' WHEN lokasi = 8 THEN 'Merauke' WHEN lokasi = 9 THEN 'Maluku Tengah' WHEN lokasi = 10 THEN 'Cilacap' ELSE 'Tidak ada data' END AS nama_lokasi"))
                 ->groupBy(DB::raw("lokasi"))
                 ->get()->toArray();
-        $jumlah_responden   = array_column($lokasi, 'jumlah_responden');
-        $nama_lokasi        = array_column($lokasi, 'nama_lokasi');
-        // print_r($nama_lokasi);
+
+        $array = "";
+        $prefix = false;
+        $array_assoc = $lokasi;
+
+        for ($i = 0; $i < count($array_assoc); $i++){
+            if ($prefix) {
+                $array .= "," . "{ name: '" . $array_assoc[$i]['nama_lokasi'] . "', data: [" . $array_assoc[$i]['jumlah_responden'] . "]}"; 
+                } else {
+                $array .= "{ name: '" . $array_assoc[$i]['nama_lokasi'] . "', data: [" . $array_assoc[$i]['jumlah_responden'] . "]}"; 
+                }
+            $prefix = true;
+        }
+
+        // print_r($array);
         // die();
 
         return view('highchart')
                 ->with('suku', json_encode($jenis_suku))
                 ->with('value', json_encode($value, JSON_NUMERIC_CHECK))
-                ->with('jumlah_responden', json_encode($jumlah_responden, JSON_NUMERIC_CHECK))
-                ->with('nama_lokasi', json_encode($nama_lokasi));
+                ->with('array', ($array));
     }
 }
