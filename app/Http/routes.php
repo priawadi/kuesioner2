@@ -265,4 +265,6 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/export-penerimaan-usaha', 'ExportKuesionerController@export_to_excel_penerimaan_usaha');
 	Route::get('/statistic-data', 'ExportKuesionerController@get_statistic_data');
 	
+	//highchart
+	Route::get('/dashboard', 'HighchartController@index');	
 });
