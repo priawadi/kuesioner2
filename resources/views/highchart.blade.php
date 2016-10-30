@@ -27,8 +27,7 @@
         ]
     });
 
-    var data_jumlah = <?php echo $jumlah_responden; ?>;
-    var data_lokasi = <?php echo $nama_lokasi; ?>;
+    var data_jumlah = <?php echo "[" . $array . "]" ?>;
     $('#ber_lokasi').highcharts({
         chart: {
             type: 'column'
@@ -37,18 +36,19 @@
             text: 'Jumlah Responden Berdasarkan Lokasi'
         },
         xAxis: {
-            categories: data_lokasi
+           labels: {
+               enabled: false
+           },
         },
         yAxis: {
             title: {
                 text: 'Jumlah'
             }
-        },
-        series: [{
-            name: data_lokasi,
-            data: data_jumlah
-        }, 
-        ]
+        },       
+        tooltip:{
+            headerFormat: '',
+        },        
+        series: data_jumlah
     });
 
 });
