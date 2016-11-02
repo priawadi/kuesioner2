@@ -324,7 +324,7 @@
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <a href="{{ url('responden') }}" class="btn btn-link btn-sm">Batal</a>
-                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                            <button type="submit" class="btn btn-submit btn-primary btn-sm" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Please wait...">Simpan</button>
                         </div>
                       </div>
                     {!! Form::close() !!}

@@ -19,7 +19,14 @@
     <script type="text/javascript" src="{!! asset('js/jquery.min.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('bootstrap-datetimepicker/moment.min.js') !!}"></script>
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.btn-submit').on('click', function() {
+              var $this = $(this)
+              $this.button('loading') // Untuk men-disable tombol
+            })
+        })
+    </script>
     <style>
         body {
             font-family: 'Lato';

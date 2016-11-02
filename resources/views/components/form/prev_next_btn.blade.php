@@ -1,2 +1,2 @@
 <a href="{{url('responden/lihat/' . Session::get('id_responden'))}}" class="btn btn-primary pull-left">Kembali</a>
-<button type="submit" class="btn btn-primary pull-right">Simpan</button>
+<button type="submit" class="btn btn-submit btn-primary pull-right" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Please wait...">Simpan</button>
