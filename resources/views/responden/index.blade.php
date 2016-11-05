@@ -131,7 +131,7 @@ $(document).ready(function() {
             { data: 'suku', name: 'suku' },
             { data: 'kampung', name: 'kampung' },
             { data: 'dusun', name: 'dusun' },
-            { data: 'lokasi_responden', name: 'lokasi_responden' },
+            { data: 'lokasi', name: 'lokasi' },
 /*            { targets : [4],
                 render : function(data, type, row) {
                     switch(row.lokasi) {

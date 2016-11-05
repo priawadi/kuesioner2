@@ -307,7 +307,7 @@
                                             {{
                                                 Form::radio(
                                                     'lokasi', 
-                                                    $k,
+                                                    $v,
                                                     false,
                                                     [
                                                         'class' => 'control-label'
