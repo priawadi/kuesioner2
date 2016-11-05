@@ -734,18 +734,18 @@ class ExportKuesionerController extends Controller
             3 => 'ABK',
         ];
 
-        $lokasi_responden = [
-            1 => 'Batam',
-            2 => 'Sibolga',
-            3 => 'Langkat',
-            4 => 'Indramayu',
-            5 => 'Pangkajene Kepulauan',
-            6 => 'Bitung',
-            7 => 'Sorong',
-            8 => 'Merauke',
-            9 => 'Maluku Tengah',
-            10 => 'Cilacap',
-        ];
+        // $lokasi_responden = [
+        //     1 => 'Batam',
+        //     2 => 'Sibolga',
+        //     3 => 'Langkat',
+        //     4 => 'Indramayu',
+        //     5 => 'Pangkajene Kepulauan',
+        //     6 => 'Bitung',
+        //     7 => 'Sorong',
+        //     8 => 'Merauke',
+        //     9 => 'Maluku Tengah',
+        //     10 => 'Cilacap',
+        // ];
 
         $responden  = Responden::find($id_responden);
         $enumerator = Enumerator::where('id_responden', $id_responden)->first();
@@ -761,7 +761,8 @@ class ExportKuesionerController extends Controller
             $responden->provinsi,
             isset($status_responden[$responden->stat_responden])? $status_responden[$responden->stat_responden]: null,
             $responden->pengalaman_usaha,
-            isset($lokasi_responden[$responden->lokasi])? $lokasi_responden[$responden->lokasi]: null,
+            //isset($lokasi_responden[$responden->lokasi])? $lokasi_responden[$responden->lokasi]: null,
+            $responden->lokasi,
             $enumerator['nama_enumerator'],
             $enumerator['tanggal_wawancara'],
             $enumerator['tanggal_editing'],

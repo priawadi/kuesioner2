@@ -69,7 +69,7 @@ class RespondenController extends Controller
         $request->session()->forget('id_responden');
         return view('responden.index', [
             'subtitle'  => 'Responden',
-            'responden' => RespondenView::orderBy('id_responden', 'DESC')->paginate(10),
+            'responden' => Responden::orderBy('id_responden', 'DESC')->paginate(10),
         ]);
     }
 
@@ -339,7 +339,7 @@ class RespondenController extends Controller
 
         public function anyData()
     {   
-        return Datatables::of(RespondenView::query())->make(true);
+        return Datatables::of(Responden::query())->make(true);
         // return Datatables::of(RespondenView::query())->make(true);
     }    
 }
