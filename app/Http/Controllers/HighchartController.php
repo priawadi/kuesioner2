@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Responden;
+use App\KarakteristikRumahTangga;
+use App\Enumerator;
 use DB;
 
 class HighchartController extends Controller
@@ -39,12 +41,42 @@ class HighchartController extends Controller
             $prefix = true;
         }
 
-        // print_r($array);
+        $rata_umur = KarakteristikRumahTangga::select(DB::raw("ROUND(AVG(umur)) as umur_rataan"))
+        ->where('status_keluarga', '!=', '0')
+        ->get();
+
+        $total_keluarga = KarakteristikRumahTangga::select(DB::raw("count(*) as total_keluarga"))
+        ->where('status_keluarga', '!=', '0')
+        //->where('jenis_kelamin', '=', '1')
+        //->orwhere('jenis_kelamin', '=', '2')
+        ->get();
+
+        $total_keluarga_pria = KarakteristikRumahTangga::select(DB::raw("count(*) as jumlah_pria"))
+        ->where('jenis_kelamin', '=', '1')
+        ->get();
+
+        $total_keluarga_wanita = KarakteristikRumahTangga::select(DB::raw("count(*) as jumlah_wanita"))
+        ->where('jenis_kelamin', '=', '2')
+        ->get();        
+
+        $total_responden = Responden::select(DB::raw("count(*) as jumlah_responden"))
+        ->get();
+
+        $rataan_keluarga = round(($total_keluarga[0]->total_keluarga)/($total_responden[0]->jumlah_responden));
+
+
+        // print_r($rataan_keluarga);
         // die();
 
         return view('highchart')
                 ->with('suku', json_encode($jenis_suku))
                 ->with('value', json_encode($value, JSON_NUMERIC_CHECK))
-                ->with('array', ($array));
+                ->with('array', $array)
+                ->with('umur_rataan', $rata_umur[0]->umur_rataan)
+                ->with('total_keluarga', $total_keluarga[0]->total_keluarga)
+                ->with('total_keluarga_pria', $total_keluarga_pria[0]->jumlah_pria)
+                ->with('total_keluarga_wanita', $total_keluarga_wanita[0]->jumlah_wanita)
+                ->with('total_responden', $total_responden[0]->jumlah_responden)
+                ->with('rataan_keluarga', $rataan_keluarga);
     }
 }

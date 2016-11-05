@@ -266,5 +266,6 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/statistic-data', 'ExportKuesionerController@get_statistic_data');
 	
 	//highchart
-	Route::get('/dashboard', 'HighchartController@index');	
+	Route::get('/dashboard', 'HighchartController@index');
+	Route::get('/makro', 'MakroController@index');		
 });
