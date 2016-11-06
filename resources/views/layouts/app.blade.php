@@ -63,7 +63,7 @@
 					<!-- <li><a href="{{ url('/') }}">Home</a></li> -->
 					@else
                         <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-                        <li><a href="{{ url('/makro') }}">Download Makro</a></li>
+                        <li><a href="{{ url('/upload-files') }}">Download Makro</a></li>
                         <li><a href="{{ url('/export-list') }}">Export</a></li>
                         @permission('user-list')
                         <li><a href="{{ route('users.index') }}"> Manajemen Pengguna</a></li>
