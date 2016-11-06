@@ -267,5 +267,6 @@ Route::group(['middleware' => ['auth']], function(){
 	
 	//highchart
 	Route::get('/dashboard', 'HighchartController@index');
-	Route::get('/makro', 'MakroController@index');		
+	//upload files
+	Route::resource('/upload-files','FileController');
 });
