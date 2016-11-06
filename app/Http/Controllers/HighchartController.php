@@ -26,7 +26,7 @@ class HighchartController extends Controller
 
         $lokasi = 
         //Responden::select(DB::raw("count(lokasi) as jumlah_responden, CASE WHEN lokasi = 1 THEN 'Batam' WHEN lokasi = 2 THEN 'Sibolga' WHEN lokasi = 3 THEN 'Langkat' WHEN lokasi = 4 THEN 'Indramayu' WHEN lokasi = 5 THEN 'Pangkajene Kepulauan' WHEN lokasi = 6 THEN 'Bitung' WHEN lokasi = 7 THEN 'Sorong' WHEN lokasi = 8 THEN 'Merauke' WHEN lokasi = 9 THEN 'Maluku Tengah' WHEN lokasi = 10 THEN 'Cilacap' ELSE 'Tidak ada data' END AS nama_lokasi"))
-                Responden::select(DB::raw("count(lokasi) as jumlah_responden, lokasi as nama_lokasi"))
+        Responden::select(DB::raw("count(lokasi) as jumlah_responden, lokasi as nama_lokasi"))
                 ->groupBy(DB::raw("lokasi"))
                 ->get()->toArray();
 
