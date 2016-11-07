@@ -52,6 +52,7 @@ class RoleController extends Controller
         $role->name = $request->input('name');
         $role->display_name = $request->input('display_name');
         $role->description = $request->input('description');
+        $role->admin = $request->input('admin', FALSE);
         $role->save();
 
         foreach ($request->input('permission') as $key => $value) {
@@ -111,6 +112,7 @@ class RoleController extends Controller
         $role = Role::find($id);
         $role->display_name = $request->input('display_name');
         $role->description = $request->input('description');
+        $role->admin = $request->input('admin', FALSE);
         $role->save();
 
         DB::table("permission_role")->where("permission_role.role_id",$id)

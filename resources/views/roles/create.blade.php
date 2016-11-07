@@ -41,6 +41,14 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
+                                    <strong>Admin?</strong>
+                                    <br>
+                                    <label>{{ Form::checkbox('admin', TRUE, FALSE, array('class' => 'name')) }}
+                                        Yes</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
                                     <strong>Permission:</strong>
                                     <br/>
                                     @foreach($permission as $value)

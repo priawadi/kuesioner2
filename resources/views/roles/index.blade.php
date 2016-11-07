@@ -23,6 +23,7 @@
 								<th>No</th>
 								<th>Role</th>
 								<th>Deskripsi</th>
+								<th>Admin?</th>
 								<th width="280px">Aksi</th>
 							</tr>
 							@foreach ($roles as $key => $role)
@@ -31,15 +32,20 @@
 								<td>{{ $role->display_name }}</td>
 								<td>{{ $role->description }}</td>
 								<td>
+									@if($role->admin)
+										<span class="label label-primary">Admin</span>
+									@endif
+								</td>
+								<td>
 									<a class="btn btn-info btn-sm" href="{{ route('roles.show',$role->id) }}">Detil</a>
 									@permission('role-edit')
 									<a class="btn btn-primary btn-sm" href="{{ route('roles.edit',$role->id) }}">Edit</a>
 									@endpermission
 									@permission('role-delete')
 									{!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
-						            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-						        	{!! Form::close() !!}
-						        	@endpermission
+				            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+				        	{!! Form::close() !!}
+				        	@endpermission
 								</td>
 							</tr>
 							@endforeach

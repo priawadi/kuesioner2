@@ -42,9 +42,11 @@
 							<a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}">Edit</a>
 							@endpermission
 							@permission('user-delete')
-							{!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-				            	{!! Form::submit('Hapus', ['class' => 'btn btn-danger btn-sm']) !!}
-				        	{!! Form::close() !!}
+							@if(!$check_admin[$user->id])
+								{!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
+			            {!! Form::submit('Hapus', ['class' => 'btn btn-danger btn-sm']) !!}
+			        	{!! Form::close() !!}
+							@endif
 							@endpermission
 						</td>
 					</tr>

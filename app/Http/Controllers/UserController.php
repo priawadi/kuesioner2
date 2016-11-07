@@ -20,7 +20,19 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $data = User::orderBy('id','DESC')->paginate(5);
-        return view('users.index',compact('data'))
+        
+        for ($i = 0; $i < count($data); $i++) { 
+            $admin = FALSE;
+            foreach ($data[$i]->roles as $item) {
+                if ($item->admin) {
+                    $admin = TRUE;
+                    continue;
+                }
+            }
+            $check_admin[$data[$i]->id] = $admin;
+        }
+
+        return view('users.index',compact('data', 'check_admin'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
